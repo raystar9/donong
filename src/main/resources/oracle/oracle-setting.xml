@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="DefaultDTO" type="team.swcome.donong.dto.DefaultDTO" />
+    <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
   </typeAliases>
 	
   <environments default="development">
@@ -19,6 +19,6 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="/oracle/default-mapper.xml"/>
+    <mapper resource="/oracle/main-mapper.xml"/>
   </mappers>
 </configuration>

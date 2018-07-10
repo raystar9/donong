@@ -8,6 +8,7 @@
     <typeAlias alias="MarketDTO" type="team.swcome.donong.dto.MarketDTO" />
     <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
     <typeAlias alias="CSBoardDTO" type="team.swcome.donong.dto.CSBoardDTO" />
+    <typeAlias alias="FarmDTO" type="team.swcome.donong.dto.FarmDTO" />
   </typeAliases>
 	
   <environments default="development">
@@ -26,5 +27,6 @@
     <mapper resource="/oracle/market-mapper.xml"/>
     <mapper resource="/oracle/board-mapper.xml"/>
     <mapper resource="/oracle/service-mapper.xml"/>
+    <mapper resource="/oracle/farm-mapper.xml"/>
   </mappers>
 </configuration>

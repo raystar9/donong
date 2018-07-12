@@ -72,3 +72,5 @@ local.properties
 .project
 .settings
 .springBeans
+
+src/main/resources/log4j.xml

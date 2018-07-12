@@ -2,8 +2,9 @@ package team.swcome.donong.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import team.swcome.donong.dto.BoardDTO;
@@ -12,9 +13,10 @@ import team.swcome.donong.dto.BoardDTO;
 public class BoardDAO {
 	
 	@Autowired
-	SqlSessionFactory factory;
+	@Qualifier("sqlSession")
+	SqlSession session;
 	
 	public List<BoardDTO> selectMainList(){
-		return factory.openSession().selectList("Board.selectAll");
+		return session.selectList("Board.selectAll");
 	}
 }

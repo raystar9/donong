@@ -4,6 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/donong/resources/farm/css/a.css">
 	<title>Home</title>
 </head>
 <body>

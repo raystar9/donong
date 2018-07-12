@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="team.swcome.donong">
-		<level value="info" />
+		<level value="all" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

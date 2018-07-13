@@ -19,8 +19,4 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-	<bean id="blahMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="team.swcome.donong.mapper.BlahMapper"/>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-	</bean>
 </beans>

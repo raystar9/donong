@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.swcome.donong.dao.AccountDAO;
 import team.swcome.donong.dto.MainDTO;
+import team.swcome.donong.mapper.MainMapper;
 
 @Service
 public class AccountService {
 	
 	@Autowired
-	AccountDAO accountDAO;
+	MainMapper mainMapper;
 	
 	public List<MainDTO> getMainList(){
-		return accountDAO.selectMainList();
+		return mainMapper.selectAll();
 	}
 }

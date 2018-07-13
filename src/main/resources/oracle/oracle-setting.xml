@@ -18,7 +18,4 @@
       </dataSource>
     </environment>
   </environments>
-  <mappers>
-    <mapper resource="/oracle/main-mapper.xml"/>
-  </mappers>
 </configuration>

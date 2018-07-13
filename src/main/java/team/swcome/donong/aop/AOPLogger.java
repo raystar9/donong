@@ -14,18 +14,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class AOPLogger {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@SuppressWarnings("rawtypes")
 	@Around("execution(* team.swcome.donong.controller.*.* (..)) "
 			+ "or execution(* team.swcome.donong.service.*.* (..)) "
 			+ "or execution(* team.swcome.donong.dao.*.* (..))")
 	public Object LoggerAspect(ProceedingJoinPoint joinPoint) throws Throwable {
-		String targetName = joinPoint.getTarget().getClass().getSimpleName();
+		Logger logger = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
+		logger.debug(joinPoint.getSignature().getName() + "()");
 		Object[] args = joinPoint.getArgs();
 
 		if (args.length == 0) {
-			logger.trace("no args ==> {}", targetName);
+			logger.trace("  >> no args");
 		} else {
 			for (Object arg : args) {
 				if (arg instanceof List) {
@@ -41,10 +40,10 @@ public class AOPLogger {
 							}
 						}
 						String logString = sb.substring(0, sb.length() - 2) + "}";
-						logger.trace("{} ==> {}", logString, targetName);
+						logger.trace("  >> {}", logString);
 					}
 				} else {
-					logger.trace("{} ==> {}", arg, targetName);
+					logger.trace("  >> {}", arg);
 				}
 			}
 		}
@@ -53,12 +52,13 @@ public class AOPLogger {
 			@SuppressWarnings("unchecked")
 			List<Object> resArray = (List) res;
 			if (resArray.size() == 0) {
-				logger.trace("empty List <== {}", targetName);
+				logger.trace("Return : empty List");
 			} else {
 				for (Object resEach : resArray) {
 					StringBuilder sb = new StringBuilder(resEach.getClass().getSimpleName() + " {");
 					Method[] methods = resEach.getClass().getMethods();
 
+					
 					for (Method method : methods) {
 						String methodName = method.getName();
 						if (methodName.startsWith("get") && methodName != "getClass") {
@@ -67,12 +67,13 @@ public class AOPLogger {
 						}
 					}
 					String logString = sb.substring(0, sb.length() - 2) + "}";
-					logger.trace("{} <== {}", logString, targetName);
+					logger.trace("Return : {}", logString);
 				}
 			}
 		} else {
-			logger.trace("{} <== {}", res, targetName);
+			logger.trace("Return : {}", res);
 		}
+		logger.debug(joinPoint.getSignature().getName() + "() end");
 		return res;
 	}
 }

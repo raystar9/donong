@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.swcome.donong.dao.CustomerServiceDAO;
 import team.swcome.donong.dto.CSBoardDTO;
+import team.swcome.donong.mapper.ServiceMapper;
 
 @Service
 public class CustomerServiceService {
 	
 	@Autowired
-	CustomerServiceDAO accountDAO;
+	ServiceMapper serviceMapper;
 	
 	public List<CSBoardDTO> getMainList(){
-		return accountDAO.selectMainList();
+		return serviceMapper.selectAll();
 	}
 }

@@ -34,6 +34,7 @@ public class CommunityController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
+		boardService.getMainList();
 		
 		model.addAttribute("serverTime", formattedDate );
 		return "community/home";

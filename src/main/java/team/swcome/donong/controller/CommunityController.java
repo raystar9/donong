@@ -64,7 +64,7 @@ public class CommunityController {
 		if( endpage<page) page=endpage;
 		
 		
-		boardlist = boardService.getMainList(page,limit); 
+		boardlist = boardService.getMainList(page); 
 
 		
 		ModelAndView boardListM;

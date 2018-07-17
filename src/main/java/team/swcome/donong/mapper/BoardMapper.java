@@ -11,7 +11,7 @@ import team.swcome.donong.dto.BoardDTO;
 public interface BoardMapper {
 	
 	
-	public List<BoardDTO> selectAll(int page,Integer limit);
+	public List<BoardDTO> selectAll(int page);
 	
 	public int deleteBoard(int id);
 	

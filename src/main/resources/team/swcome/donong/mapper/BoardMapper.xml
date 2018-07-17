@@ -9,13 +9,12 @@
   <select id="selectAll" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
 	 select * from
-         (select rownum rnum, COM_NUM,COM_ID,COM_PASS,COM_NAME
-            COM_SUBJECT,COM_CLASS, COM_CONT,COM_DATE,COM_READCOUNT,COM_FILE
-            COM_RE_REF,COM_RE_LEV,
-            COM_RE_SEQ
+         (select rownum rnum, num, member_num, password, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq
          from
-         (select * from com
-            order by COM_RE_REF desc, COM_RE_SEQ asc)
+         (select * from community
+            order by re_ref desc, re_seq asc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
@@ -24,6 +23,6 @@
 	
 	<!-- 자료실 총 게시물 수 -->
 	<select id="getListCount" resultType="int">
-		select count(*) from com
+		select count(*) from community
 	</select>
 </mapper>

@@ -7,16 +7,21 @@
     select * from blah where id = #{id}
   </select>
   
-  <insert id="insertMember" parameterType="MemberDTO">
+	<insert id="insertMember" parameterType="MemberDTO">
   	insert into member values(member_num.nextval, #{id}, #{nickname}, 
   								#{password}, #{realname}, #{address}, 
   								#{email}, #{phone}, sysdate
   	)
-  </insert>
+	</insert>
   
-	<select id="selectOne" parameterType="String" resultType="MemberDTO">
-		select id from member where id=#{id}
+	<select id="selectLoginInfo" parameterType="MemberDTO" resultType="MemberDTO">
+		select num,password, nickname from member where id=#{id} and password=#{password}
+	</select>
+	
+	<select id="findMember" parameterType="int" resultType="MemberDTO">
+		select * from member where num = #{num}
 	</select>
 
+	
   
 </mapper>

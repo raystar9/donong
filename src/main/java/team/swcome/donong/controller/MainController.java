@@ -4,11 +4,13 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +19,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.AccountService;
 
 /**
  * Handles requests for the application home page.
  */
+@SessionAttributes("sessionBean")
 @Controller
 public class MainController {
 	
@@ -69,51 +74,48 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "member_login_ok", method =  {RequestMethod.POST,RequestMethod.GET})
-	public String member_join_ok(Model model, MemberDTO m, HttpServletResponse response, HttpServletRequest request) throws Exception {
-		
-		response.setContentType("text/html;charset=UTF-8");
-		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
-		String id=request.getParameter("id");
-		String pass=request.getParameter("password");
-		
-		MemberDTO m2 = this.accountService.getUsingId(id);
-		
-		if(m==null) {
-			out.println("<script>");
-			out.println("alert('가입되어 있지 않은 ID입니다.')");
-			out.println("history.back()");
-			out.println("</script>");
-		} else {
-			if(m2.getPassword().equals(pass)) {
-				session.setAttribute("id", id);
+	public String member_join_ok(Model model, MemberDTO m, SessionBean sessionBean) throws Exception {
+			MemberDTO memberRes = accountService.getUserNum(m);
+			if(memberRes == null ) {
+				return "main/erroppage";
 				
-				String nickname = m.getNickname();
-				session.setAttribute("nickname", nickname);
-				
-				int num = m.getNum();
-				session.setAttribute("num", num);
-				
-				Cookie savecookie = new Cookie("saveid", id);
-				if(request.getParameter("saveid")!=null) {
-					savecookie.setMaxAge(60*60);
-				} else {
-					savecookie.setMaxAge(0);
-				}
-				response.addCookie(savecookie);
-				
-				return "main/home";
-			} else {
-				out.println("<script>");
-				out.println("alert('비밀번호를 다시 확인해주세요')");
-				out.println("history.go(-1)");
-				out.println("</script>");
-			}
-		}
-				return null;
-		
-		
-	}
+			}	
+			sessionBean.setNickname(memberRes.getNickname());
+			sessionBean.setMemberNum(memberRes.getNum());
+			System.out.println("세션저장"+sessionBean.getNickname());
 
+			return "main/home";
+			
+	}
+	@RequestMapping(value = "member_logout")
+	public String member_logout(SessionBean sessionBean) throws Exception {
+
+		sessionBean = null;
+
+		return "main/login";
+	}
+	@RequestMapping(value = "member_mypage")
+	public String member_mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "main/member/mypage";
+	}
+	@RequestMapping(value = "member_edit")
+	public String member_edit(Model model, MemberDTO m,SessionBean sessionBean, HttpServletRequest request)throws Exception {
+		int num = sessionBean.getMemberNum();
+		m = accountService.findMember(num);
+		
+		String email = m.getEmail();
+		
+		 StringTokenizer slidemail = new StringTokenizer(email, "@");
+		 String mail1 = slidemail.nextToken();
+		 String mail2 = slidemail.nextToken();
+		 
+		 
+		model.addAttribute(m);
+		model.addAttribute(mail1);
+		model.addAttribute(mail2);
+		
+		return "main/member/editform";
+	}
+	
 	
 }

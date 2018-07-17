@@ -22,8 +22,13 @@ public class AccountService {
 		mainMapper.insertMember(m);
 	}
 	
-	public MemberDTO getUsingId(String id) throws Exception{
-		return mainMapper.selectOne(id);
+	public MemberDTO getUserNum(MemberDTO m) {
+		return mainMapper.selectLoginInfo(m);
+		
+	}
+
+	public MemberDTO findMember(int num) {
+		return mainMapper.findMember(num);
 	}
 	
 	

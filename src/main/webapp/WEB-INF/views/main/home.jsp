@@ -5,23 +5,23 @@
 <html>
 <head>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
- 	<script>
-		
-	
-	</script> 
+
 
 	<title>메인페이지</title>
 	
 </head>
 <body>
-	<c:if test = '${empty sessionScope.id }'>
+	 <c:if test = '${sessionBean.nickname == null }'>
 		<a href="member_login">로그인</a>
 		<a href="member_join">회원가입</a>
 	</c:if>
-	<c:if test = '${!empty sessionScope.id }'>
-		${memberDTO.nickname}님 마실나오셨네요
-	</c:if>
+	<c:if test = '${sessionBean.nickname != null }'>
+		${sessionBean.nickname}님 마실나오셨네요
+		<button id="mypage" onclick="location.href='member_mypage'">MyPage</button>
+		<button id="logout" onclick="location.href='member_logout'">로그아웃</button>
+	</c:if> 
 
+		
 
 	
 	

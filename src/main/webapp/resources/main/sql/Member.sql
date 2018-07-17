@@ -14,6 +14,8 @@ drop table member
 
 select * from member
 
+select * from member where num=3
+
 create sequence member_num
 start with 1
 increment by 1
@@ -23,6 +25,8 @@ insert into member values(member_num.nextval, 'aaa', 'aaa',
   								'aaa', 'aaa', 'aaa', 'aaa',
   								'aaa', sysdate
   	)
+  	select num,password, nickname from member where id='xxx' AND password='xxx'
+  
   	
   	
   	select id from member where id='xxx'

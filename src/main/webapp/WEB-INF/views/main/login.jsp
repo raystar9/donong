@@ -19,7 +19,7 @@
 <body>
 
 		<h2 class="login_title">로그인</h2>
-			<form method="post" action="member_login_ok.nhn" onsubmit="return check()">
+			<form method="post" action="member_login_ok" onsubmit="return check()">
 				<table id="login_t">
 					<tr>
 						<th>아이디</th>
@@ -32,7 +32,7 @@
 					
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" name="pwd" id="pwd" size="20" class="input_box"></td>
+						<td><input type="password" name="password" id="pwd" size="20" class="input_box"></td>
 					</tr>	
 					
 					<tr>

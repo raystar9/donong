@@ -11,6 +11,8 @@ public interface MainMapper {
 	
 	public void insertMember(MemberDTO m);
 
-	public MemberDTO selectOne(String id);
+	public MemberDTO selectLoginInfo(MemberDTO m);
+
+	public MemberDTO findMember(int num);
 	
 }

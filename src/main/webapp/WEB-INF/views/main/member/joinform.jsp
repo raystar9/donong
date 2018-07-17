@@ -98,7 +98,7 @@ function check(){
 	$('#email').val($('#join_mailid').val()+"@"+$('#join_maildomain').val());
 	$('#address').val($('#addr').val()+" "+$('#addrdetail').val());
 	
-
+	alert($('#join_nickname').val()+" 님의 파종이 시작되었습니다.")
 	
 }
 

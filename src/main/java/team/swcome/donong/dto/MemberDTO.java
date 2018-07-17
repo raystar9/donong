@@ -6,7 +6,8 @@ import javax.annotation.Resource;
 
 @Resource
 public class MemberDTO {
-	private int id;
+	private int num;
+	private String id;
 	private String nickname;
 	private String password;
 	private String realname;
@@ -14,12 +15,16 @@ public class MemberDTO {
 	private String email;
 	private String phone;
 	private Date registdate;
-	
-	
-	public int getId() {
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNickname() {
@@ -64,6 +69,7 @@ public class MemberDTO {
 	public void setRegistdate(Date registdate) {
 		this.registdate = registdate;
 	}
+	
 	
 	
 

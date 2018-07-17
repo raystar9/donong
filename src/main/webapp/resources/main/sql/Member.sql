@@ -23,3 +23,6 @@ insert into member values(member_num.nextval, 'aaa', 'aaa',
   								'aaa', 'aaa', 'aaa', 'aaa',
   								'aaa', sysdate
   	)
+  	
+  	
+  	select id from member where id='xxx'

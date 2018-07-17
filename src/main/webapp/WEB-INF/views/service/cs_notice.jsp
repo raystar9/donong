@@ -8,10 +8,12 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<h1>
+		CS 공지사항 페이지 입니다.  
+	</h1>
+		<a href="cs/main">cs/main</a>
+	<a href="cs/notice">cs/notice</a>
+	<a href="cs/search">cs/search</a>
+	<a href="cs/qna">cs/qna</a>
 </body>
 </html>

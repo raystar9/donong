@@ -12,6 +12,7 @@ DROP TABLE cart;
 DROP TABLE goods;
 DROP TABLE goods_category;
 DROP TABLE member;
+DROP TABLE notice;
 
 CREATE TABLE member(
 num NUMBER CONSTRAINT member_num_pk PRIMARY KEY,
@@ -125,4 +126,11 @@ category NUMBER CONSTRAINT qna_category_fk REFERENCES cs_category(num) NOT NULL,
 writer NUMBER CONSTRAINT qna_writer_fk REFERENCES member(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
 content varchar2(4000) NOT NULL
+);
+
+CREATE TABLE notice(
+num NUMBER CONSTRAINT notice_num_pk PRIMARY KEY,
+title VARCHAR2(200) NOT NULL,
+content VARCHAR2(4000) NOT NULL,
+regitdate DATE NOT NULL
 );

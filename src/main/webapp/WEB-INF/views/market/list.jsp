@@ -42,15 +42,15 @@
 	</style>
 </head>
 <body>
-<div class="main container">
-
-	<div>
-		<h1>타이틀임</h1>
-	</div>
+<div class="main container">	
 	<div class="sidenav">
 		<a href="/donong/market?category=seed">모종 씨앗</a>
 		<a href="/donong/market?category=fertilizer">비료</a>
 		<a href="/donong/market?category=tools">도구</a>
+	</div>
+	<div class="container">
+	<div>
+		<h1>타이틀임</h1>
 	</div>
 	<div>
 		<c:forEach items="${items}" var="item">
@@ -72,6 +72,7 @@
 			</c:choose>
 		</c:forEach>
 	</ul>
+	</div>
 </div>
 </body>
 </html>

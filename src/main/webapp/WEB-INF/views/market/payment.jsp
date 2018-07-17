@@ -30,6 +30,7 @@
 		<div>
 			배송정보
 			<label for="name">주문인</label><input class="form-control" type="text" name="name" id="name" />
+			<label for="phone">연락처</label><input class="form-control" type="text" name="phone" id="phone" />
 			<label for="address">주소</label><input class="form-control" type="text" name="address" id="address" />
 			<label for="comment">코멘트</label><input class="form-control" type="text" name="comment" id="comment" />
 		</div>

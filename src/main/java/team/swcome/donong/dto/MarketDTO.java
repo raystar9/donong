@@ -4,8 +4,9 @@ import javax.annotation.Resource;
 
 @Resource
 public class MarketDTO {
-	int id;
-	String name;
+	private int id;
+	private String name;
+	private String filePath;
 	
 	public int getId() {
 		return id;
@@ -18,5 +19,11 @@ public class MarketDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 }

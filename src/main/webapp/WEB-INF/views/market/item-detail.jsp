@@ -32,7 +32,7 @@
 	<div>제품의 상세 정보들이 들어갈 공간</div>
 	<div>
 		<input class="btn btn-default" type="button" value="결제하기" onclick="location.href='/donong/market/payment'"/>
-		<input class="btn btn-default" type="button" value="장바구니에 담기" onclick="location.href='/donong/market/cart'" />
+		<input class="btn btn-default" type="button" value="장바구니에 담기" onclick="location.href='/donong/market/cart/${itemNo}'" />
 		<!--TODO ajax처리 예정 -->
 	</div>
 </div>

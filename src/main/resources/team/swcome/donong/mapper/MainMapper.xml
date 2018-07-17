@@ -13,6 +13,10 @@
   								#{email}, #{phone}, sysdate
   	)
   </insert>
+  
+	<select id="selectOne" parameterType="String" resultType="MemberDTO">
+		select id from member where id=#{id}
+	</select>
 
   
 </mapper>

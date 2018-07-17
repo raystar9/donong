@@ -1,17 +1,32 @@
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/main/css/a.css">
-	<title>Home</title>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+ 	<script>
+		
+	
+	</script> 
+
+	<title>메인페이지</title>
+	
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+	<c:if test = '${empty sessionScope.id }'>
+		<a href="member_login">로그인</a>
+		<a href="member_join">회원가입</a>
+	</c:if>
+	<c:if test = '${!empty sessionScope.id }'>
+		${memberDTO.nickname}님 마실나오셨네요
+	</c:if>
 
-<P>  The time on the server is ${serverTime}. </P>
+
+	
+	
 </body>
 </html>
+
+
+	

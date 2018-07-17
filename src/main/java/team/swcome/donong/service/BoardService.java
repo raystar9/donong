@@ -14,7 +14,19 @@ public class BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	public List<BoardDTO> getMainList(){
-		return boardMapper.selectAll();
+	public List<BoardDTO> getMainList(int page,Integer limit){
+		return boardMapper.selectAll(page,limit);
+	}
+	public void deleteBoard(int id) {
+		int result = boardMapper.deleteBoard(id);
+		if(result == 1) {
+			
+		} else {
+			
+		}
+	}
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		return boardMapper.getListCount();
 	}
 }

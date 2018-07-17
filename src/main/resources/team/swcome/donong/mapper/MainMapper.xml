@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.swcome.donong.mapper.MainMapper">
   <select id="selectAll" resultType="MainDTO">
-    select * from blah
+    select * from blah where id = #{id}
   </select>
+  
+  <insert id="insertMember" parameterType="MemberDTO">
+  	insert into member values(member_num.nextval, #{id}, #{nickname}, 
+  								#{password}, #{realname}, #{address}, 
+  								#{email}, #{phone}, sysdate
+  	)
+  </insert>
+
+  
 </mapper>

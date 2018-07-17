@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.service.AccountService;
 
 /**
@@ -33,11 +37,26 @@ public class MainController {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		accountService.getMainList();
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		return "main/home";
+		//return "main/home";
+		return "main/member/joinform";
 	}
+	
+	@RequestMapping(value = " member_join")
+	public String member_join(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "main/member/joinform";
+	}
+	
+	@RequestMapping(value = "member_join_ok", method =  RequestMethod.POST)
+	public String member_join_ok(MemberDTO m, HttpServletResponse response) throws Exception {
+		logger.debug(m.getNickname());
+		accountService.insertMember(m);
+		System.out.println("이름"+m.getId());
+		
+		return "main/member/joinform";
+	}
+
 	
 }

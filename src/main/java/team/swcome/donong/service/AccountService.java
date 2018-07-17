@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.swcome.donong.dto.MainDTO;
+import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.mapper.MainMapper;
 
 @Service
@@ -17,4 +18,10 @@ public class AccountService {
 	public List<MainDTO> getMainList(){
 		return mainMapper.selectAll();
 	}
+	
+	public void insertMember(MemberDTO m) {
+		mainMapper.insertMember(m);
+	}
+	
+	
 }

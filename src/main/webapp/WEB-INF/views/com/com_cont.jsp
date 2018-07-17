@@ -7,21 +7,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <body>
-<div id="comcont_wrap" style="width:600px">
+<div class="container">
 <h2 class="comcont_title" style="witdh:370px">
 커뮤니티 게시판</h2>
 <c:set var="boarddata" value="${boarddata}"/>
 <table id="comcont_t" border='1'>
 	<tr>
-	<th colspan="2">${bbsbean.com_class }잡담|${bbsbean.com_subject}안녕하세요</th>
-	<tr>
-		<th colspan="2">글쓴이 
-		${bbsbean.com_name}유승열 ${bbsbean.com_date}2018-07-16 조회 ${bbsbean.com_readcount }5</th>
+	<th colspan="2">${bbsbean.com_class }잡담|${bbsbean.com_subject}안녕하세요
+	<br>
+	글쓴이 ${bbsbean.com_name}유승열 ${bbsbean.com_date}2018-07-16 조회 ${bbsbean.com_readcount }5</th>
 	</tr>
 	<tr>
 		<th colspan="2">
-		<textarea rows="8" cols="50" readonly>${com_cont}글의 내용을 담고있는 ....</textarea></th>
+		<textarea rows="8" cols="50" readonly>${com_cont}글의 내용을 담고있는 ....</textarea>
+		<input type="button" value="목록" class="btn" style="vertical-align: top" onclick="location='communitylist?page=${page}'">
+		</th>
 	</tr>
 	<c:if test="${!empty bbsbean.com_file }">
 	<tr>
@@ -33,10 +35,10 @@
 </c:if>
 </table>
 <div id="boardcont_menu" style="margin-left:200px">
-		<input type="button" value="수정" class="input_button" onclick="location='communitycont?com_num=${bbsbean.com_num}&page=${page}&state=edit'">
-		<input type="button" value="삭제" class="input_button" onclick="location='communitycont?com_num=${bbsbean.com_num}&page=${page}&state=del'">
-		<input type="button" value="답변" class="input_button" onclick="location='communitycont?com_num=${bbsbean.com_num}&page=${page}&state=reply'">
-		<input type="button" value="목록" class="input_button" onclick="location='communitylist?page=${page}'">
+		<a href="communityedit"><input type="button" value="수정" class="btn"></a>
+		<a href="communitydel"><input type="button" value="삭제" class="btn"></a>
+		<a href="communityreply"><input type="button" value="답변" class="btn"></a>
+		<input type="button" value="목록" class="btn" onclick="location='communitylist?page=${page}'">
 		</div>
 </div>
 </body>

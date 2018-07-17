@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 @Resource
 public class BoardDTO {
 	int num;
-	String id;
+	int member_num;
 	String password;
 	String writer;
 	String subject;
@@ -28,12 +28,14 @@ public class BoardDTO {
 		this.num = num;
 	}
 
-	public String getId() {
-		return id;
+	
+
+	public int getMember_num() {
+		return member_num;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
 	}
 
 	public String getPassword() {

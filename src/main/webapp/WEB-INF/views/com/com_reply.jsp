@@ -8,46 +8,46 @@
 <title>Insert title here</title>
 <script src="resources/js/jquery-3.3.1.js"></script>
 <script src="resources/js/bbs.js"></script>
-<link href="resources/css/bbs.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <c:set var="boarddata" value="${bbsbean}"/>
-	<div id="bbswrite_wrap">
+	<div class="container">
 		<h2 class="bbswrite_title">답변 입력폼</h2>
 
-		<form method="post" action="./bbs_reply.nhn">
-							<input type="hidden" name="bbs_num" value="${boarddata.bbs_num}">
+		<form method="get" action="communitylist">
+							<input type="hidden" name="num" value="${boarddata.num}">
 
-<input type="hidden" name="bbs_re_ref" value="${boarddata.bbs_re_ref}">
-<input type="hidden" name="bbs_re_lev" value="${boarddata.bbs_re_lev}">
-<input type="hidden" name="bbs_re_seq" value="${boarddata.bbs_re_seq}">
+<input type="hidden" name="re_ref" value="${boarddata.re_ref}">
+<input type="hidden" name="re_lev" value="${boarddata.re_lev}">
+<input type="hidden" name="re_seq" value="${boarddata.re_seq}">
 <input type="hidden" name="page" value="${page }">
 			<table id="boardreply_t">
 
 				<tr>
-					<th>글쓴이</th>
-					<td><input name="bbs_name" id="bbs_name" size="14" ></td>
+					<th class="well well-sm" style="text-align:center;">글쓴이</th>
+					<td><input name="name" id="name" size="14" class="form-control"></td>
 				</tr>
 				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="bbs_pass" id="bbs_pass"
-						size="14" class="input_box"></td>
+					<th class="well well-sm" style="text-align:center;">비밀번호</th>
+					<td><input type="password" name="password" id="password"
+						size="14" class="form-control"></td>
 				</tr>
 				<tr>
-					<th>제목</th>
-					<td><input name="bbs_subject" id="bbs_subject" size="40"
-						class="input_box" value="re:${bbsbean.bbs_subject }"></td>
+					<th class="well well-sm" style="text-align:center;">제목</th>
+					<td><input name="subject" id="subject"
+						class="form-control" value="re:${bbsbean.subject }"></td>
 				</tr>
 				<tr>
-					<th>글내용</th>
-					<td><textarea name="bbs_content" id="bbs_content" rows="8"
-							cols="50" class="input_box"></textarea></td>
+					<th class="well well-sm" style="text-align:center;">글내용</th>
+					<td><textarea name="ontent" id="content" rows="15"
+							cols="60" class="form-control"></textarea></td>
 				</tr>
 			</table>
-			<div id="boardreply_menu">
-				<input type="submit" value="등록" class="input_button"> <input
-					type="reset" value="취소" class="input_button"
-					onclick="$('#bbs_name').focus();">
+			<div class="form-group">
+				<input type="submit" value="등록" class="btn btn-lg"> <input
+					type="reset" value="취소" class="btn btn-lg"
+					onclick="$('#name').focus();">
 			</div>
 		</form>
 	</div>

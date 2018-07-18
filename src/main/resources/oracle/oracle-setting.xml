@@ -5,7 +5,6 @@
 <configuration>
   <typeAliases>
     <typeAlias alias="GoodsDTO" type="team.swcome.donong.dto.GoodsDTO" />
-    <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
   </typeAliases>
 	
   <environments default="development">

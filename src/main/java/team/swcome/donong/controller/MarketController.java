@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.MarketService;
 
@@ -49,13 +50,15 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/market/item/{itemNo}", method = RequestMethod.GET)
-	public String itemDetail(Model model, @PathVariable String itemNo) {
+	public String itemDetail(Model model, @PathVariable int itemNo) {
 		model.addAttribute("itemNo", itemNo);
+		model.addAttribute("item", marketService.getItemByItemNum(itemNo));
 		return "market/item-detail";
 	}
 	
-	@RequestMapping(value = "/market/payment", method = RequestMethod.GET)
-	public String payment(Model model) {
+	@RequestMapping(value = "/market/payment", method = RequestMethod.POST)
+	public String payment(Model model, @RequestParam int count, SessionBean session) {
+		MemberDTO member = marketService.getMemberDetails(session.getMemberNum());
 		return "market/payment";
 	}
 	

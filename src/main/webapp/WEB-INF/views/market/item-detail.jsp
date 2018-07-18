@@ -19,22 +19,24 @@
 </head>
 <body>
 <div class="container">
+	<form action="/donong/market/payment" method="post">
 	<div>
 		<h1>타이틀임</h1>
 	</div>
 	<div>
-		<img src="#" width="100" height="100"/>
-		<div>이름 : 모종삽</div>
-		<div>가격 : 1000원</div>
-		수량 : <input type="number" class="form-control"/>
+		<img src="${item.filePath }" width="100" height="100"/>
+		<div>이름 : ${item.name }</div>
+		<div>가격 : ${item.price }원</div>
+		수량 : <input type="number" class="form-control" name="count"/>
 		
 	</div>
-	<div>제품의 상세 정보들이 들어갈 공간</div>
+	<div>${item.content }</div>
 	<div>
-		<input class="btn btn-default" type="button" value="결제하기" onclick="location.href='/donong/market/payment'"/>
-		<input class="btn btn-default" type="button" value="장바구니에 담기" onclick="location.href='/donong/market/cart/${itemNo}'" />
+		<input class="btn btn-default" type="submit" value="결제하기"/>
+		<button class="btn btn-default" type="button" onclick="location.href='/donong/market/cart/${itemNo}'">장바구니에 담기</button>
 		<!--TODO ajax처리 예정 -->
 	</div>
+	</form>
 </div>
 </body>
 </html>

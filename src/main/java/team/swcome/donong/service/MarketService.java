@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
+import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.mapper.GoodsMapper;
 
 @Service
@@ -14,14 +15,17 @@ public class MarketService {
 	
 	@Autowired
 	GoodsMapper mapper;
+	final int itemsPerPage = 10;
 	
 	public List<GoodsDTO> getMainList(int page){
-		return mapper.selectAll(page);
+		int startItem = (page-1) * itemsPerPage;
+		int endItem = (page-1) * itemsPerPage + 9;
+		return mapper.selectItemsAtPage(startItem, endItem);
 	}
 	
 	public MarketPaginationDTO getPaginationInfo(int currentPage) {
 		MarketPaginationDTO pagination = new MarketPaginationDTO();
-		int lastPage = 10;
+		int lastPage = (mapper.selectItemCount() / itemsPerPage) + 1;
 		
 		int startPage = currentPage - 2;
 		int endPage = currentPage + 2;
@@ -39,7 +43,15 @@ public class MarketService {
 		return pagination; 
 	}
 
+	public GoodsDTO getItemByItemNum(int itemNum) {
+		return mapper.selectItemByNum(itemNum);
+	}
+	
 	public List<GoodsDTO> getCartItems(int memberNum) {
 		return mapper.selectCartByMemberNum(memberNum);
+	}
+
+	public MemberDTO getMemberDetails(int memberNum) {
+		return mapper.selectMemberByMemberNum(memberNum);
 	}
 }

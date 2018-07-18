@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 public class GoodsDTO {
 	private int num;
 	private String name;
+	private int price;
 	private int category;
 	private String title;
 	private Date regitdate;
@@ -55,5 +56,11 @@ public class GoodsDTO {
 	}
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

@@ -3,11 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.swcome.donong.mapper.GoodsMapper">
-  <select id="selectAll" resultType="GoodsDTO">
-    select * from goods where num = #{page}
+  <select id="selectItemsAtPage" resultType="GoodsDTO">
+  <![CDATA[
+    SELECT num, name, price, category, title, regitdate, content, filepath FROM (
+    	SELECT rownum as rnum, num, name, price, category, title, regitdate, content, filepath 
+    	FROM (
+			SELECT * 
+			FROM goods 
+			ORDER BY num DESC)
+	    WHERE rownum <= #{param2}
+    )
+    WHERE rnum > #{param1}
+  ]]>
   </select>
-  <select id="selectByNum" parameterType="int" resultType="GoodsDTO">
+  <select id="selectItemByNum" parameterType="int" resultType="GoodsDTO">
   	select * from goods where num = #{num}
+  </select>
+  
+  <select id="selectItemCount" parameterType="int" resultType="int">
+  	select count(*) from goods
   </select>
   <select id="selectCartByMemberNum" resultType="GoodsDTO">
   	select goods.* from goods, cart, member where goods.num = goods_num AND cart.member_num = member.num AND cart.member_num = #{memberNum}

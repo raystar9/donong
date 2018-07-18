@@ -131,8 +131,6 @@ public class MainController {
 		
 		model.addAttribute("password", password);
 		
-		
-		
 		return "main/pwd_find";
 	}
 	

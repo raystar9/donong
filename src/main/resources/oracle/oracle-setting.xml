@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="FarmDTO" type="team.swcome.donong.dto.FarmDTO" />
+    <typeAlias alias="RentalDTO" type="team.swcome.donong.dto.RentalDTO" />
   </typeAliases>
 	
   <environments default="development">

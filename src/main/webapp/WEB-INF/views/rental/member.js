@@ -289,14 +289,6 @@ function placeMarker(location) {
 	google.maps.event.removeListener(clickEvent);
 }
 
-function addDragEvent(marker) {
-	marker.addListener('dragend', function (event) {
-		map.setCenter(event.latLng);
-		$('#markerLat').val(event.latLng.lat());
-		$('#markerLng').val(event.latLng.lng());
-	});
-}
-
 //마커 제거 함수
 function removeMarkers() {
 	console.log('삭제');
@@ -305,3 +297,12 @@ function removeMarkers() {
 	}
 	markers = [];
 }
+
+/*function addDragEvent(marker) {
+	marker.addListener('dragend', function (event) {
+		map.setCenter(event.latLng);
+		$('#markerLat').val(event.latLng.lat());
+		$('#markerLng').val(event.latLng.lng());
+	});
+}*/
+

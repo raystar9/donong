@@ -27,11 +27,13 @@ name VARCHAR2(20) NOT NULL,
 do NUMBER CONSTRAINT si_do_fk REFERENCES do(num) NOT NULL
 );
 
+drop table rentals;
 -- 농지 대여 테이블
 CREATE TABLE rentals(
 num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 title varchar2(100) NOT NULL,
 writer NUMBER CONSTRAINT rentals_writer_fk REFERENCES member(num) NOT NULL,
+area number NOT NULL,
 address varchar2(400) NOT NULL,
 do NUMBER CONSTRAINT rentals_do_fk REFERENCES do(num) NOT NULL,
 si NUMBER CONSTRAINT rentals_si_fk REFERENCES si(num) NOT NULL,

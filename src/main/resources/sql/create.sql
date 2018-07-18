@@ -56,6 +56,7 @@ CREATE TABLE rentals(
 num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 writer NUMBER CONSTRAINT rentals_writer_fk REFERENCES member(num) NOT NULL,
 address varchar2(400) NOT NULL,
+area number NOT NULL,
 do NUMBER CONSTRAINT rentals_do_fk REFERENCES do(num) NOT NULL,
 si NUMBER CONSTRAINT rentals_si_fk REFERENCES si(num) NOT NULL,
 price NUMBER NOT NULL,

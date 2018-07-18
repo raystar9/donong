@@ -17,21 +17,21 @@ public class AccountService {
 	}
 	
 	public MemberDTO getUserNum(MemberDTO m) {
-		return mainMapper.selectLoginInfo(m);
+		return mainMapper.selectLoginStateByIdAndPw(m);
 		
 	}
 
 	public MemberDTO findMember(int num) {
-		return mainMapper.findMember(num);
+		return mainMapper.selectMemberByNum(num);
 	}
 
 	public void editMember(MemberDTO m) {
-		mainMapper.editMember(m);
+		mainMapper.updateAll(m);
 		
 	}
 
 	public MemberDTO findPass(String id, String realname) {
-		return mainMapper.findPass(id, realname);
+		return mainMapper.selectMemberCountByIdAndRealname(id, realname);
 	}
 	
 	

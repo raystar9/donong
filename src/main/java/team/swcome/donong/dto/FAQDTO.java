@@ -1,5 +1,8 @@
 package team.swcome.donong.dto;
 
+import javax.annotation.Resource;
+
+@Resource
 public class FAQDTO {
 	private int num;
 	private int category;

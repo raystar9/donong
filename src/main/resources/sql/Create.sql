@@ -61,15 +61,15 @@ quantity NUMBER,
 PRIMARY KEY(order_num, goods_num)
 );
 
-CREATE TABLE do(
-num NUMBER CONSTRAINT do_num_pk PRIMARY KEY,
+CREATE TABLE sido(
+num NUMBER CONSTRAINT sido_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL
 );
 
-CREATE TABLE si(
-num NUMBER CONSTRAINT si_num_pk PRIMARY KEY,
+CREATE TABLE sigungu(
+num NUMBER CONSTRAINT sigungu_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL,
-do NUMBER CONSTRAINT si_do_fk REFERENCES do(num) NOT NULL
+sido NUMBER CONSTRAINT sigungu_sido_fk REFERENCES sido(num) NOT NULL
 );
 
 CREATE TABLE rentals(
@@ -77,8 +77,9 @@ num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 writer VARCHAR(100) NOT NULL,
 address varchar2(400) NOT NULL,
-do NUMBER CONSTRAINT rentals_do_fk REFERENCES do(num) NOT NULL,
-si NUMBER CONSTRAINT rentals_si_fk REFERENCES si(num) NOT NULL,
+sido NUMBER CONSTRAINT rentals_sido_fk REFERENCES sido(num) NOT NULL,
+sigungu NUMBER CONSTRAINT rentals_sigungu_fk REFERENCES sigungu(num) NOT NULL,
+area number NOT NULL,
 price NUMBER NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 lat NUMBER,

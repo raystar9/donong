@@ -1,6 +1,8 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -9,7 +11,7 @@
 </head>
 <body>
 	<h1>
-		CS 공지사항 페이지 입니다.  
+		CS 메인 페이지 입니다.  
 	</h1>
 		<a href="cs/main">cs/main</a>
 	<a href="cs/notice">cs/notice</a>

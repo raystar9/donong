@@ -12,5 +12,9 @@ public interface NoticeMapper {
 
 	List<NoticeDTO> getNoticeList();
 
+	int getListCount();
+
+	NoticeDTO getNoticeContent(int num);
+
 	
 }

@@ -57,8 +57,9 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/market/payment", method = RequestMethod.POST)
-	public String payment(Model model, @RequestParam int count, SessionBean session) {
-		MemberDTO member = marketService.getMemberDetails(session.getMemberNum());
+	public String payment(Model model, @RequestParam String count, SessionBean session) {
+		model.addAttribute("member", marketService.getMemberDetails(1));
+//		TODO 수정해야됨!
 		return "market/payment";
 	}
 	

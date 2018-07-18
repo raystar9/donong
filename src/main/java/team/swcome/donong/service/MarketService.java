@@ -9,12 +9,15 @@ import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
 import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.mapper.GoodsMapper;
+import team.swcome.donong.mapper.MemberMapper;
 
 @Service
 public class MarketService {
 	
 	@Autowired
 	GoodsMapper mapper;
+	@Autowired
+	MemberMapper memberMapper;
 	final int itemsPerPage = 10;
 	
 	public List<GoodsDTO> getMainList(int page){
@@ -52,6 +55,6 @@ public class MarketService {
 	}
 
 	public MemberDTO getMemberDetails(int memberNum) {
-		return mapper.selectMemberByMemberNum(memberNum);
+		return memberMapper.selectMemberByNum(memberNum);
 	}
 }

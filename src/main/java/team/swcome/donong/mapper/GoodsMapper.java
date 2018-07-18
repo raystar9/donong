@@ -13,6 +13,4 @@ public interface GoodsMapper {
 	public GoodsDTO selectItemByNum(int itemNum);
 
 	public int selectItemCount();
-
-	public MemberDTO selectMemberByMemberNum(int memberNum);
 }

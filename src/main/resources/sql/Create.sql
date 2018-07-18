@@ -2,7 +2,7 @@ DROP TABLE qna;
 DROP TABLE faq;
 DROP TABLE cs_category;
 DROP TABLE community;
-DROP TABLE files;
+DROP TABLE rentalFiles;
 DROP TABLE rentals;
 DROP TABLE si;
 DROP TABLE do;
@@ -19,9 +19,11 @@ id VARCHAR2(100) UNIQUE NOT NULL,
 nickname VARCHAR2(100) UNIQUE NOT NULL,
 password VARCHAR2(100) NOT NULL,
 realname VARCHAR2(100) NOT NULL,
+postnum VARCHAR2(10) NOT NULL,
 address VARCHAR2(200) NOT NULL,
-postcode NUMBER NOT NULL,
+addressdetail VARCHAR2(100),
 email VARCHAR2(100) NOT NULL,
+emaildomain VARCHAR2(100) NOT NULL,
 phone VARCHAR2(15) NOT NULL,
 registdate DATE NOT NULL
 );
@@ -37,7 +39,8 @@ name VARCHAR2(100) NOT NULL,
 category NUMBER CONSTRAINT goods_category_fk REFERENCES goods_category(num) NOT NULL,
 title VARCHAR2(100) NOT NULL,
 regitdate DATE NOT NULL,
-content VARCHAR2(4000) NOT NULL
+content VARCHAR2(4000) NOT NULL,
+filepath VARCHAR2(200)
 );
 
 CREATE TABLE cart(
@@ -84,18 +87,16 @@ lat NUMBER,
 lng NUMBER
 );
 
-CREATE TABLE files(
-num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
-board_name VARCHAR2(30) NOT NULL,
-board_num NUMBER NOT NULL,
-filename VARCHAR2(200) NOT NULL,
+CREATE TABLE rentalFiles(
+num NUMBER CONSTRAINT rentalfiles_num_pk PRIMARY KEY,
+rentals_num NUMBER CONSTRAINT rentalfiles_rental_fk REFERENCES rentals(num) NOT NULL,
 filepath VARCHAR2(200) NOT NULL
 );
 
 CREATE TABLE community(
 num NUMBER CONSTRAINT community_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT community_writer_fk REFERENCES member(num) NOT NULL,
-writer VARCHAR(100) NOT NULL,
+writer VARCHAR2(100) NOT NULL,
 password VARCHAR2(100) NOT NULL,
 subject VARCHAR2(200) NOT NULL,
 category VARCHAR2(50) NOT NULL,
@@ -104,7 +105,9 @@ regitdate DATE NOT NULL,
 readcount NUMBER,
 re_ref NUMBER,
 re_lev NUMBER,
-re_seq NUMBER
+re_seq NUMBER,
+filename VARCHAR2(200) NOT NULL,
+filepath VARCHAR2(200) NOT NULL
 );
 
 CREATE TABLE cs_category(
@@ -124,5 +127,7 @@ num NUMBER CONSTRAINT qna_num_pk PRIMARY KEY,
 category NUMBER CONSTRAINT qna_category_fk REFERENCES cs_category(num) NOT NULL, 
 writer NUMBER CONSTRAINT qna_writer_fk REFERENCES member(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
-content varchar2(4000) NOT NULL
+content varchar2(4000) NOT NULL,
+filename VARCHAR2(200) NOT NULL,
+filepath VARCHAR2(200) NOT NULL
 );

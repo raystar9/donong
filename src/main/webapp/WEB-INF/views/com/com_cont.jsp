@@ -21,7 +21,7 @@
 	</tr>
 	<tr>
 		<th colspan="2">
-		<textarea rows="8" cols="50" readonly>${com_cont}글의 내용을 담고있는 ....</textarea>
+		<textarea  rows="8" cols="50" readonly >${com_cont}글의 내용을 담고있는 ....</textarea>
 		<input type="button" value="목록" class="btn" style="vertical-align: top" onclick="location='communitylist?page=${page}'">
 		</th>
 	</tr>

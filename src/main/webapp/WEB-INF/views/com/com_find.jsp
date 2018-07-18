@@ -60,10 +60,10 @@
     <tr class = "pagination">
        <td colspan = 5>
           <c:if test = "${page <= 1}">
-             이전&nbsp;
+             &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}">이전</a>&nbsp;   
+             <a href = "communitylist?page=${page-1}">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach var = "a" begin = "${startpage}" end = "${endpage}">
@@ -76,10 +76,10 @@
           </c:forEach>
           
           <c:if test = "${page >= maxpage}">
-             &nbsp;다음
+             &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}">&nbsp;다음</a>
+             <a href = "communitylist?page=${page + 1}">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>

@@ -17,4 +17,8 @@ public class RentalService {
 	public List<RentalDTO> getMainList(){
 		return RentalMapper.selectAll();
 	}
+	
+	public void insertfarm(RentalDTO r) {
+		
+	}
 }

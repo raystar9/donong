@@ -16,7 +16,7 @@
 				return false;
 		 }  
 		 if($.trim($("#name").val())==""){
-		 alert("이름을 쓰세요");
+		 alert("실명을 쓰세요");
 		 $("#name").val("").focus();
 		 return false;
 		 }
@@ -26,9 +26,9 @@
 </head>
 <body>
 	<div id="pwd_wrap">
-		<c:if test="${empty pwdok}">
+		<c:if test="${empty password}">
 			<h2 class="pwd_title">비번 찾기</h2>
-			<form method="post" action="pwd_find_ok.nhn" onsubmit="return check()">
+			<form method="post" action="find_password" onsubmit="return check()">
 				<table id = "pwd_t">
 					<tr>
 						<th>아이디</th>
@@ -37,7 +37,7 @@
 					
 					<tr>
 						<th>회원이름</th>
-						<td><input name="name" id="name" size="14" class="input_box"></td>
+						<td><input name="realname" id="name" size="14" class="input_box"></td>
 					</tr>	
 				</table>
 				
@@ -52,12 +52,12 @@
 			</form>
 		</c:if>
 		
-		<c:if test="${!empty pwdok }">
+		<c:if test="${!empty password }">
 			<h2 class="pwd_title2">비번찾기 결과</h2>
 			<table id = "pwd_t2">
 				<tr>
 					<th>검색한 비밀번호</th>
-					<td>${pwdok}</td>
+					<td>${password}</td>
 				</tr>	
 			</table>
 			<div id="pwd_close2">

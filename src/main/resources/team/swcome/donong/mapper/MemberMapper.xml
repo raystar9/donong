@@ -2,10 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="team.swcome.donong.mapper.MainMapper">
-  <select id="selectAll" resultType="MainDTO">
-    select * from blah where id = #{id}
-  </select>
+<mapper namespace="team.swcome.donong.mapper.MemberMapper">
   
 	<insert id="insertMember" parameterType="MemberDTO">
   	insert into member values(member_num.nextval, #{id}, #{nickname}, 
@@ -25,12 +22,15 @@
 	
 	<update id="editMember" parameterType="MemberDTO">
 		update member 
-		set
+		set 
 		nickname=#{nickname}, password=#{password}, postnum=#{postnum},
 		address=#{address}, addressdetail=#{addressdetail}, email=#{email},
 		emaildomain=#{emaildomain}, phone=#{phone} where num=#{num}
 	</update>
-
+	
+	<select id="findPass" parameterType="String" resultType="memberDTO">
+		select password from member where id=#{param1} and realname=#{param2}
+	</select>
 	
   
 </mapper>

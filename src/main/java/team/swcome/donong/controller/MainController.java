@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.MemberDTO;
@@ -38,47 +39,35 @@ public class MainController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		//return "main/home";
-		return "main/home";
-	}
 	
 	@RequestMapping(value = "member_join")
-	public String member_join(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String member_join() throws Exception {
 		return "main/member/joinform";
 	}
 	
 	@RequestMapping(value = "member_join_ok", method =  RequestMethod.POST)
-	public String member_join_ok(MemberDTO m, HttpServletResponse response) throws Exception {
+	public String member_join_ok(MemberDTO m) throws Exception {
 		accountService.insertMember(m);
 		return  "main/login";
 	}
 	
 	@RequestMapping(value = "member_login")
-	public String member_login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String member_login() throws Exception {
 		return "main/login";
 	}
 	
 	@RequestMapping(value = "pwd_find")
-	public String pwd_find(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String pwd_find() throws Exception {
 		return "main/pwd_find";
 	}
 	
 	@RequestMapping(value = "member_login_ok", method =  {RequestMethod.POST,RequestMethod.GET})
-	public String member_join_ok(Model model, MemberDTO m, SessionBean sessionBean) throws Exception {
+	public String member_login_ok(Model model, MemberDTO m, SessionBean sessionBean) throws Exception {
 			MemberDTO memberRes = accountService.getUserNum(m);
 			if(memberRes == null ) {
+				String error = "loginfail";
+				model.addAttribute("error", error);
 				return "main/erroppage";
-				
 			}	
 			sessionBean.setNickname(memberRes.getNickname());
 			sessionBean.setMemberNum(memberRes.getNum());
@@ -87,19 +76,25 @@ public class MainController {
 			return "main/home";
 			
 	}
+	
 	@RequestMapping(value = "member_logout")
-	public String member_logout(SessionBean sessionBean) throws Exception {
+	public String member_logout(Model model, SessionBean sessionBean) throws Exception {
 
 		sessionBean = null;
+		
+		String error = "logout";
+		model.addAttribute("error", error);
 
-		return "main/login";
+		return "main/erroppage";
 	}
+	
 	@RequestMapping(value = "member_mypage")
-	public String member_mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String member_mypage() throws Exception {
 		return "main/member/mypage";
 	}
+	
 	@RequestMapping(value = "member_edit")
-	public String member_edit(Model model, MemberDTO m,SessionBean sessionBean, HttpServletRequest request)throws Exception {
+	public String member_edit(Model model, MemberDTO m,SessionBean sessionBean)throws Exception {
 		int num = sessionBean.getMemberNum();
 		m = accountService.findMember(num);
 		 
@@ -108,15 +103,41 @@ public class MainController {
 		return "main/member/editform";
 	}
 	
-	@RequestMapping(value = "member_edit_ok")
-	public String member_edit_ok(Model model, MemberDTO m,SessionBean sessionBean, HttpServletRequest request)throws Exception {
+	@RequestMapping(value = "member_edit_ok", method=RequestMethod.POST)
+	public String member_edit_ok(Model model, MemberDTO m, SessionBean sessionBean)throws Exception {
 		int num = sessionBean.getMemberNum();
-		m = accountService.findMember(num);
-		
+		m.setNum(num);
+	
 		accountService.editMember(m); 
 		
-		return "main/home";
+		String error = "editok";
+		model.addAttribute("error", error);
+		
+		return "main/member/mypage";
 	}
+	
+	@RequestMapping(value = "find_password", method=RequestMethod.POST)
+	public String find_password(Model model, MemberDTO m, @RequestParam String id, @RequestParam String realname) {
+		
+		m=accountService.findPass(id, realname);
+		
+		if(m==null) {
+			String error = "findpassfail";
+			model.addAttribute("error", error);
+			return "main/erroppage";
+		}
+		
+		String password=m.getPassword();
+		
+		model.addAttribute("password", password);
+		
+		
+		
+		return "main/pwd_find";
+	}
+	
+	
+	
 	
 	
 }

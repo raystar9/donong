@@ -5,7 +5,7 @@ import java.util.List;
 import team.swcome.donong.dto.MainDTO;
 import team.swcome.donong.dto.MemberDTO;
 
-public interface MainMapper {
+public interface MemberMapper {
 	
 	public List<MainDTO> selectAll();
 	
@@ -15,8 +15,8 @@ public interface MainMapper {
 
 	public MemberDTO findMember(int num);
 
-	public MemberDTO editMember(MemberDTO m);
+	public void editMember(MemberDTO m);
 	
-	
+	public MemberDTO findPass(String id, String realname);
 	
 }

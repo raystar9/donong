@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.swcome.donong.dto.MainDTO;
 import team.swcome.donong.dto.MemberDTO;
-import team.swcome.donong.mapper.MainMapper;
+import team.swcome.donong.mapper.MemberMapper;
 
 @Service
 public class AccountService {
 	
 	@Autowired
-	MainMapper mainMapper;
+	MemberMapper mainMapper;
 	
 	public List<MainDTO> getMainList(){
 		return mainMapper.selectAll();
@@ -31,9 +31,13 @@ public class AccountService {
 		return mainMapper.findMember(num);
 	}
 
-	public MemberDTO editMember(MemberDTO m) {
-		return mainMapper.editMember(m);
+	public void editMember(MemberDTO m) {
+		mainMapper.editMember(m);
 		
+	}
+
+	public MemberDTO findPass(String id, String realname) {
+		return mainMapper.findPass(id, realname);
 	}
 	
 	

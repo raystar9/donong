@@ -6,7 +6,7 @@ password VARCHAR2(100) NOT NULL,
 realname VARCHAR2(100) NOT NULL,
 postnum VARCHAR2(10) NOT NULL,
 address VARCHAR2(200) NOT NULL,
-addressdetail VARCHAR2(100),
+addressdetail VARCHAR2(100) NOT NULL,
 email VARCHAR2(100) NOT NULL,
 emaildomain VARCHAR2(100) NOT NULL,
 phone VARCHAR2(15) NOT NULL,
@@ -17,7 +17,7 @@ drop table member
 
 select * from member
 
-select * from member where num=3
+select password from member where id='xxx' and realname='xxxxx'
 
 create sequence member_num
 start with 1

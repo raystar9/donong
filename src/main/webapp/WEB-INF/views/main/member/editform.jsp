@@ -95,9 +95,6 @@ function check(){
 	}
 	
 	
-	$('#email').val($('#join_mailid').val()+"@"+$('#join_maildomain').val());
-	$('#address').val($('#addr').val()+" "+$('#addrdetail').val());
-	
 	alert($('#join_nickname').val()+" 님의 정보가 수정되었습니다.")
 		
 	
@@ -113,7 +110,7 @@ function check(){
 			<tr>
 				<th>ID</th>
 				<td>
-					<input name="id" id="join_id" size="30" class="input_box" placeholder="입력 후 중복체크를 해주세요" value="${memberDTO.id }"><!-- ID 입력 칸 -->
+					<input name="id" id="join_id" size="30" class="input_box" placeholder="입력 후 중복체크를 해주세요" value="${memberDTO.id }"  readonly><!-- ID 입력 칸 -->
            			<input type="button" value="아이디 중복체크" class="input_button"> <!-- 중복체크 버튼 -->
            			<div id="idcheck"></div> <!-- 중복체크 결과 표시칸 -->
                 </td>
@@ -140,7 +137,7 @@ function check(){
 			<tr>
 				<th>성명</th>
 				<td>
-					<input name="realname" id="join_name" size="40" class="input_box" placeholder="실제성명을 입력해주세요." required value="${memberDTO.realname }">
+					<input name="realname" id="join_name" size="40" class="input_box" readonly required value="${memberDTO.realname }">
 				</td>
 			</tr>	
 			<tr>

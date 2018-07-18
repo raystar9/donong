@@ -6,12 +6,12 @@ public interface MemberMapper {
 	
 	public void insertMember(MemberDTO m);
 
-	public MemberDTO selectLoginInfo(MemberDTO m);
+	public MemberDTO selectLoginStateByIdAndPw(MemberDTO m);
 
-	public MemberDTO findMember(int num);
+	public MemberDTO selectMemberByNum(int num);
 
-	public void editMember(MemberDTO m);
+	public void updateAll(MemberDTO m);
 	
-	public MemberDTO findPass(String id, String realname);
+	public MemberDTO selectMemberCountByIdAndRealname(String id, String realname);
 	
 }

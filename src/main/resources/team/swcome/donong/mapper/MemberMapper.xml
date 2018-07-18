@@ -12,15 +12,17 @@
   	)
 	</insert>
   
-	<select id="selectLoginInfo" parameterType="MemberDTO" resultType="MemberDTO">
-		select num,password, nickname from member where id=#{id} and password=#{password}
+	<select id="selectLoginStateByIdAndPw" parameterType="MemberDTO" resultType="MemberDTO">
+		select num, nickname from member where id=#{id} and password=#{password}
 	</select>
 	
-	<select id="findMember" parameterType="int" resultType="MemberDTO">
-		select * from member where num = #{num}
+	<select id="selectMemberByNum" parameterType="int" resultType="MemberDTO">
+		select num, id, nickname, realname, postnum, address, addressdetail, email, emaildomain, phone, registdate
+		from member 
+		where num = #{num}
 	</select>
 	
-	<update id="editMember" parameterType="MemberDTO">
+	<update id="updateAll" parameterType="MemberDTO">
 		update member 
 		set 
 		nickname=#{nickname}, password=#{password}, postnum=#{postnum},
@@ -28,7 +30,7 @@
 		emaildomain=#{emaildomain}, phone=#{phone} where num=#{num}
 	</update>
 	
-	<select id="findPass" parameterType="String" resultType="memberDTO">
+	<select id="selectMemberCountByIdAndRealname" parameterType="String" resultType="memberDTO">
 		select password from member where id=#{param1} and realname=#{param2}
 	</select>
 	

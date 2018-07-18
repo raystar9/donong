@@ -5,10 +5,10 @@
 <configuration>
   <typeAliases>
     <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
-    <typeAlias alias="MarketDTO" type="team.swcome.donong.dto.MarketDTO" />
     <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
     <typeAlias alias="CSBoardDTO" type="team.swcome.donong.dto.CSBoardDTO" />
     <typeAlias alias="FarmDTO" type="team.swcome.donong.dto.FarmDTO" />
+    <typeAlias alias="GoodsDTO" type="team.swcome.donong.dto.GoodsDTO" />
   </typeAliases>
 	
   <environments default="development">
@@ -22,11 +22,4 @@
       </dataSource>
     </environment>
   </environments>
-  <mappers>
-    <mapper resource="/oracle/main-mapper.xml"/>
-    <mapper resource="/oracle/market-mapper.xml"/>
-    <mapper resource="/oracle/board-mapper.xml"/>
-    <mapper resource="/oracle/service-mapper.xml"/>
-    <mapper resource="/oracle/farm-mapper.xml"/>
-  </mappers>
 </configuration>

@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import team.swcome.donong.dto.MarketDTO;
+import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
-import team.swcome.donong.mapper.BlahMapper;
+import team.swcome.donong.mapper.GoodsMapper;
 
 @Service
 public class MarketService {
 	
 	@Autowired
-	BlahMapper mapper;
+	GoodsMapper mapper;
 	
-	public List<MarketDTO> getMainList(){
-		return mapper.selectAll();
+	public List<GoodsDTO> getMainList(int page){
+		return mapper.selectAll(page);
 	}
 	
 	public MarketPaginationDTO getPaginationInfo(int currentPage) {
@@ -37,5 +37,9 @@ public class MarketService {
 		pagination.setEnd(endPage);
 		
 		return pagination; 
+	}
+
+	public List<GoodsDTO> getCartItems(int memberNum) {
+		return mapper.selectCartByMemberNum(memberNum);
 	}
 }

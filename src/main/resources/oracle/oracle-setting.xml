@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="MarketDTO" type="team.swcome.donong.dto.MarketDTO" />
+    <typeAlias alias="GoodsDTO" type="team.swcome.donong.dto.GoodsDTO" />
+    <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
   </typeAliases>
 	
   <environments default="development">

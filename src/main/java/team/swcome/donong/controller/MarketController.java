@@ -1,8 +1,5 @@
 package team.swcome.donong.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import team.swcome.donong.dto.MarketDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.MarketService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes("sessionBean")
 public class MarketController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MarketController.class);
@@ -29,7 +28,12 @@ public class MarketController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/market", method = RequestMethod.GET)
-	public String home(Model model, @RequestParam(required = false, defaultValue = "seed") String category) {
+	public String home(Model model, @RequestParam(required = false, defaultValue = "seed") String category,
+			@RequestParam(required = false, defaultValue = "1") int page, SessionBean sessionBean) {
+		if(sessionBean.getMemberNum() == 0) {
+			sessionBean.setMemberNum(1);
+			sessionBean.setNickname("raystar9");
+		}
 		
 		switch(category) {
 		case "씨앗":
@@ -37,26 +41,10 @@ public class MarketController {
 			
 		case "도구":
 			logger.debug(category);
-			
 		}
-		List<MarketDTO> items = new ArrayList<>();
 		
-		MarketDTO m1 = new MarketDTO();
-		MarketDTO m2 = new MarketDTO();
-		MarketDTO m3 = new MarketDTO();
-		m1.setId(1);
-		m2.setId(2);
-		m3.setId(3);
-		m1.setFilePath("/donong/resources/image/tool1.jpg");
-		m2.setFilePath("/donong/resources/image/tool2.jpg");
-		m3.setFilePath("/donong/resources/image/tool3.jpg");
-		items.add(m1);
-		items.add(m2);
-		items.add(m3);
-		
-		
-		model.addAttribute("items", items );
-		model.addAttribute("page", marketService.getPaginationInfo(4));
+		model.addAttribute("items", marketService.getMainList(page) );
+		model.addAttribute("page", marketService.getPaginationInfo(page));
 		return "market/list";
 	}
 	
@@ -72,15 +60,8 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/market/cart", method = RequestMethod.GET)
-	public String cart(Model model) {
-		List<MarketDTO> items = new ArrayList<>();
-		
-		MarketDTO m1 = new MarketDTO();
-		m1.setId(1);
-		m1.setName("2");
-		items.add(m1);
-		model.addAttribute("items", items);
-		
+	public String cart(Model model, SessionBean sessionBean) {
+		model.addAttribute("items", marketService.getCartItems(sessionBean.getMemberNum()));
 		return "market/cart";
 	}
 	

@@ -3,5 +3,5 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <div class="item-thumbnail">
-${item.id}번째 아이템, ${item.name}개
+${item.num}번째 아이템 : ${item.name}
 </div>

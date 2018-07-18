@@ -1,3 +1,4 @@
+DROP TABLE notice;
 DROP TABLE qna;
 DROP TABLE faq;
 DROP TABLE cs_category;
@@ -36,6 +37,7 @@ name VARCHAR2(50) UNIQUE NOT NULL
 CREATE TABLE goods(
 num NUMBER PRIMARY KEY,
 name VARCHAR2(100) NOT NULL,
+price NUMBER NOT NULL,
 category NUMBER CONSTRAINT goods_category_fk REFERENCES goods_category(num) NOT NULL,
 title VARCHAR2(100) NOT NULL,
 regitdate DATE NOT NULL,
@@ -63,15 +65,15 @@ quantity NUMBER,
 PRIMARY KEY(order_num, goods_num)
 );
 
-CREATE TABLE do(
-num NUMBER CONSTRAINT do_num_pk PRIMARY KEY,
+CREATE TABLE sido(
+num NUMBER CONSTRAINT sido_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL
 );
 
-CREATE TABLE si(
-num NUMBER CONSTRAINT si_num_pk PRIMARY KEY,
+CREATE TABLE sigungu(
+num NUMBER CONSTRAINT sigungu_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL,
-do NUMBER CONSTRAINT si_do_fk REFERENCES do(num) NOT NULL
+sido NUMBER CONSTRAINT sigungu_sido_fk REFERENCES sido(num) NOT NULL
 );
 
 CREATE TABLE rentals(
@@ -79,8 +81,9 @@ num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 writer VARCHAR(100) NOT NULL,
 address varchar2(400) NOT NULL,
-do NUMBER CONSTRAINT rentals_do_fk REFERENCES do(num) NOT NULL,
-si NUMBER CONSTRAINT rentals_si_fk REFERENCES si(num) NOT NULL,
+sido NUMBER CONSTRAINT rentals_sido_fk REFERENCES sido(num) NOT NULL,
+sigungu NUMBER CONSTRAINT rentals_sigungu_fk REFERENCES sigungu(num) NOT NULL,
+area number NOT NULL,
 price NUMBER NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 lat NUMBER,
@@ -96,7 +99,7 @@ filepath VARCHAR2(200) NOT NULL
 CREATE TABLE community(
 num NUMBER CONSTRAINT community_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT community_writer_fk REFERENCES member(num) NOT NULL,
-writer VARCHAR2(100) NOT NULL,
+writer VARCHAR(100) NOT NULL,
 password VARCHAR2(100) NOT NULL,
 subject VARCHAR2(200) NOT NULL,
 category VARCHAR2(50) NOT NULL,
@@ -130,4 +133,11 @@ title VARCHAR2(200) NOT NULL,
 content varchar2(4000) NOT NULL,
 filename VARCHAR2(200) NOT NULL,
 filepath VARCHAR2(200) NOT NULL
+);
+
+CREATE TABLE notice(
+num NUMBER CONSTRAINT notice_num_pk PRIMARY KEY,
+title VARCHAR2(200) NOT NULL,
+content VARCHAR2(4000) NOT NULL,
+regitdate DATE NOT NULL
 );

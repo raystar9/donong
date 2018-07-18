@@ -9,8 +9,9 @@
   
 	<insert id="insertMember" parameterType="MemberDTO">
   	insert into member values(member_num.nextval, #{id}, #{nickname}, 
-  								#{password}, #{realname}, #{address}, 
-  								#{email}, #{phone}, sysdate
+  								#{password}, #{realname},#{postnum}, 
+  								#{address}, #{addressdetail}, #{email}, 
+  								#{emaildomain}, #{phone}, sysdate
   	)
 	</insert>
   
@@ -21,6 +22,14 @@
 	<select id="findMember" parameterType="int" resultType="MemberDTO">
 		select * from member where num = #{num}
 	</select>
+	
+	<update id="editMember" parameterType="MemberDTO">
+		update member 
+		set
+		nickname=#{nickname}, password=#{password}, postnum=#{postnum},
+		address=#{address}, addressdetail=#{addressdetail}, email=#{email},
+		emaildomain=#{emaildomain}, phone=#{phone} where num=#{num}
+	</update>
 
 	
   

@@ -98,14 +98,17 @@ function check(){
 	$('#email').val($('#join_mailid').val()+"@"+$('#join_maildomain').val());
 	$('#address').val($('#addr').val()+" "+$('#addrdetail').val());
 	
-	alert($('#join_nickname').val()+" 님의 파종이 시작되었습니다.")
+	alert($('#join_nickname').val()+" 님의 정보가 수정되었습니다.")
+		
 	
 }
+
+
 
 </script>
 </head>
 <body>
-	<form name="joinform" method="post" action="member_join_ok"  onsubmit="return check()">
+	<form name="joinform" method="post" action="member_edit_ok"  onsubmit="return check()">
 		<table id="join_table">
 			<tr>
 				<th>ID</th>
@@ -143,18 +146,18 @@ function check(){
 			<tr>
 				<th>우편번호</th>
 					<td>
-						<input type="text" id="postno" name="postno" readonly>
+						<input type="text" id="postno" name="postnum" readonly value="${memberDTO.postnum}">
 						<input type="button"  value="주소검색" onclick="Postcode()">
 					</td>
 				</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" id="addr" name="addr" size="50" required></td>
+				<td><input type="text" id="addr" name="address" size="50" required value="${memberDTO.address}"></td>
 			</tr>
 				<tr>
 					<th>상세주소</th>
 					<td>
-						<input type="text" id="addrdetail" name="addrdetail" value="">
+						<input type="text" id="addrdetail" name="addressdetail" value="${memberDTO.addressdetail}">
 					</td>
 					
 				</tr>
@@ -168,25 +171,24 @@ function check(){
 			<tr>
 				<th>전자우편</th>
 				<td>
-					<input name="join_mailid" id="join_mailid" size="10" class="input_box" required>
-					@<input name="join_maildomain" id="join_maildomain" size="20" class="input_box" readonly>
+					<input name="email" id="join_mailid" size="10" class="input_box"  value="${memberDTO.email}" required>
+					@<input name="emaildomain" id="join_maildomain" size="20" class="input_box" readonly value="${memberDTO.emaildomain}" >
 						<select name="mail_list" id="mail_list" onchange="domain_list()">
 							<option value="">도메인선택</option>
-							<option value="daum.net">daum.net</option>
-							<option value="nate.com">nate.com</option>
-							<option value="naver.com">naver.com</option>
-							<option value="hotmail.com">hotmail.com</option>
-							<option value="gmail.com">gmail.com</option>
+							<option value="daum.net" <c:if test="${memberDTO.emaildomain == 'daum.net'}">selected</c:if>>daum.net</option>
+							<option value="nate.com" <c:if test="${memberDTO.emaildomain == 'nate.com'}">selected</c:if>>nate.com</option>
+							<option value="naver.com" <c:if test="${memberDTO.emaildomain == 'naver.com'}">selected</c:if>>naver.com</option>
+							<option value="hotmail.com" <c:if test="${memberDTO.emaildomain == 'hotmail.com'}">selected</c:if>>hotmail.com</option>
+							<option value="gmail.com" <c:if test="${memberDTO.emaildomain == 'gmail.com'}">selected</c:if>>gmail.com</option>
 							<option value="0">직접입력</option>
 						</select>
-					<input type="hidden" name="email" id="email" value="">
-					<input type="hidden" name="address" id="address" value="">
+
 				</td>		
 				
 			</tr>
 		</table>
 			<div id="join_menu">
-					<input type="submit" value="회원가입" class="input_button">
+					<input type="submit" value="회원정보수정" class="input_button">
 					<input type="reset" value="초기화" class="input_button" onclick="$('#join_id').focus();">
 			</div>	
 	</form>

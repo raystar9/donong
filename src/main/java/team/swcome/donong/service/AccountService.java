@@ -30,6 +30,11 @@ public class AccountService {
 	public MemberDTO findMember(int num) {
 		return mainMapper.findMember(num);
 	}
+
+	public MemberDTO editMember(MemberDTO m) {
+		return mainMapper.editMember(m);
+		
+	}
 	
 	
 	

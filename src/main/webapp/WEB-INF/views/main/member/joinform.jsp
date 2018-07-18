@@ -143,18 +143,18 @@ function check(){
 			<tr>
 				<th>우편번호</th>
 					<td>
-						<input type="text" id="postno" name="postno" readonly>
+						<input type="text" id="postno" name="postnum" readonly>
 						<input type="button"  value="주소검색" onclick="Postcode()">
 					</td>
 				</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" id="addr" name="addr" size="50" required></td>
+				<td><input type="text" id="addr" name="address" size="50" required></td>
 			</tr>
 				<tr>
 					<th>상세주소</th>
 					<td>
-						<input type="text" id="addrdetail" name="addrdetail" value="">
+						<input type="text" id="addrdetail" name="addressdetail" value=" ">
 					</td>
 					
 				</tr>
@@ -168,8 +168,8 @@ function check(){
 			<tr>
 				<th>전자우편</th>
 				<td>
-					<input name="join_mailid" id="join_mailid" size="10" class="input_box" required>
-					@<input name="join_maildomain" id="join_maildomain" size="20" class="input_box" readonly>
+					<input name="email" id="join_mailid" size="10" class="input_box" required>
+					@<input name="emaildomain" id="join_maildomain" size="20" class="input_box" readonly>
 						<select name="mail_list" id="mail_list" onchange="domain_list()">
 							<option value="">도메인선택</option>
 							<option value="daum.net">daum.net</option>
@@ -179,8 +179,6 @@ function check(){
 							<option value="gmail.com">gmail.com</option>
 							<option value="0">직접입력</option>
 						</select>
-					<input type="hidden" name="email" id="email" value="">
-					<input type="hidden" name="address" id="address" value="">
 				</td>		
 				
 			</tr>

@@ -14,5 +14,9 @@ public interface MainMapper {
 	public MemberDTO selectLoginInfo(MemberDTO m);
 
 	public MemberDTO findMember(int num);
+
+	public MemberDTO editMember(MemberDTO m);
+	
+	
 	
 }

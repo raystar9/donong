@@ -49,7 +49,7 @@
 			<input type="submit" value="로그인" class="input_button">
 			<input type="reset" value="취소" class="input_button" onclick="$('#id').focus();">
 			<input type="button" value="회원가입" class="input_button" onclick="location='member_join'">
-			<input type="button" value="비번찾기" class="input_button" onclick="pwd_find()">
+			<input type="button" value="비밀번호찾기" class="input_button" onclick="pwd_find()">
 		</div>
 	</form>
 	

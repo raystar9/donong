@@ -10,11 +10,15 @@ public class MemberDTO {
 	private String id;
 	private String nickname;
 	private String password;
+	private String postnum;
 	private String realname;
 	private String address;
+	private String addressdetail;
 	private String email;
+	private String emaildomain;
 	private String phone;
 	private Date registdate;
+	
 	public int getNum() {
 		return num;
 	}
@@ -39,6 +43,12 @@ public class MemberDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getPostnum() {
+		return postnum;
+	}
+	public void setPostnum(String postnum) {
+		this.postnum = postnum;
+	}
 	public String getRealname() {
 		return realname;
 	}
@@ -51,11 +61,23 @@ public class MemberDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getAddressdetail() {
+		return addressdetail;
+	}
+	public void setAddressdetail(String addressdetail) {
+		this.addressdetail = addressdetail;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getEmaildomain() {
+		return emaildomain;
+	}
+	public void setEmaildomain(String emaildomain) {
+		this.emaildomain = emaildomain;
 	}
 	public String getPhone() {
 		return phone;
@@ -69,8 +91,8 @@ public class MemberDTO {
 	public void setRegistdate(Date registdate) {
 		this.registdate = registdate;
 	}
-	
-	
+
+
 	
 
 }

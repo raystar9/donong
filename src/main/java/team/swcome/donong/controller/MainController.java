@@ -60,7 +60,7 @@ public class MainController {
 	@RequestMapping(value = "member_join_ok", method =  RequestMethod.POST)
 	public String member_join_ok(MemberDTO m, HttpServletResponse response) throws Exception {
 		accountService.insertMember(m);
-		return "main/home";
+		return  "main/login";
 	}
 	
 	@RequestMapping(value = "member_login")
@@ -102,19 +102,20 @@ public class MainController {
 	public String member_edit(Model model, MemberDTO m,SessionBean sessionBean, HttpServletRequest request)throws Exception {
 		int num = sessionBean.getMemberNum();
 		m = accountService.findMember(num);
-		
-		String email = m.getEmail();
-		
-		 StringTokenizer slidemail = new StringTokenizer(email, "@");
-		 String mail1 = slidemail.nextToken();
-		 String mail2 = slidemail.nextToken();
-		 
 		 
 		model.addAttribute(m);
-		model.addAttribute(mail1);
-		model.addAttribute(mail2);
-		
+				
 		return "main/member/editform";
+	}
+	
+	@RequestMapping(value = "member_edit_ok")
+	public String member_edit_ok(Model model, MemberDTO m,SessionBean sessionBean, HttpServletRequest request)throws Exception {
+		int num = sessionBean.getMemberNum();
+		m = accountService.findMember(num);
+		
+		accountService.editMember(m); 
+		
+		return "main/home";
 	}
 	
 	

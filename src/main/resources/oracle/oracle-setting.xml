@@ -7,16 +7,4 @@
     <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
   </typeAliases>
-	
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-        <property name="username" value="scott"/>
-        <property name="password" value="tiger"/>
-      </dataSource>
-    </environment>
-  </environments>
 </configuration>

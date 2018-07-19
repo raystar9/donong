@@ -134,8 +134,9 @@ public class MainController {
 		return "main/pwd_find";
 	}
 	
-	
-	
-	
+	@RequestMapping(value = "sitemap", method=RequestMethod.GET)
+	public String sitemap() {
+		return "main/sitemap";
+	}
 	
 }

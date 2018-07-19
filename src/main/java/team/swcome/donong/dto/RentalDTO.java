@@ -1,25 +1,45 @@
 package team.swcome.donong.dto;
 
+
+
 import javax.annotation.Resource;
+
 
 @Resource
 public class RentalDTO {
 	
 	private int num;		//게시글 고유번호
+	private int member_num;	//작성자 고유번호
+	private String writer;	//게시글 작성자 이름
 	private String title;	//게시글 제목
 	private String address;	//소재지
-	private String sido; //도
+	private String sido; 	//도
 	private String sigungu;	//시
+	private int area;		//면적
 	private int price;		//임대료
 	private String content;	//게시글 내용
 	private int lat;		//위도
 	private int lng;		//경도
-	private String file1;	//파일1 (대표이미지)
-	private String file2;	//파일2 
-	private String file3;	//파일3 
-	private String file4;	//파일4 
 	
 	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public int getMember_num() {
+		return member_num;
+	}
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
+	}
+	public int getArea() {
+		return area;
+	}
+	public void setArea(int area) {
+		this.area = area;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -74,30 +94,5 @@ public class RentalDTO {
 	public void setSigungu(String sigungu) {
 		this.sigungu = sigungu;
 	}
-	public String getFile1() {
-		return file1;
-	}
-	public void setFile1(String file1) {
-		this.file1 = file1;
-	}
-	public String getFile2() {
-		return file2;
-	}
-	public void setFile2(String file2) {
-		this.file2 = file2;
-	}
-	public String getFile3() {
-		return file3;
-	}
-	public void setFile3(String file3) {
-		this.file3 = file3;
-	}
-	public String getFile4() {
-		return file4;
-	}
-	public void setFile4(String file4) {
-		this.file4 = file4;
-	}
-	
 
 }

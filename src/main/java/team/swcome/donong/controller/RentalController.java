@@ -9,10 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.FileDTO;
+import team.swcome.donong.dto.RentalDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.RentalService;
 
-
+@SessionAttributes("sessionBean")
 @Controller
 public class RentalController {
 	
@@ -44,11 +48,22 @@ public class RentalController {
 	/* 농지 대여 글쓰기 페이지로 이동 */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
 	public String rentalWrite() {
+		//RentalService.insertfarm(r);
 		return "rental/rentalWrite";
 	}
 	
 	@RequestMapping(value = "/rental/write_ok", method = RequestMethod.POST)
-	public String rentalWrite_ok(Locale locale, Model model) {
+	public String rentalWrite_ok(Locale locale, 
+								 Model model,  
+								 SessionBean sessionBean,
+								 RentalDTO r,
+								 FileDTO f) {
+		//int member_num = sessionBean.getMemberNum(); - 로그인 연결되면 이렇게 가져올 것
+		sessionBean.setMemberNum(1);
+		int member_num = sessionBean.getMemberNum();
+		r.setMember_num(member_num);
+		RentalService.insertfarm(r);
+		
 		return "rental/rentalWrite";
 	}
 	

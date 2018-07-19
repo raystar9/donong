@@ -37,8 +37,9 @@ num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 writer VARCHAR(100) NOT NULL,
 address varchar2(400) NOT NULL,
+title varchar2(100) NOT NULL,
 sido NUMBER CONSTRAINT rentals_sido_fk REFERENCES sido(num) NOT NULL,
-sigungugungu NUMBER CONSTRAINT rentals_sigungugungu_fk REFERENCES sigungugungu(num) NOT NULL,
+sigungu NUMBER CONSTRAINT rentals_sigungu_fk REFERENCES sigungu(num) NOT NULL,
 area number NOT NULL,
 price NUMBER NOT NULL,
 content VARCHAR2(4000) NOT NULL,
@@ -46,13 +47,17 @@ lat NUMBER,
 lng NUMBER
 );
 
+drop table rentals;
+drop table files;
+member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
+
 -- 파일 테이블
-CREATE TABLE files(
+CREATE TABLE rentalfiles(
 num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
-board_name VARCHAR2(30) NOT NULL,	-- 어떤 테이블인지 테이블 이름!
-board_num NUMBER NOT NULL,			-- 그 테이블의 게시글 번호
+board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- 그 테이블의 게시글 번호
 filename VARCHAR2(200) NOT NULL,
-filepath VARCHAR2(200) NOT NULL
+filepath VARCHAR2(200) NOT NULL,
+
 );
 
 drop sequence do_num_seq;

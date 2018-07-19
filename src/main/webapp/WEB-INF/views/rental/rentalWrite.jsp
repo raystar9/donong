@@ -40,7 +40,7 @@
 </head>
 <body>
 <div id="main">
-	<form action="rental/write_ok" method="post" class="writeForm">
+	<form action="rental/write_ok" method="post" class="writeForm" enctype="multipart/form-data">
 	<table border="1" class="writeTable">
 		<tr>
 			<td>임대자</td>
@@ -69,25 +69,25 @@
 		<tr>
 			<td>대표이미지</td>
 			<td>
-				 <input type="file" name="file1" id="file">
+				 <input type="file" name="file1" id="file1">
 			</td>
 		</tr>
 		<tr>
 			<td>사진1</td>
 			<td>
-				 <input type="file" name="file2" id="file">
+				 <input type="file" name="file2" id="file2">
 			</td>
 		</tr>
 		<tr>
 			<td>사진2</td>
 			<td>
-				 <input type="file" name="file3" id="file">
+				 <input type="file" name="file3" id="file3">
 			</td>
 		</tr>
 		<tr>
 			<td>사진3</td>
 			<td>
-				 <input type="file" name="file4" id="file">
+				 <input type="file" name="file4" id="file4">
 			</td>
 		</tr>
 		<tr>
@@ -103,8 +103,8 @@
 		(주소와 위치가 일치하는지 확인하세요)
 	</div>
 	<div id="map">
-		<input type="hidden" id="markerLat" name="Lat">
-		<input type="hidden" id="markerLng" name="Lng">
+		<input type="hidden" id="markerLat" name="lat">
+		<input type="hidden" id="markerLng" name="lng">
 	</div>
 	<div class="button">
 		<input type="submit" value="등록">

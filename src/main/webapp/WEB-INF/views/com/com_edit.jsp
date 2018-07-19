@@ -6,15 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="resources/js/jquery-3.3.1.js"></script>
-<script src="resources/js/bbs.js"></script>
-<link href="resources/css/bbs.css" rel="stylesheet">
+<!--  <script src="resources/js/bbs.js"></script>-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 <body>
-	<div id="comwrite_wrap">
-		<h2 class="comwrite_title">게시판 입력폼</h2>
-		<form method="post" action="com_edit_ok.nhn" onsubmit="return check()" enctype="multipart/form-data">
-			<input type="hidden" name="com_num" value="${bbsbean.com_num}">
+	<div class="container">
+		<h2 class="comwrite_title">커뮤니티게시판 수정</h2>
+		<form method="get" action="communitylist" onsubmit="return check()" enctype="multipart/form-data">
+			<input type="hidden" name="num" value="${bbsbean.num}">
 			<input type="hidden" name="page" value="${page}">
 			<table id="comwrite_t">
 			<!-- 
@@ -29,30 +29,44 @@
 						size="14" class="input_box"></td>
 				</tr>
 				 -->
-				<tr>
-					<th>제목</th>
-					<td><input name="com_subject" id="com_subject" size="40"
-						class="input_box" value="${bbsbean.com_subject }"></td>
+				<tr class="form-group"> 
+					<th class="well well-sm" style="text-align:center;">제목</th>
+					<td><input name="subject" id="subject" size="40"
+						class="form-control" value="${bbsbean.subject }"></td>
 				</tr>
 				<tr>
-					<th>글내용</th>
-					<td><textarea name="com_content" id="com_content" rows="8"
-							cols="50" class="input_box">${bbsbean.com_content}</textarea></td>
-				</tr>
-				<tr>
-				<th>파일첨부</th>
+				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
-				<label for="upfile"><img src="resources/images/file_open.png" alt="파일열기"></label>
-				<input type="file" id="upfile" name="uploadfile">
-				<span id="filevalue"></span>&nbsp;
-				<span id="close"><img src="resources/images/cancel.png"></span>
+				<label for="upfile"></label>
+				<input type="file" id="upfile" name="uploadfile" value=" " class="form-control">
+				<span id="filevalue"></span>
 				</td>
 				</tr>
+				<tr>
+				<th class="well well-sm" style="text-align:center;">분류</th>
+				<td>
+				<select class="form-control">
+				<option>선택하세요.</option>
+				<option>잡담</option>
+				<option>질문</option>
+				<option>정보</option>
+				<option>모임</option>
+				</select>
+				
+				</td>
+				</tr>
+				<tr>
+					<th  class="well well-sm" style="text-align:center;">글내용</th>
+					<td><textarea name="content" id="content" rows="15"
+							cols="60" class="form-control">${bbsbean.content}</textarea></td>
+				</tr>
+				
 			</table>
-			<div id="comwrite_menu">
-				<input type="submit" value="수정" class="input_button"> <input
-					type="reset" value="취소" class="input_button"
-					onclick="$('#com_subject').focus();">
+			<br>
+			<div class="form-group">
+				<input type="submit" value="수정" class="btn btn-lg"> <input
+					type="reset" value="취소" class="btn btn-lg"
+					onclick="$('#subject').focus();">
 			</div>
 		</form>
 	</div>

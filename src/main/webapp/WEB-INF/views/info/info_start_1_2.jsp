@@ -85,16 +85,16 @@
 			</p>
 			<p align="center" style="text-align: center;">
 				<strong><img
-					src="https://www.modunong.or.kr:449/imgFileDownload.jsp?file_path=/editor_img/20151123/F7106CD4-9D1E-14F3-BD94-EF61DEC48AC4.jpg"></strong><img
-					src="https://www.modunong.or.kr:449/imgFileDownload.jsp?file_path=/editor_img/20151102/6977428F-19CC-677B-67D0-C218512B59E3.jpg"><img
-					src="https://www.modunong.or.kr:449/imgFileDownload.jsp?file_path=/editor_img/20151102/ADDE2400-098C-EA10-C3C7-2EA5751D8CFE.jpg">
+					src="resources/images/info_start_1_2 (1).jpg"></strong><img
+					src="resources/images/info_start_1_2 (2).jpg"><img
+					src="resources/images/info_start_1_2 (3).jpg">
 			</p>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<p align="center" style="text-align: center;">
 				<img
-					src="https://www.modunong.or.kr:449/imgFileDownload.jsp?file_path=/editor_img/20151102/F98FB835-E2AD-56C1-FC34-F6FF86B72BF3.jpg"><img
-					src="https://www.modunong.or.kr:449/imgFileDownload.jsp?file_path=/editor_img/20151102/EE1A5C9E-5AB3-D26B-3034-D00637BCB033.jpg"><br>
+					src="resources/images/info_start_1_2 (4).jpg"><img
+					src="resources/images/info_start_1_2 (5).jpg"><br>
 				<span style="font-size: 11pt;"><strong><br></strong></span>
 			</p>
 			<p>&nbsp;</p>

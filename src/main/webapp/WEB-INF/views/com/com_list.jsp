@@ -74,7 +74,7 @@ $(function(){
     <table class="table table-hover">
        
     <tr>
-    <th width = "10"><div>분류</div></th>
+    <th width = "10%"><div>분류</div></th>
        <th width = "48%"><div>제목</div></th>
        <th width = "12%"><div>작성자</div></th>
        <th width = "15%"><div>날짜</div></th>

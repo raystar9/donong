@@ -123,7 +123,7 @@
 					style="color: rgb(0, 117, 200); font-size: 14pt;"></span></strong></span>
 			<p align="center" style="text-align: center;">
 				<img
-					src="https://www.modunong.or.kr:449/imgFileDownload.jsp?file_path=/editor_img/20151203/1279E6BF-4C13-06D4-0A2E-B3CE2F751CA1.jpg">&nbsp;
+					src="resources/images/info_start_1.jpg">&nbsp;
 			</p>
 			<p align="center" style="text-align: center;">&nbsp;</p>
 			<div align="center" style="text-align: center;"></div>

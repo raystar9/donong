@@ -34,6 +34,13 @@
 	</script>	
 </c:if>
 
+<c:if test="${error=='findidfail'}">
+	<script>
+		alert("입력 정보를 다시 확인해주세요");
+		history.back();
+	</script>	
+</c:if>
+
 
 </body>
 </html>

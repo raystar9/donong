@@ -45,11 +45,8 @@ function Postcode() {
  
              // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                 fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                
-             
+                            
             } 
-                
-           
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postno').value = data.zonecode; //5자리 새우편번호 사용
@@ -94,6 +91,15 @@ function check(){
 		return false;
 	}
 	
+	if($('#checkconfirmID').val()=="false" || checkid != $("#join_id").val()){
+		alert("아이디 중복체크를 하세요");
+		return false;
+	}
+		
+	if($('#checkconfirmNickName').val()=="false" || checknickname != $("#join_nickname").val()){
+		alert("별칭 중복체크를 하세요");
+		return false;
+	}
 	
 	alert($('#join_nickname').val()+" 님의 정보가 수정되었습니다.")
 		
@@ -101,18 +107,61 @@ function check(){
 }
 
 
+	
+	var checknickname ='';
+	var inputNickname = '';
+function nickname_check(){		
+	if($.trim($("#join_nickname").val())==""){
+		alert("별칭을 입력하세요");
+		$("#join_nickname").val("").focus();
+		return false;
+	}
+	
+	$('#nicknamecheck').attr('');
+	inputNickname = $('#join_nickname').val();
+	
+	var msg = '';
+
+	$.ajax({
+		type : "POST",
+		data : {"nickname" : inputNickname},
+		url : "checkOverlapNickName",
+		cache : false,
+		success: function(data){
+			
+			if(data == 0 || $('#join_nickname').val() == "${memberDTO.id }"){
+				$('#checkconfirmNickName').val('true');
+				msg = '사용가능한 별칭입니다.';
+				$('#nicknamecheck').css('color', 'blue');
+				checknickname = inputNickname;
+			} else {
+				msg = '이미 사용중인 별칭입니다.';
+				$('#nicknamecheck').css('color', 'red');
+				$('#nicknamecheck').text(msg);
+				return false;
+			}
+			
+			$('#nicknamecheck').text(msg);
+		}
+		
+});	
+	}
+
+
 
 </script>
 </head>
 <body>
+	<input type="hidden" name="checkconfirmID" id="checkconfirmID" value="false">
+	<input type="hidden" name="checkconfirmNickName" id="checkconfirmNickName" value="false">
+
 	<form name="joinform" method="post" action="member_edit_ok"  onsubmit="return check()">
 		<table id="join_table">
 			<tr>
 				<th>ID</th>
 				<td>
 					<input name="id" id="join_id" size="30" class="input_box" placeholder="입력 후 중복체크를 해주세요" value="${memberDTO.id }"  readonly><!-- ID 입력 칸 -->
-           			<input type="button" value="아이디 중복체크" class="input_button"> <!-- 중복체크 버튼 -->
-           			<div id="idcheck"></div> <!-- 중복체크 결과 표시칸 -->
+           		
                 </td>
 			</tr>
 			<tr>
@@ -131,7 +180,9 @@ function check(){
 			<tr>
 				<th>별칭</th>
 				<td>
-					<input name="nickname" id="join_nickname" size="40" class="input_box" placeholder="사이트 내에서 사용될 별칭입니다." required value="${memberDTO.nickname }">
+					<input name="nickname" id="join_nickname" size="30" class="input_box" placeholder="사이트 내에서 사용될 별칭입니다." required value="${memberDTO.nickname }">
+					<input type="button" value="별칭 중복체크" class="input_button" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
+           			<div id="nicknamecheck"></div> <!-- 중복체크 결과 표시칸 -->
 				</td>
 			</tr>
 			<tr>

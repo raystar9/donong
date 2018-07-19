@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.MemberMapper">
+  
+	<insert id="insertMember" parameterType="MemberDTO">
+  	insert into member values(member_num.nextval, #{id}, #{nickname}, 
+  								#{password}, #{realname},#{postnum}, 
+  								#{address}, #{addressdetail}, #{email}, 
+  								#{emaildomain}, #{phone}, sysdate
+  	)
+	</insert>
+  
+	<select id="selectLoginStateByIdAndPw" parameterType="MemberDTO" resultType="MemberDTO">
+		select num, nickname from member where id=#{id} and password=#{password}
+	</select>
+	
+	<select id="selectMemberByNum" parameterType="int" resultType="MemberDTO">
+		select num, id, nickname, realname, postnum, address, addressdetail, email, emaildomain, phone, registdate
+		from member 
+		where num = #{num}
+	</select>
+	
+	<update id="updateAll" parameterType="MemberDTO">
+		update member 
+		set 
+		nickname=#{nickname}, password=#{password}, postnum=#{postnum},
+		address=#{address}, addressdetail=#{addressdetail}, email=#{email},
+		emaildomain=#{emaildomain}, phone=#{phone} where num=#{num}
+	</update>
+	
+	<select id="selectMemberCountByIdAndRealname" parameterType="String" resultType="memberDTO">
+		select password from member where id=#{param1} and realname=#{param2}
+	</select>
+	
+  
+</mapper>

@@ -1,23 +1,25 @@
 package team.swcome.donong.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.MarketService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes("sessionBean")
 public class MarketController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MarketController.class);
@@ -27,16 +29,63 @@ public class MarketController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/market", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(Model model, @RequestParam(required = false, defaultValue = "seed") String category,
+			@RequestParam(required = false, defaultValue = "1") int page, SessionBean sessionBean) {
+		if(sessionBean.getMemberNum() == 0) {
+			sessionBean.setMemberNum(1);
+			sessionBean.setNickname("raystar9");
+		}
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		switch(category) {
+		case "씨앗":
+		case "비료":
+			
+		case "도구":
+			logger.debug(category);
+		}
 		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		return "market/home";
+		model.addAttribute("items", marketService.getMainList(page) );
+		model.addAttribute("page", marketService.getPaginationInfo(page));
+		return "market/list";
 	}
 	
+	@RequestMapping(value = "/market/item/{itemNo}", method = RequestMethod.GET)
+	public String itemDetail(Model model, @PathVariable int itemNo) {
+		model.addAttribute("itemNo", itemNo);
+		model.addAttribute("item", marketService.getItemByItemNum(itemNo));
+		return "market/item-detail";
+	}
+	
+	@RequestMapping(value = "/market/payment", method = RequestMethod.POST)
+	public String payment(Model model, @RequestParam String count, SessionBean session) {
+		model.addAttribute("member", marketService.getMemberDetails(1));
+//		TODO 수정해야됨!
+		return "market/payment";
+	}
+	
+	@RequestMapping(value = "/market/cart", method = RequestMethod.GET)
+	public String cart(Model model, SessionBean sessionBean) {
+		model.addAttribute("items", marketService.getCartItems(sessionBean.getMemberNum()));
+		return "market/cart";
+	}
+	
+	@RequestMapping(value = "market/cart/{itemNo}")
+	public String putIntoCart(Model model) {
+		return "redirect:/market/cart/confirm";
+	}
+	
+	@RequestMapping(value = "/market/cart/confirm", method = RequestMethod.GET)
+	public String cartConfirm(Model model) {
+		return "market/cart-confirm";
+	}
+	
+	@RequestMapping(value = "/market/payment/process", method = RequestMethod.POST)
+	public String paymentProcess(Model model) {
+		return "redirect:/market/payment/confirm";
+	}
+	
+	@RequestMapping(value = "/market/payment/confirm", method = RequestMethod.GET)
+	public String paymentConfirm(Model model) {
+		return "market/confirm";
+	}
 }

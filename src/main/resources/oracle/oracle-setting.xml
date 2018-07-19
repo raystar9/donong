@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
   <typeAliases>
     <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
     <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
@@ -10,17 +15,8 @@
     <typeAlias alias="GoodsDTO" type="team.swcome.donong.dto.GoodsDTO" />
     <typeAlias alias="RentalDTO" type="team.swcome.donong.dto.RentalDTO" />
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
+    <typeAlias alias="faq" type="team.swcome.donong.dto.FAQDTO" />
+	<typeAlias alias="notice" type="team.swcome.donong.dto.NoticeDTO" />
+	<typeAlias alias="qna" type="team.swcome.donong.dto.QNADTO" />
   </typeAliases>
-	
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-        <property name="username" value="scott"/>
-        <property name="password" value="tiger"/>
-      </dataSource>
-    </environment>
-  </environments>
 </configuration>

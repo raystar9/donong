@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.MemberDTO;
@@ -56,8 +57,15 @@ public class MarketController {
 		return "market/item-detail";
 	}
 	
-	@RequestMapping(value = "/market/payment", method = RequestMethod.POST)
-	public String payment(Model model, @RequestParam String count, SessionBean session) {
+	@RequestMapping(value = "/market/item/{itemNo}/payment", method = RequestMethod.GET)
+	public String payment(Model model, @PathVariable int itemNo, @RequestParam String count, SessionBean session) {
+		model.addAttribute("member", marketService.getMemberDetails(1));
+//		TODO 수정해야됨!
+		return "market/payment";
+	}
+	
+	@RequestMapping(value = "/market/cart/payment", method = RequestMethod.GET)
+	public String DirectlyPayment(Model model, SessionBean session) {
 		model.addAttribute("member", marketService.getMemberDetails(1));
 //		TODO 수정해야됨!
 		return "market/payment";
@@ -87,5 +95,11 @@ public class MarketController {
 	@RequestMapping(value = "/market/payment/confirm", method = RequestMethod.GET)
 	public String paymentConfirm(Model model) {
 		return "market/confirm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/donong/ajax", method = RequestMethod.GET)
+	public MemberDTO ajax(Model model) {
+		return marketService.getMemberDetails(1);
 	}
 }

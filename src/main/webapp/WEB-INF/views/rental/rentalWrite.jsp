@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDOe4IKBXOqkDF771joEPKg_wqglhjjv2Y&callback=initMap&libraries=places'></script> -->
- 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <script src="/donong/resources/rental/js/rentalWrite.js"></script>
@@ -45,13 +44,13 @@
 		<tr>
 			<td>임대자</td>
 			<td>
-				이다혜
+				${name} 
 			</td>
-		</tr>
+		</tr> 
 		<tr>
 			<td>연락처</td>
 			<td>
-				010-2350-3059
+				${phone}
 			</td>
 		</tr>
 		<tr>

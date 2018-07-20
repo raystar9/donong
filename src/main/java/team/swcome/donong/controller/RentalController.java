@@ -1,6 +1,9 @@
 package team.swcome.donong.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +50,16 @@ public class RentalController {
 	
 	/* 농지 대여 글쓰기 페이지로 이동 */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
-	public String rentalWrite() {
-		//RentalService.insertfarm(r);
+	public String rentalWrite(Model model, SessionBean sessionBean) {
+		sessionBean.setMemberNum(1); 					//임시로 정해놓음
+		int member_num = sessionBean.getMemberNum();
+		
+		Map map = new HashMap();
+		map = RentalService.selectNameByPhone(member_num);
+		
+		model.addAttribute("name", map.get("name"));
+		model.addAttribute("phone", map.get("phone"));
+		
 		return "rental/rentalWrite";
 	}
 	
@@ -57,14 +68,18 @@ public class RentalController {
 								 Model model,  
 								 SessionBean sessionBean,
 								 RentalDTO r,
-								 FileDTO f) {
+								 FileDTO f) throws IllegalStateException, IOException {
 		//int member_num = sessionBean.getMemberNum(); - 로그인 연결되면 이렇게 가져올 것
-		sessionBean.setMemberNum(1);
+		
+		sessionBean.setMemberNum(1); 					//임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		r.setMember_num(member_num);
-		RentalService.insertfarm(r);
 		
-		return "rental/rentalWrite";
+		int board_num = RentalService.insertFarm(r);	//게시글 번호를 가져와서 지정
+		f.setBoard_num(board_num);
+		RentalService.insertFile(f);
+		
+		return "rental/rentalList";
 	}
 	
 	/*

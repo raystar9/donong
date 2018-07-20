@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileDTO {
 	
+	private int board_num;			//게시글 번호
+	
 	private MultipartFile file1;	//파일1 (대표이미지)
 	private MultipartFile file2;	//파일2 
 	private MultipartFile file3;	//파일3 
@@ -19,6 +21,14 @@ public class FileDTO {
 	private String filePath3;
 	private String filePath4;
 	
+	
+	
+	public int getBoard_num() {
+		return board_num;
+	}
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
+	}
 	public MultipartFile getFile1() {
 		return file1;
 	}

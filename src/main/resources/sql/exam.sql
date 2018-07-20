@@ -8,3 +8,6 @@ select * from RENTALS;
 insert into RENTALS
 values (rental_num_seq.nextval, 1, '이다혜', '경기도 부천시 원미구 상동 226-11', '경기도', '부천시', 2400, );
 
+select * from RENTALFILES
+
+select * from RENTALFILES;

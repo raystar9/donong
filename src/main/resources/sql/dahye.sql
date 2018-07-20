@@ -48,16 +48,21 @@ lng NUMBER
 );
 
 drop table rentals;
-drop table files;
+drop table rentalfiles;
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 
 -- 파일 테이블
 CREATE TABLE rentalfiles(
 num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
 board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- 그 테이블의 게시글 번호
-filename VARCHAR2(200) NOT NULL,
-filepath VARCHAR2(200) NOT NULL,
-
+filename1 VARCHAR2(200) NOT NULL,
+filename2 VARCHAR2(200) NOT NULL,
+filename3 VARCHAR2(200) NOT NULL,
+filename4 VARCHAR2(200) NOT NULL,
+filepath1 VARCHAR2(200) NOT NULL,
+filepath2 VARCHAR2(200) NOT NULL,
+filepath3 VARCHAR2(200) NOT NULL,
+filepath4 VARCHAR2(200) NOT NULL
 );
 
 drop sequence do_num_seq;
@@ -71,7 +76,7 @@ CREATE SEQUENCE sido_num_seq
 start with 1
 increment by 1
 
-CREATE SEQUENCE sigungugungu_num_seq
+CREATE SEQUENCE sigungu_num_seq
 start with 1
 increment by 1
 

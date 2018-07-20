@@ -3,7 +3,9 @@ package team.swcome.donong.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -31,7 +33,7 @@ public class RentalService {
 		return rentalMapper.selectAll();
 	}
 	
-	public void insertfarm(RentalDTO r) {
+	public int insertFarm(RentalDTO r) {
 		String sido = "";
 		String sigungu = "";
 		String ri = "";
@@ -56,7 +58,8 @@ public class RentalService {
 		r.setSido(sido);
 		r.setSigungu(sigungu);
 		
-		rentalMapper.insertfarm(r);
+		int board_num = rentalMapper.insertFarm(r);
+		return board_num;
 	}
 	
 	public void insertFile(FileDTO f) throws IllegalStateException, IOException {
@@ -97,7 +100,7 @@ public class RentalService {
 		System.out.println("확장자1 = " + fileExtension);
 		
 		// 새로운 파일명을 저장
-		String refileName = "rental" + year + month + date + random + "." + fileExtension;
+		String refileName = "farm" + year + month + date + random + "." + fileExtension;
 		System.out.println("refileName1 = " + refileName);
 		
 		// 오라클 디비에 저장될 레코드 값
@@ -133,6 +136,9 @@ public class RentalService {
 			file2.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath2(fileDBName);
+		}else {
+			f.setFileName2("");
+			f.setFilePath2("");
 		}
 		
 		if(!file3.isEmpty()) {
@@ -158,6 +164,9 @@ public class RentalService {
 			file1.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath3(fileDBName);
+		}else {
+			f.setFileName3("");
+			f.setFilePath3("");
 		}
 		
 		if(!file4.isEmpty()) {
@@ -183,9 +192,24 @@ public class RentalService {
 			file1.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath4(fileDBName);
+		}else {
+			f.setFileName4("");
+			f.setFilePath4("");
 		}
 		
 		rentalMapper.insertFile(f);
 		
 	}
+	
+	public Map selectNameByPhone(int num) {
+		MemberDTO m = memberMapper.selectMemberByNum(num);
+		String name = m.getRealname();
+		String phone = m.getPhone();
+		
+		Map map = new HashMap();
+		map.put("name", name);
+		map.put("phone", phone);
+		
+		return map;
+	};
 }

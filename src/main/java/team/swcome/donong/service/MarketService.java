@@ -51,10 +51,18 @@ public class MarketService {
 	}
 	
 	public List<GoodsDTO> getCartItems(int memberNum) {
-		return mapper.selectCartByMemberNum(memberNum);
+		return mapper.selectCartItemsByMemberNum(memberNum);
 	}
 
 	public MemberDTO getMemberDetails(int memberNum) {
 		return memberMapper.selectMemberByNum(memberNum);
+	}
+
+	public int getTotalPrice(List<GoodsDTO> items) {
+		int totalPrice = 0;
+		for(GoodsDTO item : items) {
+			totalPrice += item.getPrice() * item.getQuantity();
+		}
+		return totalPrice;
 	}
 }

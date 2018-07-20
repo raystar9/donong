@@ -1,5 +1,7 @@
 package team.swcome.donong.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.MarketService;
@@ -57,23 +60,43 @@ public class MarketController {
 		return "market/item-detail";
 	}
 	
-	@RequestMapping(value = "/market/item/{itemNo}/payment", method = RequestMethod.GET)
-	public String payment(Model model, @PathVariable int itemNo, @RequestParam String count, SessionBean session) {
-		model.addAttribute("member", marketService.getMemberDetails(1));
-//		TODO 수정해야됨!
-		return "market/payment";
+	@RequestMapping(value = "/market/order/item/{itemNo}", method = RequestMethod.GET)
+	public String orderByItemNum(Model model, @PathVariable int itemNo, @RequestParam int quantity, SessionBean session) {
+		GoodsDTO item = marketService.getItemByItemNum(itemNo);
+		item.setQuantity(quantity);
+		model.addAttribute("member", marketService.getMemberDetails(session.getMemberNum()));
+		orderOne(model, item);
+		return "market/order";
 	}
 	
-	@RequestMapping(value = "/market/cart/payment", method = RequestMethod.GET)
-	public String DirectlyPayment(Model model, SessionBean session) {
-		model.addAttribute("member", marketService.getMemberDetails(1));
-//		TODO 수정해야됨!
-		return "market/payment";
+	@RequestMapping(value = "/market/order/cart", method = RequestMethod.GET)
+	public String orderByCart(Model model, SessionBean session) {
+		List<GoodsDTO> items = marketService.getCartItems(session.getMemberNum());
+		model.addAttribute("member", marketService.getMemberDetails(session.getMemberNum()));		
+		if(items.size() == 0) {			
+			return "market/order";
+		} else if(items.size() == 1){
+			orderOne(model, items.get(0));
+		} else {		
+			model.addAttribute("repItemTitle", items.get(0).getTitle());
+			model.addAttribute("itemCount", items.size());
+			model.addAttribute("totalPrice", marketService.getTotalPrice(items));
+		}
+		return "market/order";
+	}
+	
+	public void orderOne(Model model, GoodsDTO item) {
+		model.addAttribute("item", item);
+		model.addAttribute("repItemTitle", item.getTitle());
+		model.addAttribute("itemCount", 1);
+		model.addAttribute("totalPrice", item.getPrice() * item.getQuantity());
 	}
 	
 	@RequestMapping(value = "/market/cart", method = RequestMethod.GET)
 	public String cart(Model model, SessionBean sessionBean) {
-		model.addAttribute("items", marketService.getCartItems(sessionBean.getMemberNum()));
+		List<GoodsDTO> items = marketService.getCartItems(sessionBean.getMemberNum());
+		model.addAttribute("items", items);
+		model.addAttribute("totalPrice", marketService.getTotalPrice(items));
 		return "market/cart";
 	}
 	
@@ -87,12 +110,12 @@ public class MarketController {
 		return "market/cart-confirm";
 	}
 	
-	@RequestMapping(value = "/market/payment/process", method = RequestMethod.POST)
+	@RequestMapping(value = "/market/order/process", method = RequestMethod.POST)
 	public String paymentProcess(Model model) {
-		return "redirect:/market/payment/confirm";
+		return "redirect:/market/order/confirm";
 	}
 	
-	@RequestMapping(value = "/market/payment/confirm", method = RequestMethod.GET)
+	@RequestMapping(value = "/market/order/confirm", method = RequestMethod.GET)
 	public String paymentConfirm(Model model) {
 		return "market/confirm";
 	}

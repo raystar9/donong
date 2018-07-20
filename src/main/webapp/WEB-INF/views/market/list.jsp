@@ -34,10 +34,20 @@
 		    color: #818181;
 		    display: block;
 		}
-		.item-thumbnail {
-			height: 175px;
-			margin-bottom: 5px;
-			border: solid black 1px;
+		.item-img {
+			margin-left: 5px;
+			margin-top: 3px;
+			margin-bottom: 3px;
+			height: 167px;
+		}
+		.item-cell {
+			display: inline-block;
+		}
+		.item-name {
+			width: 500px;
+		}
+		.item-price {
+			width: 400px;
 		}
 	</style>
 </head>
@@ -52,11 +62,9 @@
 	<div>
 		<h1>타이틀임</h1>
 	</div>
-	<div>
+	<div class="container-fluid">
 		<c:forEach items="${items}" var="item">
-		<div>
 			<%@ include file="/WEB-INF/views/market/list-item.jsp" %>
-		</div>
 		</c:forEach>
 	</div>
 	<ul class="pagination">

@@ -14,6 +14,7 @@ public class GoodsDTO {
 	private Date regitdate;
 	private String content;
 	private String filePath;
+	private int quantity;
 	
 	public int getNum() {
 		return num;
@@ -62,5 +63,11 @@ public class GoodsDTO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

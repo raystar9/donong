@@ -37,10 +37,10 @@
 		<c:forEach items="${items}" var="item">
 			<%@ include file="/WEB-INF/views/market/cart-item.jsp" %>
 		</c:forEach>
-		<p class="form-control-static">총 결제가격</p>
-		<p class="form-control-static">2000원</p>
+		<label for="price">총 가격 : </label>
+		<p class="form-control-static">${totalPrice }원</p>
 	</div>
-		<input type="button" value="결제하기" onclick="location.href='/donong/market/cart/payment'"/>
+		<input type="button" class="btn btn-default" value="주문하기" onclick="location.href='/donong/market/order/cart'"/>
 		<!-- <input type="button" value="돌아가기" onclick="history.back();"/> -->
 </div>
 </body>

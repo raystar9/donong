@@ -12,8 +12,8 @@
 <body>
 <div class="container">
 	해당 물건을 장바구니에 담았습니다.
-	<input type="button" value="돌아가기" onclick="history.back()" />
-	<input type="button" value="장바구니로" onclick="location.href='/donong/market/cart'" />
+	<input type="button" class="btn btn-default" value="돌아가기" onclick="history.back()" />
+	<input type="button" class="btn btn-default" value="장바구니로" onclick="location.href='/donong/market/cart'" />
 </div>
 </body>
 </html>

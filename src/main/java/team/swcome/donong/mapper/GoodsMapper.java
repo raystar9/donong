@@ -8,7 +8,7 @@ import team.swcome.donong.dto.MemberDTO;
 public interface GoodsMapper {
 	public List<GoodsDTO> selectItemsAtPage(int startItem, int endItem);
 
-	public List<GoodsDTO> selectCartByMemberNum(int memberNum);
+	public List<GoodsDTO> selectCartItemsByMemberNum(int memberNum);
 
 	public GoodsDTO selectItemByNum(int itemNum);
 

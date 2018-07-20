@@ -83,7 +83,7 @@ public class MainController {
 			}
 			response.addCookie(savecookie);
 			
-			return "main/home";
+			return "main/header";
 			}
 			
 	}
@@ -91,7 +91,9 @@ public class MainController {
 	@RequestMapping(value = "member_logout")
 	public String member_logout(Model model, SessionBean sessionBean) throws Exception {
 
-		sessionBean = null;
+		sessionBean.setMemberNum(0);
+		sessionBean.setNickname(null);
+	
 		
 		String error = "logout";
 		model.addAttribute("error", error);
@@ -192,6 +194,15 @@ public class MainController {
 		return d;
 		
 	}
+	
+	
+	//임시 무조건 삭제 헤더보기용
+	@RequestMapping(value = "header")
+	public String view() throws Exception {
+		return "main/header";
+	}
+	
+	//
 	
 	
 }

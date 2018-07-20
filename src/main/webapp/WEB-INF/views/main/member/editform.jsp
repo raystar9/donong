@@ -129,7 +129,7 @@ function nickname_check(){
 		cache : false,
 		success: function(data){
 			
-			if(data == 0 || $('#join_nickname').val() == "${memberDTO.id }"){
+			if(data == 0 || $('#join_nickname').val() == "${memberDTO.nickname }"){
 				$('#checkconfirmNickName').val('true');
 				msg = '사용가능한 별칭입니다.';
 				$('#nicknamecheck').css('color', 'blue');

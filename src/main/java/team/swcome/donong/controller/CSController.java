@@ -1,16 +1,20 @@
 package team.swcome.donong.controller;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.swcome.donong.dto.NoticeDTO;
-import team.swcome.donong.mapper.FAQMapper;
-import team.swcome.donong.mapper.NoticeMapper;
-import team.swcome.donong.mapper.QNAMapper;
 import team.swcome.donong.service.FAQService;
 import team.swcome.donong.service.NoticeService;
 import team.swcome.donong.service.QNAService;
@@ -49,13 +50,77 @@ public class CSController {
 			ModelAndView mv, 
 			@RequestParam(defaultValue="") String srcOpt,
 			@RequestParam(defaultValue="") String srcTxt,
-			@RequestParam(value="state", defaultValue="none") String state) throws Exception {
+			@RequestParam(value="state", defaultValue="none") String state,
+			HttpServletRequest request) throws Exception {
+		int page = 1;
+		int maxPage = 0;
+		int startPage = 0;
+		int endPage = 0;
+		int listCount = 0;
+		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+		
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		RowBounds row = new RowBounds((page - 1) * 10, 10);
+		
+		if (srcTxt.equals("")) {
+			listCount = noticeService.getListCount();
+			noticeList = noticeService.getNoticeList(row);
+		} else {
+			Map<String, Object> map = new HashMap<>();
+			map.put("srcOpt", srcOpt);
+			map.put("srcTxt", "%" + srcTxt + "%");
+			
+			listCount = noticeService.getSrcListCount(map);
+			noticeList = noticeService.getSrcList(map, row);
+		}
+		
+		maxPage = (listCount + 10 - 1) / 10;
+		startPage = ((page - 1) / 10) * 10 + 1;
+		endPage = startPage + 10 - 1;
 
-		mv.addObject("listCount", noticeService.getListCount());
-		mv.addObject("noticeList", noticeService.getNoticeList());
-		mv.setViewName("service/notice");
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+
+		if (endPage < page) {
+			page = endPage;
+		}
+		
+		mv.addObject("page", page);
+		mv.addObject("srcOpt", srcOpt);
+		mv.addObject("srcTxt", srcTxt);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("listCount", listCount);
+		mv.addObject("noticeList", noticeList);
+		
+		if (state.equals("paging") || state.equals("search")) {
+			System.out.println("ajax 실행!!");
+			mv.setViewName("service/notice_ajax");
+		} else {			
+			mv.setViewName("service/notice");
+		}
 		
 		return mv;
+	}
+
+	@RequestMapping(value = "/cs/notice/write")
+	public String noticeWrite() {
+		return "service/notice_write";
+	}
+  
+	@RequestMapping(value="/cs/notice", method=RequestMethod.POST)
+	public String noticeWrite(
+			NoticeDTO notice
+			) {
+		System.out.println("글쓰기");
+		noticeService.insertNotice(notice);
+		
+		return "redirect:/cs/notice/" + notice.getNum() + "?state=cont";
 	}
 	
 	@RequestMapping(value="/cs/notice/{num}", method=RequestMethod.GET)
@@ -78,32 +143,56 @@ public class CSController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/cs/notice_del/{num}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/cs/notice/{num}", method=RequestMethod.PUT)
+	public String noticeEdit(
+			@PathVariable int num,
+			NoticeDTO notice
+			) {
+		noticeService.delNotice(num);
+		
+		return "redirect:/cs/notice/" + notice.getNum() + "?state=cont";
+	}
+	
+	@RequestMapping(value="/cs/notice/{num}", method=RequestMethod.DELETE)
 	public String noticeDel(
 			@PathVariable int num
 			) {
+		noticeService.delNotice(num);
 		
 		return "redirect:/cs/notice";
 	}
 	
 	@RequestMapping(value="/cs/faq", method=RequestMethod.GET)
-	public ModelAndView faqList(ModelAndView mv) {
-		mv.addObject("faqList", faqService.getFAQList());
+	public ModelAndView faqList(
+			ModelAndView mv,
+			@RequestParam String keyword,
+			HttpServletRequest request) {
+		Map<String, Object> map = faqService.getFaqSrcList(keyword, request);
+		
+		mv.addObject("faqList", map.get("faqList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("page", map.get("page"));
+		mv.addObject("limit", map.get("limit"));
+		mv.addObject("maxPage", map.get("maxPage"));
+		mv.addObject("startPage", map.get("startPage"));
+		mv.addObject("endPage", map.get("endPage"));
+		
 		mv.setViewName("service/faq");
 
 		return mv;
 	}
 	
 	@RequestMapping(value="/cs/search", method=RequestMethod.GET)
-	public ModelAndView csSearch(ModelAndView mv) {
-		mv.setViewName("service/cs_search");
+	public ModelAndView csSearch(ModelAndView mv, Model model) {
+		mv.setViewName("service/search");
 		
+		Map<String, Object> map = model.asMap(); 
 		return mv;
 	}
 	
 	@RequestMapping(value="/cs/qna", method=RequestMethod.GET)
 	public ModelAndView csQna(ModelAndView mv) {
-		mv.setViewName("service/cs_qna");
+		mv.setViewName("service/qna");
 		
 		return mv;
 	}

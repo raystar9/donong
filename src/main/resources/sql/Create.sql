@@ -135,3 +135,6 @@ title VARCHAR2(200) NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 regitdate DATE NOT NULL
 );
+
+
+insert into faq values(1, '구매', 'test', 'test');

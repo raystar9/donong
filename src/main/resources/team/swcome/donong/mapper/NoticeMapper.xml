@@ -16,4 +16,42 @@
 		select * from notice where num=#{num}
 	</select>
 	
+	<select id="getSrcListCount" parameterType="java.util.Map" resultType="int">
+		select count(num) from notice
+		<where>
+			<if test="srcOpt == ''"></if>
+			<if test="srcOpt == 'title'">
+				title like #{srcTxt}
+			</if>
+			<if test="srcOpt == 'content'">
+				content like #{srcTxt}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getSrcList" parameterType="java.util.Map" resultType="notice">
+		select * from notice
+		<where>
+			<if test="srcOpt == ''"></if>
+			<if test="srcOpt == 'title'">
+				title like #{srcTxt}
+			</if>
+			<if test="srcOpt == 'content'">
+				content like #{srcTxt}
+			</if>
+		</where>
+		order by regitdate
+	</select>
+	
+	<delete id="delNotice">
+		delete from notice where num=#{num}
+	</delete>
+	
+	<insert id="insertNotice" parameterType="notice">
+		<selectKey resultType="int" keyProperty="num" order="BEFORE">
+			select nvl(max(num), 0) + 1 from notice
+		</selectKey>
+		insert into notice values(#{num}, #{title}, #{content}, sysdate)
+	</insert>
+	
 </mapper>

@@ -4,16 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.swcome.donong.mapper.FAQMapper">
 	
-	<select id="selectAll" resultType="faq">
-		select * from faq order by regitdate desc
+	<select id="getSrcListCount" resultType="int" parameterType="String">
+		select count(num) from faq where  
+		category like #{keyword} or 
+		title like #{keyword} or 
+		content like #{keyword}
+		order by num
 	</select>
 	
-	<select id="selectPage" resultType="faq">
-		select * from faq where num between 1 and 10 order by regitdate desc
-	</select>
-	
-	<select id="select" resultType="faq" parameterType="int">
-		select *from faq where num=#{num}
+	<select id="getSrcList" resultType="faq">
+		select * from faq where
+		category like #{keyword} or 
+		title like #{keyword} or 
+		content like #{keyword}
+		order by num 
 	</select>
 	
 	

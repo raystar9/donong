@@ -1,16 +1,18 @@
-drop table member;
+drop table member cascade constraints;
 
 --회원 테이블
 CREATE TABLE member(
-num	NUMBER CONSTRAINT member_num_pk PRIMARY KEY,
-id	VARCHAR2(100) UNIQUE NOT NULL,
+num NUMBER CONSTRAINT member_num_pk PRIMARY KEY,
+id VARCHAR2(100) UNIQUE NOT NULL,
 nickname VARCHAR2(100) UNIQUE NOT NULL,
 password VARCHAR2(100) NOT NULL,
 realname VARCHAR2(100) NOT NULL,
+postnum VARCHAR2(10) NOT NULL,
 address VARCHAR2(200) NOT NULL,
-postcode NUMBER NOT NULL,
-email	VARCHAR2(100) NOT NULL,
-phone	VARCHAR2(15) NOT NULL,
+addressdetail VARCHAR2(100) NOT NULL,
+email VARCHAR2(100) NOT NULL,
+emaildomain VARCHAR2(100) NOT NULL,
+phone VARCHAR2(15) NOT NULL,
 registdate DATE NOT NULL
 );
 
@@ -256,5 +258,6 @@ insert into sigungu values (sigungu_num_seq.nextval, '괴산군', 12);
 insert into sigungu values (sigungu_num_seq.nextval, '음성군', 12);
 insert into sigungu values (sigungu_num_seq.nextval, '단양군', 12);
 ----------------------------------------------------------------
+
 
 

@@ -13,13 +13,13 @@ public class RentalDTO {
 	private String writer;	//게시글 작성자 이름
 	private String title;	//게시글 제목
 	private String address;	//소재지
-	private String sido; 	//도
-	private String sigungu;	//시
+	private int sido; 	//도
+	private int sigungu;	//시
 	private int area;		//면적
 	private int price;		//임대료
 	private String content;	//게시글 내용
-	private int lat;		//위도
-	private int lng;		//경도
+	private float lat;		//위도
+	private float lng;		//경도
 	
 	
 	public String getWriter() {
@@ -70,29 +70,30 @@ public class RentalDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getLat() {
-		return lat;
-	}
-	public void setLat(int lat) {
-		this.lat = lat;
-	}
-	public int getLng() {
-		return lng;
-	}
-	public void setLng(int lng) {
-		this.lng = lng;
-	}
-	public String getSido() {
+	public int getSido() {
 		return sido;
 	}
-	public void setSido(String sido) {
+	public void setSido(int sido) {
 		this.sido = sido;
 	}
-	public String getSigungu() {
+	public int getSigungu() {
 		return sigungu;
 	}
-	public void setSigungu(String sigungu) {
+	public void setSigungu(int sigungu) {
 		this.sigungu = sigungu;
 	}
+	public float getLat() {
+		return lat;
+	}
+	public void setLat(float lat) {
+		this.lat = lat;
+	}
+	public float getLng() {
+		return lng;
+	}
+	public void setLng(float lng) {
+		this.lng = lng;
+	}
+	
 
 }

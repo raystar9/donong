@@ -38,25 +38,45 @@ public class RentalService {
 		String sigungu = "";
 		String ri = "";
 		String title = "";
-		String address = r.getAddress();
+		String address = r.getAddress() + " ";
 		String writer = "";
+		
+		System.out.println("lat = " + r.getLat());
+		System.out.println("lng = " + r.getLng());
 		
 		//로그인한 사람 이름 가져오기
 		MemberDTO m = new MemberDTO();
 		m = memberMapper.selectMemberByNum(r.getMember_num());
 		writer = m.getRealname();
+		System.out.println("num = " + m.getNum());
 		
 		//시도, 시군구, 제목
-		StringTokenizer st = new StringTokenizer(address," ");
-		sido = st.nextToken();
-		sigungu = st.nextToken();
-		ri = st.nextToken();
-		title = sido + " " + sigungu + " " + ri;
+		String[] addArr = address.split("\\s"); 
+		System.out.println("address : " + address);
+		if(addArr.length == 2) {
+			sido = addArr[1];	
+			sigungu = " ";
+			ri = " ";
+		}else if(addArr.length == 3) {
+			sido = addArr[1];
+			sigungu = addArr[2];
+			ri = " ";
+		}else if(addArr.length <= 4) {
+			sido = addArr[1];
+			sigungu = addArr[2];
+			ri = addArr[3];
+		}
+		System.out.println("sido = "+ sido);
+		System.out.println("sigungu = "+ sigungu);
+		System.out.println("ri = "+ ri);
 		
+		
+		title = sido + " " + sigungu + " " + ri;
+	
 		r.setTitle(title);
 		r.setWriter(writer);
-		r.setSido(sido);
-		r.setSigungu(sigungu);
+		//r.setSido();
+		//r.setSigungu();
 		
 		int board_num = rentalMapper.insertFarm(r);
 		return board_num;
@@ -201,15 +221,9 @@ public class RentalService {
 		
 	}
 	
-	public Map selectNameByPhone(int num) {
+	public MemberDTO selectNameByPhone(int num) {
 		MemberDTO m = memberMapper.selectMemberByNum(num);
-		String name = m.getRealname();
-		String phone = m.getPhone();
-		
-		Map map = new HashMap();
-		map.put("name", name);
-		map.put("phone", phone);
-		
-		return map;
+		System.out.println("name = " + m.getRealname());
+		return m;
 	};
 }

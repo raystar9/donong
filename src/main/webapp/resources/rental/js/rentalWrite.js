@@ -49,6 +49,8 @@ function addMarker(location){
 	
 	$('#markerLat').val(location.lat());
 	$('#markerLng').val(location.lng());
+	lat = location.lat();
+	lng = location.lng()
 	
 }//addMarker()
 

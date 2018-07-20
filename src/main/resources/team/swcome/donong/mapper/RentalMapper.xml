@@ -15,16 +15,20 @@
   		    
   	<selectKey resultType="int" keyProperty="board_num" order="AFTER">
   		SELECT max(num) 
-  		FROM rental
+  		FROM rentals
   		WHERE member_num = #{member_num}
   	</selectKey>	 
   </insert>
   
   <insert id="insertFile" parameterType="FileDTO">
-  	INSERT INT rentalfiles
+  	INSERT INTO rentalfiles
   	VALUES (file_num_seq.nextval, #{board_num}, #{filename1}, #{filename2}, #{filename3}, 
   	       #{filename4}, #{filepath1}, #{filepath2}, #{filepath3}, #{filepath4})
   </insert>
+  
+  <select id="selectNameByPhone" parameterType="int" resultType="MemberDTO">
+  	SELECT name, phone FROM member
+  </select> 
   
 </mapper>
 

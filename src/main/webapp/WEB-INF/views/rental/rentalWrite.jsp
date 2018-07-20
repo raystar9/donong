@@ -39,7 +39,7 @@
 </head>
 <body>
 <div id="main">
-	<form action="rental/write_ok" method="post" class="writeForm" enctype="multipart/form-data">
+	<form action="./write_ok" method="post" class="writeForm" enctype="multipart/form-data">
 	<table border="1" class="writeTable">
 		<tr>
 			<td>임대자</td>
@@ -102,9 +102,9 @@
 		(주소와 위치가 일치하는지 확인하세요)
 	</div>
 	<div id="map">
-		<input type="hidden" id="markerLat" name="lat">
-		<input type="hidden" id="markerLng" name="lng">
 	</div>
+	<input type="hidden" id="markerLat" name="lat" value="">
+	<input type="hidden" id="markerLng" name="lng" value="">
 	<div class="button">
 		<input type="submit" value="등록">
 		<input type="button" value="취소">

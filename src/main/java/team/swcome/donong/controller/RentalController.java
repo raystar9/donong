@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.FileDTO;
+import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.RentalService;
@@ -51,31 +52,31 @@ public class RentalController {
 	/* 농지 대여 글쓰기 페이지로 이동 */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
 	public String rentalWrite(Model model, SessionBean sessionBean) {
-		sessionBean.setMemberNum(1); 					//임시로 정해놓음
+		sessionBean.setMemberNum(2); 					//임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
+		MemberDTO m = new MemberDTO();
+		m = RentalService.selectNameByPhone(member_num);
 		
-		Map map = new HashMap();
-		map = RentalService.selectNameByPhone(member_num);
-		
-		model.addAttribute("name", map.get("name"));
-		model.addAttribute("phone", map.get("phone"));
+		model.addAttribute("name", m.getRealname());
+		model.addAttribute("phone", m.getPhone());
 		
 		return "rental/rentalWrite";
 	}
 	
 	@RequestMapping(value = "/rental/write_ok", method = RequestMethod.POST)
-	public String rentalWrite_ok(Locale locale, 
+	public String rentalWrite_ok(
 								 Model model,  
 								 SessionBean sessionBean,
 								 RentalDTO r,
 								 FileDTO f) throws IllegalStateException, IOException {
 		//int member_num = sessionBean.getMemberNum(); - 로그인 연결되면 이렇게 가져올 것
-		
-		sessionBean.setMemberNum(1); 					//임시로 정해놓음
+		System.out.println("here :: " + r.getLat());
+		sessionBean.setMemberNum(2); 					//임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		r.setMember_num(member_num);
 		
 		int board_num = RentalService.insertFarm(r);	//게시글 번호를 가져와서 지정
+		System.out.println("board_num = " + board_num);
 		f.setBoard_num(board_num);
 		RentalService.insertFile(f);
 		

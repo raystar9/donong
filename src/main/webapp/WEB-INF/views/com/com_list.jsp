@@ -13,7 +13,9 @@ $(function(){
 	var limit; 
 	var search_index;
 	var text;
-	
+	console.log('page = ${page}');
+	console.log('startpage = ${startpage}');
+	console.log('endpage = ${endpage}');
 	$("#viewcount").change(function(){
 		limit = $("#viewcount option:selected").val();
 		
@@ -96,7 +98,7 @@ $(function(){
              <img src="./resources/images/AnswerLine.gif"> 
              </c:if>   
              
-             <a href = "communitycont?com_num=${b.num}&page=${page}&state=cont">
+             <a href = "communitycont?num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>
@@ -122,12 +124,12 @@ $(function(){
              <a href = "communitylist?page=${page-1}">&lt;</a>&nbsp;   
           </c:if>
           
-          <c:forEach var = "a" begin = "${startpage}" end = "${endpage}">
-             <c:if test = "${a == page}">
-                ${a}
+          <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
+             <c:if test = "${status.index == page}">
+                ${status.index}
              </c:if>
-             <c:if test = "${a != page}">
-                <a href = "communitylist?page=${a}">${a}</a>
+             <c:if test = "${status.index != page}">
+                <a href = "communitylist?page=${status.index}">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -154,14 +156,14 @@ $(function(){
     </table>
     <div id="bbsfind">
      
-    <form method="get" action="communityfind" onsubmit="return find_check()">
+    <form method="get" action="communityfind" onsubmit="return find_check()" style="position:relative;left:30%">
     
     <table>
    
     <tr>
     
     <th>
-    <div class="form-control">
+    <div class="form-control" style="height:100%">
     <select name="find_field" >
     <option value="writer">작성자</option>
     <option value="subject">제목</option>
@@ -180,11 +182,11 @@ $(function(){
     </div>
     
     <br>
-    <form method="get" action="./communitywrite">
+    <form method="get" action="./communitywrite" style="float:right;">
     <table id="table_third">
 	
 	<tr><td>
-			<button type="submit" class="btn" >글쓰기</button>
+			<button type="submit" class="btn" style=>글쓰기</button></div>
 	</td>
 	</tr>
 </table>

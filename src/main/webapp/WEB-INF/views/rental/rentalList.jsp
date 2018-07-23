@@ -82,7 +82,7 @@
 	<c:forEach var="r" items="${list}">
 		<table id="list_table">
 			<tr>
-				<td><img src="../resources/rental/upload${r.path }" width="130px" height="100px"></td>
+				<td><a href="./rental/view?num="#{r.num }><img src="../resources/rental/upload${r.path }" width="130px" height="100px"></a></td>
 			</tr>
 			<tr>
 				<td>${r.title }</td>

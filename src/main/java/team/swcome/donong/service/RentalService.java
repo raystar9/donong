@@ -30,7 +30,7 @@ public class RentalService {
 
 	private String saveFolder = "C:\\Users\\이다혜\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
-
+	/* 농지 대여글 삽입 */
 	public int insertFarm(RentalDTO r) {
 		String sido = "";
 		String sigungu = "";
@@ -81,7 +81,8 @@ public class RentalService {
 		System.out.println("board_num = " + r.getNum());
 		return r.getNum();
 	}
-
+	
+	/* 농지 대여 글 파일 삽입 */
 	public void insertFile(FileDTO f) throws IllegalStateException, IOException {
 
 		MultipartFile file1 = f.getFile1();
@@ -210,22 +211,32 @@ public class RentalService {
 		rentalMapper.insertFile(f);
 
 	}
-
+	
+	/* 로그인한 사람 이름, 핸드폰 가져오기 */
 	public MemberDTO selectNameByPhone(int num) {
 		MemberDTO m = memberMapper.selectMemberByNum(num);
 		System.out.println("name = " + m.getRealname());
 		return m;
 	};
 	
+	/* 농지 대여 리스트 가져오기 */
 	public List<RentalDTO> selectRentalList(){
 		List<RentalDTO> list = rentalMapper.selectRentalList();
 		return list;
 	};
 	
+	/* 대표 이미지 path 가져오기 */
 	public String[] selectRepresentImg() {
 		String[] filepath = rentalMapper.selectRepresentImg();
 		System.out.println("filepath 개수 = " + filepath.length);
 		return filepath;
+	};
+	
+	
+	/* 농지 대여 글 상세보기 가져오기 */
+	public RentalDTO selectRentalView(int board_num) {
+		RentalDTO r = rentalMapper.selectRentalView(board_num);
+		return r;
 	};
 	
 }

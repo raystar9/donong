@@ -21,4 +21,6 @@ public interface RentalMapper {
 	
 	public String[] selectRepresentImg();
 	
+	public RentalDTO selectRentalView(int board_num);
+	
 }

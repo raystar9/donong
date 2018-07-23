@@ -58,7 +58,7 @@ member_num NUMBER CONSTRAINT order_member_num_fk REFERENCES member(num) NOT NULL
 name VARCHAR2(100) NOT NULL,
 address VARCHAR2(200) NOT NULL,
 phone VARCHAR2(15) NOT NULL,
-comment VARCHAR2(300) NOT NULL,
+comments VARCHAR2(300) NOT NULL,
 status varchar2(20) NOT NULL
 );
 

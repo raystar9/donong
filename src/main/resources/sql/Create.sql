@@ -58,7 +58,7 @@ member_num NUMBER CONSTRAINT order_member_num_fk REFERENCES member(num) NOT NULL
 name VARCHAR2(100) NOT NULL,
 address VARCHAR2(200) NOT NULL,
 phone VARCHAR2(15) NOT NULL,
-comment VARCHAR2(300) NOT NULL,
+comments VARCHAR2(300) NOT NULL,
 status varchar2(20) NOT NULL
 );
 
@@ -109,12 +109,12 @@ subject VARCHAR2(200) NOT NULL,
 category VARCHAR2(50) NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 regitdate DATE NOT NULL,
-readcount NUMBER,
-re_ref NUMBER,
-re_lev NUMBER,
-re_seq NUMBER,
-filename VARCHAR2(200) NOT NULL,
-filepath VARCHAR2(200) NOT NULL
+readcount NUMBER NOT NULL,
+re_ref NUMBER NOT NULL,
+re_lev NUMBER NOT NULL,
+re_seq NUMBER NOT NULL,
+filename VARCHAR2(200),
+filepath VARCHAR2(200)
 );
 
 CREATE TABLE cs_category(

@@ -33,4 +33,19 @@
   	) 
   	where goods_num = goods.num
   </select>
+  <insert id="insertGoods">
+  	INSERT INTO goods
+  	VALUES (#{num}, #{name}, #{price}, #{category}, #{title}, #{regitdate}, #{content}, #{filePath})
+  </insert>
+  <update id="updateGoods" parameterType="GoodsDTO">
+  	UPDATE goods
+  	SET name = #{name} AND price = #{price} AND category = #{category} AND title = #{title} AND regitdate = #{regitdate} AND
+  		content = #{content} AND filePath = #{filePath}
+  	WHERE num = #{num}
+  </update>
+  <delete id="deleteGoodsByNum">
+  	DELETE FROM goods 
+  	WHERE num = #{num}
+  </delete>
+  
 </mapper>

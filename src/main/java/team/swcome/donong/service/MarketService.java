@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import team.swcome.donong.dto.CartDTO;
 import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.OrdersDTO;
+import team.swcome.donong.mapper.CartMapper;
 import team.swcome.donong.mapper.GoodsMapper;
 import team.swcome.donong.mapper.MemberMapper;
+import team.swcome.donong.mapper.OrdersMapper;
 
 @Service
 public class MarketService {
@@ -18,6 +22,14 @@ public class MarketService {
 	GoodsMapper mapper;
 	@Autowired
 	MemberMapper memberMapper;
+	@Autowired
+	OrdersMapper ordersMapper;
+	@Autowired
+	CartMapper cartMapper;
+	
+	/*
+	 * Goods관련 메서드
+	 */
 	final int itemsPerPage = 10;
 	
 	public List<GoodsDTO> getMainList(int page){
@@ -64,5 +76,43 @@ public class MarketService {
 			totalPrice += item.getPrice() * item.getQuantity();
 		}
 		return totalPrice;
+	}
+	
+	public void insertMember(MemberDTO member) {
+		
+	}
+	
+	/*
+	 * Order관련 메서드
+	 */
+	public List<OrdersDTO> getOrderListByMemberNum(int memberNum) {
+		return ordersMapper.selectAllOrdersByMemberNum(memberNum);
+	}
+	
+	public void insertOrder(OrdersDTO orders) {
+		ordersMapper.insertOrder(orders);
+	}
+	
+	public void updateOrder(OrdersDTO orders) {
+		ordersMapper.updateOrder(orders);
+	}
+	
+	public void deleteOrder(int num) {
+		ordersMapper.deleteOrderByNum(num);
+	}
+	
+	/*
+	 * Cart관련 메서드
+	 */
+	public void insertCartItem(CartDTO cart) {
+		cartMapper.insertCartItem(cart);
+	}
+	
+	public void updateCartItem(CartDTO cart) {
+		cartMapper.updateCartItem(cart);
+	}
+	
+	public void deleteCartItem(int num) {
+		cartMapper.deleteCartItemByNum(num);
 	}
 }

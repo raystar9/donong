@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.OrdersMapper">
+	<resultMap id="OrdersResult" type="OrdersDTO">
+	  	  <result column="member_num" property="memberNum"/>
+	</resultMap>
+	
+	<select id="selectAllOrdersByMemberNum" resultMap="OrdersResult">
+		SELECT * 
+		FROM ORDERS
+		WHERE member_num = #{memberNum}
+	</select>
+	
+	<select id="selectCurrentOrdersByMemberNum" resultMap="OrdersResult">
+		SELECT * 
+		FROM ORDERS
+		WHERE member_num = #{memberNum} AND status in ('npay', 'prep', 'delv')
+	</select>
+	
+	<insert id="insertOrder" parameterType="OrdersDTO">
+		INSERT INTO ORDERS
+		VALUES(#{num}, #{memberNum}, #{name}, #{address}, #{phone}, #{comments}, 'napy')
+	</insert>
+	
+	<update id="updateOrder" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET member_num = #{memberNum} AND name = #{name} AND address = #{address} AND
+			phone = #{phone} AND comments = #{comments} AND status = #{status}
+		WHERE num = #{num}
+	</update>
+	
+	<delete id="deleteOrderByNum">
+		DELETE 
+		FROM orders
+		WHERE member_num = #{memberNum}
+	</delete>
+</mapper>

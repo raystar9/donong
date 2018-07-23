@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.CartMapper">
+  <insert id="insertCartItem" parameterType="CartDTO">
+  	INSERT INTO cart
+  	VALUES (#{num}, #{goodsNum}, #{memberNum}, #{quantity})
+  </insert>
+  <update id="updateCartItem" parameterType="CartDTO">
+  	UPDATE cart
+  	SET goods_num = #{goodsNum} AND member_num = #{memberNum} AND quantity = #{quantity}
+  	WHERE num = #{num}
+  </update>
+  <delete id="deleteCartItemByNum">
+  	DELETE FROM goods 
+  	WHERE num = #{num}
+  </delete>
+  
+</mapper>

@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/resources/market/css/a.css">
 	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
 	<title>Home</title>
+	<script src="/donong/resources/jquery/jquery-3.3.1.min.js"></script>
 	<style>
 		html, body {
 			margin: 0px;
@@ -55,7 +56,7 @@
 			</div>
 			<label for="address">주소</label><input class="form-control" type="text" name="address" id="address" value="${member.address }" />
 			<input class="form-control" type="text" name="addressdetail" id="addressdetail" value="${member.addressdetail }" />
-			<label for="comment">코멘트</label><input class="form-control" type="text" name="comment" id="comment" />
+			<label for="comments">코멘트</label><input class="form-control" type="text" name="comments" id="comments" />
 		<input class="btn btn-default" type="submit" value="주문하기" />
 	
 	</fieldset>

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.CartDTO;
 import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.OrdersDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.MarketService;
 
@@ -40,6 +42,7 @@ public class MarketController {
 			sessionBean.setNickname("raystar9");
 		}
 		
+		marketService.getOrderListByMemberNum(1);
 		switch(category) {
 		case "씨앗":
 		case "비료":
@@ -54,9 +57,10 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/market/item/{itemNo}", method = RequestMethod.GET)
-	public String itemDetail(Model model, @PathVariable int itemNo) {
+	public String itemDetail(Model model, @PathVariable int itemNo, SessionBean session) {
+		GoodsDTO item = marketService.getItemByItemNum(itemNo);
 		model.addAttribute("itemNo", itemNo);
-		model.addAttribute("item", marketService.getItemByItemNum(itemNo));
+		model.addAttribute("item", item);
 		return "market/item-detail";
 	}
 	
@@ -100,8 +104,9 @@ public class MarketController {
 		return "market/cart";
 	}
 	
-	@RequestMapping(value = "market/cart/{itemNo}")
-	public String putIntoCart(Model model) {
+	@RequestMapping(value = "market/cart/{itemNo}", method = RequestMethod.POST)
+	public String putIntoCart(Model model, CartDTO cart) {
+		marketService.insertCartItem(cart);
 		return "redirect:/market/cart/confirm";
 	}
 	
@@ -111,12 +116,17 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/market/order/process", method = RequestMethod.POST)
-	public String paymentProcess(Model model) {
+	public String paymentProcess(Model model, OrdersDTO order, @RequestParam("addressdetail") String addressDetail, SessionBean session) {
+		order.setAddress(order.getAddress() + " " + addressDetail);
+		order.setNum(2);
+		order.setMemberNum(session.getMemberNum());
+		marketService.insertOrder(order);
 		return "redirect:/market/order/confirm";
 	}
 	
 	@RequestMapping(value = "/market/order/confirm", method = RequestMethod.GET)
-	public String paymentConfirm(Model model) {
+	public String paymentConfirm(Model model, SessionBean session) {
+		logger.debug("address : 	{}", marketService.getOrderListByMemberNum(session.getMemberNum()).get(1).getAddress());
 		return "market/confirm";
 	}
 	

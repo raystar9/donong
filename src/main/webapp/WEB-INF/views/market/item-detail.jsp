@@ -4,8 +4,29 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<script src="/donong/resources/jquery/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/donong/resources/market/css/a.css">
 	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	<script>
+		function cartItem() {
+			$.ajax({
+				url: '/donong/market/cart/${itemNo}',
+				method: 'post',
+				data: {
+					num: 6,
+					goodsNum: '${item.num}',
+					memberNum: '${sessionBean.memberNum}',
+					quantity: $("#quantity").val()
+				},
+				success: function(result){
+					location.href='/donong/market/cart/confirm';
+				},
+				error: function(res){
+					alert('오류가 발생했습니다.');
+				}
+			});
+		}
+	</script>
 	<title>Home</title>
 	<style>
 		html, body {
@@ -39,13 +60,13 @@
 	<div class="col-sm-7 item-info-content align-middle">
 		<div class="form-group"><label class="control-label col-lg-3" for="name">이름 : </label><p class="col-lg-9 form-control-static">${item.name }</p></div>
 		<div class="form-group"><label class="control-label col-lg-3" for="price">가격 : </label><p class="col-lg-9 form-control-static">${item.price }원</p></div>
-		<div class="form-group"><label class="control-label col-lg-3" for="number">수량 : </label><input type="number" class="form-control item-count col-lg-9" name="quantity" value="1"/></div>
+		<div class="form-group"><label class="control-label col-lg-3" for="number">수량 : </label><input type="number" class="form-control item-count col-lg-9" id="quantity" name="quantity" value="1"/></div>
 	</div>
 	</div>
 	<div>${item.content }</div>
 	<div>
 		<input class="btn btn-default" type="submit" value="주문하기"/>
-		<button class="btn btn-default" type="button" onclick="location.href='/donong/market/cart/${itemNo}'">장바구니에 담기</button>
+		<button class="btn btn-default" type="button" onclick="cartItem()">장바구니에 담기</button>
 		<!--TODO ajax처리 예정 -->
 	</div>
 	</form>

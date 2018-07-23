@@ -1,5 +1,80 @@
 $(document).ready(function() {
-
+	
+	document.getElementById("file_2").disabled = true;
+	document.getElementById("file_3").disabled = true;
+	document.getElementById("file_4").disabled = true;
+	
+	$('#file_1').change(function() {
+		document.getElementById("file_2").disabled = false;
+	});
+	
+	$('#file_2').change(function() {
+		document.getElementById("file_3").disabled = false;
+		file2 = $('#file_2').val();
+		$('#file2').val(file2);
+	});
+	
+	$('#file_3').change(function() {
+		document.getElementById("file_4").disabled = false;
+		file3 = $('#file_3').val();
+		$('#file3').val(file3);
+	});
+	
+	$('#file_4').change(function() {
+		file4 = $('#file_4').val();
+		$('#file4').val(file4);
+	});
+	
+	$('form').submit(function(){
+		if ($('#area').val() == '') {
+			$('#area').focus();
+			alert('면적을 입력하세요.');
+			return false;
+		}
+		
+		if ($('#price').val() == '') {
+			$('#price').focus();
+			alert('임대료를 입력하세요.');
+			return false;
+		}
+		
+		if ($('#file1').val() == '') {
+			$('#file1').focus();
+			alert('대표이미지를 선택하세요.');
+			return false;
+		}
+		
+		if ($('#content').val() == '') {
+			$('#content').focus();
+			alert('상세내용을 입력하세요.');
+			return false;
+		}
+		
+		if ($('#autocomplete').val() == '') {
+			$('#autocomplete').focus();
+			alert('주소를 입력하세요.');
+			return false;
+		}
+		
+		if ($('#markerLat').val() == '') {
+			$('#markerLat').focus();
+			alert('농장위치를 지도에 마킹해주세요.');
+			return false;
+		}
+		
+		var address = $('#autocomplete').val();
+		var addArry = address.split(" ");
+		if(addArry.length < 4 ){
+			$('#autocomplete').focus();
+			alert('주소를 상세하게 입력하세요.');
+			return false;
+		}
+		
+		
+		
+		
+		
+	});//submit()
 	
 });//ready()
 

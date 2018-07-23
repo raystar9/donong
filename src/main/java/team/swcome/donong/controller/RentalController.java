@@ -54,9 +54,8 @@ public class RentalController {
 	public String rentalWrite(Model model, SessionBean sessionBean) {
 		sessionBean.setMemberNum(2); 					//임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
-		MemberDTO m = new MemberDTO();
-		m = RentalService.selectNameByPhone(member_num);
-		
+		MemberDTO m =  RentalService.selectNameByPhone(member_num);
+
 		model.addAttribute("name", m.getRealname());
 		model.addAttribute("phone", m.getPhone());
 		
@@ -70,7 +69,6 @@ public class RentalController {
 								 RentalDTO r,
 								 FileDTO f) throws IllegalStateException, IOException {
 		//int member_num = sessionBean.getMemberNum(); - 로그인 연결되면 이렇게 가져올 것
-		System.out.println("here :: " + r.getLat());
 		sessionBean.setMemberNum(2); 					//임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		r.setMember_num(member_num);

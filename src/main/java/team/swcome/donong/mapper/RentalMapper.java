@@ -17,4 +17,6 @@ public interface RentalMapper {
 	
 	public MemberDTO selectNameByPhone(int num);
 	
+	public RentalDTO selectSidoSigunguNum(Map<String,String> map);
+	
 }

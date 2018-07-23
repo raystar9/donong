@@ -1,4 +1,4 @@
-drop table member cascade constraints;
+drop table rentals cascade constraints;
 
 --회원 테이블
 CREATE TABLE member(
@@ -58,13 +58,13 @@ CREATE TABLE rentalfiles(
 num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
 board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- 그 테이블의 게시글 번호
 filename1 VARCHAR2(200) NOT NULL,
-filename2 VARCHAR2(200) NOT NULL,
-filename3 VARCHAR2(200) NOT NULL,
-filename4 VARCHAR2(200) NOT NULL,
+filename2 VARCHAR2(200) ,
+filename3 VARCHAR2(200) ,
+filename4 VARCHAR2(200) ,
 filepath1 VARCHAR2(200) NOT NULL,
-filepath2 VARCHAR2(200) NOT NULL,
-filepath3 VARCHAR2(200) NOT NULL,
-filepath4 VARCHAR2(200) NOT NULL
+filepath2 VARCHAR2(200) ,
+filepath3 VARCHAR2(200) ,
+filepath4 VARCHAR2(200) 
 );
 
 drop sequence do_num_seq;

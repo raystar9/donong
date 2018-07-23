@@ -13,22 +13,30 @@
   	VALUES (rental_num_seq.nextval, #{member_num}, #{writer}, #{address}, #{title}, 
   		    #{sido}, #{sigungu}, #{area}, #{price}, #{content}, #{lat}, #{lng})
   		    
-  	<selectKey resultType="int" keyProperty="board_num" order="AFTER">
+  	<selectKey resultType="int" keyProperty="num" order="AFTER">
   		SELECT max(num) 
   		FROM rentals
   		WHERE member_num = #{member_num}
-  	</selectKey>	 
+  	</selectKey>
   </insert>
   
   <insert id="insertFile" parameterType="FileDTO">
   	INSERT INTO rentalfiles
-  	VALUES (file_num_seq.nextval, #{board_num}, #{filename1}, #{filename2}, #{filename3}, 
-  	       #{filename4}, #{filepath1}, #{filepath2}, #{filepath3}, #{filepath4})
+  	VALUES (file_num_seq.nextval, #{board_num}, #{fileName1}, #{fileName2}, #{fileName3}, 
+  	       #{fileName4}, #{filePath1}, #{filePath2}, #{filePath3}, #{filePath4})
   </insert>
   
   <select id="selectNameByPhone" parameterType="int" resultType="MemberDTO">
   	SELECT name, phone FROM member
   </select> 
+  
+  <select id="selectSidoSigunguNum" parameterType="Map" resultType="RentalDTO">
+  	select sido.num as sido, sigungu.num as sigungu
+	from sido , sigungu
+	where sido.name like #{sido}
+	and sigungu.name = #{sigungu}
+  </select>
+  
   
 </mapper>
 

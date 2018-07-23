@@ -13,13 +13,14 @@ public class RentalDTO {
 	private String writer;	//게시글 작성자 이름
 	private String title;	//게시글 제목
 	private String address;	//소재지
-	private int sido; 	//도
+	private int sido; 		//도
 	private int sigungu;	//시
 	private int area;		//면적
 	private int price;		//임대료
 	private String content;	//게시글 내용
 	private float lat;		//위도
 	private float lng;		//경도
+
 	
 	
 	public String getWriter() {

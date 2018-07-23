@@ -19,8 +19,8 @@ select num, id, nickname, realname, postnum, address, addressdetail, email, emai
 select * from rentalFiles;
 
 	INSERT INTO rentals
-  	VALUES (rental_num_seq.nextval, 2, #{writer}, #{address}, #{title}, 
-  		    #{sido}, #{sigungu}, #{area}, #{price}, #{content}, #{lat}, #{lng});
+  	VALUES (rental_num_seq.nextval, 2, '이다혜', '대한민국 경기도 부천시', '경기도 부천시', 
+  		    2, 15, 2400, 10000000, '장소가좋아요^^', 24, 24);
   		    
   		    SELECT max(num) 
   		FROM rentals
@@ -31,11 +31,31 @@ start with 1
 increment by 1  	
 
 select * from sido;
+select * from sigungu;
 
 select num
 from sido
 where name like '%강원도%'
+
+select * from RENTALS;
+
+select sido.num, sigungu.num
+from sido , sigungu
+where sido.name = '경기도'
+and sigungu.name = '부천시';
+
+SELECT sido.num as sido, sigungu.num as sigunu
+	FROM sido , sigungu
+	WHERE sido.name = '경기도'
+	AND sigungu.name = '부천시';
+	
+	SELECT sido.num as sido
+	FROM sido
+	WHERE sido.name like '%경기도%'	
   		    
+	delete from rentals cascade constraints;
   		    
-  		    
+ SELECT max(num) 
+  		FROM rentals
+  		WHERE member_num = 2 		    
   		    

@@ -13,11 +13,13 @@
 	
 </head>
 <body>
+	<h1>
+		공지사항 페이지 입니다.  
+	</h1>
 	<a href="/donong/cs/main">main</a>
 	<a href="/donong/cs/notice">notice</a>
-	<a href="/donong/cs/search">search</a>
-	<a href="/donong/cs/faq">faq</a>
 	<a href="/donong/cs/qna">qna</a>
+	
 	<table id="boardList">
 		<c:if test="${listCount != 0 }">
 			<tr>

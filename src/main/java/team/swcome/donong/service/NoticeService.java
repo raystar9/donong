@@ -26,20 +26,25 @@ public class NoticeService {
 
 		return noticeMapper.getListCount();
 	}
+	
+	public void insertNotice(NoticeDTO notice) {
+		
+		noticeMapper.insertNotice(notice);
+	}
 
-	public NoticeDTO getNoticeContent(int num) {
+	public NoticeDTO getNotice(int num) {
 
 		return noticeMapper.getNoticeContent(num);
+	}
+	
+	public void updateNotice(NoticeDTO notice) {
+		
+		noticeMapper.updateNotice(notice);
 	}
 
 	public void delNotice(int num) {
 		
 		noticeMapper.delNotice(num);
-	}
-
-	public void insertNotice(NoticeDTO notice) {
-		
-		noticeMapper.insertNotice(notice);
 	}
 
 	public int getSrcListCount(Map<String, Object> map) {

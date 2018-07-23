@@ -5,21 +5,30 @@
 <mapper namespace="team.swcome.donong.mapper.FAQMapper">
 	
 	<select id="getSrcListCount" resultType="int" parameterType="String">
-		select count(num) from faq where  
-		category like #{keyword} or 
+		select count(num) 
+		from (select f.num, c.name category, f.title, f.content, nvl(f.readcount, 0) readcount from faq f, cs_category c where f.category = c.num) 
+		where category like #{keyword} or 
+		title like #{keyword} or 
+		content like #{keyword}
+	</select>
+	
+	<select id="getSrcList" resultType="faq">
+		select * 
+		from (select f.num, c.name category, f.title, f.content, nvl(f.readcount, 0) readcount from faq f, cs_category c where f.category = c.num) 
+		where category like #{keyword} or 
 		title like #{keyword} or 
 		content like #{keyword}
 		order by num
 	</select>
 	
-	<select id="getSrcList" resultType="faq">
-		select * from faq where
-		category like #{keyword} or 
-		title like #{keyword} or 
-		content like #{keyword}
-		order by num 
+	<select id="getFaqTopTenList" resultType="faq">
+		select * 
+		from (select f.num, c.name category, f.title, f.content, nvl(f.readcount, 0) readcount from faq f, cs_category c where f.category = c.num) 
+		order by readcount desc
 	</select>
 	
-	
+	<update id="faqReadCountUpdate" parameterType="int">
+		update faq set readcount = readcount + 1 where num = #{num}
+	</update>
 	
 </mapper>

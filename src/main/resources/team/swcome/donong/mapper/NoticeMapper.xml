@@ -43,6 +43,10 @@
 		order by regitdate
 	</select>
 	
+	<update id="updateNotice" parameterType="notice">
+		update notice set title=#{title}, content=#{content} where num=#{num}
+	</update>
+	
 	<delete id="delNotice">
 		delete from notice where num=#{num}
 	</delete>

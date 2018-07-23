@@ -118,7 +118,8 @@ CREATE TABLE faq(
 num NUMBER CONSTRAINT faq_num_pk PRIMARY KEY,
 category NUMBER CONSTRAINT faq_category_fk REFERENCES cs_category(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
-content VARCHAR2(4000) NOT NULL
+content VARCHAR2(4000) NOT NULL,
+readcount number
 );
 
 CREATE TABLE qna(
@@ -126,7 +127,11 @@ num NUMBER CONSTRAINT qna_num_pk PRIMARY KEY,
 category NUMBER CONSTRAINT qna_category_fk REFERENCES cs_category(num) NOT NULL, 
 writer NUMBER CONSTRAINT qna_writer_fk REFERENCES member(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
-content varchar2(4000) NOT NULL
+content varchar2(4000) NOT NULL,
+regitdate DATE NOT NULL,
+answer varchar2(4000),
+ansdate DATE,
+state varchar2(20)
 );
 
 CREATE TABLE notice(
@@ -137,4 +142,19 @@ regitdate DATE NOT NULL
 );
 
 
-insert into faq values(1, '구매', 'test', 'test');
+
+alter table qna add(state varchar2(20));
+alter table faq modify(readcount number default 0);
+insert into cs_category values(2, '구매');
+insert into faq values(2, 2, 'test', 'test');
+insert into qna (num, category, writer, title, content, regitdate, state) values (1, 1, 1, 'abc', 'abc', sysdate, '답변 대기');
+select * from CS_CATEGORY;
+insert into CS_CATEGORY values(1, '고객정보');
+insert into CS_CATEGORY values(2, '주문/결제');
+insert into CS_CATEGORY values(3, '배송');
+insert into CS_CATEGORY values(4, '상품/상품평');
+insert into CS_CATEGORY values(5, '취소');
+insert into CS_CATEGORY values(6, '반품');
+insert into CS_CATEGORY values(7, '교환');
+insert into CS_CATEGORY values(8, '이벤트/제휴/기타');
+insert into CS_CATEGORY values(9, '고객의소리');

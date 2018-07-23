@@ -16,15 +16,18 @@ public interface NoticeMapper {
 
 	int getListCount();
 
+	void insertNotice(NoticeDTO notice);
+
 	NoticeDTO getNoticeContent(int num);
+	
+	void updateNotice(NoticeDTO notice);
 
 	void delNotice(int num);
-
-	void insertNotice(NoticeDTO notice);
 
 	int getSrcListCount(Map<String, Object> map);
 
 	List<NoticeDTO> getSrcList(Map<String, Object> map, RowBounds row);
+
 
 	
 }

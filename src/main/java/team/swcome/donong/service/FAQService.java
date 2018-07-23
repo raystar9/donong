@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import team.swcome.donong.dto.FAQDTO;
 import team.swcome.donong.mapper.FAQMapper;
 
 @Service
@@ -39,6 +40,14 @@ public class FAQService {
 		startPage = ((page - 1) / 10) * 10 + 1;
 		endPage = startPage + 10 - 1;
 		
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+
+		if (endPage < page) {
+			page = endPage;
+		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("faqList", faqMapper.getSrcList("%" + keyword + "%", row));
 		map.put("listCount", listCount);
@@ -49,6 +58,16 @@ public class FAQService {
 		map.put("endPage", endPage);
 		
 		return map;
+	}
+
+	public int faqReadCountUpdate(int num) {
+
+		return faqMapper.faqReadCountUpdate(num);
+	}
+
+	public List<FAQDTO> getFaqTopTenList() {
+
+		return faqMapper.getFaqTopTenList();
 	}
 
 	

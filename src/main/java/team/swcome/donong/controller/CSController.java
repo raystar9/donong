@@ -16,17 +16,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.swcome.donong.dto.NoticeDTO;
+import team.swcome.donong.dto.QNADTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.FAQService;
 import team.swcome.donong.service.NoticeService;
 import team.swcome.donong.service.QNAService;
 
 @Controller
+@SessionAttributes("sessionBean")
 public class CSController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CSController.class);
@@ -39,7 +45,12 @@ public class CSController {
 	QNAService qnaService;
 	
 	@RequestMapping(value="/cs/main", method=RequestMethod.GET)
-	public ModelAndView csHome(Locale locale, ModelAndView mv) {
+	public ModelAndView csHome(
+			ModelAndView mv) {
+		RowBounds row = new RowBounds(0, 10);
+		mv.addObject("faqList", faqService.getFaqTopTenList());
+		mv.addObject("noticeList", noticeService.getNoticeList(row));
+		
 		mv.setViewName("service/cs_main");
 		
 		return mv;
@@ -112,12 +123,9 @@ public class CSController {
 	public String noticeWrite() {
 		return "service/notice_write";
 	}
-  
+
 	@RequestMapping(value="/cs/notice", method=RequestMethod.POST)
-	public String noticeWrite(
-			NoticeDTO notice
-			) {
-		System.out.println("글쓰기");
+	public String noticeWrite(NoticeDTO notice) {
 		noticeService.insertNotice(notice);
 		
 		return "redirect:/cs/notice/" + notice.getNum() + "?state=cont";
@@ -129,10 +137,10 @@ public class CSController {
 			@PathVariable int num, 
 			@RequestParam("state") String state,
 			HttpServletResponse response) throws Exception {
-		NoticeDTO noticeBean = noticeService.getNoticeContent(num);
-		noticeBean.setContent(noticeBean.getContent().replace("\n", "<br>"));
+		NoticeDTO noticeDTO = noticeService.getNotice(num);
+		noticeDTO.setContent(noticeDTO.getContent().replace("\n", "<br>"));
 		
-		mv.addObject("notice", noticeBean);
+		mv.addObject("notice", noticeDTO);
 
 		if (state.equals("cont")) {
 			mv.setViewName("service/notice_cont");
@@ -148,9 +156,10 @@ public class CSController {
 			@PathVariable int num,
 			NoticeDTO notice
 			) {
-		noticeService.delNotice(num);
+		notice.setNum(num);
+		noticeService.updateNotice(notice);
 		
-		return "redirect:/cs/notice/" + notice.getNum() + "?state=cont";
+		return "redirect:/cs/notice/" + num + "?state=cont";
 	}
 	
 	@RequestMapping(value="/cs/notice/{num}", method=RequestMethod.DELETE)
@@ -176,25 +185,116 @@ public class CSController {
 		mv.addObject("maxPage", map.get("maxPage"));
 		mv.addObject("startPage", map.get("startPage"));
 		mv.addObject("endPage", map.get("endPage"));
+		mv.addObject("keyword", keyword);
 		
 		mv.setViewName("service/faq");
 
 		return mv;
 	}
 	
-	@RequestMapping(value="/cs/search", method=RequestMethod.GET)
-	public ModelAndView csSearch(ModelAndView mv, Model model) {
-		mv.setViewName("service/search");
+	@ResponseBody
+	@RequestMapping(value="/cs/faq/{num}")
+	public int faqReadCountUpdate(@PathVariable int num) {
 		
-		Map<String, Object> map = model.asMap(); 
-		return mv;
+		return faqService.faqReadCountUpdate(num); 
 	}
 	
 	@RequestMapping(value="/cs/qna", method=RequestMethod.GET)
-	public ModelAndView csQna(ModelAndView mv) {
-		mv.setViewName("service/qna");
+	public ModelAndView qnaList(
+			ModelAndView mv, 
+			SessionBean session, 
+			@RequestParam(defaultValue="none") String state,
+			HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		session.setNickname("admin");
+		session.setMemberNum(1);
+		if (session.getNickname().equals("admin")) {
+			map = qnaService.getQnaListAll(request);
+			
+			mv.addObject("qnaList", map.get("qnaList"));
+			mv.addObject("listCount", map.get("listCount"));
+			mv.addObject("page", map.get("page"));
+			mv.addObject("limit", map.get("limit"));
+			mv.addObject("maxPage", map.get("maxPage"));
+			mv.addObject("startPage", map.get("startPage"));
+			mv.addObject("endPage", map.get("endPage"));
+		} else {
+			map = qnaService.getQnaList(session.getMemberNum(), request);
+			
+			mv.addObject("qnaList", map.get("qnaList"));
+			mv.addObject("listCount", map.get("listCount"));
+			mv.addObject("page", map.get("page"));
+			mv.addObject("limit", map.get("limit"));
+			mv.addObject("maxPage", map.get("maxPage"));
+			mv.addObject("startPage", map.get("startPage"));
+			mv.addObject("endPage", map.get("endPage"));
+		}
+		if (state.equals("paging") || state.equals("search")) {
+			System.out.println("ajax 실행!!");
+			mv.setViewName("service/qna_ajax");
+		} else {			
+			mv.setViewName("service/qna");
+		}
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="/cs/qna/write")
+	public String qnaWrite() {
+		
+		return "service/qna_write";
+	}
+	
+	@RequestMapping(value="/cs/qna", method=RequestMethod.POST)
+	public String qnaWrite(QNADTO qna, SessionBean session) {
+		qna.setWriter(session.getMemberNum());
+		qnaService.insertQna(qna);
+		
+		return "redirect:/cs/qna/" + qna.getNum() + "?state=cont";
+	}
+	
+	@RequestMapping(value="/cs/qna/{num}", method=RequestMethod.GET)
+	public ModelAndView qnaCont(
+			ModelAndView mv, 
+			@PathVariable int num, 
+			@RequestParam("state") String state,
+			HttpServletResponse response) throws Exception {
+		QNADTO qnaDTO = qnaService.getQna(num);
+		qnaDTO.setContent(qnaDTO.getContent().replace("\n", "<br>"));
+		
+		mv.addObject("qna", qnaDTO);
+
+		if (state.equals("cont")) {
+			mv.setViewName("service/qna_cont");
+		} else if (state.equals("edit")) {
+			mv.setViewName("service/qna_edit");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/cs/qna/{num}", method=RequestMethod.PUT)
+	public String qnaUpdate(
+			@PathVariable int num,
+			QNADTO qna) {
+		System.out.println("start");
+		qna.setNum(num);
+		System.out.println("here : " + qna.getTitle());
+		System.out.println("here : " + qna.getContent());
+		if (qna.getAnswer() == null) {
+			qnaService.updateQna(qna);
+		} else {
+			qnaService.updateAnswer(qna);
+		}
+		
+		return "redirect:/cs/qna/" + num + "?state=cont";
+	}
+	
+	@RequestMapping(value="/cs/qna/{num}", method=RequestMethod.DELETE)
+	public String qnaDelete(@PathVariable int num) {
+		qnaService.deleteQna(num);
+		
+		return "cs/qna";
 	}
 	
 }

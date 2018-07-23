@@ -2,6 +2,7 @@ package team.swcome.donong.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -27,11 +28,8 @@ public class RentalService {
 	@Autowired
 	MemberMapper memberMapper;
 
-	private String saveFolder = "C:\\Users\\ÀÌ´ÙÇı\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
+	private String saveFolder = "C:\\Users\\ì´ë‹¤í˜œ\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
-	public List<RentalDTO> getMainList() {
-		return rentalMapper.selectAll();
-	}
 
 	public int insertFarm(RentalDTO r) {
 		String sido = "";
@@ -44,19 +42,19 @@ public class RentalService {
 		System.out.println("lat = " + r.getLat());
 		System.out.println("lng = " + r.getLng());
 
-		// ·Î±×ÀÎÇÑ »ç¶÷ ÀÌ¸§ °¡Á®¿À±â
+		// ë¡œê·¸ì¸í•œ ì‚¬ëŒ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
 		MemberDTO m = new MemberDTO();
 		m = memberMapper.selectMemberByNum(r.getMember_num());
 		writer = m.getRealname();
 		System.out.println("num = " + m.getNum());
 
-		// ½Ãµµ, ½Ã±º±¸, Á¦¸ñ
+		// ì‹œë„, ì‹œêµ°êµ¬, ì œëª©
 		String[] addArr = address.split("\\s");
 		sido = addArr[1];
 		sigungu = addArr[2];
 		ri = addArr[3];
 
-		// ±Û Á¦¸ñ
+		// ê¸€ ì œëª©
 		title = sido + " " + sigungu + " " + ri;
 
 		System.out.println("address = " + address);
@@ -65,7 +63,7 @@ public class RentalService {
 		System.out.println("ri = " + ri);
 		System.out.println("title = " + sido + " " + sigungu + " " + ri);
 
-		// ½Ãµµ, ½Ã±º±¸ ¹øÈ£
+		// ì‹œë„, ì‹œêµ°êµ¬ ë²ˆí˜¸
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
 		map.put("sigungu", sigungu);
@@ -73,8 +71,8 @@ public class RentalService {
 		RentalDTO r2 = rentalMapper.selectSidoSigunguNum(map);
 		r.setSido(r2.getSido());
 		r.setSigungu(r2.getSigungu());
-		System.out.println("sido¹øÈ£ = " + r.getSido());
-		System.out.println("sigungu¹øÈ£ = " + r.getSigungu());
+		System.out.println("sidoë²ˆí˜¸ = " + r.getSido());
+		System.out.println("sigunguë²ˆí˜¸ = " + r.getSigungu());
 
 		r.setTitle(title);
 		r.setWriter(writer);
@@ -91,121 +89,121 @@ public class RentalService {
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
 
-		// »ı¼ºÇÒ Æú´õ ÀÌ¸§: ¿À´Ã ³â+¿ù+ÀÏ
+		// ìƒì„±í•  í´ë” ì´ë¦„: ì˜¤ëŠ˜ ë…„+ì›”+ì¼
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH) + 1;
 		int date = c.get(Calendar.DATE);
 		String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
 
-		// ÆÄÀÏ °´Ã¼ »ı¼ºÇÕ´Ï´Ù.
+		// íŒŒì¼ ê°ì²´ ìƒì„±í•©ë‹ˆë‹¤.
 		File path = new File(homedir);
 
-		// Æú´õ°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+		// í´ë”ê°€ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
 		if (!(path.exists())) {
-			System.out.println("Æú´õ ¸¸µé¾î¿ä");
-			path.mkdir(); // »õ·Î¿î Æú´õ¸¦ »ı¼º
+			System.out.println("í´ë” ë§Œë“¤ì–´ìš”");
+			path.mkdir(); // ìƒˆë¡œìš´ í´ë”ë¥¼ ìƒì„±
 		}
 
-		// ³­¼ö¸¦ ±¸ÇÕ´Ï´Ù.
+		// ë‚œìˆ˜ë¥¼ êµ¬í•©ë‹ˆë‹¤.
 		Random r = new Random();
 		int random = r.nextInt(100000000);
 
-		/* Ã¹¹øÂ° ÆÄÀÏ */
-		// ¿ø·¡ ÆÄÀÏ¸í ÀúÀå
+		/* ì²«ë²ˆì§¸ íŒŒì¼ */
+		// ì›ë˜ íŒŒì¼ëª… ì €ì¥
 		String fileName = file1.getOriginalFilename();
 		f.setFileName1(fileName);
 
-		// È®ÀåÀÚ
+		// í™•ì¥ì
 		int index = fileName.lastIndexOf(".");
 		String fileExtension = fileName.substring(index + 1);
-		System.out.println("È®ÀåÀÚ1 = " + fileExtension);
+		System.out.println("í™•ì¥ì1 = " + fileExtension);
 
-		// »õ·Î¿î ÆÄÀÏ¸íÀ» ÀúÀå
+		// ìƒˆë¡œìš´ íŒŒì¼ëª…ì„ ì €ì¥
 		String refileName = "farm" + year + month + date + random + "." + fileExtension;
 		System.out.println("refileName1 = " + refileName);
 
-		// ¿À¶óÅ¬ µğºñ¿¡ ÀúÀåµÉ ·¹ÄÚµå °ª
+		// ì˜¤ë¼í´ ë””ë¹„ì— ì €ì¥ë  ë ˆì½”ë“œ ê°’
 		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
 		System.out.println("fileDBName1 = " + fileDBName);
 
-		// transferTo(FIle path) : ¾÷·ÎµåÇÑ ÆÄÀÏÀ» ¸Å°³º¯¼öÀÇ °æ·Î¿¡ ÀúÀåÇÕ´Ï´Ù.
+		// transferTo(FIle path) : ì—…ë¡œë“œí•œ íŒŒì¼ì„ ë§¤ê°œë³€ìˆ˜ì˜ ê²½ë¡œì— ì €ì¥í•©ë‹ˆë‹¤.
 		file1.transferTo(new File(saveFolder + fileDBName));
-		// ¹Ù²ï ÆÄÀÏ¸íÀ¸·Î ÀúÀå
+		// ë°”ë€ íŒŒì¼ëª…ìœ¼ë¡œ ì €ì¥
 		f.setFilePath1(fileDBName);
 
 		if (!file2.isEmpty()) {
-			/* µÎ¹øÂ° ÆÄÀÏ */
-			// ¿ø·¡ ÆÄÀÏ¸í ÀúÀå
+			/* ë‘ë²ˆì§¸ íŒŒì¼ */
+			// ì›ë˜ íŒŒì¼ëª… ì €ì¥
 			fileName = file2.getOriginalFilename();
 			f.setFileName2(fileName);
 
-			// È®ÀåÀÚ
+			// í™•ì¥ì
 			index = fileName.lastIndexOf(".");
 			fileExtension = fileName.substring(index + 1);
-			System.out.println("È®ÀåÀÚ2 = " + fileExtension);
+			System.out.println("í™•ì¥ì2 = " + fileExtension);
 
-			// »õ·Î¿î ÆÄÀÏ¸íÀ» ÀúÀå
+			// ìƒˆë¡œìš´ íŒŒì¼ëª…ì„ ì €ì¥
 			refileName = "rental" + year + month + date + random + "." + fileExtension;
 			System.out.println("refileName2 = " + refileName);
 
-			// ¿À¶óÅ¬ µğºñ¿¡ ÀúÀåµÉ ·¹ÄÚµå °ª
+			// ì˜¤ë¼í´ ë””ë¹„ì— ì €ì¥ë  ë ˆì½”ë“œ ê°’
 			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
 			System.out.println("fileDBName2 = " + fileDBName);
 
-			// transferTo(FIle path) : ¾÷·ÎµåÇÑ ÆÄÀÏÀ» ¸Å°³º¯¼öÀÇ °æ·Î¿¡ ÀúÀåÇÕ´Ï´Ù.
+			// transferTo(FIle path) : ì—…ë¡œë“œí•œ íŒŒì¼ì„ ë§¤ê°œë³€ìˆ˜ì˜ ê²½ë¡œì— ì €ì¥í•©ë‹ˆë‹¤.
 			file2.transferTo(new File(saveFolder + fileDBName));
-			// ¹Ù²ï ÆÄÀÏ¸íÀ¸·Î ÀúÀå
+			// ë°”ë€ íŒŒì¼ëª…ìœ¼ë¡œ ì €ì¥
 			f.setFilePath2(fileDBName);
 		}
 
 		if (!file3.isEmpty()) {
-			/* ¼¼¹øÂ° ÆÄÀÏ */
-			// ¿ø·¡ ÆÄÀÏ¸í ÀúÀå
+			/* ì„¸ë²ˆì§¸ íŒŒì¼ */
+			// ì›ë˜ íŒŒì¼ëª… ì €ì¥
 			fileName = file3.getOriginalFilename();
 			f.setFileName3(fileName);
 
-			// È®ÀåÀÚ
+			// í™•ì¥ì
 			index = fileName.lastIndexOf(".");
 			fileExtension = fileName.substring(index + 1);
-			System.out.println("È®ÀåÀÚ3 = " + fileExtension);
+			System.out.println("í™•ì¥ì3 = " + fileExtension);
 
-			// »õ·Î¿î ÆÄÀÏ¸íÀ» ÀúÀå
+			// ìƒˆë¡œìš´ íŒŒì¼ëª…ì„ ì €ì¥
 			refileName = "rental" + year + month + date + random + "." + fileExtension;
 			System.out.println("refileName3 = " + refileName);
 
-			// ¿À¶óÅ¬ µğºñ¿¡ ÀúÀåµÉ ·¹ÄÚµå °ª
+			// ì˜¤ë¼í´ ë””ë¹„ì— ì €ì¥ë  ë ˆì½”ë“œ ê°’
 			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
 			System.out.println("fileDBName3 = " + fileDBName);
 
-			// transferTo(FIle path) : ¾÷·ÎµåÇÑ ÆÄÀÏÀ» ¸Å°³º¯¼öÀÇ °æ·Î¿¡ ÀúÀåÇÕ´Ï´Ù.
+			// transferTo(FIle path) : ì—…ë¡œë“œí•œ íŒŒì¼ì„ ë§¤ê°œë³€ìˆ˜ì˜ ê²½ë¡œì— ì €ì¥í•©ë‹ˆë‹¤.
 			file1.transferTo(new File(saveFolder + fileDBName));
-			// ¹Ù²ï ÆÄÀÏ¸íÀ¸·Î ÀúÀå
+			// ë°”ë€ íŒŒì¼ëª…ìœ¼ë¡œ ì €ì¥
 			f.setFilePath3(fileDBName);
 		}
 
 		if (!file4.isEmpty()) {
-			/* ³×¹øÂ° ÆÄÀÏ */
-			// ¿ø·¡ ÆÄÀÏ¸í ÀúÀå
+			/* ë„¤ë²ˆì§¸ íŒŒì¼ */
+			// ì›ë˜ íŒŒì¼ëª… ì €ì¥
 			fileName = file4.getOriginalFilename();
 			f.setFileName4(fileName);
 
-			// È®ÀåÀÚ
+			// í™•ì¥ì
 			index = fileName.lastIndexOf(".");
 			fileExtension = fileName.substring(index + 1);
-			System.out.println("È®ÀåÀÚ4 = " + fileExtension);
+			System.out.println("í™•ì¥ì4 = " + fileExtension);
 
-			// »õ·Î¿î ÆÄÀÏ¸íÀ» ÀúÀå
+			// ìƒˆë¡œìš´ íŒŒì¼ëª…ì„ ì €ì¥
 			refileName = "rental" + year + month + date + random + "." + fileExtension;
 			System.out.println("refileName4 = " + refileName);
 
-			// ¿À¶óÅ¬ µğºñ¿¡ ÀúÀåµÉ ·¹ÄÚµå °ª
+			// ì˜¤ë¼í´ ë””ë¹„ì— ì €ì¥ë  ë ˆì½”ë“œ ê°’
 			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
 			System.out.println("fileDBName4 = " + fileDBName);
 
-			// transferTo(FIle path) : ¾÷·ÎµåÇÑ ÆÄÀÏÀ» ¸Å°³º¯¼öÀÇ °æ·Î¿¡ ÀúÀåÇÕ´Ï´Ù.
+			// transferTo(FIle path) : ì—…ë¡œë“œí•œ íŒŒì¼ì„ ë§¤ê°œë³€ìˆ˜ì˜ ê²½ë¡œì— ì €ì¥í•©ë‹ˆë‹¤.
 			file1.transferTo(new File(saveFolder + fileDBName));
-			// ¹Ù²ï ÆÄÀÏ¸íÀ¸·Î ÀúÀå
+			// ë°”ë€ íŒŒì¼ëª…ìœ¼ë¡œ ì €ì¥
 			f.setFilePath4(fileDBName);
 		}
 
@@ -218,4 +216,16 @@ public class RentalService {
 		System.out.println("name = " + m.getRealname());
 		return m;
 	};
+	
+	public List<RentalDTO> selectRentalList(){
+		List<RentalDTO> list = rentalMapper.selectRentalList();
+		return list;
+	};
+	
+	public String[] selectRepresentImg() {
+		String[] filepath = rentalMapper.selectRepresentImg();
+		System.out.println("filepath ê°œìˆ˜ = " + filepath.length);
+		return filepath;
+	};
+	
 }

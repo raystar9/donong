@@ -68,28 +68,25 @@
 		<tr>
 			<td>대표이미지</td>
 			<td>
-				 <input type="file" name="file1" id="file_1">
+				 <input type="file" name="file1" id="file1">
 			</td>
 		</tr>
 		<tr id='file2_tr'>
 			<td>사진1</td>
 			<td>
-				 <input type="file" id="file_2" value="">
-				 <input type="file" name="file2" id="file2" value="" style="display:none">
+				 <input type="file" name="file2" id="file2">
 			</td>
 		</tr>
-		<tr>
+		<tr id='file3_tr'>
 			<td>사진2</td>
 			<td>
-				 <input type="file" id="file_3" value="">
-				 <input type="file" name="file3" id="file3" value="" style="display:none">
+				 <input type="file" name="file3" id="file3">
 			</td>
 		</tr>
-		<tr>
+		<tr id='file4_tr'>
 			<td>사진3</td>
 			<td>
-				 <input type="file" id="file_4" value="">
-				 <input type="file" name="file4" id="file4" value="" style="display:none">
+				 <input type="file" name="file4" id="file4">
 			</td>
 		</tr>
 		<tr>

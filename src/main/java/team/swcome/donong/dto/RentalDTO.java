@@ -8,21 +8,28 @@ import javax.annotation.Resource;
 @Resource
 public class RentalDTO {
 	
-	private int num;		//°Ô½Ã±Û °íÀ¯¹øÈ£
-	private int member_num;	//ÀÛ¼ºÀÚ °íÀ¯¹øÈ£
-	private String writer;	//°Ô½Ã±Û ÀÛ¼ºÀÚ ÀÌ¸§
-	private String title;	//°Ô½Ã±Û Á¦¸ñ
-	private String address;	//¼ÒÀçÁö
-	private int sido; 		//µµ
-	private int sigungu;	//½Ã
-	private int area;		//¸éÀû
-	private int price;		//ÀÓ´ë·á
-	private String content;	//°Ô½Ã±Û ³»¿ë
-	private float lat;		//À§µµ
-	private float lng;		//°æµµ
+	private int num;		//ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+	private int member_num;	//ì‘ì„±ì ê³ ìœ ë²ˆí˜¸
+	private String writer;	//ê²Œì‹œê¸€ ì‘ì„±ì ì´ë¦„
+	private String title;	//ê²Œì‹œê¸€ ì œëª©
+	private String address;	//ì†Œì¬ì§€
+	private int sido; 		//ë„
+	private int sigungu;	//ì‹œ
+	private int area;		//ë©´ì 
+	private int price;		//ì„ëŒ€ë£Œ
+	private String content;	//ê²Œì‹œê¸€ ë‚´ìš©
+	private float lat;		//ìœ„ë„
+	private float lng;		//ê²½ë„
+	private String path;	//ëŒ€í‘œì´ë¯¸ì§€ ê²½ë¡œ
 
 	
 	
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public String getWriter() {
 		return writer;
 	}

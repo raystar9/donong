@@ -2,6 +2,7 @@ package team.swcome.donong.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -29,7 +30,8 @@ public class RentalController {
 	RentalService RentalService;
 	
 	
-	/*@RequestMapping(value = "rental", method = RequestMethod.GET)
+	/*
+	@RequestMapping(value = "rental", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -41,18 +43,27 @@ public class RentalController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		return "rental/home";
-	}*/
+	 }
+	*/
 	
-	/* ³óÁö ´ë¿© ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ */
+	/* ë†ì§€ ëŒ€ì—¬ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™ */
 	@RequestMapping(value = "/rental", method = RequestMethod.GET)
-	public String rentalList() {
+	public String rentalList(Model model) {
+		List<RentalDTO> list = RentalService.selectRentalList();
+		String[] filepath = RentalService.selectRepresentImg();
+		System.out.println("List ê°œìˆ˜ = " + list.size());
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setPath(filepath[i]);
+		}
+		
+		model.addAttribute("list", list);
 		return "rental/rentalList";
 	}
 	
-	/* ³óÁö ´ë¿© ±Û¾²±â ÆäÀÌÁö·Î ÀÌµ¿ */
+	/* ë†ì§€ ëŒ€ì—¬ ê¸€ì“°ê¸° í˜ì´ì§€ë¡œ ì´ë™ */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
 	public String rentalWrite(Model model, SessionBean sessionBean) {
-		sessionBean.setMemberNum(2); 					//ÀÓ½Ã·Î Á¤ÇØ³õÀ½
+		sessionBean.setMemberNum(2); 					//ì„ì‹œë¡œ ì •í•´ë†“ìŒ
 		int member_num = sessionBean.getMemberNum();
 		MemberDTO m =  RentalService.selectNameByPhone(member_num);
 
@@ -68,30 +79,30 @@ public class RentalController {
 								 SessionBean sessionBean,
 								 RentalDTO r,
 								 FileDTO f) throws IllegalStateException, IOException {
-		//int member_num = sessionBean.getMemberNum(); - ·Î±×ÀÎ ¿¬°áµÇ¸é ÀÌ·¸°Ô °¡Á®¿Ã °Í
-		sessionBean.setMemberNum(2); 					//ÀÓ½Ã·Î Á¤ÇØ³õÀ½
+		//int member_num = sessionBean.getMemberNum(); - ë¡œê·¸ì¸ ì—°ê²°ë˜ë©´ ì´ë ‡ê²Œ ê°€ì ¸ì˜¬ ê²ƒ
+		sessionBean.setMemberNum(2); 					//ì„ì‹œë¡œ ì •í•´ë†“ìŒ
 		int member_num = sessionBean.getMemberNum();
 		r.setMember_num(member_num);
 		
-		int board_num = RentalService.insertFarm(r);	//°Ô½Ã±Û ¹øÈ£¸¦ °¡Á®¿Í¼­ ÁöÁ¤
+		int board_num = RentalService.insertFarm(r);	//ê²Œì‹œê¸€ ë²ˆí˜¸ë¥¼ ê°€ì ¸ì™€ì„œ ì§€ì •
 		System.out.println("board_num = " + board_num);
 		f.setBoard_num(board_num);
 		RentalService.insertFile(f);
 		
 		return "rental/rentalList";
-	}
+	} 
 	
 	/*
-	//°Ë»ö¹öÆ° ´©¸£¸é ¿À´Â °÷
+	//ê²€ìƒ‰ë²„íŠ¼ ëˆ„ë¥´ë©´ ì˜¤ëŠ” ê³³
 	@RequestMapping(value = "rental/search", method = RequestMethod.GET)
 	public String rentalSearch(Locale locale, Model model) {
 		return "rental/rentalWrite";
 	}
 	
-	//±Û¾²±â ÆäÀÌÁö¿¡¼­ µî·Ï ¹öÆ° ´©¸£¸é ¿À´Â °÷ 
+	//ê¸€ì“°ê¸° í˜ì´ì§€ì—ì„œ ë“±ë¡ ë²„íŠ¼ ëˆ„ë¥´ë©´ ì˜¤ëŠ” ê³³ 
 	
 	
-	//»èÁ¦ ¹öÆ° ´©¸£¸é ¿À´Â °÷
+	//ì‚­ì œ ë²„íŠ¼ ëˆ„ë¥´ë©´ ì˜¤ëŠ” ê³³
 	@RequestMapping(value = "rental/delete", method = RequestMethod.POST)
 	public String rentalDelete(Locale locale, Model model) {
 		return "rental/rentalWrite";

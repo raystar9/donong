@@ -9,8 +9,6 @@ import team.swcome.donong.dto.RentalDTO;
 
 public interface RentalMapper {
 	
-	public List<RentalDTO> selectAll();
-
 	public int insertFarm(RentalDTO r);
 	
 	public void insertFile(FileDTO f);
@@ -18,5 +16,9 @@ public interface RentalMapper {
 	public MemberDTO selectNameByPhone(int num);
 	
 	public RentalDTO selectSidoSigunguNum(Map<String,String> map);
+	
+	public List<RentalDTO> selectRentalList();
+	
+	public String[] selectRepresentImg();
 	
 }

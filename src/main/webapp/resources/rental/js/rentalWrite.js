@@ -1,23 +1,19 @@
 $(document).ready(function() {
+	$('#file2_tr').css('display','none');
+	$('#file3_tr').css('display','none');
+	$('#file4_tr').css('display','none');
 	
-	document.getElementById("file_2").disabled = true;
-	document.getElementById("file_3").disabled = true;
-	document.getElementById("file_4").disabled = true;
-	
-	$('#file_1').change(function() {
-		document.getElementById("file_2").disabled = false;
+	//파일 선택 시 행 추가
+	$('#file1').change(function() {
+		$('#file2_tr').css('display','block');
 	});
 	
-	$('#file_2').change(function() {
-		document.getElementById("file_3").disabled = false;
-		file2 = $('#file_2').val();
-		$('#file2').val(file2);
+	$('#file2').change(function() {
+		$('#file3_tr').css('display','block');
 	});
 	
-	$('#file_3').change(function() {
-		document.getElementById("file_4").disabled = false;
-		file3 = $('#file_3').val();
-		$('#file3').val(file3);
+	$('#file3').change(function() {
+		$('#file4_tr').css('display','block');
 	});
 	
 	$('#file_4').change(function() {

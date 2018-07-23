@@ -1,12 +1,18 @@
 insert into member
-values (mem_num_seq.nextval, 'dahye', 'dada', '1234', 'ÀÌ´ÙÇı', 123456, '°æ±âµµ ºÎÃµ½Ã ¿ø¹Ì±¸', '±İ°­½ÃÆ¼ºô 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
+values (mem_num_seq.nextval, 'dahye', 'dada', '1234', 'ì´ë‹¤í˜œ', 123456, 'ê²½ê¸°ë„ ë¶€ì²œì‹œ ì›ë¯¸êµ¬', 'ê¸ˆê°•ì‹œí‹°ë¹Œ 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
 
 select * from member;
+
+truncate table rentals;
+truncate table rentalFiles; 
+
+select * from SIGUNGU
+where name = 'ì´ë¬¸ë™';
 
 select * from RENTALS;
 
 insert into RENTALS
-values (rental_num_seq.nextval, 1, 'ÀÌ´ÙÇı', '°æ±âµµ ºÎÃµ½Ã ¿ø¹Ì±¸ »óµ¿ 226-11', '°æ±âµµ', 'ºÎÃµ½Ã', 2400, );
+values (rental_num_seq.nextval, 1, 'ì´ë‹¤í˜œ', 'ê²½ê¸°ë„ ë¶€ì²œì‹œ ì›ë¯¸êµ¬ ìƒë™ 226-11', 'ê²½ê¸°ë„', 'ë¶€ì²œì‹œ', 2400, );
 
 select * from RENTALFILES
 
@@ -19,8 +25,8 @@ select num, id, nickname, realname, postnum, address, addressdetail, email, emai
 select * from rentalFiles;
 
 	INSERT INTO rentals
-  	VALUES (rental_num_seq.nextval, 2, 'ÀÌ´ÙÇı', '´ëÇÑ¹Î±¹ °æ±âµµ ºÎÃµ½Ã', '°æ±âµµ ºÎÃµ½Ã', 
-  		    2, 15, 2400, 10000000, 'Àå¼Ò°¡ÁÁ¾Æ¿ä^^', 24, 24);
+  	VALUES (rental_num_seq.nextval, 2, 'ì´ë‹¤í˜œ', 'ëŒ€í•œë¯¼êµ­ ê²½ê¸°ë„ ë¶€ì²œì‹œ', 'ê²½ê¸°ë„ ë¶€ì²œì‹œ', 
+  		    2, 15, 2400, 10000000, 'ì¥ì†Œê°€ì¢‹ì•„ìš”^^', 24, 24);
   		    
   		    SELECT max(num) 
   		FROM rentals
@@ -35,27 +41,35 @@ select * from sigungu;
 
 select num
 from sido
-where name like '%°­¿øµµ%'
+where name like '%ê°•ì›ë„%'
 
 select * from RENTALS;
 
 select sido.num, sigungu.num
 from sido , sigungu
-where sido.name = '°æ±âµµ'
-and sigungu.name = 'ºÎÃµ½Ã';
+where sido.name = 'ê²½ê¸°ë„'
+and sigungu.name = 'ë¶€ì²œì‹œ';
 
 SELECT sido.num as sido, sigungu.num as sigunu
 	FROM sido , sigungu
-	WHERE sido.name = '°æ±âµµ'
-	AND sigungu.name = 'ºÎÃµ½Ã';
+	WHERE sido.name = 'ê²½ê¸°ë„'
+	AND sigungu.name = 'ë¶€ì²œì‹œ';
 	
 	SELECT sido.num as sido
 	FROM sido
-	WHERE sido.name like '%°æ±âµµ%'	
+	WHERE sido.name like '%ê²½ê¸°ë„%'	
   		    
 	delete from rentals cascade constraints;
   		    
  SELECT max(num) 
   		FROM rentals
-  		WHERE member_num = 2 		    
+  		WHERE member_num = 2 	
+  		
+select * from rentals;
+
+select filepath1
+from RENTALFILES
+
+select * from RENTALS
+where num = 53;
   		    

@@ -4,9 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.swcome.donong.mapper.RentalMapper">
 
-  <select id="selectAll" resultType="RentalDTO">
-    SELECT * FROM
-  </select>
   
   <insert id="insertFarm" parameterType="RentalDTO">
   	INSERT INTO rentals
@@ -27,14 +24,27 @@
   </insert>
   
   <select id="selectNameByPhone" parameterType="int" resultType="MemberDTO">
-  	SELECT name, phone FROM member
+  	SELECT name, phone 
+  	FROM member
   </select> 
   
   <select id="selectSidoSigunguNum" parameterType="Map" resultType="RentalDTO">
-  	select sido.num as sido, sigungu.num as sigungu
-	from sido , sigungu
-	where sido.name like #{sido}
-	and sigungu.name = #{sigungu}
+  	SELECT sido.num AS sido, sigungu.num AS sigungu
+	FROM sido , sigungu
+	WHERE sido.name like #{sido}
+	AND sigungu.name = #{sigungu}
+  </select>
+  
+  <select id="selectRentalList" resultType="RentalDTO">
+  	SELECT * FROM rentals
+  </select>
+  
+  <select id="selectRepresentImg" resultType="String">
+  	SELECT filepath1 FROM rentalfiles
+  </select>
+  
+  <select id="selectRentalView" resultType="RentalDTO" parameterType="int">
+  	
   </select>
   
   

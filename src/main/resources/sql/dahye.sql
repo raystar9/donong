@@ -1,6 +1,6 @@
 drop table rentals cascade constraints;
 
---È¸¿ø Å×ÀÌºí
+--íšŒì› í…Œì´ë¸”
 CREATE TABLE member(
 num NUMBER CONSTRAINT member_num_pk PRIMARY KEY,
 id VARCHAR2(100) UNIQUE NOT NULL,
@@ -16,13 +16,13 @@ phone VARCHAR2(15) NOT NULL,
 registdate DATE NOT NULL
 );
 
--- ÁÖ¼Ò¿¡¼­ '½Ã,µµ' Å×ÀÌºí
+-- ì£¼ì†Œì—ì„œ 'ì‹œ,ë„' í…Œì´ë¸”
 CREATE TABLE sido(
 num NUMBER CONSTRAINT sido_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL
 );
 
--- ÁÖ¼Ò¿¡¼­ '½Ã,±º,±¸' Å×ÀÌºí
+-- ì£¼ì†Œì—ì„œ 'ì‹œ,êµ°,êµ¬' í…Œì´ë¸”
 CREATE TABLE sigungugungu(
 num NUMBER CONSTRAINT sigungugungu_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL,
@@ -33,7 +33,7 @@ drop table rentals;
 drop table sigungu;
 drop table do;
 
--- ³óÁö ´ë¿© Å×ÀÌºí
+-- ë†ì§€ ëŒ€ì—¬ í…Œì´ë¸”
 CREATE TABLE rentals(
 num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
@@ -53,10 +53,10 @@ drop table rentals;
 drop table rentalfiles;
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 
--- ÆÄÀÏ Å×ÀÌºí
+-- íŒŒì¼ í…Œì´ë¸”
 CREATE TABLE rentalfiles(
 num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
-board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- ±× Å×ÀÌºíÀÇ °Ô½Ã±Û ¹øÈ£
+board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- ê·¸ í…Œì´ë¸”ì˜ ê²Œì‹œê¸€ ë²ˆí˜¸
 filename1 VARCHAR2(200) NOT NULL,
 filename2 VARCHAR2(200) ,
 filename3 VARCHAR2(200) ,
@@ -102,161 +102,161 @@ select * from sigungu order by sido;
 
 select * from files;
 ----------------------------------------------------------------
-insert into sido values (sido_num_seq.nextval, '°­¿øµµ');
-insert into sido values (sido_num_seq.nextval, '°æ±âµµ');
-insert into sido values (sido_num_seq.nextval, '°æ»ó³²µµ');
-insert into sido values (sido_num_seq.nextval, '±¤ÁÖ±¤¿ª½Ã ');
-insert into sido values (sido_num_seq.nextval, '´ë±¸±¤¿ª½Ã');
-insert into sido values (sido_num_seq.nextval, '´ëÀü±¤¿ª½Ã');
-insert into sido values (sido_num_seq.nextval, 'ºÎ»ê±¤¿ª½Ã');
-insert into sido values (sido_num_seq.nextval, '¼­¿ïÆ¯º°½Ã');
-insert into sido values (sido_num_seq.nextval, '¿ï»ê±¤¿ª½Ã');
-insert into sido values (sido_num_seq.nextval, 'ÀÎÃµ±¤¿ª½Ã');
-insert into sido values (sido_num_seq.nextval, 'Àü¶óºÏµµ');
-insert into sido values (sido_num_seq.nextval, 'ÃæÃ»ºÏµµ');
+insert into sido values (sido_num_seq.nextval, 'ê°•ì›ë„');
+insert into sido values (sido_num_seq.nextval, 'ê²½ê¸°ë„');
+insert into sido values (sido_num_seq.nextval, 'ê²½ìƒë‚¨ë„');
+insert into sido values (sido_num_seq.nextval, 'ê´‘ì£¼ê´‘ì—­ì‹œ ');
+insert into sido values (sido_num_seq.nextval, 'ëŒ€êµ¬ê´‘ì—­ì‹œ');
+insert into sido values (sido_num_seq.nextval, 'ëŒ€ì „ê´‘ì—­ì‹œ');
+insert into sido values (sido_num_seq.nextval, 'ë¶€ì‚°ê´‘ì—­ì‹œ');
+insert into sido values (sido_num_seq.nextval, 'ì„œìš¸íŠ¹ë³„ì‹œ');
+insert into sido values (sido_num_seq.nextval, 'ìš¸ì‚°ê´‘ì—­ì‹œ');
+insert into sido values (sido_num_seq.nextval, 'ì¸ì²œê´‘ì—­ì‹œ');
+insert into sido values (sido_num_seq.nextval, 'ì „ë¼ë¶ë„');
+insert into sido values (sido_num_seq.nextval, 'ì¶©ì²­ë¶ë„');
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'ÃáÃµ½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, '¿øÁÖ½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, '°­¸ª½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿ÇØ½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÅÂ¹é½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, '¼ÓÃÊ½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, '»ïÃ´½Ã', 1);
-insert into sigungu values (sigungu_num_seq.nextval, 'È«Ãµ±º', 1);
-insert into sigungu values (sigungu_num_seq.nextval, 'È¾¼º±º', 1);
-insert into sigungu values (sigungu_num_seq.nextval, '¿µ¿ù±º', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¶˜ì²œì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì›ì£¼ì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê°•ë¦‰ì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™í•´ì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'íƒœë°±ì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì†ì´ˆì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì‚¼ì²™ì‹œ', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'í™ì²œêµ°', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'íš¡ì„±êµ°', 1);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ì›”êµ°', 1);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, '¼ö¿ø½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '¼º³²½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀÇÁ¤ºÎ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '¾È¾ç½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÎÃµ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '±¤¸í½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÆòÅÃ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿µÎÃµ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '¾È»ê½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '°í¾ç½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '°úÃµ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '³²¾çÁÖ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '¿À»ê½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '½ÃÈï½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '±ºÆ÷½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀÇ¿Õ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÇÏ³²½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, '¿ëÀÎ½Ã', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÆÄÁÖ', 2);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀÌÃµ½Ã', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìˆ˜ì›ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„±ë‚¨ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ì •ë¶€ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì•ˆì–‘ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶€ì²œì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê´‘ëª…ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'í‰íƒì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™ë‘ì²œì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì•ˆì‚°ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê³ ì–‘ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê³¼ì²œì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨ì–‘ì£¼ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜¤ì‚°ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì‹œí¥ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'êµ°í¬ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ì™•ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'í•˜ë‚¨ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìš©ì¸ì‹œ', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'íŒŒì£¼', 2);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì´ì²œì‹œ', 2);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Ã¢¿ø½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÁøÁÖ½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, 'Åë¿µ½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, '»çÃµ½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, '±èÇØ½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, '¹Ğ¾ç½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, '°ÅÁ¦½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, '¾ç»ê½Ã', 3);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀÇ·É±º', 3);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÇÔ¾È±º', 3);
-insert into sigungu values (sigungu_num_seq.nextval, 'Ã¢³ç±º', 3);
-insert into sigungu values (sigungu_num_seq.nextval, '°í¼º±º', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì°½ì›ì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì§„ì£¼ì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'í†µì˜ì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì‚¬ì²œì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê¹€í•´ì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë°€ì–‘ì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê±°ì œì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì–‘ì‚°ì‹œ', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ë ¹êµ°', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'í•¨ì•ˆêµ°', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì°½ë…•êµ°', 3);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê³ ì„±êµ°', 3);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿±¸', 4);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­±¸', 4);
-insert into sigungu values (sigungu_num_seq.nextval, '³²±¸', 4);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÏ±¸', 4);
-insert into sigungu values (sigungu_num_seq.nextval, '±¤»ê±¸', 4);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™êµ¬', 4);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œêµ¬', 4);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨êµ¬', 4);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶êµ¬', 4);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê´‘ì‚°êµ¬', 4);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, '³²±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÏ±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, '¼ö¼º±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, '´Ş¼­±¸', 5);
-insert into sigungu values (sigungu_num_seq.nextval, '´Ş¼º±º', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘êµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™êµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œêµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨êµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶êµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìˆ˜ì„±êµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‹¬ì„œêµ¬', 5);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‹¬ì„±êµ°', 5);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß±¸', 6);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿±¸', 6);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­±¸', 6);
-insert into sigungu values (sigungu_num_seq.nextval, 'À¯¼º±¸', 6);
-insert into sigungu values (sigungu_num_seq.nextval, '´ë´ö±¸', 6);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘êµ¬', 6);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™êµ¬', 6);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œêµ¬', 6);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìœ ì„±êµ¬', 6);
+insert into sigungu values (sigungu_num_seq.nextval, 'ëŒ€ë•êµ¬', 6);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, '³²±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÏ±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, '¿µµµ±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÎ»êÁø±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿·¡±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÇØ¿î´ë±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, '»çÇÏ±¸', 7);
-insert into sigungu values (sigungu_num_seq.nextval, '±İÁ¤±¸', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œêµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ë„êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶€ì‚°ì§„êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™ë˜êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'í•´ìš´ëŒ€êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì‚¬í•˜êµ¬', 7);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê¸ˆì •êµ¬', 7);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Á¾·Î±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¿ë»ê±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¼ºµ¿±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '±¤Áø±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿´ë¹®±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß¶û±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¼ººÏ±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '°­ºÏ±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, 'µµºÀ±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '³ë¿ø±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀºÆò±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­´ë¹®±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¸¶Æ÷±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¾çÃµ±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '°­¼­±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '±¸·Î±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '±İÃµ±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¿µµîÆ÷±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿ÀÛ±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '°ü¾Ç±¸', 8);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­ÃÊ±¸', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¢…ë¡œêµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìš©ì‚°êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„±ë™êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê´‘ì§„êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™ëŒ€ë¬¸êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘ë‘êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„±ë¶êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê°•ë¶êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë„ë´‰êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë…¸ì›êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì€í‰êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œëŒ€ë¬¸êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë§ˆí¬êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì–‘ì²œêµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê°•ì„œêµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'êµ¬ë¡œêµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê¸ˆì²œêµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ë“±í¬êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™ì‘êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê´€ì•…êµ¬', 8);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œì´ˆêµ¬', 8);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß±¸', 9);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿±¸', 9);
-insert into sigungu values (sigungu_num_seq.nextval, '³²±¸', 9);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÏ±¸', 9);
-insert into sigungu values (sigungu_num_seq.nextval, '¿ïÁÖ±º', 9);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘êµ¬', 9);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™êµ¬', 9);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨êµ¬', 9);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶êµ¬', 9);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìš¸ì£¼êµ°', 9);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀüÁÖ½Ã', 11);
-insert into sigungu values (sigungu_num_seq.nextval, '±º»ê½Ã', 11);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀÍ»ê½Ã', 11);
-insert into sigungu values (sigungu_num_seq.nextval, 'Á¤À¾½Ã', 11);
-insert into sigungu values (sigungu_num_seq.nextval, '³²¿ø½Ã', 11);
-insert into sigungu values (sigungu_num_seq.nextval, '±èÁ¦½Ã', 11);
-insert into sigungu values (sigungu_num_seq.nextval, '¿ÏÁÖ±º', 11);
-insert into sigungu values (sigungu_num_seq.nextval, 'Áø¾È±º', 11);
-insert into sigungu values (sigungu_num_seq.nextval, '¹«ÁÖ±º', 11);
-insert into sigungu values (sigungu_num_seq.nextval, 'Àå¼ö±º', 11);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÀÓ½Ç±º', 11);
-insert into sigungu values (sigungu_num_seq.nextval, '¼øÃ¢±º', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì „ì£¼ì‹œ', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'êµ°ì‚°ì‹œ', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìµì‚°ì‹œ', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì •ìì‹œ', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨ì›ì‹œ', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê¹€ì œì‹œ', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì™„ì£¼êµ°', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì§„ì•ˆêµ°', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¬´ì£¼êµ°', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¥ìˆ˜êµ°', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„ì‹¤êµ°', 11);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìˆœì°½êµ°', 11);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Áß±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, 'µ¿±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '¹ÌÃßÈ¦±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '¿¬¼ö±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '³²µ¿±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, 'ºÎÆò±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '°è¾ç±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '¼­±¸', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '°­È­±º', 10);
-insert into sigungu values (sigungu_num_seq.nextval, '¿ËÁø±º', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¤‘êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë™êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¯¸ì¶”í™€êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì—°ìˆ˜êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‚¨ë™êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë¶€í‰êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê³„ì–‘êµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì„œêµ¬', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê°•í™”êµ°', 10);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜¹ì§„êµ°', 10);
 ----------------------------------------------------------------
-insert into sigungu values (sigungu_num_seq.nextval, 'Ã»ÁÖ½Ã', 12);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÃæÁÖ½Ã', 12);
-insert into sigungu values (sigungu_num_seq.nextval, 'Á¦Ãµ½Ã', 12);
-insert into sigungu values (sigungu_num_seq.nextval, 'º¸Àº±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, '¿ÁÃµ±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, '¿µµ¿±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÁõÆò±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, 'ÁøÃµ±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, '±«»ê±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, 'À½¼º±º', 12);
-insert into sigungu values (sigungu_num_seq.nextval, '´Ü¾ç±º', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì²­ì£¼ì‹œ', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¶©ì£¼ì‹œ', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì œì²œì‹œ', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë³´ì€êµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜¥ì²œêµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì˜ë™êµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì¦í‰êµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ì§„ì²œêµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ê´´ì‚°êµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ìŒì„±êµ°', 12);
+insert into sigungu values (sigungu_num_seq.nextval, 'ë‹¨ì–‘êµ°', 12);
 ----------------------------------------------------------------
 
 

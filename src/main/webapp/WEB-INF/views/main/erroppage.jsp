@@ -23,7 +23,7 @@
 <c:if test="${error=='logout'}">
 	<script>
 		alert("로그아웃 되었습니다.");
-		location.href="header"
+		location.href="main"
 	</script>	
 </c:if>
 

@@ -196,12 +196,17 @@ public class MainController {
 	}
 	
 	
-	//임시 무조건 삭제 헤더보기용
+	//임시 후에 삭제 헤더보기용
 	@RequestMapping(value = "header")
 	public String view() throws Exception {
 		return "main/header";
 	}
 	
+	//main페이지 
+	@RequestMapping(value = "main")
+	public String mainview() throws Exception {
+		return "main/main";
+	}
 	//
 	
 	

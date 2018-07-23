@@ -5,9 +5,10 @@
 <html>
 <head>
 <title>아이디 찾기</title>
-<link rel= "stylesheet" type="text/css" href="./resources/css/admin.css">
-<link rel= "stylesheet" type="text/css" href="./resources/css/member.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+
  <script>
 	 function check(){
 		 if($.trim($("#realname").val())==""){
@@ -23,10 +24,13 @@
 	
 	}
  </script>
+ <style>
+		 
+ </style>
 
 </head>
 <body>
-	<div id="id_wrap">
+	<div id="container text-center">
 		<c:if test="${empty id}">
 			<h2 class="id_title">아이디 찾기</h2>
 			<form method="post" action="find_id" onsubmit="return check()">

@@ -25,7 +25,7 @@ public interface BoardMapper {
 	public void bbsReplyOk(BoardDTO b);
 	
 	
-	public int deleteBoard(int id);
+	public int deleteBoard(int num);
 	
 	public Integer bbsfind_cnt(String string, Map m);
 	public List<BoardDTO> bbs_find(String string, Map m);

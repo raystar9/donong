@@ -86,8 +86,8 @@ public class BoardService {
 		boardMapper.bbs_edit(bbsbean);
 		
 	}
-	public void deleteBbs(int bbs_num) {
-		boardMapper.deleteBoard(bbs_num);
+	public void deleteBbs(int num) {
+		boardMapper.deleteBoard(num);
 		
 	}
 	public void refEdit(BoardDTO bbsbean) {

@@ -17,7 +17,7 @@
             re_ref, re_lev, re_seq, filename, filepath
          from
          (select * from community 
-            order by re_ref desc, re_seq asc)
+            order by re_ref desc, re_seq desc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
@@ -32,12 +32,11 @@
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
-         (select * from community 
-            order by re_ref desc, re_seq asc)
+         (select * from community where category = '질문'
+            order by re_ref desc, re_seq desc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
-            and category = '질문'
       ]]>
 	</select> 
 	<!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
@@ -48,12 +47,11 @@
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
-         (select * from community 
-            order by re_ref desc, re_seq asc)
+         (select * from community where category = '잡담'
+            order by re_ref desc, re_seq desc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
-            and category = '잡담'
       ]]>
 	</select>
 	 <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
@@ -64,12 +62,11 @@
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
-         (select * from community 
-            order by re_ref desc, re_seq asc)
+         (select * from community where category = '정보'
+            order by re_ref desc, re_seq desc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
-            and category = '정보'
       ]]>
 	</select>
 	 <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
@@ -80,12 +77,11 @@
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
-         (select * from community 
-            order by re_ref desc, re_seq asc)
+         (select * from community where category = '모임'
+            order by re_ref desc, re_seq desc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
-            and category = '모임'
       ]]>
 	</select>
 	
@@ -95,14 +91,14 @@
 		select count(*) from community
 	</select>
 	<!-- 자료실 저장 -->
-	<insert id="bbs_insert" parameterType="BoardDTO">
+	<insert id="insertBbs" parameterType="BoardDTO">
 		insert into community
 		(num, member_num, writer, password,
 		subject, category, content, regitdate, readcount,
 		re_ref, re_lev,	re_seq, filename, filepath)
-		values(community_num_seq.nextval,#{member_num},#{writer},#{password},
+		values(community_num_seq1.nextval,#{member_num},#{writer},#{password},
 		#{subject},#{category},#{content},sysdate,0,
-		0,0,community_num_seq.nextval,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
+		0,0,community_num_seq1.nextval,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
 	</insert>
 	<!-- 게시판 조회수 증가 -->
 	<select id="selectCommunityByNum" resultType="BoardDTO" parameterType="int">
@@ -130,7 +126,7 @@
 	
 	
 	<!-- 답변글 레벨 증가 -->
-	<update id="bbs_Level" parameterType="BoardDTO">
+	<update id="refEdit" parameterType="BoardDTO">
 		update community
 		set
 		re_seq=re_seq+1
@@ -140,14 +136,14 @@
 	</update>
 
 	<!-- 답변글 저장 -->
-	<insert id="bbs_reply" parameterType="BoardDTO">
+	<insert id="bbsReplyOk" parameterType="BoardDTO">
 		insert into community
 		(num, member_num, writer, password,
 		subject, category, content, regitdate, readcount,
 		re_ref, re_lev,	re_seq, filename, filepath)
-		values(community_num_seq.nextval,#{member_num},#{writer},#{password},
+		values(community_num_seq1.nextval,1,#{writer},#{password},
 		#{subject},#{category},#{content},sysdate,0,
-		0,0,community_num_seq.nextval,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
+		0,0,community_num_seq1.nextval,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
 	</insert>
 	<!-- 자료실 검색 결과 총 게시물 수 -->
 	<select id="bbsfind_cnt" parameterType="java.util.Map" resultType="int">

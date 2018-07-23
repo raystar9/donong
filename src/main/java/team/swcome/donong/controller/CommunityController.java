@@ -95,7 +95,7 @@ public class CommunityController {
 			boardlist = boardService.getMainList(page,limit);
 		}
 		
-
+		model.addAttribute("category", category);
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
@@ -172,7 +172,8 @@ public class CommunityController {
 		}
 		this.boardService.insertBbs(boardDTO);//저장 메서드 호출
 
-		return "com/com_list";
+		return "redirect:/communitylist";
+		
 	}
 
 	@RequestMapping(value = "/communitycont", method = RequestMethod.GET)
@@ -187,7 +188,7 @@ public class CommunityController {
 		BoardDTO bbsbean = boardService.getContent(bbs_num);
 		
 		ModelAndView contM = new ModelAndView();
-		
+		contM.addObject("num", bbs_num);
 		if(state.equals("cont")) {//내용보기일때
 			contM.setViewName("com/com_cont");//내용보기 페이지 설정
 			String content=bbsbean.getContent().replace("\n","<br/>");
@@ -223,23 +224,21 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/communityedit", method = RequestMethod.GET)
-	public String edit(Locale locale, Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "state", defaultValue = "no") String state,
-			@RequestParam(required = false, defaultValue="전체") String category, HttpServletRequest request) {
-
+	public String edit(Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
+		 @RequestParam(value = "num") int num) {
+		
+		model.addAttribute("bbsbean", boardService.getContent(num));
+		model.addAttribute("page", page);
+		model.addAttribute("num", num);
 		return "com/com_edit";
 	}
 	
 	@RequestMapping(value = "/communityedit_ok", method = RequestMethod.POST)
-	public ModelAndView board_edit_ok(BoardDTO bbsbean,MultipartFile uploadfile, @RequestParam int page, HttpServletResponse response) throws Exception {
-	
-		System.out.println("넘어온 비밀번호="+bbsbean.getPassword());
-		System.out.println(page);
+	public ModelAndView board_edit_ok(Model model,BoardDTO bbsbean,MultipartFile uploadfile, @RequestParam int page, HttpServletResponse response, @RequestParam(value = "num") String num) throws Exception {
 		
 		response.setContentType("text/html;chaset=UTF-8");
 		PrintWriter out = response.getWriter();//출력 스트림 생성
-		int bbs_num=bbsbean.getNum();
+		
 		//번호를 기준으로 DB 내용을 가져옵니다.
 		BoardDTO bcont= boardService.getContent(bbsbean.getNum());
 		
@@ -300,18 +299,15 @@ public class CommunityController {
 				bbsbean.setFilename(fileDBName);		
 				}
 			this.boardService.editBbs(bbsbean);
-			response.sendRedirect("communitycont?state=cont&page="+page+"&num="+bbs_num+"&state=cont");
+			response.sendRedirect("communitycont?num="+num+"&page="+page+"&state=cont");
 		}
 		
 		return null;
 	}
 
 	@RequestMapping(value = "/communitydel", method = RequestMethod.GET)
-	public String del(Locale locale, Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "state", defaultValue = "no") String state,
-			@RequestParam(required = false, defaultValue="전체") String category, HttpServletRequest request) {
-		
+	public String del(Model model, @RequestParam(value = "num") String num) {
+		model.addAttribute("num", num);
 		return "com/com_del";
 	}
 	@RequestMapping(value = "/communitydel_ok", method = RequestMethod.POST)
@@ -322,7 +318,7 @@ public class CommunityController {
 		
 		//번호를 기준으로 DB 내용을 가져옵니다.
 		BoardDTO board= boardService.getContent(b.getNum());
-		int bbs_num=b.getNum();
+		int num=b.getNum();
 		String fname=b.getFilename();
 		if(!board.getPassword().equals(b.getPassword())) {
 			out.println("<script>");
@@ -336,7 +332,7 @@ public class CommunityController {
 				File file=new File(saveFolder+fname);
 				file.delete();
 			}
-			boardService.deleteBbs(bbs_num);
+			boardService.deleteBbs(num);
 			return
 					"redirect:/communitylist";
 			
@@ -347,19 +343,20 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/communityreply", method = RequestMethod.GET)
-	public String reply(Locale locale, Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "state", defaultValue = "no") String state,
-			@RequestParam(required = false, defaultValue="전체") String category, HttpServletRequest request) {
-
+	public String reply(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+			 @RequestParam(value = "num") int num) {
+		model.addAttribute("bbsbean", boardService.getContent(num));
+		model.addAttribute("page", page);
+		model.addAttribute("num", num);
+		
 		return "com/com_reply";
 	}
 	/* 게시판 답변 저장 */
 	@RequestMapping(value = "/communityreply_ok", method = RequestMethod.POST)
 	public String bbs_reply_ok(BoardDTO bbsbean, @RequestParam("page") String page) throws Exception {
-		boardService.refEdit(bbsbean);
 		bbsbean.setRe_lev(bbsbean.getRe_lev()+1);
 		bbsbean.setRe_seq(bbsbean.getRe_seq()+1);
+		boardService.refEdit(bbsbean);
 		boardService.bbsReplyOk(bbsbean);// 저장 메서드
 		
 		return "redirect:/communitylist?page="+page;

@@ -156,6 +156,9 @@ public class RentalService {
 			file2.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath2(fileDBName);
+		}else {
+			f.setFileName2("default.png");
+			f.setFilePath2("./resources/rental/image/default.png");
 		}
 
 		if (!file3.isEmpty()) {
@@ -181,6 +184,9 @@ public class RentalService {
 			file1.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath3(fileDBName);
+		}else {
+			f.setFileName3("default.png");
+			f.setFilePath3("./resources/rental/image/default.png");
 		}
 
 		if (!file4.isEmpty()) {
@@ -206,6 +212,9 @@ public class RentalService {
 			file1.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath4(fileDBName);
+		}else {
+			f.setFileName4("default.png");
+			f.setFilePath4("./resources/rental/image/default.png");
 		}
 
 		rentalMapper.insertFile(f);
@@ -228,7 +237,6 @@ public class RentalService {
 	/* 대표 이미지 path 가져오기 */
 	public String[] selectRepresentImg() {
 		String[] filepath = rentalMapper.selectRepresentImg();
-		System.out.println("filepath 개수 = " + filepath.length);
 		return filepath;
 	};
 	
@@ -237,6 +245,12 @@ public class RentalService {
 	public RentalDTO selectRentalView(int board_num) {
 		RentalDTO r = rentalMapper.selectRentalView(board_num);
 		return r;
+	};
+	
+	/* 상세보기에서 사진들 경로 구해오기 */
+	public FileDTO selectFilePath(int board_num) {
+		FileDTO f = rentalMapper.selectFilePath(board_num);
+		return f;
 	};
 	
 }

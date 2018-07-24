@@ -3,17 +3,17 @@ $(document).ready(function() {
 	$('#file3_tr').css('display','none');
 	$('#file4_tr').css('display','none');
 	
-	//파일 선택 시 행 추가
+	/* 파일 선택 시 행 추가 */
 	$('#file1').change(function() {
-		$('#file2_tr').css('display','block');
+		$('#file2_tr').css('display','table-row');
 	});
 	
 	$('#file2').change(function() {
-		$('#file3_tr').css('display','block');
+		$('#file3_tr').css('display','table-row');
 	});
 	
 	$('#file3').change(function() {
-		$('#file4_tr').css('display','block');
+		$('#file4_tr').css('display','table-row');
 	});
 	
 	$('#file_4').change(function() {
@@ -21,12 +21,22 @@ $(document).ready(function() {
 		$('#file4').val(file4);
 	});
 	
+	/* 유효성 검사 */
 	$('form').submit(function(){
+		
 		if ($('#area').val() == '') {
 			$('#area').focus();
 			alert('면적을 입력하세요.');
 			return false;
 		}
+		
+		area = $('#area').val();
+	    if (!isNumeric(area)) {
+            alert("면적은 숫자로 입력하세요.");
+            $('#area').val("");
+            $('#area').focus();
+            return false;
+          }
 		
 		if ($('#price').val() == '') {
 			$('#price').focus();
@@ -34,6 +44,14 @@ $(document).ready(function() {
 			return false;
 		}
 		
+		price = $('#price').val();
+		if (!isNumeric(price)) {
+            alert("임대료는 숫자로 입력하세요.");
+            $('#price').val("");
+            $('#price').focus();
+            return false;
+     	}
+	
 		if ($('#file1').val() == '') {
 			$('#file1').focus();
 			alert('대표이미지를 선택하세요.');
@@ -52,12 +70,6 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		if ($('#markerLat').val() == '') {
-			$('#markerLat').focus();
-			alert('농장위치를 지도에 마킹해주세요.');
-			return false;
-		}
-		
 		var address = $('#autocomplete').val();
 		var addArry = address.split(" ");
 		if(addArry.length < 4 ){
@@ -66,9 +78,11 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		
-		
-		
+		if ($('#markerLat').val() == '') {
+			$('#markerLat').focus();
+			alert('농장위치를 지도에 마킹해주세요.');
+			return false;
+		}
 		
 	});//submit()
 	
@@ -77,7 +91,7 @@ $(document).ready(function() {
 var marker;
 var pins = [];
 
-//맵 초기화 함수	
+/* 맵 초기화 함수 */	
 function initMap(){
 	var seoul = {			//서울 시청으로 처음 위치 지정
 		lat : 37.566697,
@@ -108,9 +122,8 @@ function initMap(){
 	});//autocomplete.addListener()
 	
 }//initMap()
-var lat;
-var lng;
-//마킹하는 함수
+
+/* 마킹하는 함수 */
 function addMarker(location){
 	var marker = new google.maps.Marker({
         position: location,
@@ -118,14 +131,12 @@ function addMarker(location){
       });
 	pins.push(marker);
 	
-	$('#markerLat').val(location.lat());
-	$('#markerLng').val(location.lng());
 	lat = location.lat();
 	lng = location.lng()
 	
 }//addMarker()
 
-//마킹 제거하는 함수
+/* 마킹 제거하는 함수 */
 function removeMarker(){
 	for(var i=0; i<pins.length; i++){
 		pins[i].setMap(null);

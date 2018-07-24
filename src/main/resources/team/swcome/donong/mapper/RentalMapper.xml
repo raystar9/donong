@@ -44,7 +44,15 @@
   </select>
   
   <select id="selectRentalView" resultType="RentalDTO" parameterType="int">
-  	
+  	SELECT * 
+  	FROM rentals
+  	WHERE num = #{num}
+  </select>
+  
+  <select id="selectFilePath" resultType="FileDTO" parameterType="int">
+  	SELECT filepath1, filepath2, filepath3, filepath4  
+  	FROM rentalfiles
+	WHERE board_num = #{board_num}
   </select>
   
   

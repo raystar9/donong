@@ -72,4 +72,9 @@ from RENTALFILES
 
 select * from RENTALS
 where num = 53;
+
+select filepath1, filepath2, filepath3, filepath4  from RENTALFILES
+where board_num = #{num};
   		    
+
+select * from rentalFiles;

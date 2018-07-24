@@ -1,10 +1,9 @@
 package team.swcome.donong.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.FileDTO;
@@ -51,9 +51,10 @@ public class RentalController {
 	public String rentalList(Model model) {
 		List<RentalDTO> list = RentalService.selectRentalList();
 		String[] filepath = RentalService.selectRepresentImg();
-		System.out.println("List 개수 = " + list.size());
+
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setPath(filepath[i]);
+			System.out.println("num = " + list.get(i).getNum());
 		}
 		
 		model.addAttribute("list", list);
@@ -85,12 +86,43 @@ public class RentalController {
 		r.setMember_num(member_num);
 		
 		int board_num = RentalService.insertFarm(r);	//게시글 번호를 가져와서 지정
-		System.out.println("board_num = " + board_num);
 		f.setBoard_num(board_num);
 		RentalService.insertFile(f);
 		
 		return "rental/rentalList";
 	} 
+	
+	/* 농지 대여 상세보기 페이지로 이동 */
+	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
+	public String rentalView(Model model, SessionBean sessionBean, 	HttpServletRequest request) {
+		sessionBean.setMemberNum(2); 					//임시로 정해놓음
+		int member_num = sessionBean.getMemberNum();
+		MemberDTO m =  RentalService.selectNameByPhone(member_num);
+		
+		int board_num = Integer.parseInt(request.getParameter("num"));
+		RentalDTO r = RentalService.selectRentalView(board_num);
+		
+		FileDTO f = RentalService.selectFilePath(board_num);
+		
+		model.addAttribute("file", f);
+		model.addAttribute("member", m);
+		model.addAttribute("rental", r);
+		return "rental/rentalView";
+	}
+	
+	/* 마커 찍을 때 Ajax */
+	@RequestMapping(value = "/markerJson", method = RequestMethod.POST)
+	@ResponseBody
+	public Object markerJson(Model model, SessionBean sessionBean) {
+		List<RentalDTO> list = RentalService.selectRentalList();
+		String[] imgs = RentalService.selectRepresentImg();
+		
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setPath(imgs[i]);
+		}
+		
+		return list;
+	}
 	
 	/*
 	//검색버튼 누르면 오는 곳

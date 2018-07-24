@@ -1,7 +1,10 @@
 package team.swcome.donong.dto;
 
+import javax.annotation.Resource;
+
 import org.springframework.web.multipart.MultipartFile;
 
+@Resource
 public class FileDTO {
 	
 	private int board_num;			//게시글 번호

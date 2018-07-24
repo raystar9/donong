@@ -18,6 +18,7 @@
 	.writeTable{
 		margin: auto;
 		margin-top: 50px;
+		width: 700px;
 	}
 	#map {
 		width: 400px;
@@ -34,6 +35,9 @@
 		margin-top:50px;
 		margin: auto;
 		text-align: center;
+	}
+	table tr td:first-child {
+		width: 150px;
 	}
 </style>
 </head>

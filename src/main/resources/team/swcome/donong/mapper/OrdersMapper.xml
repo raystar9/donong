@@ -20,6 +20,10 @@
 	</select>
 	
 	<insert id="insertOrder" parameterType="OrdersDTO">
+	
+	  <selectKey resultType="int" keyProperty="num" order="BEFORE">
+	  	SELECT MAX(num)+1 FROM ORDERS
+	  </selectKey>
 		INSERT INTO ORDERS
 		VALUES(#{num}, #{memberNum}, #{name}, #{address}, #{phone}, #{comments}, 'napy')
 	</insert>

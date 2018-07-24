@@ -2,10 +2,13 @@ package team.swcome.donong.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.swcome.donong.dto.CartDTO;
+import team.swcome.donong.dto.CartGoodsDTO;
 import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
 import team.swcome.donong.dto.MemberDTO;
@@ -27,15 +30,30 @@ public class MarketService {
 	@Autowired
 	CartMapper cartMapper;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/*
 	 * Goods관련 메서드
 	 */
 	final int itemsPerPage = 10;
 	
-	public List<GoodsDTO> getMainList(int page){
+	public List<GoodsDTO> getGoodsList(int page, String category){
 		int startItem = (page-1) * itemsPerPage;
 		int endItem = (page-1) * itemsPerPage + 9;
-		return mapper.selectItemsAtPage(startItem, endItem);
+		int categoryNum;
+		switch(category) {
+		case "seed":
+			categoryNum = 1;
+			break;
+		case "fertilizer":
+			categoryNum = 2;
+			break;
+		case "tools":
+		default:
+			categoryNum = 3;
+			break;
+		}
+		logger.debug("category : {}", categoryNum);
+		return mapper.selectItemsAtPage(startItem, endItem, categoryNum);
 	}
 	
 	public MarketPaginationDTO getPaginationInfo(int currentPage) {
@@ -62,17 +80,17 @@ public class MarketService {
 		return mapper.selectItemByNum(itemNum);
 	}
 	
-	public List<GoodsDTO> getCartItems(int memberNum) {
-		return mapper.selectCartItemsByMemberNum(memberNum);
+	public List<CartGoodsDTO> getCartItems(int memberNum) {
+		return cartMapper.selectCartGoodsListByMemberNum(memberNum);
 	}
 
 	public MemberDTO getMemberDetails(int memberNum) {
 		return memberMapper.selectMemberByNum(memberNum);
 	}
 
-	public int getTotalPrice(List<GoodsDTO> items) {
+	public int getTotalPrice(List<CartGoodsDTO> items) {
 		int totalPrice = 0;
-		for(GoodsDTO item : items) {
+		for(CartGoodsDTO item : items) {
 			totalPrice += item.getPrice() * item.getQuantity();
 		}
 		return totalPrice;
@@ -112,7 +130,11 @@ public class MarketService {
 		cartMapper.updateCartItem(cart);
 	}
 	
-	public void deleteCartItem(int num) {
-		cartMapper.deleteCartItemByNum(num);
+	public int updateCartQuantity(int num, int quantity) {
+		return cartMapper.updateCartQuantityByCartNum(num, quantity);
+	}
+	
+	public int deleteCartItem(int num) {
+		return cartMapper.deleteCartItemByNum(num);
 	}
 }

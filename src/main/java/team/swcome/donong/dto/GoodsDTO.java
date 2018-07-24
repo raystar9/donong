@@ -6,15 +6,14 @@ import javax.annotation.Resource;
 
 @Resource
 public class GoodsDTO {
-	private int num;
-	private String name;
-	private int price;
-	private int category;
-	private String title;
-	private Date regitdate;
-	private String content;
-	private String filePath;
-	private int quantity;
+	int num;
+	String name;
+	int price;
+	int category;
+	String title;
+	Date regitdate;
+	String content;
+	String filePath;
 	
 	public int getNum() {
 		return num;
@@ -63,11 +62,5 @@ public class GoodsDTO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 }

@@ -4,15 +4,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/resources/market/css/a.css">
 	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
 	<title>Home</title>
 	<script src="/donong/resources/jquery/jquery-3.3.1.min.js"></script>
 	<style>
-		html, body {
-			margin: 0px;
-			padding: 0px;
-		}
 		.left-navbar {
 			width: 150px;
 		}
@@ -39,7 +34,7 @@
 		
 	</c:if>
 	<c:if test="${itemCount > 1 }">
-	 	외 ${itemCount }개 제품
+	 	외 ${itemCount -1 }개 제품
 	 </c:if>
 	<p>총 가격 : ${totalPrice }원</p>
 	</div>

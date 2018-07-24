@@ -7,6 +7,9 @@
 <title>회원 가입 페이지</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
 <script>
 //도로명 주소찾기 API
 
@@ -134,7 +137,7 @@ function id_check(){
 				$('#idcheck').css('color', 'blue');
 				checkid = inputId;
 			} else {
-				msg = '이미 사용중인 id입니다.';
+				msg = '사용중인 id입니다.';
 				$('#idcheck').css('color', 'red');
 				$('#idcheck').text(msg);
 				return false;
@@ -173,7 +176,7 @@ function nickname_check(){
 				$('#nicknamecheck').css('color', 'blue');
 				checknickname = inputNickname;
 			} else {
-				msg = '이미 사용중인 별칭입니다.';
+				msg = '사용중인 별칭입니다.';
 				$('#nicknamecheck').css('color', 'red');
 				$('#nicknamecheck').text(msg);
 				return false;
@@ -186,80 +189,149 @@ function nickname_check(){
 	}
 
 </script>
+<style>
+body {
+  display:flex;
+  align-items:top;
+}
+#join_table{
+	margin:50px;
+}
+h2{
+	font-weight:bold;
+}
+.title{
+	margin:50px;
+	}
+
+</style>
+
 </head>
 <body>
+<div class="container text-center">
 <input type="hidden" name="checkconfirmID" id="checkconfirmID" value="false">
 <input type="hidden" name="checkconfirmNickName" id="checkconfirmNickName" value="false">
 
-	<form name="joinform" method="post" action="member_join_ok"  onsubmit="return check()">
-		<table id="join_table">
-	
-			<tr>
-				<th>ID</th>
-				<td>
-					<input name="id" id="join_id" size="30" class="input_box" placeholder="입력 후 중복체크를 해주세요" required><!-- ID 입력 칸 -->
-           			<input type="button" value="아이디 중복체크" class="input_button" onclick="id_check()"> <!-- 중복체크 버튼 -->
+	<form name="joinform" method="post" action="member_join_ok" class="form-horizontal" onsubmit="return check()">
+
+		<div id="join_table">
+			<div class=title>
+					<div class="form-group">
+					<h2 class="col-sm-12">회원 가입 페이지</h2>
+					</div>
+			</div>		
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_id">ID</label>
+				<div class="col-sm-3">
+					<input name="id" id="join_id" class="form-control" placeholder="입력 후 중복체크를 해주세요" required><!-- ID 입력 칸 -->
+                </div>
+                <div class="col-sm-2">
+           			<input type="button" value="ID 중복체크" class="btn btn-default" onclick="id_check()"> <!-- 중복체크 버튼 -->
+           		</div>	
+           		<div class="col-sm-2">	
            			<div id="idcheck"></div> <!-- 중복체크 결과 표시칸 -->
-                </td>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td>
-					<input type="password" name="password" id="join_pwd" size="40" class="input_box" required>
-				</td>
-			</tr>	
-			<tr>
-				<th>비밀번호확인</th>
-				<td>
-					<input type="password" name="join_passchk" id="join_passchk" size="40" class="input_box" required>
-				</td>
-			</tr>	
+           		</div>	
+           		<div class="col-sm-1"></div>
+           		
+			</div>
 			
-			<tr>
-				<th>별칭</th>
-				<td>
-					<input name="nickname" id="join_nickname" size="30" class="input_box" placeholder="사이트 내에서 사용될 별칭입니다." required>
-					<input type="button" value="별칭 중복체크" class="input_button" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
-           			<div id="nicknamecheck"></div> <!-- 중복체크 결과 표시칸 -->
-				</td>
-			</tr>
-			<tr>
-				<th>성명</th>
-				<td>
-					<input name="realname" id="join_name" size="40" class="input_box" placeholder="실제성명을 입력해주세요." required>
-				</td>
-			</tr>	
-			<tr>
-				<th>우편번호</th>
-					<td>
-						<input type="text" id="postno" name="postnum" readonly>
-						<input type="button"  value="주소검색" onclick="Postcode()">
-					</td>
-				</tr>
-			<tr>
-				<th>주소</th>
-				<td><input type="text" id="addr" name="address" size="50" required></td>
-			</tr>
-				<tr>
-					<th>상세주소</th>
-					<td>
-						<input type="text" id="addrdetail" name="addressdetail" value=" ">
-					</td>
-					
-				</tr>
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_pwd">비밀번호</label>
+				<div class="col-sm-3">
+					<input type="password" name="password" id="join_pwd" class="form-control" required>
+				</div>
+				<div class="col-sm-5"></div>
 				
-			<tr>
-				<th>휴대전화번호</th>
-				<td>
-					<input name="phone" id="join_phone" size="30" class="input_box" placeholder="하이픈(-) 없이 입력해주세요" required>
-				</td>
-			</tr>
-			<tr>
-				<th>전자우편</th>
-				<td>
-					<input name="email" id="join_mailid" size="10" class="input_box" required>
-					@<input name="emaildomain" id="join_maildomain" size="20" class="input_box" readonly>
-						<select name="mail_list" id="mail_list" onchange="domain_list()">
+			</div>	
+			
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_passchk">비밀번호확인</label>
+				<div class="col-sm-3">
+					<input type="password" name="join_passchk" id="join_passchk" class="form-control" required>
+				</div>
+				<div class="col-sm-5"></div>
+			</div>	
+			
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_nickname">별칭</label>
+				<div class="col-sm-3">
+					<input name="nickname" id="join_nickname" class="form-control" placeholder="활동할 닉네임입니다." required>
+				</div>
+				<div class="col-sm-2">	
+					<input type="button" value="별칭 중복체크" class="btn btn-default" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
+           		</div>
+           		<div class="col-sm-2">	
+           			<div id="nicknamecheck"></div> <!-- 중복체크 결과 표시칸 -->
+           		</div>	
+           		<div class="col-sm-1"></div>
+			</div>
+			
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_name">성명</label>
+				<div class="col-sm-3">
+					<input name="realname" id="join_name" class="form-control" placeholder="실제성명을 입력해주세요." required>
+				</div>
+				<div class="col-sm-5"></div>
+			</div>	
+			
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="postbutton">우편번호</label>
+					<div class="col-sm-1">
+						<input type="text" id="postno" name="postnum" class="form-control" readonly>
+					</div>
+					<div class="col-sm-2"></div>
+					<div class="col-sm-2">
+						<input type="button" id="postbutton" class="btn btn-default" value="주소검색" onclick="Postcode()">
+					</div>	
+				<div class="col-sm-3"></div>
+			</div>
+				
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="postbutton">주소</label>
+				<div class="col-sm-4"><input type="text" id="addr" name="address" class="form-control" required readonly></div>
+				<div class="col-sm-4"></div>
+			</div>
+			
+			
+			
+				<div class="form-group">
+					<div class="col-sm-2"></div>
+					<label class="control-label col-sm-2" for="addrdetail">상세주소</label>
+					<div class="col-sm-4">
+						<input type="text" id="addrdetail" name="addressdetail" class="form-control" value=" ">
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_phone">휴대폰 번호</label>
+				<div class="col-sm-3">
+					<input name="phone" id="join_phone" class="form-control" placeholder="하이픈(-) 없이 입력해주세요" required>
+				</div>
+				<div class="col-sm-5"></div>
+			</div>
+			
+			<div class="form-group">
+			<div class="col-sm-2"></div>
+				<label class="control-label col-sm-2" for="join_mailid">전자우편</label>
+				
+				<div class="col-sm-2">
+					<input name="email" id="join_mailid" class="form-control" required>
+				</div>	
+				
+				<div class="col-sm-2">
+					<input name="emaildomain" id="join_maildomain" class="form-control" readonly>
+				</div>
+					<div class="col-sm-2">
+						<select name="mail_list" id="mail_list" class="form-control" onchange="domain_list()">
 							<option value="">도메인선택</option>
 							<option value="daum.net">daum.net</option>
 							<option value="nate.com">nate.com</option>
@@ -268,15 +340,18 @@ function nickname_check(){
 							<option value="gmail.com">gmail.com</option>
 							<option value="0">직접입력</option>
 						</select>
-				</td>		
-				
-			</tr>
-		</table>
-			<div id="join_menu">
-					<input type="submit" value="회원가입" class="input_button">
-					<input type="reset" value="초기화" class="input_button" onclick="$('#join_id').focus();">
+					</div>	
+				<div class="col-sm-2"></div>
+			</div>
+	
+		</div>
+			<div class="form-group text-center"> 
+			<div class="col-sm-12">
+					<input type="submit" value="회원가입" class="btn btn-default">
+					<input type="reset" value="초기화" class="btn btn-default" onclick="$('#join_id').focus();">
+			</div>			
 			</div>	
 	</form>
-
+</div>
 </body>
 </html>

@@ -8,15 +8,28 @@
 
 
 	<title>header</title>
-	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	<script>
+	function pwd_find(){
+		window.open("pwd_find","비번찾기","width=400,height=300");
+	
+	}
+		
+		function id_find(){
+		window.open("id_find","ID찾기","width=400,height=300");
+			
+	}
+ 	
+ 	</script>
+ 
  <style>
  
-
-
 .container-fluid{
 background-color: #ACD17F;
 
@@ -94,6 +107,35 @@ background-color: #ACD17F;
   color:white;
 }
 
+.form-group{
+	margin:5px,0,0,0;
+}
+
+<!-- 로그인창 가운데로 나오게 하는거 -->
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+<!-- 여기까지 -->
+
+.find{
+	float:right;
+}
+
 </style>
 
 	
@@ -103,7 +145,7 @@ background-color: #ACD17F;
 
 <div class="container-fluid">
 <div class="navbar-header">
-<a class="dropdown" href="main"><img id="logo" src="resources/main/image/imsilogo.JPG"></a>
+<a class="dropdown" href="main"><img id="logo" src="resources/main/image/logo.jpg"></a>
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
@@ -162,28 +204,61 @@ background-color: #ACD17F;
 		<li><a href="member_logout"><span class="glyphicon glyphicon-off"></span> Log out</a></li>
 	</c:if> 
     </ul>
+    
     <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
+        
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          
+          
+          <h4 class="modal-title">Login Page</h4>
         </div>
+	<form class="form-horizontal" method="post" action="member_login_ok" onsubmit="return check()">
         <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
+				<div class="form-group">
+						<label class="control-label col-sm-2" for="id">아이디</label>
+						<div class="col-sm-10">
+							<input name="id" id="id" size="20" class="form-control" placeholder="Enter ID"
+							<c:if test="${!empty saveid}"> value="${saveid}" </c:if>>
+						</div>
+				</div>		
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">비밀번호</label>
+						<div class="col-sm-10">
+						<input type="password" name="password" id="pwd" size="20" class="form-control" placeholder="Enter PassWord">
+						</div>
+					</div>
+					
+					<div class="form-group"> 
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox text-left">
+	       						 <label><input type="checkbox" name="saveid" id="saveid"  
+									<c:if test="${!empty saveid}">checked</c:if>> Remember ID</label>
+     						</div>
+     						<div class="find text-right">
+     						<div><a onclick="id_find()">ID찾기</a>/<a onclick="id_find()">비밀번호찾기</a></div>
+  							</div>
+     					</div>	
+     				</div>	 
+
+        </div> <!-- end modal-body -->
+        
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       		 <input type="submit" value="로그인" class="btn btn-default">      
+       		 <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         </div>
-      </div>
+        </form>
+      </div> <!-- end modal-content -->
       
-    </div>
-  </div>
-</div>
-</div>
-</div>
+    </div> <!-- end modal-dialog -->
+  </div> <!-- end modal fade -->
+</div> <!-- end navbar-collapse -->
+</div> <!-- end container-fluid -->
+</div> <!-- end full -->
 
 
 

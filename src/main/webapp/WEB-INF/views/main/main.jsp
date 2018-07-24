@@ -61,7 +61,7 @@
    </div>
      <div class="col-sm-6 text-center">
    	 <h1>분양정보 예정위치</h1>
-     <p><a href="#"><img id="sample" src="resources/main/image/imsilogo.JPG"></a></p> 
+     <p><a href="#"><img id="sample" src="resources/main/image/logo.jpg"></a></p> 
     </div>
     </div>
  </div>

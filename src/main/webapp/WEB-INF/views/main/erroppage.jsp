@@ -41,6 +41,13 @@
 	</script>	
 </c:if>
 
+<c:if test="${error=='del'}">
+	<script>
+		alert("탈퇴 되었습니다. 다음에 또 만나요");
+		location.href="main"
+	</script>	
+</c:if>
+
 
 </body>
 </html>

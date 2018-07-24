@@ -42,21 +42,8 @@ public class MainController {
 	@RequestMapping(value = "member_join_ok", method =  RequestMethod.POST)
 	public String member_join_ok(MemberDTO m) throws Exception {
 		accountService.insertMember(m);
-		return  "main/login";
+		return  "main/main";
 	}
-	
-	@RequestMapping(value = "member_login")
-	public String member_login(Model model, @CookieValue(value="saveid", required=false) Cookie readCookie) throws Exception {
-		
-	
-		if(readCookie != null) {
-			model.addAttribute("saveid", readCookie.getValue());
-		}
-	
-		return "main/login";
-		
-	}
-	
 	
 	@RequestMapping(value = "member_login_ok", method =  {RequestMethod.POST,RequestMethod.GET})
 	public String member_login_ok(Model model, MemberDTO m, SessionBean sessionBean, 
@@ -83,7 +70,7 @@ public class MainController {
 			}
 			response.addCookie(savecookie);
 			
-			return "main/header";
+			return "main/main";
 			}
 			
 	}
@@ -195,19 +182,33 @@ public class MainController {
 		
 	}
 	
-	
-	//임시 후에 삭제 헤더보기용
-	@RequestMapping(value = "header")
-	public String view() throws Exception {
-		return "main/header";
-	}
+
 	
 	//main페이지 
 	@RequestMapping(value = "main")
-	public String mainview() throws Exception {
+	public String mainview(Model model, @CookieValue(value="saveid", required=false) Cookie readCookie) throws Exception {
+		
+		if(readCookie != null) {
+			model.addAttribute("saveid", readCookie.getValue());
+		}
+		
 		return "main/main";
 	}
-	//
+	
+	@RequestMapping(value = "member_del")
+	public String member_del(Model model, SessionBean sessionBean) throws Exception {
+		
+		sessionBean.setMemberNum(0);
+		sessionBean.setNickname(null);
+	
+		
+		String error = "del";
+		model.addAttribute("error", error);
+
+		return "main/erroppage";
+
+	}
+	
 	
 	
 }

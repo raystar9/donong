@@ -1,7 +1,6 @@
 package team.swcome.donong.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +70,10 @@ public class BoardService {
 		// TODO Auto-generated method stub
 		return boardMapper.getListCount();
 	}
+	public int getListCountByCategory(String category) {
+		// TODO Auto-generated method stub
+		return boardMapper.getListCountByCategory(category);
+	}
 	public void insertBbs(BoardDTO boardDTO) {
 		boardMapper.insertBbs(boardDTO);
 		
@@ -98,14 +101,12 @@ public class BoardService {
 		boardMapper.bbsReplyOk(bbsbean);
 
 	}
-	public int getListCount3(Map m) {
-		int count=0;
-		count=((Integer)boardMapper.bbsfind_cnt("bbsfind_cnt",m)).intValue();
-return count;
+	public int getListCount3(Map<String, String> m) {
+		return boardMapper.getListCount3(m);
 	}
-	public List<BoardDTO> getBbsList3(Map m) {
+	public List<BoardDTO> getBbsList3(Map<String, String> m) {
 		List<BoardDTO> list =new ArrayList<BoardDTO>();
-		list=boardMapper.bbs_find("bbs_find",m);
+		list=boardMapper.bbs_find(m); 
 		return list;
 	}
 }

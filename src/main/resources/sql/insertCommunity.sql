@@ -25,8 +25,12 @@ select * from COMMUNITY where category ='모임';
 
 select * from COMMUNITY ;
 
-
             
 drop sequence community_num_seq;
 create sequence community_num_seq1
 increment by 1 start with 1
+
+update community
+		set
+		subject='gd', content='gd'
+		where num= 21;

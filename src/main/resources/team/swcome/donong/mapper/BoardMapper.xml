@@ -17,7 +17,7 @@
             re_ref, re_lev, re_seq, filename, filepath
          from
          (select * from community 
-            order by re_ref desc, re_seq desc)
+            order by re_ref desc, re_seq asc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
@@ -33,7 +33,7 @@
             re_ref, re_lev, re_seq, filename, filepath
          from
          (select * from community where category = '질문'
-            order by re_ref desc, re_seq desc)
+            order by re_ref desc, re_seq asc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
@@ -48,7 +48,7 @@
             re_ref, re_lev, re_seq, filename, filepath
          from
          (select * from community where category = '잡담'
-            order by re_ref desc, re_seq desc)
+            order by re_ref desc, re_seq asc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
@@ -63,7 +63,7 @@
             re_ref, re_lev, re_seq, filename, filepath
          from
          (select * from community where category = '정보'
-            order by re_ref desc, re_seq desc)
+            order by re_ref desc, re_seq asc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
@@ -78,17 +78,21 @@
             re_ref, re_lev, re_seq, filename, filepath
          from
          (select * from community where category = '모임'
-            order by re_ref desc, re_seq desc)
+            order by re_ref desc, re_seq asc)
             )
          where rnum >= ((#{page}-1) * 10 +1 )
             and rnum <= (#{page} * 10)
       ]]>
 	</select>
 	
-	
-	<!-- 자료실 총 게시물 수 -->
 	<select id="getListCount" resultType="int">
 		select count(*) from community
+	</select>
+	
+	<!-- 자료실 총 게시물 수 -->
+	<select id="getListCountByCategory" resultType="int">
+		select count(*) from community
+		where category = #{category}
 	</select>
 	<!-- 자료실 저장 -->
 	<insert id="insertBbs" parameterType="BoardDTO">
@@ -98,7 +102,7 @@
 		re_ref, re_lev,	re_seq, filename, filepath)
 		values(community_num_seq1.nextval,#{member_num},#{writer},#{password},
 		#{subject},#{category},#{content},sysdate,0,
-		0,0,community_num_seq1.nextval,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
+		community_num_seq1.nextval,0,0,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
 	</insert>
 	<!-- 게시판 조회수 증가 -->
 	<select id="selectCommunityByNum" resultType="BoardDTO" parameterType="int">
@@ -118,8 +122,9 @@
 	<update id="bbs_edit" parameterType="BoardDTO">
 		update community
 		set
-		writer=#{writer},
-		subject=#{subject}, content=#{content}, filename=#{filename, jdbcType=VARCHAR}, filepath=#{filepath, jdbcType=VARCHAR}
+		subject=#{subject}, content=#{content}
+		<if test="filename==''">, filename=#{filename, jdbcType=VARCHAR}, filepath=#{filepath, jdbcType=VARCHAR}
+		</if>
 		where num=#{num}
 	</update>
 	
@@ -142,11 +147,11 @@
 		subject, category, content, regitdate, readcount,
 		re_ref, re_lev,	re_seq, filename, filepath)
 		values(community_num_seq1.nextval,1,#{writer},#{password},
-		#{subject},#{category},#{content},sysdate,0,
-		0,0,community_num_seq1.nextval,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
+		#{subject},#{category},#{content},sysdate,0,#{re_ref},
+		#{re_lev},#{re_seq},#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
 	</insert>
 	<!-- 자료실 검색 결과 총 게시물 수 -->
-	<select id="bbsfind_cnt" parameterType="java.util.Map" resultType="int">
+	<select id="getListCount3" parameterType="hashmap" resultType="int">
 	select count(*) from community
 	<!-- Mybatis 동적SQL문 <where>태그는 where 절을 반환합니다. <where>안의 하위 태그를 실행하고 반환값이 있으면 where 절을 만들어 반환하고 반환값이 없으면 where 절을 반환하지 않습니다. -->
 	<where>
@@ -169,7 +174,7 @@
 	</select>
 	
 	<!-- 자료실 검색 목록 -->
-	<select id="bbs_find" parameterType="java.util.Map" resultType="BoardDTO">
+	<select id="bbs_find" parameterType="hashmap" resultType="BoardDTO">
 
 	 select * from
          (select rownum rnum, num, member_num, writer, password,

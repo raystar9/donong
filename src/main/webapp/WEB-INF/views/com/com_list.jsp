@@ -95,7 +95,7 @@ $(function(){
                 <c:forEach var = "a" begin = "0" end = "${b.re_lev*2}" step = "1">
                 &nbsp;
                 </c:forEach>
-             <img src="./resources/images/AnswerLine.gif"> 
+             
              </c:if>   
              
              <a href = "communitycont?num=${b.num}&page=${page}&state=cont">
@@ -143,7 +143,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='잡담' }">
+    <c:if test="${category=='잡담' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -171,7 +171,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='질문' }">
+    <c:if test="${category=='질문' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -199,7 +199,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='정보' }">
+    <c:if test="${category=='정보' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -227,7 +227,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='모임' }">
+    <c:if test="${category=='모임' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -255,6 +255,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
+   
     <!-- 레코드가 없으면 -->
     <c:if test="${listcount == 0 }">
        <tr>

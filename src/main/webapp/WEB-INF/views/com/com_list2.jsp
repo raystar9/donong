@@ -53,7 +53,7 @@
 									<c:forEach var="a" begin="0" end="${b.re_lev*2}" step="1">
                 &nbsp;
                 </c:forEach>
-									<img src="./resources/images/AnswerLine.gif">
+									
 								</c:if>
 
 								<a href="communitycont?com_num=${b.num}&page=${page}&state=cont">

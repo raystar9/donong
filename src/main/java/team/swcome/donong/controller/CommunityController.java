@@ -62,21 +62,6 @@ public class CommunityController {
 		if (session.getAttribute("limit") != null) {
 			limit = Integer.parseInt(session.getAttribute("limit").toString());
 		}
-
-		int listcount = boardService.getListCount();
-
-		int maxpage = (listcount + limit - 1) / limit;
-
-		int startpage = ((page - 1) / 10) * 10 + 1;
-
-		int endpage = startpage + 10 - 1;
-
-		if (endpage > maxpage){
-			endpage = maxpage;
-		}
-		if (endpage < page){
-			page = endpage;
-		}
 		switch (category) {
 		case "질문":
 			boardlist = boardService.getAskList(page,limit);
@@ -93,6 +78,24 @@ public class CommunityController {
 		case "전체":
 		default:
 			boardlist = boardService.getMainList(page,limit);
+		}
+		int listcount;
+		if(category.equals("전체")) {
+			listcount = boardService.getListCount();			
+		} else {
+			listcount = boardService.getListCountByCategory(category);
+		}
+		int maxpage = (listcount + limit - 1) / limit;
+		
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		
+		int endpage = startpage + 10 - 1;
+		
+		if (endpage > maxpage){
+			endpage = maxpage;
+		}
+		if (endpage < page){
+			page = endpage;
 		}
 		
 		model.addAttribute("category", category);
@@ -354,9 +357,10 @@ public class CommunityController {
 	/* 게시판 답변 저장 */
 	@RequestMapping(value = "/communityreply_ok", method = RequestMethod.POST)
 	public String bbs_reply_ok(BoardDTO bbsbean, @RequestParam("page") String page) throws Exception {
+		boardService.refEdit(bbsbean);
 		bbsbean.setRe_lev(bbsbean.getRe_lev()+1);
 		bbsbean.setRe_seq(bbsbean.getRe_seq()+1);
-		boardService.refEdit(bbsbean);
+		
 		boardService.bbsReplyOk(bbsbean);// 저장 메서드
 		
 		return "redirect:/communitylist?page="+page;
@@ -372,8 +376,8 @@ public class CommunityController {
 			@RequestParam("find_field") String find_field) throws Exception{
 		int limit=10;
 		
-		Map m=new HashMap();
-		m.put("page", page);
+		Map<String, String> m=new HashMap<>();
+		m.put("page", page + "");
 		m.put("find_field", find_field);
 		m.put("find_name", "%"+find_name+"%");
 		int listcount=this.boardService.getListCount3(m);

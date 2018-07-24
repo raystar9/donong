@@ -56,7 +56,7 @@ function check(){
 					<th class="well well-sm" style="text-align:center;">제목</th>
 					<td><input name="subject" id="subject"
 						class="form-control" value="re:${bbsbean.subject }"><input type="hidden" id="category" name="category" value="${boarddata.category }">
-						<input type="hidden" id="filename" name="filename" value="${boarddata.filename }"><input type="hidden" id="filepath" name="filepath" value="${boarddata.filepath }"></td>
+						</td>
 				</tr>
 				<tr>
 					<th class="well well-sm" style="text-align:center;">글내용</th>

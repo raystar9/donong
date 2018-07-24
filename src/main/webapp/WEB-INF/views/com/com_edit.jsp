@@ -60,18 +60,21 @@ function check(){
 				<tr>
 				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
+				
 				<label for="upfile"></label>
-				<input type="file" id="filename" name="uploadfile" value="${bbsbean.filename } " class="form-control">
+				<input type="file" id="filename" name="uploadfile" value=" " class="form-control">
 				<span id="filevalue"></span>
+				
+				
 				</td>
 				</tr>
 				<tr>
+				
 				<th class="well well-sm" style="text-align:center;">분류</th>
 				<td>
 				<input name="category" id="category" value="${bbsbean.category }" class="form-control" readonly>
-			
-				
 				</td>
+				
 				</tr>
 				<tr>
 					<th  class="well well-sm" style="text-align:center;">글내용</th>

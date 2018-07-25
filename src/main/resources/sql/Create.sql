@@ -126,7 +126,8 @@ CREATE TABLE faq(
 num NUMBER CONSTRAINT faq_num_pk PRIMARY KEY,
 category NUMBER CONSTRAINT faq_category_fk REFERENCES cs_category(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
-content VARCHAR2(4000) NOT NULL
+content VARCHAR2(4000) NOT NULL,
+readcount number
 );
 
 CREATE TABLE qna(
@@ -135,8 +136,10 @@ category NUMBER CONSTRAINT qna_category_fk REFERENCES cs_category(num) NOT NULL,
 writer NUMBER CONSTRAINT qna_writer_fk REFERENCES member(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
 content varchar2(4000) NOT NULL,
-filename VARCHAR2(200) NOT NULL,
-filepath VARCHAR2(200) NOT NULL
+regitdate DATE NOT NULL,
+answer varchar2(4000),
+ansdate DATE,
+state varchar2(20)
 );
 
 CREATE TABLE notice(

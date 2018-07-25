@@ -9,11 +9,11 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	공지사항 수정
+	공지사항 쓰기 
 
-	<f:form method="put" action="/donong/cs/notice">
-		제목 : <input type="text" id="title" name="title" value="${notice.title }" /> <br />
-		내용 : <textarea name="content" id="content" cols="30" rows="10">${notice.content }</textarea>
+	<f:form method="post" action="/donong/cs/notice">
+		제목 : <input id="title" name="title" /> <br />
+		내용 : <textarea id="content" name="content"></textarea>
 			
 		<input type="submit" value="등록">
 		<input type="reset" value="취소">

@@ -13,10 +13,13 @@
 	${notice.num } <br />
 	${notice.title } <br />
 	${notice.content } <br />
-	${notice.regitdate }
+	${notice.regitdate } <br />
 	
-	<f:form method="delete" action="/donong/cs/notice_del/${notice.num }">
+	<button onclick="location.href='/donong/cs/notice/${notice.num}?state=edit'">수정</button>
+	<f:form method="delete" action="/donong/cs/notice/${notice.num }">
 		<input type="submit" value="삭제" />
 	</f:form>
+	<button onclick="location.href='/donong/cs/notice'">목록으로</button>
+
 </body>
 </html>

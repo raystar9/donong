@@ -1,25 +1,53 @@
 package team.swcome.donong.dto;
 
+
+
 import javax.annotation.Resource;
+
 
 @Resource
 public class RentalDTO {
 	
-	private int num;		//°Ô½Ã±Û °íÀ¯¹øÈ£
-	private String title;	//°Ô½Ã±Û Á¦¸ñ
-	private String address;	//¼ÒÀçÁö
-	private String sido; //µµ
-	private String sigungu;	//½Ã
-	private int price;		//ÀÓ´ë·á
-	private String content;	//°Ô½Ã±Û ³»¿ë
-	private int lat;		//À§µµ
-	private int lng;		//°æµµ
-	private String file1;	//ÆÄÀÏ1 (´ëÇ¥ÀÌ¹ÌÁö)
-	private String file2;	//ÆÄÀÏ2 
-	private String file3;	//ÆÄÀÏ3 
-	private String file4;	//ÆÄÀÏ4 
+	private int num;		//ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+	private int member_num;	//ì‘ì„±ì ê³ ìœ ë²ˆí˜¸
+	private String writer;	//ê²Œì‹œê¸€ ì‘ì„±ì ì´ë¦„
+	private String title;	//ê²Œì‹œê¸€ ì œëª©
+	private String address;	//ì†Œì¬ì§€
+	private int sido; 		//ë„
+	private int sigungu;	//ì‹œ
+	private int area;		//ë©´ì 
+	private int price;		//ì„ëŒ€ë£Œ
+	private String content;	//ê²Œì‹œê¸€ ë‚´ìš©
+	private float lat;		//ìœ„ë„
+	private float lng;		//ê²½ë„
+	private String path;	//ëŒ€í‘œì´ë¯¸ì§€ ê²½ë¡œ
+
 	
 	
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public int getMember_num() {
+		return member_num;
+	}
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
+	}
+	public int getArea() {
+		return area;
+	}
+	public void setArea(int area) {
+		this.area = area;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -50,53 +78,29 @@ public class RentalDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getLat() {
-		return lat;
-	}
-	public void setLat(int lat) {
-		this.lat = lat;
-	}
-	public int getLng() {
-		return lng;
-	}
-	public void setLng(int lng) {
-		this.lng = lng;
-	}
-	public String getSido() {
+	public int getSido() {
 		return sido;
 	}
-	public void setSido(String sido) {
+	public void setSido(int sido) {
 		this.sido = sido;
 	}
-	public String getSigungu() {
+	public int getSigungu() {
 		return sigungu;
 	}
-	public void setSigungu(String sigungu) {
+	public void setSigungu(int sigungu) {
 		this.sigungu = sigungu;
 	}
-	public String getFile1() {
-		return file1;
+	public float getLat() {
+		return lat;
 	}
-	public void setFile1(String file1) {
-		this.file1 = file1;
+	public void setLat(float lat) {
+		this.lat = lat;
 	}
-	public String getFile2() {
-		return file2;
+	public float getLng() {
+		return lng;
 	}
-	public void setFile2(String file2) {
-		this.file2 = file2;
-	}
-	public String getFile3() {
-		return file3;
-	}
-	public void setFile3(String file3) {
-		this.file3 = file3;
-	}
-	public String getFile4() {
-		return file4;
-	}
-	public void setFile4(String file4) {
-		this.file4 = file4;
+	public void setLng(float lng) {
+		this.lng = lng;
 	}
 	
 

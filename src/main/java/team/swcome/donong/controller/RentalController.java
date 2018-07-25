@@ -1,6 +1,9 @@
 package team.swcome.donong.controller;
 
-import java.util.Locale;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.FileDTO;
+import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.RentalDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.RentalService;
 
-
+@SessionAttributes("sessionBean")
 @Controller
 public class RentalController {
 	
@@ -21,7 +30,8 @@ public class RentalController {
 	RentalService RentalService;
 	
 	
-	/*@RequestMapping(value = "rental", method = RequestMethod.GET)
+	/*
+	@RequestMapping(value = "rental", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -33,36 +43,98 @@ public class RentalController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		return "rental/home";
-	}*/
+	 }
+	*/
 	
-	/* ≥Û¡ˆ ¥Îø© ∏Ò∑œ ∆‰¿Ã¡ˆ∑Œ ¿Ãµø */
+	/* ÎÜçÏßÄ ÎåÄÏó¨ Î™©Î°ù ÌéòÏù¥ÏßÄÎ°ú Ïù¥Îèô */
 	@RequestMapping(value = "/rental", method = RequestMethod.GET)
-	public String rentalList() {
+	public String rentalList(Model model) {
+		List<RentalDTO> list = RentalService.selectRentalList();
+		String[] filepath = RentalService.selectRepresentImg();
+
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setPath(filepath[i]);
+			System.out.println("num = " + list.get(i).getNum());
+		}
+		
+		model.addAttribute("list", list);
 		return "rental/rentalList";
 	}
 	
-	/* ≥Û¡ˆ ¥Îø© ±€æ≤±‚ ∆‰¿Ã¡ˆ∑Œ ¿Ãµø */
+	/* ÎÜçÏßÄ ÎåÄÏó¨ Í∏ÄÏì∞Í∏∞ ÌéòÏù¥ÏßÄÎ°ú Ïù¥Îèô */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
-	public String rentalWrite() {
+	public String rentalWrite(Model model, SessionBean sessionBean) {
+		sessionBean.setMemberNum(2); 					//ÏûÑÏãúÎ°ú Ï†ïÌï¥ÎÜìÏùå
+		int member_num = sessionBean.getMemberNum();
+		MemberDTO m =  RentalService.selectNameByPhone(member_num);
+
+		model.addAttribute("name", m.getRealname());
+		model.addAttribute("phone", m.getPhone());
+		
 		return "rental/rentalWrite";
 	}
 	
 	@RequestMapping(value = "/rental/write_ok", method = RequestMethod.POST)
-	public String rentalWrite_ok(Locale locale, Model model) {
-		return "rental/rentalWrite";
+	public String rentalWrite_ok(
+								 Model model,  
+								 SessionBean sessionBean,
+								 RentalDTO r,
+								 FileDTO f) throws IllegalStateException, IOException {
+		//int member_num = sessionBean.getMemberNum(); - Î°úÍ∑∏Ïù∏ Ïó∞Í≤∞ÎêòÎ©¥ Ïù¥Î†áÍ≤å Í∞ÄÏ†∏Ïò¨ Í≤É
+		sessionBean.setMemberNum(2); 					//ÏûÑÏãúÎ°ú Ï†ïÌï¥ÎÜìÏùå
+		int member_num = sessionBean.getMemberNum();
+		r.setMember_num(member_num);
+		
+		int board_num = RentalService.insertFarm(r);	//Í≤åÏãúÍ∏Ä Î≤àÌò∏Î•º Í∞ÄÏ†∏ÏôÄÏÑú ÏßÄÏ†ï
+		f.setBoard_num(board_num);
+		RentalService.insertFile(f);
+		
+		return "rental/rentalList";
+	} 
+	
+	/* ÎÜçÏßÄ ÎåÄÏó¨ ÏÉÅÏÑ∏Î≥¥Í∏∞ ÌéòÏù¥ÏßÄÎ°ú Ïù¥Îèô */
+	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
+	public String rentalView(Model model, SessionBean sessionBean, 	HttpServletRequest request) {
+		sessionBean.setMemberNum(2); 					//ÏûÑÏãúÎ°ú Ï†ïÌï¥ÎÜìÏùå
+		int member_num = sessionBean.getMemberNum();
+		MemberDTO m =  RentalService.selectNameByPhone(member_num);
+		
+		int board_num = Integer.parseInt(request.getParameter("num"));
+		RentalDTO r = RentalService.selectRentalView(board_num);
+		
+		FileDTO f = RentalService.selectFilePath(board_num);
+		
+		model.addAttribute("file", f);
+		model.addAttribute("member", m);
+		model.addAttribute("rental", r);
+		return "rental/rentalView";
+	}
+	
+	/* ÎßàÏª§ Ï∞çÏùÑ Îïå Ajax */
+	@RequestMapping(value = "/markerJson", method = RequestMethod.POST)
+	@ResponseBody
+	public Object markerJson(Model model, SessionBean sessionBean) {
+		List<RentalDTO> list = RentalService.selectRentalList();
+		String[] imgs = RentalService.selectRepresentImg();
+		
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setPath(imgs[i]);
+		}
+		
+		return list;
 	}
 	
 	/*
-	//∞Àªˆπˆ∆∞ ¥©∏£∏È ø¿¥¬ ∞˜
+	//Í≤ÄÏÉâÎ≤ÑÌäº ÎàÑÎ•¥Î©¥ Ïò§Îäî Í≥≥
 	@RequestMapping(value = "rental/search", method = RequestMethod.GET)
 	public String rentalSearch(Locale locale, Model model) {
 		return "rental/rentalWrite";
 	}
 	
-	//±€æ≤±‚ ∆‰¿Ã¡ˆø°º≠ µÓ∑œ πˆ∆∞ ¥©∏£∏È ø¿¥¬ ∞˜ 
+	//Í∏ÄÏì∞Í∏∞ ÌéòÏù¥ÏßÄÏóêÏÑú Îì±Î°ù Î≤ÑÌäº ÎàÑÎ•¥Î©¥ Ïò§Îäî Í≥≥ 
 	
 	
-	//ªË¡¶ πˆ∆∞ ¥©∏£∏È ø¿¥¬ ∞˜
+	//ÏÇ≠Ï†ú Î≤ÑÌäº ÎàÑÎ•¥Î©¥ Ïò§Îäî Í≥≥
 	@RequestMapping(value = "rental/delete", method = RequestMethod.POST)
 	public String rentalDelete(Locale locale, Model model) {
 		return "rental/rentalWrite";

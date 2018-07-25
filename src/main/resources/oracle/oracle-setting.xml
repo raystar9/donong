@@ -7,7 +7,6 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
-	
   <typeAliases>
     <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
     <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
@@ -20,5 +19,6 @@
     <typeAlias alias="OrdersDTO" type="team.swcome.donong.dto.OrdersDTO" />
     <typeAlias alias="CartDTO" type="team.swcome.donong.dto.CartDTO" />
     <typeAlias alias="CartGoodsDTO" type="team.swcome.donong.dto.CartGoodsDTO" />
+    <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
   </typeAliases>
 </configuration>

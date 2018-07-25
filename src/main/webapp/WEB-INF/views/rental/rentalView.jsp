@@ -1,55 +1,120 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap"></script>
+<script src="/donong/resources/rental/js/rentalView.js"></script>
+<style>
+	.img{
+		width:100px;
+		height:100px;
+	}
+	#content{
+		border:1px solid black;
+		width:900px;
+		height:407px;
+		margin-top:10px;
+		font-size:15px;
+	}
+	#represent{
+		border:1px solid black;
+		height:178px;
+		display:inline-block;
+		width:250px;
+	}
+	#map{
+		width:500px;
+		height:300px;
+		margin-bottom: 50px;
+		margin-top: 50px;
+	}
+	.writeTable{
+		width:650px;
+		height:180px;
+		float:left;
+	}
+	#representImg{
+		width:100%;
+		height:100%;
+	}
+	#main{
+		margin-left:350px;
+		margin-top: 50px;
+	}
+	#areaBox{
+		font-size:17px;
+		border:0px;
+		padding:15px;
+	}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>대여 상세보기 페이지</title>
 </head>
 <body>
 
+<input type="hidden" id="lat" value="${rental.lat }"/>
+<input type="hidden" id="lng" value="${rental.lng }"/>
 <div id="main">
 	<table border="1" class="writeTable">
 		<tr>
 			<td>번호</td>
 			<td>
-				<!-- ${num} -->
+				${rental.num}
 			</td>
 		</tr>
 		<tr>
 			<td>소재지</td>
 			<td>
-				<!-- ${address} -->
+				${rental.address}
 			</td>
 		</tr>
 		<tr>
 			<td>면적</td>
 			<td>
-				<!-- ${area} -->
+				${rental.area}
 			</td>
 		</tr>
 		<tr>
-			<td>임대가</td>
+			<td>임대료</td>
 			<td>
-				<!-- ${price} -->
+				${rental.price}
 			</td>
 		</tr>
 		<tr>
-			<td>임대자</td>
+			<td rowspan='2'>문의</td>
 			<td>
-				<!-- ${writer} -->
+				${member.realname}
 			</td>
 		</tr>
 		<tr>
-			<td>연락처</td>
 			<td>
-				<!-- ${phone} -->
+				${member.phone}
 			</td>
 		</tr>
 	</table>
-	<div class="represent"></div>	<!-- 대표이미지 넣는 곳 -->
-	<div class="content"></div>		<!-- 상세내용 넣는 곳 -->
-	<div class="images"></div>		<!-- 이미지들 넣는 곳 -->
-	<div class="map"></div>			<!-- 지도 넣는 곳 -->
+	
+	<div id="represent">
+		<img src="../resources/rental/upload${file.filePath1 }" id='representImg'/>
+	</div>	<!-- 대표이미지 넣는 곳 -->
+	
+	<!-- 상세내용 넣는 곳 -->
+	<div id="content"> 
+		<textarea rows='19' cols='95' id='areaBox'>${rental.content }</textarea>
+	</div>		
+	
+	<!-- 이미지들 넣는 곳 -->
+	<div id="images">
+			<img src="../resources/rental/upload${file.filePath1 }" class='img'/>
+			<img src="../resources/rental/upload${file.filePath2 }" class='img'/>
+			<img src="../resources/rental/upload${file.filePath3 }" class='img'/>
+			<img src="../resources/rental/upload${file.filePath4 }" class='img'/>
+	</div>	
+	
+	<!-- 지도 넣는 곳 -->
+	<div id="map"></div>		
+		
 </div>
 </body>
 </html>

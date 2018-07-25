@@ -15,30 +15,30 @@
 		<div id="first">
 			<div id="form-title">
 				<span>
-					<h3>NICE2MEETU.COM¿¡ µî·ÏÇÏ½Ê½Ã¿À</h3>
-					<b>Nice2MeetU.COM</b>È¸¿ø°¡ÀÔÀ» ¿øÇÏ½Ã¸é ¾Æ·¡ ¾ç½ÄÀ» ÀÛ¼ºÇØ ÁÖ½Ê½Ã¿À.<br>
-					º¸´Ù Æí¸®ÇÑ ¼îÇÎÀ» À§ÇØ Á¦°øÇØÁÖ½Å Á¤º¸¸¦ ÀúÀåÇÕ´Ï´Ù.
+					<h3>NICE2MEETU.COMì— ë“±ë¡í•˜ì‹­ì‹œì˜¤</h3>
+					<b>Nice2MeetU.COM</b>íšŒì›ê°€ìž…ì„ ì›í•˜ì‹œë©´ ì•„ëž˜ ì–‘ì‹ì„ ìž‘ì„±í•´ ì£¼ì‹­ì‹œì˜¤.<br>
+					ë³´ë‹¤ íŽ¸ë¦¬í•œ ì‡¼í•‘ì„ ìœ„í•´ ì œê³µí•´ì£¼ì‹  ì •ë³´ë¥¼ ì €ìž¥í•©ë‹ˆë‹¤.
 				</span>
 			</div>
 			
 			<div class="form-row subTitle">
-				<h3>»ç¿ëÀÚ °èÁ¤</h3>
+				<h3>ì‚¬ìš©ìž ê³„ì •</h3>
 			</div>
 			
 			<div class="form-row">
 				<label>ID</label>
 				<div class="secondCol halfLen">
 					<input type="text" name="id" id="id"> 
-					<input type="button" id="idcheck" value="IDÁßº¹°Ë»ç"><br>
+					<input type="button" id="idcheck" value="IDì¤‘ë³µê²€ì‚¬"><br>
 					<span id="message"></span>
 				</div>
 			</div>
 			
 			<div class="form-row">
-				<label>´Ð³×ÀÓ</label>
+				<label>ë‹‰ë„¤ìž„</label>
 				<div class="secondCol halfLen">
 					<input type="text" id="nickname" name="nickname">
-					<input type="button" id="nicknamecheck" value="´Ð³×ÀÓÁßº¹°Ë»ç"><br>
+					<input type="button" id="nicknamecheck" value="ë‹‰ë„¤ìž„ì¤‘ë³µê²€ì‚¬"><br>
 					<span id="nickmessage"></span>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 					<input type="text" name="email" id="email">
 					@ <input type="text" name="domain" id="domain">
 					<select name="sel" id="sel">
-						<option value="">Á÷Á¢ÀÔ·Â</option>
+						<option value="">ì§ì ‘ìž…ë ¥</option>
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="nate.com">nate.com</option>
@@ -59,14 +59,14 @@
 			</div>
 			
 			<div class="form-row">
-				<label>ºñ¹Ð¹øÈ£</label> 
+				<label>ë¹„ë°€ë²ˆí˜¸</label> 
 					<div class="secondCol fullLen">
 					<input type="password" id="password" name="password">
 				</div>
 			</div>
 						
 			<div class="form-row">	
-				<label>ºñ¹Ð¹øÈ£ È®ÀÎ</label>
+				<label>ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
 				<div class="secondCol fullLen"> 
 					<input type="password" id="passcheck" name="passcheck">
 				</div>
@@ -75,11 +75,11 @@
 		
 		<div id="second">
 			<div class="form-row subTitle">
-				<h3>¿¬¶ôÃ³ Á¤º¸</h3>
+				<h3>ì—°ë½ì²˜ ì •ë³´</h3>
 			</div>
 			
 			<div class="form-row">
-				<label>¿¬¶ôÃ³</label>
+				<label>ì—°ë½ì²˜</label>
 				<div class="secondCol telLen">
 					<select name="brandsel"	id="brandsel">
 						<option value="LGU+">LGU+</option>
@@ -91,22 +91,22 @@
 			</div>
 			
 			<div class="form-row">
-				<label>¿ìÆí¹øÈ£</label>
+				<label>ìš°íŽ¸ë²ˆí˜¸</label>
 				<div class="secondCol halfLen">
 					<input type="text" id="post" name="post" class="postcodify_postcode5" />
-					<input type="button" id="postcodify_search_button" value="¿ìÆí¹øÈ£ Ã£±â"><br> 
+					<input type="button" id="postcodify_search_button" value="ìš°íŽ¸ë²ˆí˜¸ ì°¾ê¸°"><br> 
 				 </div>
 			 </div>
 			 
 			 <div class="form-row">
-				<label>ÁÖ¼Ò</label>
+				<label>ì£¼ì†Œ</label>
 				<div class="secondCol fullLen">
 					<input type="text" id="address" name="address" class="postcodify_address" size=40  /><br>
 				 </div>
 			 </div>
 			 
 			 <div class="form-row">
-				<label>»ó¼¼ÁÖ¼Ò</label>
+				<label>ìƒì„¸ì£¼ì†Œ</label>
 				<div class="secondCol fullLen"> 
 					<input type="text" name="detailaddress" size=40><br>
 				</div>
@@ -114,11 +114,11 @@
 		</div>
 		
 		<div class="form-row subTitle">
-			<h3>±âº» À§Ä¡ ¼³Á¤</h3>
+			<h3>ê¸°ë³¸ ìœ„ì¹˜ ì„¤ì •</h3>
 		</div>
 		<div class="form-row">
 			<div id="locationField">
-				<input id="autocomplete" placeholder="°Ë»öÇÒ Àå¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä." type="text" />
+				<input id="autocomplete" placeholder="ê²€ìƒ‰í•  ìž¥ì†Œë¥¼ ìž…ë ¥í•˜ì„¸ìš”." type="text" />
 			</div>
 			<div id="map"></div>
 			<input type="hidden" id="markerLat" name="markerLat">
@@ -127,19 +127,19 @@
 		
 		<div class="form-row last-row">
 			<span class="check" id="check1">&#xe803;</span>
-			<h3>¸ðµç Ç×¸ñ¿¡ Ã¼Å©ÇÏ±â</h3><br>
+			<h3>ëª¨ë“  í•­ëª©ì— ì²´í¬í•˜ê¸°</h3><br>
 			<span class="check sub" id="check2">&#xe803;</span>
-			<h3>* °³ÀÎÁ¤º¸ÀÇ ¼öÁý ¹× ÀÌ¿ë¿¡ ´ëÇÑ µ¿ÀÇ ÀÚ¼¼È÷ º¸±â</h3><br>
+			<h3>* ê°œì¸ì •ë³´ì˜ ìˆ˜ì§‘ ë° ì´ìš©ì— ëŒ€í•œ ë™ì˜ ìžì„¸ížˆ ë³´ê¸°</h3><br>
 			<span class="check sub" id="check3">&#xe803;</span>
-			<h3>* °³ÀÎÁ¤º¸ÀÇ ±¹¿Ü ÀÌÀü¿¡ ´ëÇÑ µ¿ÀÇ ÀÚ¼¼È÷ º¸±â</h3><br>
+			<h3>* ê°œì¸ì •ë³´ì˜ êµ­ì™¸ ì´ì „ì— ëŒ€í•œ ë™ì˜ ìžì„¸ížˆ ë³´ê¸°</h3><br>
 			<span class="check sub" id="check4">&#xe803;</span>
-			<h3>´º½º·¹ÅÍ ±¸µ¶À» À§ÇÑ °³ÀÎÁ¤º¸ÀÇ ¼öÁý ¹× ÀÌ¿ë¿¡ ´ëÇÑ µ¿ÀÇ ÀÚ¼¼È÷ º¸±â</h3>
+			<h3>ë‰´ìŠ¤ë ˆí„° êµ¬ë…ì„ ìœ„í•œ ê°œì¸ì •ë³´ì˜ ìˆ˜ì§‘ ë° ì´ìš©ì— ëŒ€í•œ ë™ì˜ ìžì„¸ížˆ ë³´ê¸°</h3>
 		</div>
 		
 		<div class="form-row">
 			<div id="clearfix">
-				<button type="submit" class="submitbtn">È¸¿ø°¡ÀÔ</button>
-				<button type="reset" class="cancelbtn">´Ù½Ã ÀÛ¼º</button>
+				<button type="submit" class="submitbtn">íšŒì›ê°€ìž…</button>
+				<button type="reset" class="cancelbtn">ë‹¤ì‹œ ìž‘ì„±</button>
 			</div>
 		</div>
 		

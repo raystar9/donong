@@ -29,12 +29,8 @@
  	</script>
  
  <style>
-.navbar {
-	border: 0px;
-	margin-bottom: 0px;
-}
-
-.navbar-collapse{
+ 
+.container-fluid{
 background-color: #ACD17F;
 
 }
@@ -44,6 +40,11 @@ background-color: #ACD17F;
 	font-size:15pt;
 	font-weight:bold;
 	text-align:center;
+}
+
+#full{
+	width:100%;
+	height:100%;
 }
 
 #logo{
@@ -140,7 +141,9 @@ background-color: #ACD17F;
 	
 </head>
 <body>
-<div class="navbar">
+<div id="full">
+
+<div class="container-fluid">
 <div class="navbar-header">
 <a class="dropdown" href="main"><img id="logo" src="resources/main/image/logo.jpg"></a>
 </div>
@@ -254,7 +257,10 @@ background-color: #ACD17F;
     </div> <!-- end modal-dialog -->
   </div> <!-- end modal fade -->
 </div> <!-- end navbar-collapse -->
-</div>
+</div> <!-- end container-fluid -->
+</div> <!-- end full -->
+
+
 
 	
 	

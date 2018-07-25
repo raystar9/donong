@@ -192,7 +192,6 @@ function nickname_check(){
 </script>
 <style>
 body {
-  display:flex;
   align-items:top;
 }
 #join_table{

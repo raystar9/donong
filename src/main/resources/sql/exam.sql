@@ -24,6 +24,9 @@ select num, id, nickname, realname, postnum, address, addressdetail, email, emai
 		
 select * from rentalFiles;
 
+INSERT INTO
+
+
 	INSERT INTO rentals
   	VALUES (rental_num_seq.nextval, 2, '이다혜', '대한민국 경기도 부천시', '경기도 부천시', 
   		    2, 15, 2400, 10000000, '장소가좋아요^^', 24, 24);
@@ -76,5 +79,7 @@ where num = 53;
 select filepath1, filepath2, filepath3, filepath4  from RENTALFILES
 where board_num = #{num};
   		    
-
+select * from sigungu;
 select * from rentalFiles;
+
+select * from sido;

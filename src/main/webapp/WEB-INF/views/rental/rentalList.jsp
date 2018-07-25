@@ -18,7 +18,7 @@
 	}
 	#List{
 		border:1px solid black;
-		width: 1000px;
+		width: 980px;
 		height: 700px;
 		margin-bottom: 70px;
 		padding: 10px;
@@ -31,7 +31,7 @@
 	.list_table{
 		text-align: center;
 		width: 140px;
-		height: 160px;
+		height: 200px;
 		display: inline-block;
 		border: 1px solid #444444
 		
@@ -42,8 +42,8 @@
 	.viewbox{
 		text-align: center;
 		border: 1px solid black;
-		width: 170px;
-		height: 200px;
+		width: 180px;
+		height: 225px;
 		font-size: 13px;
 		margin-left: 10px;
 		margin-right: 10px;
@@ -66,6 +66,13 @@
 		margin-top : 20px;
 		margin-bottom : 20px;
 		display:inline-block;
+	}
+	#top{
+		height:20px;
+		background:#277623;
+		color:white;
+		width:100%;
+	
 	}
 </style>
 </head>
@@ -113,6 +120,9 @@
 <div id="List" style="overflow-y:scroll;">
 	<c:forEach var="r" items="${list}">
 		<div class='viewbox'>
+			<div id='top'>
+				No.&nbsp;${r.num }
+			</div>
 			<div class='row'>
 				<a href="./rental/view?num=${r.num }"><img src="./resources/rental/upload${r.path }" class='img'></a>
 			</div>
@@ -123,7 +133,7 @@
 				<img src="./resources/rental/image/area3.png" width='13px' height='13px'/>&nbsp;${r.area }㎡<br>
 			</div>
 			<div class='row'>
-				<img src="./resources/rental/image/dollar.png" width='13px' height='13px'/>&nbsp;월 ${r.price }원<br>
+				<img src="./resources/rental/image/dollar.png" width='13px' height='13px'/>&nbsp; ${r.price }원<br>
 			</div>
 		</div>
 	</c:forEach>

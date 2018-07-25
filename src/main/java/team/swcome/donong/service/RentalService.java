@@ -84,7 +84,8 @@ public class RentalService {
 	
 	/* 농지 대여 글 파일 삽입 */
 	public void insertFile(FileDTO f) throws IllegalStateException, IOException {
-
+		System.out.println();
+		
 		MultipartFile file1 = f.getFile1();
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
@@ -158,7 +159,7 @@ public class RentalService {
 			f.setFilePath2(fileDBName);
 		}else {
 			f.setFileName2("default.png");
-			f.setFilePath2("./resources/rental/image/default.png");
+			f.setFilePath2("/default2.png");
 		}
 
 		if (!file3.isEmpty()) {
@@ -186,7 +187,7 @@ public class RentalService {
 			f.setFilePath3(fileDBName);
 		}else {
 			f.setFileName3("default.png");
-			f.setFilePath3("./resources/rental/image/default.png");
+			f.setFilePath3("/default2.png");
 		}
 
 		if (!file4.isEmpty()) {
@@ -214,7 +215,7 @@ public class RentalService {
 			f.setFilePath4(fileDBName);
 		}else {
 			f.setFileName4("default.png");
-			f.setFilePath4("./resources/rental/image/default.png");
+			f.setFilePath4("/default2.png");
 		}
 
 		rentalMapper.insertFile(f);
@@ -248,8 +249,8 @@ public class RentalService {
 	};
 	
 	/* 상세보기에서 사진들 경로 구해오기 */
-	public FileDTO selectFilePath(int board_num) {
-		FileDTO f = rentalMapper.selectFilePath(board_num);
+	public FileDTO selectFileNamePath(int board_num) {
+		FileDTO f = rentalMapper.selectFileNamePath(board_num);
 		return f;
 	};
 	

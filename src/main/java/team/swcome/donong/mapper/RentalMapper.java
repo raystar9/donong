@@ -23,6 +23,6 @@ public interface RentalMapper {
 	
 	public RentalDTO selectRentalView(int board_num);
 	
-	public FileDTO selectFilePath(int board_num);
+	public FileDTO selectFileNamePath(int board_num);
 	
 }

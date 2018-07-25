@@ -49,8 +49,8 @@
   	WHERE num = #{num}
   </select>
   
-  <select id="selectFilePath" resultType="FileDTO" parameterType="int">
-  	SELECT filepath1, filepath2, filepath3, filepath4  
+  <select id="selectFileNamePath" resultType="FileDTO" parameterType="int">
+  	SELECT filepath1, filepath2, filepath3, filepath4, filename1, filename2, filename3, filename4 
   	FROM rentalfiles
 	WHERE board_num = #{board_num}
   </select>

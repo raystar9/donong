@@ -89,7 +89,7 @@ public class RentalController {
 		f.setBoard_num(board_num);
 		RentalService.insertFile(f);
 		
-		return "rental/rentalList";
+		return "redirect:/rental";
 	} 
 	
 	/* 농지 대여 상세보기 페이지로 이동 */
@@ -102,7 +102,7 @@ public class RentalController {
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		RentalDTO r = RentalService.selectRentalView(board_num);
 		
-		FileDTO f = RentalService.selectFilePath(board_num);
+		FileDTO f = RentalService.selectFileNamePath(board_num);
 		
 		model.addAttribute("file", f);
 		model.addAttribute("member", m);

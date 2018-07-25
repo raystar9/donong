@@ -30,8 +30,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		area = $('#area').val();
-	    if (!isNumeric(area)) {
+	    if (!$.isNumeric($('#area').val())) {
             alert("면적은 숫자로 입력하세요.");
             $('#area').val("");
             $('#area').focus();
@@ -44,8 +43,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		price = $('#price').val();
-		if (!isNumeric(price)) {
+		if (!$.isNumeric($('#price').val())) {
             alert("임대료는 숫자로 입력하세요.");
             $('#price').val("");
             $('#price').focus();
@@ -131,8 +129,9 @@ function addMarker(location){
       });
 	pins.push(marker);
 	
-	lat = location.lat();
-	lng = location.lng()
+	$('#markerLat').val(location.lat());
+	$('#markerLng').val(location.lng());
+	
 	
 }//addMarker()
 

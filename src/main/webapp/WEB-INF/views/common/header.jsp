@@ -151,9 +151,9 @@ background-color: #ACD17F;
 <ul class="nav navbar-nav">
 
    <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">시작하기</a>
+    <a class="dropdown-toggle" data-toggle="dropdown">시작하기</a>
     <ul class="dropdown-menu">
-      <li><a href="#">사전준비</a></li>
+      <li><a href="/donong/info">사전준비</a></li>
       <li><a href="#">작물정보</a></li>
       <li><a href="#">재배방법</a></li>
      </ul>
@@ -161,30 +161,30 @@ background-color: #ACD17F;
   
   
   <li class="dropdown">
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown">마을회관</a>
+   <a class="dropdown-toggle" data-toggle="dropdown">마을회관</a>
     <ul class="dropdown-menu">
-      <li><a href="#">공지사항</a><li>
+      <li><a href="/donong/communitylist">게시판</a><li>
       <li><a href="#">공유정보</a></li>
       <li><a href="#">수확후기</a></li>
     </ul>
   </li>
   
     <li class="dropdown">
-     <a href="#" class="dropdown-toggle" data-toggle="dropdown">준비하기(구매)</a>
+     <a class="dropdown-toggle" data-toggle="dropdown">준비하기(구매)</a>
     <ul class="dropdown-menu">
-      <li><a href="#">종자구매</a></li>
-      <li><a href="#">비료구매</a></li>
-      <li><a href="#">도구구매</a></li>
+      <li><a href="/donong/market?category=seed">종자</a></li>
+      <li><a href="/donong/market?category=fertilizer">비료</a></li>
+      <li><a href="/donong/market?category=tools">도구</a></li>
     </ul>
   </li>
   	
-  	<li class="dropdown"><a href=#>농지대여</a></li>
+  	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
   	
   	 <li class="dropdown">
-     <a href="#" class="dropdown-toggle" data-toggle="dropdown">고객센터</a>
+     <a class="dropdown-toggle" data-toggle="dropdown">고객센터</a>
     <ul class="dropdown-menu">
-      <li><a href="#">FaQ</a></li>
-      <li><a href="#">QnA</a></li>
+      <li><a href="/donong/cs/main">메인</a></li>
+      <li><a href="/donong/cs/qna">QnA</a></li>
       <li><a href="#">내가 한 질문</a></li>
     </ul>
   </li>
@@ -240,7 +240,7 @@ background-color: #ACD17F;
 									<c:if test="${!empty saveid}">checked</c:if>> Remember ID</label>
      						</div>
      						<div class="find text-right">
-     						<div><a onclick="id_find()">ID찾기</a>/<a onclick="id_find()">비밀번호찾기</a></div>
+     						<div><a onclick="id_find()">ID찾기</a>/<a onclick="pwd_find()">비밀번호찾기</a></div>
   							</div>
      					</div>	
      				</div>	 

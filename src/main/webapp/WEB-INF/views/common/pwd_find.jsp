@@ -27,7 +27,7 @@
 <body>
 	<div id="pwd_wrap">
 		<c:if test="${empty password}">
-			<h2 class="pwd_title">비번 찾기</h2>
+			<h2 class="pwd_title">비밀번호 찾기</h2>
 			<form method="post" action="find_password" class="form-horizontal" onsubmit="return check()">
 					<div class="form-group">
 					<label class="control-label col-sm-2" for="id">ID</label>
@@ -39,7 +39,7 @@
 					<div class="form-group">
    					 <label class="control-label col-sm-2" for="name">성명</label>
 				<div class="col-sm-9"> 
-     			 	<input class="form-control" name="realname" id="name" placeholder="Enter PhoneNumber">
+     			 	<input class="form-control" name="realname" id="name" placeholder="Enter Name">
   				</div>			
 				</div>	
 				

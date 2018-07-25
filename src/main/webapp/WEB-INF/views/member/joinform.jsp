@@ -52,7 +52,7 @@ function Postcode() {
              
             } 
                 
-           
+
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postno').value = data.zonecode; //5자리 새우편번호 사용
@@ -151,6 +151,7 @@ function id_check(){
 	
 	var checknickname ='';
 	var inputNickname = '';
+	
 function nickname_check(){		
 	if($.trim($("#join_nickname").val())==""){
 		alert("별칭을 입력하세요");
@@ -197,9 +198,7 @@ body {
 #join_table{
 	margin:50px;
 }
-h2{
-	font-weight:bold;
-}
+
 .title{
 	margin:50px;
 	}
@@ -216,13 +215,17 @@ h2{
 
 </head>
 <body>
+
+<%@include file="../common/header.jsp" %>
 <div class="container text-center">
+
 <input type="hidden" name="checkconfirmID" id="checkconfirmID" value="false">
 <input type="hidden" name="checkconfirmNickName" id="checkconfirmNickName" value="false">
-
+	
 	<form name="joinform" method="post" action="member_join_ok" class="form-horizontal" onsubmit="return check()">
 
 		<div id="join_table">
+	
 			<div class=title>
 					<div class="form-group">
 					<h2 class="col-sm-12">회원 가입 페이지</h2>
@@ -235,7 +238,7 @@ h2{
 					<input name="id" id="join_id" class="form-control" placeholder="입력 후 중복체크를 해주세요" required><!-- ID 입력 칸 -->
                 </div>
                 <div class="col-sm-2">
-           			<input type="button" value="ID 중복체크" class="btn btn-default" onclick="id_check()"> <!-- 중복체크 버튼 -->
+           			<input type="button" value="ID 중복체크" class="btn btn-success" onclick="id_check()"> <!-- 중복체크 버튼 -->
            		</div>	
            		<div class="col-sm-2">	
            			<div id="idcheck"></div> <!-- 중복체크 결과 표시칸 -->
@@ -270,7 +273,7 @@ h2{
 					<input name="nickname" id="join_nickname" class="form-control" placeholder="활동할 닉네임입니다." required>
 				</div>
 				<div class="col-sm-2">	
-					<input type="button" value="별칭 중복체크" class="btn btn-default" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
+					<input type="button" value="별칭 중복체크" class="btn btn-success" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
            		</div>
            		<div class="col-sm-2">	
            			<div id="nicknamecheck"></div> <!-- 중복체크 결과 표시칸 -->
@@ -290,12 +293,12 @@ h2{
 			<div class="form-group">
 			<div class="col-sm-2"></div>
 				<label class="control-label col-sm-2" for="postbutton">우편번호</label>
-					<div class="col-sm-1">
+					<div class="col-sm-2">
 						<input type="text" id="postno" name="postnum" class="form-control" readonly>
 					</div>
-					<div class="col-sm-2"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						<input type="button" id="postbutton" class="btn btn-default" value="주소검색" onclick="Postcode()">
+						<input type="button" id="postbutton" class="btn btn-success" value="주소검색" onclick="Postcode()">
 					</div>	
 				<div class="col-sm-3"></div>
 			</div>
@@ -360,8 +363,8 @@ h2{
 		</div>
 			<div class="form-group text-center"> 
 			<div class="col-sm-12">
-					<input type="submit" value="회원가입" class="btn btn-default">
-					<input type="reset" value="초기화" class="btn btn-default" onclick="$('#join_id').focus();">
+					<input type="submit" value="회원가입" class="btn btn-success">
+					<input type="reset" value="초기화" class="btn btn-success" onclick="$('#join_id').focus();">
 			</div>			
 			</div>	
 	</form>

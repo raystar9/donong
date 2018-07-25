@@ -42,10 +42,6 @@ background-color: #ACD17F;
 	text-align:center;
 }
 
-#full{
-	width:100%;
-	height:100%;
-}
 
 #logo{
  width:55.56px;
@@ -141,7 +137,7 @@ background-color: #ACD17F;
 	
 </head>
 <body>
-<div id="full">
+
 
 <div class="container-fluid">
 <div class="navbar-header">
@@ -258,7 +254,7 @@ background-color: #ACD17F;
   </div> <!-- end modal fade -->
 </div> <!-- end navbar-collapse -->
 </div> <!-- end container-fluid -->
-</div> <!-- end full -->
+
 
 
 

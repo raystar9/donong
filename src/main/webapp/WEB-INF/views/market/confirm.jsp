@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<title>Home</title>
 	<style>
 		.left-navbar {
@@ -13,6 +13,7 @@
 	</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div>
 	<div class="container">
 		<h1>주문이 완료되었습니다.</h1>

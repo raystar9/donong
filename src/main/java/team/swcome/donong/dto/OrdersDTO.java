@@ -1,10 +1,13 @@
 package team.swcome.donong.dto;
 
+import java.sql.Date;
+
 public class OrdersDTO {
 
 	private int num;
 	private int memberNum;
 	private String name;
+	private Date orderDate;
 	private String address;
 	private String phone;
 	private String comments;
@@ -27,6 +30,12 @@ public class OrdersDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 	public String getAddress() {
 		return address;

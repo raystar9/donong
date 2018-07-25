@@ -4,8 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
-	<script type="text/javascript" src="/donong/resources/jquery/jquery-3.3.1.min.js"></script>
+	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<script src="/donong/resources/market/js/cart.js"></script>
 	<title>Home</title>
 	<style>
@@ -20,6 +19,7 @@
 	</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
 	<div>
 		<h1>장바구니 페이지</h1>

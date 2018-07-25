@@ -5,22 +5,20 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<title>Home</title>
 	<style>
+		.main {
+			display: flex;
+		}
 		.sidenav {
-		    height: 100%; /* Full-height: remove this if you want "auto" height */
+			margin-left: -15px;
+		    height: auto; /* Full-height: remove this if you want "auto" height */
 		    width: 160px; /* Set the width of the sidebar */
-		    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-		    z-index: 1; /* Stay on top */
-		    top: 0; /* Stay at the top */
-		    left: 0;
-		    background-color: #CCFFDD; /* Black */
+		    border-right: 1px #ddd solid;
+		    border-bottom: 1px #ddd solid;
 		    overflow-x: hidden; /* Disable horizontal scroll */
 		    padding-top: 20px;
-		}
-		.main {
-			margin-left: 160px;
 		}
 		.sidenav a {
 		    padding: 6px 8px 6px 16px;
@@ -35,6 +33,9 @@
 			margin-bottom: 3px;
 			height: 167px;
 		}
+		.item-container {
+			margin-left: 20px;
+		}
 		.item-cell {
 			display: inline-block;
 		}
@@ -47,13 +48,14 @@
 	</style>
 </head>
 <body>
-<div class="main container">	
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<div class="main container-fluid">	
 	<div class="sidenav">
 		<a href="/donong/market?category=seed">모종 씨앗</a>
 		<a href="/donong/market?category=fertilizer">비료</a>
 		<a href="/donong/market?category=tools">도구</a>
 	</div>
-	<div class="container">
+	<div class="item-container">
 	<div>
 		<h1>타이틀임</h1>
 	</div>

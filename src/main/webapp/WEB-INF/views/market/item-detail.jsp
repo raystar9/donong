@@ -4,8 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<script src="/donong/resources/jquery/jquery-3.3.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<script src="/donong/resources/market/js/item-detail.js"></script>
 	<title>Home</title>
 	<style>
@@ -24,6 +23,7 @@
 	</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
 	<form class="form-horizontal" action="/donong/market/order/item/${itemNo}" method="get">
 	<div>

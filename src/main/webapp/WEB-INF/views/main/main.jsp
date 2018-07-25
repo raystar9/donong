@@ -6,12 +6,7 @@
   <title>나만따라와 도시농부</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-  
+  <%@ include file="/resources/common/jsp/import.jsp" %>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -51,7 +46,7 @@
 </head>
 <body>
 
-  <%@include file="../common/header.jsp" %>
+  <%@include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="container text-center">    
   <div class="row content">

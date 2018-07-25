@@ -5,64 +5,72 @@
 <html>
 <head>
 <title>아이디 찾기</title>
-<link rel= "stylesheet" type="text/css" href="./resources/css/admin.css">
-<link rel= "stylesheet" type="text/css" href="./resources/css/member.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+
  <script>
 	 function check(){
-		 if($.trim($("#id").val())==""){
-				alert("아이디를 입력하세요");
-				$("#id").val("").focus();
-				return false;
+		 if($.trim($("#realname").val())==""){
+			 alert("실명을 입력하세요");
+			 $("#realname").val("").focus();
+			 return false;
+			 }
+		 if($.trim($("#phone").val())==""){
+			alert("가입시 등록한 휴대폰번호를 입력하세요");
+			$("#phone").val("").focus();
+			return false;
 		 }  
-		 if($.trim($("#name").val())==""){
-		 alert("실명을 쓰세요");
-		 $("#name").val("").focus();
-		 return false;
-		 }
+	
 	}
  </script>
+ <style>
+		 
+ </style>
 
 </head>
 <body>
-	<div id="pwd_wrap">
-		<c:if test="${empty password}">
-			<h2 class="pwd_title">아이디 찾기</h2>
-			<form method="post" action="find_password" onsubmit="return check()">
-				<table id = "pwd_t">
-					<tr>
-						<th>아이디</th>
-						<td><input name="id" id="id" size="14" class="input_box"></td>
-					</tr>
+	<div id="container text-center">
+		<c:if test="${empty id}">
+			<h2 class="id_title">아이디 찾기</h2>
+			<form method="post" action="find_id" class="form-horizontal" onsubmit="return check()">
+				<div class="form-group">
 					
-					<tr>
-						<th>회원이름</th>
-						<td><input name="realname" id="name" size="14" class="input_box"></td>
-					</tr>	
-				</table>
+					<label class="control-label col-sm-2" for="realname">성명</label>
+						<div class="col-sm-9">
+					<input class="form-control" name="realname" id="realname" placeholder="Enter Name">
+				</div>
+				</div>
+			
+				 <div class="form-group">
+   					 <label class="control-label col-sm-2" for="phone">휴대폰번호</label>
+				<div class="col-sm-9"> 
+     			 	<input class="form-control" name="phone" id="phone" placeholder="Enter PhoneNumber">
+  				</div>			
+				</div>	
 				
-				<div id="pwd_menu">
-					<input type="submit" value="찾기" class="input_button">
-					<input type="reset" value="취소" class="input_button" onclick="$('#id').focus();">
-				</div>
-				<div id = "pwd_close">
-					<input type = "button" value="닫기" class="input_button" onclick="self.close()">
-					<!--  close()메서드로 팝업창 닫기 -->
-				</div>
-			</form>
+				<div class="form-group"> 
+  					  <div class="col-sm-offset-2 col-sm-10">
+     					 <button type="submit" class="btn btn-default">찾기</button>
+     					 <button type = "button" class="btn btn-default" onclick="self.close()">취소</button>
+   					 </div>
+ 				</div>				
+				
+		</form>
 		</c:if>
+
+		<c:if test="${!empty id }">
+			<h2 class="col-sm-12 text-center">아이디찾기 결과</h2>
+				<div class="form-group">
+						<div class="col-sm-12 text-center">검색된 ID는 ${id} 입니다.</div>
+				</div>
+			
+				<div class="form-group"> 
+  					  <div class="col-sm-12 text-center">
+     					<input type="button" value="닫기" class="btn btn-default" onclick="self.close();">
+   					 </div>
+ 				</div>	
 		
-		<c:if test="${!empty password }">
-			<h2 class="pwd_title2">비번찾기 결과</h2>
-			<table id = "pwd_t2">
-				<tr>
-					<th>검색한 비밀번호</th>
-					<td>${password}</td>
-				</tr>	
-			</table>
-			<div id="pwd_close2">
-				<input type="button" value="닫기" class="input_button" onclick="self.close();">
-			</div>
 		</c:if>
 		
 	</div>

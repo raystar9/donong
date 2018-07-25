@@ -23,7 +23,7 @@
 <c:if test="${error=='logout'}">
 	<script>
 		alert("로그아웃 되었습니다.");
-		location.href="member_login"
+		location.href="main"
 	</script>	
 </c:if>
 
@@ -31,6 +31,20 @@
 	<script>
 		alert("입력 정보를 다시 확인해주세요");
 		history.back();
+	</script>	
+</c:if>
+
+<c:if test="${error=='findidfail'}">
+	<script>
+		alert("입력 정보를 다시 확인해주세요");
+		history.back();
+	</script>	
+</c:if>
+
+<c:if test="${error=='del'}">
+	<script>
+		alert("탈퇴 되었습니다. 다음에 또 만나요");
+		location.href="main"
 	</script>	
 </c:if>
 

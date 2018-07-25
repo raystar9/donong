@@ -14,4 +14,9 @@ public interface MemberMapper {
 	
 	public MemberDTO selectMemberCountByIdAndRealname(String id, String realname);
 	
+	public MemberDTO selectMemberCountByRealnameAndPhone(String realname, String phone);
+	
+	public MemberDTO selectMemberCountById(String id);
+	
+	public MemberDTO selectMemberCountByNickName(String nickname);
 }

@@ -31,10 +31,12 @@
   </style>
 </head>
 <body>
-  <%@include file="../header.jsp" %>
+  <%@include file="../common/header.jsp" %>
   
 <div class="container">
 	<div class="col-sm-2"></div>
+	
+	
     <div class="col-sm-8">
       <h4>최근에 작성한 글</h4>
       <ul class="nav nav-pills nav-stacked">

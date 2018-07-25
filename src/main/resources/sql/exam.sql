@@ -26,6 +26,8 @@ select * from rentalFiles;
 
 INSERT INTO
 
+select * from sido;
+select * from sigungu;
 
 	INSERT INTO rentals
   	VALUES (rental_num_seq.nextval, 2, '이다혜', '대한민국 경기도 부천시', '경기도 부천시', 

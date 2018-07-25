@@ -11,6 +11,9 @@
 <script src="/donong/resources/rental/js/rentalWrite.js"></script>
 <title>대여 작성 페이지</title>
 <style>
+	*{
+		box-sizing:border-box;
+	}
 	#main{
 		margin: auto;
 		border:1px solid black;
@@ -117,7 +120,7 @@
 	<input type='hidden' id="markerLng" name="lng" value="">
 	<div class="button">
 		<input type="submit" value="등록">
-		<input type="button" value="취소">
+		<input type="button" value="취소" onclick="location.href='../rental'">
 	</div>	
 	</form>
 </div>

@@ -32,7 +32,7 @@
   	SELECT sido.num AS sido, sigungu.num AS sigungu
 	FROM sido , sigungu
 	WHERE sido.name like #{sido}
-	AND sigungu.name = #{sigungu}
+	AND sigungu.name like #{sigungu}
   </select>
   
   <select id="selectRentalList" resultType="RentalDTO">

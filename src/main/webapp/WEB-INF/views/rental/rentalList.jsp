@@ -9,6 +9,18 @@
 <script src="/donong/resources/rental/js/rentalList.js"></script>
 <title>대여 목록 페이지</title>
 <style>
+	*{
+		box-sizing:border-box;
+	}
+	#btnwrite{
+		float:right;
+	}
+	#btn{
+		width:1000px;
+		margin-top:5px;
+		margin-bottom:5px;
+		height:32px;
+	}
 	#searchBox{
 		border:1px solid black;
 		width: 1000px;
@@ -18,7 +30,7 @@
 	}
 	#List{
 		border:1px solid black;
-		width: 980px;
+		width: 1000px;
 		height: 700px;
 		margin-bottom: 70px;
 		padding: 10px;
@@ -86,29 +98,28 @@
 				<td rowspan="3">토지 검색</td>
 				<td>번호</td>
 				<td colspan="2">
-					<input type="text" name="id"  id="id">
+					<input type="text" name="num"  id="num">
 				</td>
 				<td rowspan="3">
-					<input type="button" value="검색"> 
+					<input type="submit" value="검색"> 
 				</td>
 			</tr>
 			<tr>
 				<td>지역</td>
-				<td>
-					<select name="si">
-						<option value="1">시 예시</option>
+				<td> 
+					<select name="sido" id="sido">
 					</select>
 				</td>
 				<td>
-					<select name="">
-						<option value="2">군 예시</option>
+					<select name="sigungu" id="sigungu">
+						<option value='0'>시,군,구 </option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td>가격</td>
+				<td>임대료</td>
 				<td colspan="2">
-					<input type="text" name="price"  id="price">
+					<input type="text" name="price" id="price">
 				</td>
 			</tr>
 		</table>
@@ -116,6 +127,9 @@
 </div>
 
 <div id="map"></div>
+<div id="btn">
+	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite">
+</div>
 
 <div id="List" style="overflow-y:scroll;">
 	<c:forEach var="r" items="${list}">

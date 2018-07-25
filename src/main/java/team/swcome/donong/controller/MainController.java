@@ -36,7 +36,7 @@ public class MainController {
 	
 	@RequestMapping(value = "member_join")
 	public String member_join() throws Exception {
-		return "main/member/joinform";
+		return "/member/joinform";
 	}
 	
 	@RequestMapping(value = "member_join_ok", method =  RequestMethod.POST)
@@ -53,7 +53,7 @@ public class MainController {
 			if(memberRes == null ) {
 				String error = "loginfail";
 				model.addAttribute("error", error);
-				return "main/erroppage";
+				return "common/erroppage";
 				
 			} else {	
 			
@@ -85,12 +85,12 @@ public class MainController {
 		String error = "logout";
 		model.addAttribute("error", error);
 
-		return "main/erroppage";
+		return "common/erroppage";
 	}
 	
 	@RequestMapping(value = "member_mypage")
 	public String member_mypage() throws Exception {
-		return "main/member/mypage";
+		return "/member/mypage";
 	}
 	
 	@RequestMapping(value = "member_edit")
@@ -100,7 +100,7 @@ public class MainController {
 		 
 		model.addAttribute(m);
 				
-		return "main/member/editform";
+		return "/member/editform";
 	}
 	
 	@RequestMapping(value = "member_edit_ok", method=RequestMethod.POST)
@@ -113,12 +113,12 @@ public class MainController {
 		String error = "editok";
 		model.addAttribute("error", error);
 		
-		return "main/member/mypage";
+		return "/member/mypage";
 	}
 	
 	@RequestMapping(value = "pwd_find")
 	public String pwd_find() throws Exception {
-		return "main/pwd_find";
+		return "common/pwd_find";
 	}
 	
 	@RequestMapping(value = "find_password", method=RequestMethod.POST)
@@ -129,19 +129,19 @@ public class MainController {
 		if(m==null) {
 			String error = "findpassfail";
 			model.addAttribute("error", error);
-			return "main/erroppage";
+			return "common/erroppage";
 		}
 		
 		String password=m.getPassword();
 		
 		model.addAttribute("password", password);
 		
-		return "main/pwd_find";
+		return "common/pwd_find";
 	}
 	
 	@RequestMapping(value = "id_find")
 	public String id_find() throws Exception {
-		return "main/id_find";
+		return "common/id_find";
 	}
 	
 	@RequestMapping(value = "find_id", method=RequestMethod.POST)
@@ -152,14 +152,14 @@ public class MainController {
 		if(m==null) {
 			String error = "findidfail";
 			model.addAttribute("error", error);
-			return "main/erroppage";
+			return "common/erroppage";
 		}
 		
 		String id=m.getId();
 		
 		model.addAttribute("id", id);
 		
-		return "main/id_find";
+		return "common/id_find";
 	}
 	
 	@ResponseBody
@@ -205,7 +205,7 @@ public class MainController {
 		String error = "del";
 		model.addAttribute("error", error);
 
-		return "main/erroppage";
+		return "common/erroppage";
 
 	}
 	

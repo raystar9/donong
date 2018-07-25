@@ -51,7 +51,7 @@
 </head>
 <body>
 
-  <%@include file="header.jsp" %>
+  <%@include file="../common/header.jsp" %>
 
 <div class="container text-center">    
   <div class="row content">

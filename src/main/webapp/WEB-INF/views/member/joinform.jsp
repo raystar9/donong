@@ -204,6 +204,14 @@ h2{
 	margin:50px;
 	}
 
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+    width:10px;
+    height:2px;
+    text-align:center;
+    margin:0 auto;
+}
 </style>
 
 </head>
@@ -295,8 +303,8 @@ h2{
 			<div class="form-group">
 				<div class="col-sm-2"></div>
 				<label class="control-label col-sm-2" for="postbutton">주소</label>
-				<div class="col-sm-4"><input type="text" id="addr" name="address" class="form-control" required readonly></div>
-				<div class="col-sm-4"></div>
+				<div class="col-sm-5"><input type="text" id="addr" name="address" class="form-control" required readonly></div>
+				<div class="col-sm-3"></div>
 			</div>
 			
 			
@@ -327,6 +335,11 @@ h2{
 					<input name="email" id="join_mailid" class="form-control" required>
 				</div>	
 				
+				<div class="no-gutter">
+				<div class="col-sm-1">
+					@
+				</div>
+				</div>	
 				<div class="col-sm-2">
 					<input name="emaildomain" id="join_maildomain" class="form-control" readonly>
 				</div>
@@ -341,7 +354,7 @@ h2{
 							<option value="0">직접입력</option>
 						</select>
 					</div>	
-				<div class="col-sm-2"></div>
+				<div class="col-sm-1"></div>
 			</div>
 	
 		</div>

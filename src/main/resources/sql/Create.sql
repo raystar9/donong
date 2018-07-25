@@ -142,10 +142,10 @@ regitdate DATE NOT NULL
 );
 
 
-
+insert into member values(1, 'admin', 'admin', '1111', 'admin', '서울시 중구 남대문로 120 kh정보교육원', '02879', 'admin@donong.com', '010-1234-1234', sysdate);
+insert into member values(2, 'user1', 'user1', '1111', 'user1', '서울시 중구 남대문로 120 kh정보교육원', '02879', 'user1@donong.com', '010-1234-1234', sysdate);
 alter table qna add(state varchar2(20));
 alter table faq modify(readcount number default 0);
-insert into cs_category values(2, '구매');
 insert into faq values(2, 2, 'test', 'test');
 insert into qna (num, category, writer, title, content, regitdate, state) values (1, 1, 1, 'abc', 'abc', sysdate, '답변 대기');
 select * from CS_CATEGORY;

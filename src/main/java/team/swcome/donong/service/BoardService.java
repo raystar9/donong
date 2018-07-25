@@ -2,7 +2,9 @@ package team.swcome.donong.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,122 +18,43 @@ public class BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	public List<BoardDTO> getMainList(int page){
+	public List<BoardDTO> getMainList(int page,int limit){
 		List<BoardDTO> result = new ArrayList<>();
-		BoardDTO b1 = new BoardDTO();
-		b1.setSubject("예제입니다.");
-		b1.setWriter("유승열");
-		b1.setCategory("질문");
-		b1.setNum(1);
-		b1.setRe_lev(0);
-		b1.setRe_seq(0);
-		b1.setReadcount(5);
-		Date date = new Date();
-		b1.setRegitdate(date);
-		BoardDTO b2 = new BoardDTO();
-		b2.setSubject("안녕하세요");
-		b2.setWriter("관리자");
-		b2.setCategory("정보");
-		b2.setNum(2);
-		b2.setRe_lev(0);
-		b2.setRe_seq(0);
-		b2.setReadcount(15);
-		b2.setRegitdate(date);
-		result.add(b1);
-		result.add(b2);
-		
-		BoardDTO b3 = new BoardDTO();
-		b3.setSubject("토요일 모일사람.");
-		b3.setWriter("유승열");
-		b3.setCategory("모임");
-		b3.setNum(1);
-		b3.setRe_lev(0);
-		b3.setRe_seq(0);
-		b3.setReadcount(5);
-		b3.setRegitdate(date);
-		result.add(b3);
-		
-		BoardDTO b4 = new BoardDTO();
-		b4.setSubject("정보알려드려요.");
-		b4.setWriter("유승열");
-		b4.setCategory("정보");
-		b4.setNum(1);
-		b4.setRe_lev(0);
-		b4.setRe_seq(0);
-		b4.setReadcount(5);
-		b4.setRegitdate(date);
-		result.add(b4);
-		
-		BoardDTO b5 = new BoardDTO();
-		b5.setSubject("잡담합시다.");
-		b5.setWriter("유승열");
-		b5.setCategory("잡담");
-		b5.setNum(1);
-		b5.setRe_lev(0);
-		b5.setRe_seq(0);
-		b5.setReadcount(5);
-		b5.setRegitdate(date);
-		result.add(b5);
-		
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		hm.put("page", page);
+		hm.put("limit",limit);
+		result=boardMapper.selectAll(hm);
 		return result;
 	}
-	public List<BoardDTO> getAskList(int page){
+	public List<BoardDTO> getAskList(int page,int limit){
 		List<BoardDTO> result = new ArrayList<>();
-		BoardDTO b1 = new BoardDTO();
-		b1.setSubject("예제입니다.");
-		b1.setWriter("유승열");
-		b1.setCategory("질문");
-		b1.setNum(1);
-		b1.setRe_lev(0);
-		b1.setRe_seq(0);
-		b1.setReadcount(5);
-		Date date = new Date();
-		b1.setRegitdate(date);
-		result.add(b1);
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		hm.put("page", page);
+		hm.put("limit",limit);
+		result=boardMapper.selectAsk(hm);
 		return result;
 	}
-	public List<BoardDTO> getTalkList(int page){
+	public List<BoardDTO> getTalkList(int page,int limit){
 		List<BoardDTO> result = new ArrayList<>();
-		BoardDTO b1 = new BoardDTO();
-		b1.setSubject("잡담합시다.");
-		b1.setWriter("유승열");
-		b1.setCategory("잡담");
-		b1.setNum(1);
-		b1.setRe_lev(0);
-		b1.setRe_seq(0);
-		b1.setReadcount(5);
-		Date date = new Date();
-		b1.setRegitdate(date);
-		result.add(b1);
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		hm.put("page", page);
+		hm.put("limit",limit);
+		result=boardMapper.selectTalk(hm);
 		return result;
-	}public List<BoardDTO> getInfoList(int page){
+	}public List<BoardDTO> getInfoList(int page,int limit){
 		List<BoardDTO> result = new ArrayList<>();
-		BoardDTO b1 = new BoardDTO();
-		b1.setSubject("정보알려드려요.");
-		b1.setWriter("유승열");
-		b1.setCategory("정보");
-		b1.setNum(1);
-		b1.setRe_lev(0);
-		b1.setRe_seq(0);
-		b1.setReadcount(5);
-		Date date = new Date();
-		b1.setRegitdate(date);
-		result.add(b1);
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		hm.put("page", page);
+		hm.put("limit",limit);
+		result=boardMapper.selectInfo(hm);
 		return result;
 	}
-	public List<BoardDTO> getCircleList(int page){
+	public List<BoardDTO> getCircleList(int page,int limit){
 		List<BoardDTO> result = new ArrayList<>();
-		BoardDTO b1 = new BoardDTO();
-		b1.setSubject("토요일 모일사람.");
-		b1.setWriter("유승열");
-		b1.setCategory("모임");
-		b1.setNum(1);
-		b1.setRe_lev(0);
-		b1.setRe_seq(0);
-		b1.setReadcount(5);
-		Date date = new Date();
-		b1.setRegitdate(date);
-		result.add(b1);
+		HashMap<String, Integer> hm = new HashMap<String, Integer>();
+		hm.put("page", page);
+		hm.put("limit",limit);
+		result=boardMapper.selectCircle(hm);
 		return result;
 	}
 	
@@ -143,8 +66,46 @@ public class BoardService {
 			
 		}
 	}
+	
 	public int getListCount() {
 		// TODO Auto-generated method stub
 		return boardMapper.getListCount();
+	}
+	public void insertBbs(BoardDTO boardDTO) {
+		boardMapper.insertBbs(boardDTO);
+		
+	}
+	public BoardDTO getContent(int bbs_num) {
+		return boardMapper.selectCommunityByNum(bbs_num);
+	}
+	public void bbsHit(int bbs_num) {
+		boardMapper.bbs_hit(bbs_num);
+		
+	}
+	public void editBbs(BoardDTO bbsbean) {
+		boardMapper.bbs_edit(bbsbean);
+		
+	}
+	public void deleteBbs(int num) {
+		boardMapper.deleteBoard(num);
+		
+	}
+	public void refEdit(BoardDTO bbsbean) {
+		boardMapper.refEdit(bbsbean);
+
+	}
+	public void bbsReplyOk(BoardDTO bbsbean) {
+		boardMapper.bbsReplyOk(bbsbean);
+
+	}
+	public int getListCount3(Map m) {
+		int count=0;
+		count=((Integer)boardMapper.bbsfind_cnt("bbsfind_cnt",m)).intValue();
+return count;
+	}
+	public List<BoardDTO> getBbsList3(Map m) {
+		List<BoardDTO> list =new ArrayList<BoardDTO>();
+		list=boardMapper.bbs_find("bbs_find",m);
+		return list;
 	}
 }

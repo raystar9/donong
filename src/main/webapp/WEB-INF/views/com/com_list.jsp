@@ -13,7 +13,9 @@ $(function(){
 	var limit; 
 	var search_index;
 	var text;
-	
+	console.log('page = ${page}');
+	console.log('startpage = ${startpage}');
+	console.log('endpage = ${endpage}');
 	$("#viewcount").change(function(){
 		limit = $("#viewcount option:selected").val();
 		
@@ -74,7 +76,7 @@ $(function(){
     <table class="table table-hover">
        
     <tr>
-    <th width = "10"><div>분류</div></th>
+    <th width = "10%"><div>분류</div></th>
        <th width = "48%"><div>제목</div></th>
        <th width = "12%"><div>작성자</div></th>
        <th width = "15%"><div>날짜</div></th>
@@ -96,7 +98,7 @@ $(function(){
              <img src="./resources/images/AnswerLine.gif"> 
              </c:if>   
              
-             <a href = "communitycont?com_num=${b.num}&page=${page}&state=cont">
+             <a href = "communitycont?num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>
@@ -113,8 +115,9 @@ $(function(){
     </tr>
     
     </c:forEach>
+    <c:if test="${category=='전체' }">
     <tr class = "pagination">
-       <td colspan = 5>
+       <td >
           <c:if test = "${page <= 1}">
              &lt;&nbsp;
           </c:if>
@@ -122,12 +125,12 @@ $(function(){
              <a href = "communitylist?page=${page-1}">&lt;</a>&nbsp;   
           </c:if>
           
-          <c:forEach var = "a" begin = "${startpage}" end = "${endpage}">
-             <c:if test = "${a == page}">
-                ${a}
+          <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
+             <c:if test = "${status.index == page}">
+                ${status.index}
              </c:if>
-             <c:if test = "${a != page}">
-                <a href = "communitylist?page=${a}">${a}</a>
+             <c:if test = "${status.index != page}">
+                <a href = "communitylist?page=${status.index}">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -139,7 +142,119 @@ $(function(){
           </c:if>
        </td>                  
     </tr>
-    
+    </c:if>
+    <c:if test="${category='잡담' }">
+      <tr class = "pagination">
+       <td >
+          <c:if test = "${page <= 1}">
+             &lt;&nbsp;
+          </c:if>
+          <c:if test = "${page > 1}">
+             <a href = "communitylist?page=${page-1}&category=잡담">&lt;</a>&nbsp;   
+          </c:if>
+          
+          <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
+             <c:if test = "${status.index == page}">
+                ${status.index}
+             </c:if>
+             <c:if test = "${status.index != page}">
+                <a href = "communitylist?page=${status.index}&category=잡담">${status.index}</a>
+             </c:if>   
+          </c:forEach>
+          
+          <c:if test = "${page >= maxpage}">
+             &nbsp;&gt;
+          </c:if>
+          <c:if test = "${page < maxpage}">
+             <a href = "communitylist?page=${page + 1}&category=잡담">&nbsp;&gt;</a>
+          </c:if>
+       </td>                  
+    </tr>
+    </c:if>
+    <c:if test="${category='질문' }">
+      <tr class = "pagination">
+       <td >
+          <c:if test = "${page <= 1}">
+             &lt;&nbsp;
+          </c:if>
+          <c:if test = "${page > 1}">
+             <a href = "communitylist?page=${page-1}&category=질문">&lt;</a>&nbsp;   
+          </c:if>
+          
+          <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
+             <c:if test = "${status.index == page}">
+                ${status.index}
+             </c:if>
+             <c:if test = "${status.index != page}">
+                <a href = "communitylist?page=${status.index}&category=질문">${status.index}</a>
+             </c:if>   
+          </c:forEach>
+          
+          <c:if test = "${page >= maxpage}">
+             &nbsp;&gt;
+          </c:if>
+          <c:if test = "${page < maxpage}">
+             <a href = "communitylist?page=${page + 1}&category=질문">&nbsp;&gt;</a>
+          </c:if>
+       </td>                  
+    </tr>
+    </c:if>
+    <c:if test="${category='정보' }">
+      <tr class = "pagination">
+       <td >
+          <c:if test = "${page <= 1}">
+             &lt;&nbsp;
+          </c:if>
+          <c:if test = "${page > 1}">
+             <a href = "communitylist?page=${page-1}&category=정보">&lt;</a>&nbsp;   
+          </c:if>
+          
+          <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
+             <c:if test = "${status.index == page}">
+                ${status.index}
+             </c:if>
+             <c:if test = "${status.index != page}">
+                <a href = "communitylist?page=${status.index}&category=정보">${status.index}</a>
+             </c:if>   
+          </c:forEach>
+          
+          <c:if test = "${page >= maxpage}">
+             &nbsp;&gt;
+          </c:if>
+          <c:if test = "${page < maxpage}">
+             <a href = "communitylist?page=${page + 1}&category=정보">&nbsp;&gt;</a>
+          </c:if>
+       </td>                  
+    </tr>
+    </c:if>
+    <c:if test="${category='모임' }">
+      <tr class = "pagination">
+       <td >
+          <c:if test = "${page <= 1}">
+             &lt;&nbsp;
+          </c:if>
+          <c:if test = "${page > 1}">
+             <a href = "communitylist?page=${page-1}&category=모임">&lt;</a>&nbsp;   
+          </c:if>
+          
+          <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
+             <c:if test = "${status.index == page}">
+                ${status.index}
+             </c:if>
+             <c:if test = "${status.index != page}">
+                <a href = "communitylist?page=${status.index}&category=모임">${status.index}</a>
+             </c:if>   
+          </c:forEach>
+          
+          <c:if test = "${page >= maxpage}">
+             &nbsp;&gt;
+          </c:if>
+          <c:if test = "${page < maxpage}">
+             <a href = "communitylist?page=${page + 1}&category=모임">&nbsp;&gt;</a>
+          </c:if>
+       </td>                  
+    </tr>
+    </c:if>
     <!-- 레코드가 없으면 -->
     <c:if test="${listcount == 0 }">
        <tr>
@@ -154,14 +269,14 @@ $(function(){
     </table>
     <div id="bbsfind">
      
-    <form method="get" action="communityfind" onsubmit="return find_check()">
+    <form method="get" action="communityfind" onsubmit="return find_check()" style="position:relative;left:30%">
     
     <table>
    
     <tr>
     
     <th>
-    <div class="form-control">
+    <div class="form-control" style="height:100%">
     <select name="find_field" >
     <option value="writer">작성자</option>
     <option value="subject">제목</option>
@@ -180,11 +295,11 @@ $(function(){
     </div>
     
     <br>
-    <form method="get" action="./communitywrite">
+    <form method="get" action="./communitywrite" style="float:right;">
     <table id="table_third">
 	
 	<tr><td>
-			<button type="submit" class="btn" >글쓰기</button>
+			<button type="submit" class="btn" style=>글쓰기</button>
 	</td>
 	</tr>
 </table>

@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="container">
-<form action="communitylist" method="get" name="boardform">
-<input type="hidden" name="num" value="${bbsbean.num }">
+<form action="communitydel_ok" method="post" name="boardform">
+<input type="hidden" name="num" value="${num }">
 <input type="hidden" name="page" value="${page}">
 <table>
 	<tr class="center">

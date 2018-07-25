@@ -13,31 +13,40 @@
 <h2 class="comcont_title" style="witdh:370px">
 커뮤니티 게시판</h2>
 <c:set var="boarddata" value="${boarddata}"/>
-<table id="comcont_t" border='1'>
-	<tr>
-	<th colspan="2">${bbsbean.com_class }잡담|${bbsbean.com_subject}안녕하세요
-	<br>
-	글쓴이 ${bbsbean.com_name}유승열 ${bbsbean.com_date}2018-07-16 조회 ${bbsbean.com_readcount }5</th>
-	</tr>
-	<tr>
-		<th colspan="2">
-		<textarea  rows="8" cols="50" readonly >${com_cont}글의 내용을 담고있는 ....</textarea>
-		<input type="button" value="목록" class="btn" style="vertical-align: top" onclick="location='communitylist?page=${page}'">
-		</th>
-	</tr>
-	<c:if test="${!empty bbsbean.com_file }">
-	<tr>
-	<th>첨부파일명</th>
-	<td>
-	<a href="./download.file?path=${bbsbean.com_file}&original=${bbsbean.com_original } ">${bbsbean.com_original }</a>
-</td>
-</tr>
+<div>
+<h4>${bbsbean.category }|${bbsbean.subject}</h4>
+	<h5>글쓴이 ${bbsbean.writer} ${bbsbean.regitdate} 조회 ${bbsbean.readcount }</h5>
+	<hr>
+		<div class="container">
+		<div class="col-sm-9" style="float:left;">
+		<c:if test="${!empty bbsbean.filename }">
+<img src="resources/upload${bbsbean.filename }">
 </c:if>
-</table>
-<div id="boardcont_menu" style="margin-left:200px">
-		<a href="communityedit"><input type="button" value="수정" class="btn"></a>
-		<a href="communitydel"><input type="button" value="삭제" class="btn"></a>
-		<a href="communityreply"><input type="button" value="답변" class="btn"></a>
+<br>
+		${content}
+<br>
+
+</div>
+<div class="col-sm-3" >
+		<input type="button" value="목록" class="btn" style="vertical-align: top,right;float:right;" onclick="location='communitylist?page=${page}'">
+	</div>
+	</div>
+	<hr>
+	<c:if test="${!empty bbsbean.filename }">
+	
+	파일 다운로드
+	
+	<a href="./download.file?filename=${bbsbean.filename}&filepath=${bbsbean.filepath } ">${bbsbean.filepath }</a>
+
+
+</c:if>
+</div>
+<hr>
+<div id="boardcont_menu" style="margin-left:80%">
+		
+		<input type="button" value="수정" class="btn" onclick="location='communityedit?page=${page}&num=${num}'">
+		<input type="button" value="삭제" class="btn" onclick="location='communitydel?num=${num}'">
+		<input type="button" value="답변" class="btn" onclick="location='communityreply?page=${page}&num=${num}'">
 		<input type="button" value="목록" class="btn" onclick="location='communitylist?page=${page}'">
 		</div>
 </div>

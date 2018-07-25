@@ -5,14 +5,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/market/css/a.css">
 	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
 	<title>Home</title>
 	<style>
-		html, body {
-			margin: 0px;
-		
-		}
 		.sidenav {
 		    height: 100%; /* Full-height: remove this if you want "auto" height */
 		    width: 160px; /* Set the width of the sidebar */
@@ -34,10 +29,20 @@
 		    color: #818181;
 		    display: block;
 		}
-		.item-thumbnail {
-			height: 175px;
-			margin-bottom: 5px;
-			border: solid black 1px;
+		.item-img {
+			margin-left: 5px;
+			margin-top: 3px;
+			margin-bottom: 3px;
+			height: 167px;
+		}
+		.item-cell {
+			display: inline-block;
+		}
+		.item-name {
+			width: 500px;
+		}
+		.item-price {
+			width: 400px;
 		}
 	</style>
 </head>
@@ -52,11 +57,9 @@
 	<div>
 		<h1>타이틀임</h1>
 	</div>
-	<div>
+	<div class="container-fluid">
 		<c:forEach items="${items}" var="item">
-		<div>
 			<%@ include file="/WEB-INF/views/market/list-item.jsp" %>
-		</div>
 		</c:forEach>
 	</div>
 	<ul class="pagination">

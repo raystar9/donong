@@ -1,0 +1,26 @@
+#boardList {
+	width: 80%;
+	height: 70%;
+	
+}
+
+#pagingTd {
+	text-align: center;
+}
+
+#pagingTd a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+#pagingTd #currPage {
+	padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#pagingTd a:hover:not(#currPage) {
+	background-color: #ddd;
+}
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.NoticeMapper">
+	
+	<select id="getNoticeList" resultType="notice">
+		select num, title, content, to_char(regitdate, 'yy/mm/dd') regitdate from notice order by regitdate desc
+	</select>
+	
+	<select id="getListCount" resultType="int">
+		select count(num) from notice
+	</select>
+	
+	<select id="getNoticeContent" resultType="notice">
+		select num, title, content, to_char(regitdate, 'yy/mm/dd') regitdate from notice where num=#{num}
+	</select>
+	
+	<select id="getSrcListCount" parameterType="java.util.Map" resultType="int">
+		select count(num) from notice
+		<where>
+			<if test="srcOpt == ''"></if>
+			<if test="srcOpt == 'title'">
+				title like #{srcTxt}
+			</if>
+			<if test="srcOpt == 'content'">
+				content like #{srcTxt}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getSrcList" parameterType="java.util.Map" resultType="notice">
+		select num, title, content, to_char(regitdate, 'yy/mm/dd') regitdate from notice
+		<where>
+			<if test="srcOpt == ''"></if>
+			<if test="srcOpt == 'title'">
+				title like #{srcTxt}
+			</if>
+			<if test="srcOpt == 'content'">
+				content like #{srcTxt}
+			</if>
+		</where>
+		order by regitdate
+	</select>
+	
+	<update id="updateNotice" parameterType="notice">
+		update notice set title=#{title}, content=#{content} where num=#{num}
+	</update>
+	
+	<delete id="delNotice">
+		delete from notice where num=#{num}
+	</delete>
+	
+	<insert id="insertNotice" parameterType="notice">
+		<selectKey resultType="int" keyProperty="num" order="BEFORE">
+			select nvl(max(num), 0) + 1 from notice
+		</selectKey>
+		insert into notice values(#{num}, #{title}, #{content}, sysdate)
+	</insert>
+	
+</mapper>

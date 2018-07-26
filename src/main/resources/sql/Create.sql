@@ -1,18 +1,19 @@
-DROP TABLE notice;
+
 DROP TABLE qna;
 DROP TABLE faq;
 DROP TABLE cs_category;
 DROP TABLE community;
-DROP TABLE rentalFiles;
+DROP TABLE files;
 DROP TABLE rentals;
-DROP TABLE sigungu;
-DROP TABLE sido;
+DROP TABLE si;
+DROP TABLE do;
 DROP TABLE goodsorders;
 DROP TABLE orders;
 DROP TABLE cart;
 DROP TABLE goods;
 DROP TABLE goods_category;
 DROP TABLE member;
+DROP TABLE notice;
 
 CREATE TABLE member(
 num NUMBER CONSTRAINT member_num_pk PRIMARY KEY,
@@ -20,11 +21,9 @@ id VARCHAR2(100) UNIQUE NOT NULL,
 nickname VARCHAR2(100) UNIQUE NOT NULL,
 password VARCHAR2(100) NOT NULL,
 realname VARCHAR2(100) NOT NULL,
-postnum VARCHAR2(10) NOT NULL,
 address VARCHAR2(200) NOT NULL,
-addressdetail VARCHAR2(100) NOT NULL,
+postcode NUMBER NOT NULL,
 email VARCHAR2(100) NOT NULL,
-emaildomain VARCHAR2(100) NOT NULL,
 phone VARCHAR2(15) NOT NULL,
 registdate DATE NOT NULL
 );
@@ -37,12 +36,10 @@ name VARCHAR2(50) UNIQUE NOT NULL
 CREATE TABLE goods(
 num NUMBER PRIMARY KEY,
 name VARCHAR2(100) NOT NULL,
-price NUMBER NOT NULL,
 category NUMBER CONSTRAINT goods_category_fk REFERENCES goods_category(num) NOT NULL,
 title VARCHAR2(100) NOT NULL,
 regitdate DATE NOT NULL,
-content VARCHAR2(4000) NOT NULL,
-filepath VARCHAR2(200)
+content VARCHAR2(4000) NOT NULL
 );
 
 CREATE TABLE cart(
@@ -55,11 +52,6 @@ quantity NUMBER NOT NULL
 CREATE TABLE orders(
 num NUMBER CONSTRAINT order_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT order_member_num_fk REFERENCES member(num) NOT NULL,
-name VARCHAR2(100) NOT NULL,
-orderdate DATE NOT NULL,
-address VARCHAR2(200) NOT NULL,
-phone VARCHAR2(15) NOT NULL,
-comments VARCHAR2(300) NOT NULL,
 status varchar2(20) NOT NULL
 );
 
@@ -86,7 +78,6 @@ num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 writer VARCHAR(100) NOT NULL,
 address varchar2(400) NOT NULL,
-title varchar2(100) NOT NULL,
 sido NUMBER CONSTRAINT rentals_sido_fk REFERENCES sido(num) NOT NULL,
 sigungu NUMBER CONSTRAINT rentals_sigungu_fk REFERENCES sigungu(num) NOT NULL,
 area number NOT NULL,
@@ -96,17 +87,12 @@ lat NUMBER,
 lng NUMBER
 );
 
-CREATE TABLE rentalfiles(
+CREATE TABLE files(
 num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
-board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- 그 테이블의 게시글 번호
-filename1 VARCHAR2(200) NOT NULL,
-filename2 VARCHAR2(200) ,
-filename3 VARCHAR2(200) ,
-filename4 VARCHAR2(200) ,
-filepath1 VARCHAR2(200) NOT NULL,
-filepath2 VARCHAR2(200) ,
-filepath3 VARCHAR2(200) ,
-filepath4 VARCHAR2(200) 
+board_name VARCHAR2(30) NOT NULL,
+board_num NUMBER NOT NULL,
+filename VARCHAR2(200) NOT NULL,
+filepath VARCHAR2(200) NOT NULL
 );
 
 CREATE TABLE community(
@@ -118,12 +104,10 @@ subject VARCHAR2(200) NOT NULL,
 category VARCHAR2(50) NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 regitdate DATE NOT NULL,
-readcount NUMBER NOT NULL,
-re_ref NUMBER NOT NULL,
-re_lev NUMBER NOT NULL,
-re_seq NUMBER NOT NULL,
-filename VARCHAR2(200),
-filepath VARCHAR2(200)
+readcount NUMBER,
+re_ref NUMBER,
+re_lev NUMBER,
+re_seq NUMBER
 );
 
 CREATE TABLE cs_category(
@@ -157,3 +141,55 @@ title VARCHAR2(200) NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 regitdate DATE NOT NULL
 );
+
+
+insert into member values(1, 'admin', 'admin', '1111', 'admin', '서울시 중구 남대문로 120 kh정보교육원', '02879', 'admin@donong.com', '010-1234-1234', sysdate);
+insert into member values(2, 'user1', 'user1', '1111', 'user1', '서울시 중구 남대문로 120 kh정보교육원', '02879', 'user1@donong.com', '010-1234-1234', sysdate);
+alter table qna add(state varchar2(20));
+alter table faq modify(readcount number default 0);
+insert into faq values(2, 2, 'test', 'test');
+insert into qna (num, category, writer, title, content, regitdate, state) values (1, 1, 1, 'abc', 'abc', sysdate, '답변 대기');
+select * from CS_CATEGORY;
+insert into CS_CATEGORY values(1, '고객정보');
+insert into CS_CATEGORY values(2, '주문/결제');
+insert into CS_CATEGORY values(3, '배송');
+insert into CS_CATEGORY values(4, '상품/상품평');
+insert into CS_CATEGORY values(5, '취소');
+insert into CS_CATEGORY values(6, '반품');
+insert into CS_CATEGORY values(7, '교환');
+insert into CS_CATEGORY values(8, '이벤트/제휴/기타');
+insert into CS_CATEGORY values(9, '고객의소리');
+insert into NOTICE values(2, 'test', 'test', sysdate);
+insert into NOTICE values(3, 'test', 'test', sysdate);
+insert into NOTICE values(4, 'test', 'test', sysdate);
+insert into NOTICE values(5, 'test', 'test', sysdate);
+insert into NOTICE values(6, 'test', 'test', sysdate);
+insert into NOTICE values(7, 'test', 'test', sysdate);
+insert into NOTICE values(8, 'test', 'test', sysdate);
+insert into NOTICE values(9, 'test', 'test', sysdate);
+insert into NOTICE values(10, 'test', 'test', sysdate);
+insert into NOTICE values(11, 'test', 'test', sysdate);
+insert into NOTICE values(12, 'test', 'test', sysdate);
+insert into NOTICE values(13, 'test', 'test', sysdate);
+insert into NOTICE values(14, 'test', 'test', sysdate);
+insert into NOTICE values(15, 'test', 'test', sysdate);
+insert into NOTICE values(16, 'test', 'test', sysdate);
+insert into NOTICE values(17, 'test', 'test', sysdate);
+insert into NOTICE values(18, 'test', 'test', sysdate);
+insert into NOTICE values(19, 'test', 'test', sysdate);
+insert into NOTICE values(20, 'test', 'test', sysdate);
+insert into NOTICE values(21, 'test', 'test', sysdate);
+insert into NOTICE values(22, 'test', 'test', sysdate);
+insert into faq values(1, 1, 'test', 'test', 0);
+insert into faq values(2, 1, 'test', 'test', 0);
+insert into faq values(3, 2, 'test', 'test', 0);
+insert into faq values(4, 2, 'test', 'test', 0);
+insert into faq values(5, 3, 'test', 'test', 0);
+insert into faq values(6, 3, 'test', 'test', 0);
+insert into faq values(7, 4, 'test', 'test', 0);
+insert into faq values(8, 5, 'test', 'test', 0);
+insert into faq values(9, 5, 'test', 'test', 0);
+insert into faq values(10, 6, 'test', 'test', 0);
+insert into faq values(11, 6, 'test', 'test', 0);
+insert into faq values(12, 7, 'test', 'test', 0);
+

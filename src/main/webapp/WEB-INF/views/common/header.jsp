@@ -10,7 +10,7 @@
 <ul class="nav navbar-nav">
 
    <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown">시작하기</a>
+    <a class="dropdown-toggle" >시작하기</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/info">사전준비</a></li>
       <li><a href="#">작물정보</a></li>
@@ -20,7 +20,7 @@
   
   
   <li class="dropdown">
-   <a class="dropdown-toggle" data-toggle="dropdown">마을회관</a>
+   <a class="dropdown-toggle" >마을회관</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/communitylist">게시판</a><li>
       <li><a href="#">공유정보</a></li>
@@ -29,7 +29,7 @@
   </li>
   
     <li class="dropdown">
-     <a class="dropdown-toggle" data-toggle="dropdown">준비하기(구매)</a>
+     <a class="dropdown-toggle" >준비하기(구매)</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/market?category=seed">종자</a></li>
       <li><a href="/donong/market?category=fertilizer">비료</a></li>
@@ -40,7 +40,7 @@
   	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
   	
   	 <li class="dropdown">
-     <a class="dropdown-toggle" data-toggle="dropdown">고객센터</a>
+     <a class="dropdown-toggle" >고객센터</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/cs/main">메인</a></li>
       <li><a href="/donong/cs/qna">QnA</a></li>

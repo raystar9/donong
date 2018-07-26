@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
 <html>
 <head>
   <title>My Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<%@ include file="/resources/common/jsp/import.jsp" %>
   
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
@@ -23,36 +22,36 @@
       color: white;
       padding: 15px;
      	text-align:center;
-     	height:100%;
+     	height:60px;
     }
       .row.content {height: auto;} 
-    }
-   	h4{
-   		font-weight:bold;
-   		color:red;
-   	}
-   	.container-footer{
-   		height:60px;
-   	
-   	}
 
-.container{
-	margin:5%;
+	.mypage-buy{
+		
+		margin-top:50px;
+	}
 	
-}
+
+	.mypage-write{
+		margin-top:100px;
+		margin-bottom:50px;
+	}
+	
+	
+
   </style>
 </head>
 <body>
   <%@include file="../common/header.jsp" %>
   
-  <div class="container">
-  
+  <div class="container mypage-buy">
+  <div class="row">
   <div class="col-sm-12 text-center">
   <h2>구매 내역</h2>
   <p>${sessionBean.nickname}님의 구매내역 입니다.</p>  
   </div>
-  
-  
+  </div>
+<div class="row">  
   <div class="col-sm-2"></div>
     <div class="col-sm-8">          
   <table class="table table-hover">
@@ -84,8 +83,8 @@
   </div>
     <div class="col-sm-2"></div>
 </div>
-  
-<div class="container">
+  </div>
+<div class="container mypage-write">
  <div class="col-sm-12 text-center">
 	<h2>최근에 작성한 글</h2>
 </div>
@@ -105,8 +104,8 @@
    
     </div>
   
-	</div>
     <div class="col-sm-2"></div>
+	</div>
 
 
 <footer class="container-footer">

@@ -33,8 +33,8 @@
     }
     
     #sample{
-    	width:100%;
-    	height:100%
+    	width:555px;
+    	height:375px;
     }
     
     #sample1{
@@ -52,7 +52,40 @@
   <div class="row content">
     <div class="col-sm-6 text-center"> 
       <h1>이달의 작물(정보페이지)</h1>
-       <p><a href="#"><img id="sample" src="resources/main/image/sample1.png"></a></p>
+      
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- 슬라이드 순서 -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    
+    <!-- 슬라이드용 사진설정 -->
+    <div class="carousel-inner">
+      <div class="item active">
+      	<a href="#1"><img id="sample" src="resources/main/image/sample1.png" alt="sample1" style="width:100%;"></a>
+      	</div>
+      	 <div class="item">
+		<a href="#2"><img id="sample" src="resources/main/image/sample2.png" alt="sample2" style="width:100%;"></a>
+		</div>
+		 <div class="item">
+		<a href="#3"><img id="sample" src="resources/main/image/logo.jpg" alt="logo" style="width:100%;"></a>
+		</div>
+      </div>
+      
+      <!-- 옆 슬라이드 이동 화살표 -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+      
+      </div>
+       
    </div>
      <div class="col-sm-6 text-center">
    	 <h1>분양정보 예정위치</h1>

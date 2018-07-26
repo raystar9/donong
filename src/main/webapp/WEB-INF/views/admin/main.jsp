@@ -13,7 +13,7 @@
 <div class="container">
 관리자 메인 페이지입니다.
 <ul>
-	<li><a href="#">1</a></li>
+	<li><a href="/donong/admin/market">장터 관리</a></li>
 	<li><a href="#">2</a></li>
 	<li><a href="#">3</a></li>
 	<li><a href="#">4</a></li>

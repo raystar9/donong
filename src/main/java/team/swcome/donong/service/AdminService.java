@@ -24,7 +24,9 @@ public class AdminService {
 			List<GoodsDTO> goods = goodsMapper.selectItemsByOrderNum(item.getOrderNum());
 			item.setGoods(goods);
 			item.setPrice(getTotalPrice(goods));
-			item.setOrderName(goods.get(0).getName() + " 외");
+			if(!goods.isEmpty()) {
+				item.setOrderName(goods.get(0).getName() + " 외");
+			}
 		}
 		return result;
 	}

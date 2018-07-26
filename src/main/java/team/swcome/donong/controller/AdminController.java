@@ -34,7 +34,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/market/waiting", method = RequestMethod.GET)
 	public String adminMarketWaitingData(Model model) {
-		logger.debug("{}",adminService.getOrders(1).get(0).getPrice());
+//		logger.debug("{}",adminService.getOrders(1).get(0).getPrice());
 		model.addAttribute("orderList", adminService.getOrders(1));
 		return "admin/market-waiting";
 	}

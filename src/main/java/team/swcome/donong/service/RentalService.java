@@ -66,7 +66,7 @@ public class RentalService {
 		// 시도, 시군구 번호
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
-		map.put("sigungu", sigungu);
+		map.put("sigungu", "%" + sigungu "%");
 
 		RentalDTO r2 = rentalMapper.selectSidoSigunguNum(map);
 		r.setSido(r2.getSido());

@@ -60,6 +60,7 @@ orderdate DATE NOT NULL,
 address VARCHAR2(200) NOT NULL,
 phone VARCHAR2(15) NOT NULL,
 comments VARCHAR2(300) NOT NULL,
+waybill number,
 status varchar2(20) NOT NULL
 );
 

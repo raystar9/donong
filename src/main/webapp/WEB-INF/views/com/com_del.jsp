@@ -17,17 +17,6 @@
 		<th colspan="2">커뮤니티 게시판 삭제</th>
 		
 	</tr>
-	
-	
-	<tr>
-		<td><div>비밀번호</div></td>
-		<td>
-			<input name="password" id="password" class="form-control"
-					type="password" size="5" maxlength="10" >
-		</td>
-	</tr>
-	
-
 	<tr class="center">
 		<td colspan="2" class="h30 lime">
 			<input type="submit" value="삭제" class="btn btn-lg">

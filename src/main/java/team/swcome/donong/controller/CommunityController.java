@@ -26,15 +26,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.swcome.donong.dto.BoardDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.BoardService;
 
 /**
  * Handles requests for the application home page.
  */
+@SessionAttributes("sessionBean")
 @Controller
 public class CommunityController {
 
@@ -50,7 +53,8 @@ public class CommunityController {
 	public String home(Locale locale, Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "state", defaultValue = "no") String state,
-			@RequestParam(required = false, defaultValue="전체") String category, HttpServletRequest request) {
+			@RequestParam(required = false, defaultValue="전체") String category, HttpServletRequest request,
+			SessionBean sessionBean) {
 		List<BoardDTO> boardlist = new ArrayList<>();
 		HttpSession session = request.getSession();
 		if (limit != null) {
@@ -115,7 +119,7 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/communitywrite", method = RequestMethod.GET)
-	public String write(Locale locale, Model model) {
+	public String write(Locale locale, Model model, SessionBean sessionBean) {
 
 		return "com/com_write";
 	}
@@ -183,7 +187,8 @@ public class CommunityController {
 	public ModelAndView cont(HttpServletRequest request,
 			HttpServletResponse response,Locale locale, Model model,@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("num") int bbs_num,
-			@RequestParam("state") String state) throws Exception{
+			@RequestParam("state") String state,
+			SessionBean sessionBean) throws Exception{
 		
 		if(state.equals("cont")) {//내용보기일때만
 			boardService.bbsHit(bbs_num);
@@ -228,7 +233,8 @@ public class CommunityController {
 
 	@RequestMapping(value = "/communityedit", method = RequestMethod.GET)
 	public String edit(Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
-		 @RequestParam(value = "num") int num) {
+		 @RequestParam(value = "num") int num,
+		 SessionBean sessionBean) {
 		
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
@@ -245,14 +251,7 @@ public class CommunityController {
 		//번호를 기준으로 DB 내용을 가져옵니다.
 		BoardDTO bcont= boardService.getContent(bbsbean.getNum());
 		
-		if(!bcont.getPassword().equals(bbsbean.getPassword())) {
-			out.println("<script>");
-			out.println("alert('비번이 다릅니다!')");
-			out.println("history.back()");
-			out.println("</script>");
-			
-			
-		}else {//비번이 같다면
+		//비번이 같다면
 			
 			if(!uploadfile.isEmpty()) {
 				File DelFile=new File(saveFolder+bcont.getFilename());
@@ -300,7 +299,7 @@ public class CommunityController {
 				uploadfile.transferTo(new File(saveFolder+fileDBName));
 				//바뀐 파일명으로 저장
 				bbsbean.setFilename(fileDBName);		
-				}
+				
 			this.boardService.editBbs(bbsbean);
 			response.sendRedirect("communitycont?num="+num+"&page="+page+"&state=cont");
 		}
@@ -309,7 +308,7 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/communitydel", method = RequestMethod.GET)
-	public String del(Model model, @RequestParam(value = "num") String num) {
+	public String del(Model model, @RequestParam(value = "num") String num, SessionBean sessionBean) {
 		model.addAttribute("num", num);
 		return "com/com_del";
 	}
@@ -323,31 +322,23 @@ public class CommunityController {
 		BoardDTO board= boardService.getContent(b.getNum());
 		int num=b.getNum();
 		String fname=b.getFilename();
-		if(!board.getPassword().equals(b.getPassword())) {
-			out.println("<script>");
-			out.println("alert('비번이 다릅니다!')");
-			out.println("history.back()");
-			out.println("</script>");
-			
-			
-		}else {//비번이 같다면
-			if(fname!=null) {
+		
+		if(fname!=null) {
 				File file=new File(saveFolder+fname);
 				file.delete();
-			}
+			
 			boardService.deleteBbs(num);
-			return
-					"redirect:/communitylist";
+			
 			
 			
 		}
-		
-		return null;
+		boardService.deleteBbs(num);
+		return "redirect:/communitylist";
 	}
 
 	@RequestMapping(value = "/communityreply", method = RequestMethod.GET)
 	public String reply(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-			 @RequestParam(value = "num") int num) {
+			 @RequestParam(value = "num") int num, SessionBean sessionBean) {
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
@@ -373,7 +364,7 @@ public class CommunityController {
 			HttpServletResponse response,
 			@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("find_name") String find_name,
-			@RequestParam("find_field") String find_field) throws Exception{
+			@RequestParam("find_field") String find_field, SessionBean sessionBean) throws Exception{
 		int limit=10;
 		
 		Map<String, String> m=new HashMap<>();

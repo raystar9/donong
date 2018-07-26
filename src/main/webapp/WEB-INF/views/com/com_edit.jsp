@@ -53,8 +53,7 @@ function check(){
 					<th class="well well-sm" style="text-align:center;">제목</th>
 					<td><input name="subject" id="subject" size="40"
 						class="form-control" value="${bbsbean.subject }"><input type="hidden" name="writer" id="writer" size="14"
-						class="input_box" value="admin"><input type="hidden" name="password" id="password" value="1111"
-						size="14" class="input_box"><input type="hidden" name="member_num" id="member_num" value="1"
+						class="input_box" value="${sessionBean.nickname}"><input type="hidden" name="member_num" id="member_num" value="${sessionBean.memberNum}"
 						size="14" class="input_box"></td>
 				</tr>
 				<tr>

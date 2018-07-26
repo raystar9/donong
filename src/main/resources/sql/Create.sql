@@ -104,7 +104,6 @@ CREATE TABLE community(
 num NUMBER CONSTRAINT community_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT community_writer_fk REFERENCES member(num) NOT NULL,
 writer VARCHAR(100) NOT NULL,
-password VARCHAR2(100) NOT NULL,
 subject VARCHAR2(200) NOT NULL,
 category VARCHAR2(50) NOT NULL,
 content VARCHAR2(4000) NOT NULL,

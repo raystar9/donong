@@ -12,7 +12,7 @@
   <select id="selectAll" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
 	 select * from
-         (select rownum rnum, num, member_num, writer, password,
+         (select rownum rnum, num, member_num, writer,
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
@@ -28,7 +28,7 @@
   <select id="selectAsk" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
 	 select * from
-         (select rownum rnum, num, member_num, writer, password,
+         (select rownum rnum, num, member_num, writer,
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
@@ -43,7 +43,7 @@
   <select id="selectTalk" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
 	 select * from
-         (select rownum rnum, num, member_num, writer, password,
+         (select rownum rnum, num, member_num, writer,
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
@@ -58,7 +58,7 @@
   <select id="selectInfo" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
 	 select * from
-         (select rownum rnum, num, member_num, writer, password,
+         (select rownum rnum, num, member_num, writer,
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
@@ -73,7 +73,7 @@
   <select id="selectCircle" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
 	 select * from
-         (select rownum rnum, num, member_num, writer, password,
+         (select rownum rnum, num, member_num, writer,
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from
@@ -97,10 +97,10 @@
 	<!-- 자료실 저장 -->
 	<insert id="insertBbs" parameterType="BoardDTO">
 		insert into community
-		(num, member_num, writer, password,
+		(num, member_num, writer, 
 		subject, category, content, regitdate, readcount,
 		re_ref, re_lev,	re_seq, filename, filepath)
-		values(community_num_seq1.nextval,#{member_num},#{writer},#{password},
+		values(community_num_seq1.nextval,#{member_num},#{writer},
 		#{subject},#{category},#{content},sysdate,0,
 		community_num_seq1.nextval,0,0,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
 	</insert>
@@ -143,10 +143,10 @@
 	<!-- 답변글 저장 -->
 	<insert id="bbsReplyOk" parameterType="BoardDTO">
 		insert into community
-		(num, member_num, writer, password,
+		(num, member_num, writer,
 		subject, category, content, regitdate, readcount,
 		re_ref, re_lev,	re_seq, filename, filepath)
-		values(community_num_seq1.nextval,1,#{writer},#{password},
+		values(community_num_seq1.nextval,1,#{writer},
 		#{subject},#{category},#{content},sysdate,0,#{re_ref},
 		#{re_lev},#{re_seq},#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
 	</insert>
@@ -177,7 +177,7 @@
 	<select id="bbs_find" parameterType="hashmap" resultType="BoardDTO">
 
 	 select * from
-         (select rownum rnum, num, member_num, writer, password,
+         (select rownum rnum, num, member_num, writer,
             subject, category, content, regitdate, readcount,
             re_ref, re_lev, re_seq, filename, filepath
          from

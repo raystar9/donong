@@ -47,11 +47,7 @@ function check(){
 					<th class="well well-sm" style="text-align:center;">글쓴이</th>
 					<td><input name="writer" id="writer" size="14" class="form-control"></td>
 				</tr>
-				<tr>
-					<th class="well well-sm" style="text-align:center;">비밀번호</th>
-					<td><input type="password" name="password" id="password"
-						size="14" class="form-control"></td>
-				</tr>
+				
 				<tr>
 					<th class="well well-sm" style="text-align:center;">제목</th>
 					<td><input name="subject" id="subject"

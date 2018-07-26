@@ -1,0 +1,105 @@
+.navbar {
+	border: 0px;
+	margin-bottom: 0px;
+}
+
+.navbar-collapse{
+background-color: #ACD17F;
+
+}
+
+.dropdown{
+	width:200px;
+	font-size:15pt;
+	font-weight:bold;
+	text-align:center;
+}
+
+#logo{
+ width:55.56px;
+  height:55.56px;
+  margin:0 auto;
+  padding:0;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    width:200px;
+    font-size:15pt;
+	font-weight:bold;
+	text-align:center;
+	background-color: #ACD17F;
+	color:white;
+}
+
+
+.navbar-nav {
+
+  display: inline-block;
+
+  float: none;
+
+}
+
+.navbar-collapse {
+
+  text-align: center;
+
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+   background-color:#9CCE5F;
+  color:white;
+}
+
+.nav > li > a,
+.nav > li > a {
+  text-decoration: none;
+   background-color:#ACD17F;
+  color:white;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  text-decoration: none;
+   background-color:#9CCE5F;
+  color:white;
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu > li > a {
+  text-decoration: none;
+   background-color:#ACD17F;
+  color:white;
+}
+
+.form-group{
+	margin:5px,0,0,0;
+}
+
+<!-- 로그인창 가운데로 나오게 하는거 -->
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+<!-- 여기까지 -->
+
+.find{
+	float:right;
+}

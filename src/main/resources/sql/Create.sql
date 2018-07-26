@@ -1,3 +1,4 @@
+
 DROP TABLE qna;
 DROP TABLE faq;
 DROP TABLE cs_category;
@@ -191,6 +192,4 @@ insert into faq values(9, 5, 'test', 'test', 0);
 insert into faq values(10, 6, 'test', 'test', 0);
 insert into faq values(11, 6, 'test', 'test', 0);
 insert into faq values(12, 7, 'test', 'test', 0);
-
-
 

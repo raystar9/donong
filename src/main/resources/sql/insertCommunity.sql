@@ -20,6 +20,9 @@ insert into community values(16,1,'admin','1111','제목','모임','내용',sysd
 insert into community values(17,1,'admin','1111','제목','질문','내용',sysdate,1,0,0,0,'s.png','s.png');
 insert into community values(18,1,'admin','1111','제목','질문','내용',sysdate,1,0,0,0,'s.png','s.png');
 
+
+
+
 drop table community;
 select * from COMMUNITY where category ='모임';
 

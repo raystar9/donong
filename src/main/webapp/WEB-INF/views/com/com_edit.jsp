@@ -5,10 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
-<script src="resources/js/jquery-3.3.1.js"></script>
 <!--  <script src="resources/js/bbs.js"></script>-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script>
 function check(){
 	if($.trim($('#category').val())==""){
@@ -30,6 +29,7 @@ function check(){
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<h2 class="comwrite_title">커뮤니티게시판 수정</h2>
 		<form method="post" action="communityedit_ok" onsubmit="return check()" enctype="multipart/form-data">

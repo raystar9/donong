@@ -9,7 +9,7 @@ background-color: #ACD17F;
 }
 
 .dropdown{
-	width:200px;
+	width:180px;
 	font-size:15pt;
 	font-weight:bold;
 	text-align:center;
@@ -24,7 +24,7 @@ background-color: #ACD17F;
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
-    width:200px;
+    width:180px;
     font-size:15pt;
 	font-weight:bold;
 	text-align:center;

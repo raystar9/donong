@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
 <script>
 function check(){
@@ -24,11 +25,9 @@ function check(){
 	}
 }
 </script>
-<script src="resources/js/jquery-3.3.1.js"></script>
-<!-- <script src="resources/js/bbs.js"></script> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<h2 class="comwrite_title">커뮤니티 게시판 글쓰기</h2>
 		<form method="post" action="communitywrite_ok" onsubmit="return check()"

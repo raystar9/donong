@@ -5,9 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="resources/js/jquery-3.3.1.js"></script>
 <script>
 $(function(){
 	var limit; 
@@ -65,6 +64,7 @@ $(function(){
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
   <div class="container">
   <div style="text-align:center; font-size:150px; top-margin:50px;">
    <a href ="communitylist?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>

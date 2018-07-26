@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
 <script>
 function check(){
@@ -25,11 +26,10 @@ function check(){
 	}
 }
 </script>
-<script src="resources/js/jquery-3.3.1.js"></script>
 <script src="resources/js/bbs.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <c:set var="boarddata" value="${bbsbean}"/>
 	<div class="container">
 		<h2 class="bbswrite_title">답변 입력폼</h2>

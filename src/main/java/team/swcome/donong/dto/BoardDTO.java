@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.multipart.MultipartFile;
 
 @Resource
 public class BoardDTO {

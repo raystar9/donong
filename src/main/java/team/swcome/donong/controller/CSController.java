@@ -48,7 +48,7 @@ public class CSController {
 	public ModelAndView csHome(
 			ModelAndView mv) {
 		RowBounds row = new RowBounds(0, 10);
-		mv.addObject("faqList", faqService.getFaqTopTenList());
+		mv.addObject("faqList", faqService.getFaqTopTenList(row));
 		mv.addObject("noticeList", noticeService.getNoticeList(row));
 		
 		mv.setViewName("service/cs_main");

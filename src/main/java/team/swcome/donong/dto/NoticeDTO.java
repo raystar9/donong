@@ -1,7 +1,5 @@
 package team.swcome.donong.dto;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 @Resource
@@ -9,7 +7,7 @@ public class NoticeDTO {
 	private int num;
 	private String title;
 	private String content;
-	private Date regitdate;
+	private String regitdate;
 	
 	public int getNum() {
 		return num;
@@ -29,10 +27,10 @@ public class NoticeDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegitdate() {
+	public String getRegitdate() {
 		return regitdate;
 	}
-	public void setRegitdate(Date regitdate) {
+	public void setRegitdate(String regitdate) {
 		this.regitdate = regitdate;
 	}
 	

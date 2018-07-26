@@ -1,7 +1,5 @@
 package team.swcome.donong.dto;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 @Resource
@@ -11,9 +9,9 @@ public class QNADTO {
 	private int writer;
 	private String title;
 	private String content;
-	private Date regitdate;
+	private String regitdate;
 	private String answer;
-	private Date ansdate;
+	private String ansdate;
 	private String state;
 	
 	public int getNum() {
@@ -46,10 +44,10 @@ public class QNADTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegitdate() {
+	public String getRegitdate() {
 		return regitdate;
 	}
-	public void setRegitdate(Date regitdate) {
+	public void setRegitdate(String regitdate) {
 		this.regitdate = regitdate;
 	}
 	public String getAnswer() {
@@ -58,10 +56,10 @@ public class QNADTO {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public Date getAnsdate() {
+	public String getAnsdate() {
 		return ansdate;
 	}
-	public void setAnsdate(Date ansdate) {
+	public void setAnsdate(String ansdate) {
 		this.ansdate = ansdate;
 	}
 	public String getState() {

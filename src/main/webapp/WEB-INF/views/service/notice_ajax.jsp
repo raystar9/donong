@@ -31,10 +31,10 @@
 <tr>
 	<td colspan="3" id="pagingTd">
 			<c:if test="${page <= 1 }">
-				이전&nbsp;
+				&laquo;&nbsp;
 			</c:if>
 			<c:if test="${page > 1 }">
-				<a>이전</a>
+				<a>&laquo;</a>
 			</c:if>
 			
 			<c:forEach var="pageNum" begin="${startPage }" end="${endPage }">
@@ -47,10 +47,10 @@
 			</c:forEach>
 			
 			<c:if test="${page >= maxPage }">
-				&nbsp;다음
+				&nbsp;&raquo;
 			</c:if>
 			<c:if test="${page < maxPage }">
-				<a>다음</a>
+				<a>&raquo;</a>
 			</c:if>
 		</td>
 </tr>

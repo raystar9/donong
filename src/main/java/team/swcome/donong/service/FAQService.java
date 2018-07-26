@@ -1,6 +1,5 @@
 package team.swcome.donong.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,9 +64,9 @@ public class FAQService {
 		return faqMapper.faqReadCountUpdate(num);
 	}
 
-	public List<FAQDTO> getFaqTopTenList() {
+	public List<FAQDTO> getFaqTopTenList(RowBounds row) {
 
-		return faqMapper.getFaqTopTenList();
+		return faqMapper.getFaqTopTenList(row);
 	}
 
 	

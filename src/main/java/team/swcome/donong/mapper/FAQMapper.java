@@ -16,6 +16,6 @@ public interface FAQMapper {
 
 	public int faqReadCountUpdate(int num);
 
-	public List<FAQDTO> getFaqTopTenList();
+	public List<FAQDTO> getFaqTopTenList(RowBounds row);
 	
 }

@@ -23,7 +23,7 @@
 	
 	<select id="getFaqTopTenList" resultType="faq">
 		select * 
-		from (select f.num, c.name category, f.title, f.content, nvl(f.readcount, 0) readcount from faq f, cs_category c where f.category = c.num) 
+		from (select f.num, c.name category, f.title, f.content, nvl(f.readcount, 0) readcount from faq f, cs_category c where f.category = c.num)  
 		order by readcount desc
 	</select>
 	

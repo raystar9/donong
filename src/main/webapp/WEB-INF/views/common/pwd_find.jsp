@@ -5,9 +5,7 @@
 <html>
 <head>
 <title>비밀번호 찾기</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+ <%@ include file="/resources/common/jsp/import.jsp" %>
  <script>
 	 function check(){
 		 if($.trim($("#id").val())==""){

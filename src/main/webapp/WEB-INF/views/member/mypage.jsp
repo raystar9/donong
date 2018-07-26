@@ -95,11 +95,11 @@
 	
       
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#">작성글1</a></li>
-        <li><a href="#">작성글2</a></li>
-        <li><a href="#">작성글3</a></li>
-        <li><a href="#">작성글4</a></li>
-        <li><a href="#">작성글5</a></li>
+        <li><a href="#1">작성글1</a></li>
+        <li><a href="#2">작성글2</a></li>
+        <li><a href="#3">작성글3</a></li>
+        <li><a href="#4">작성글4</a></li>
+        <li><a href="#5">작성글5</a></li>
       </ul><br>
    
     </div>

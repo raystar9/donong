@@ -54,7 +54,7 @@
       <h1>이달의 작물(정보페이지)</h1>
       
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- 슬라이드 순서 -->
+    <!-- 인디게이터(사진 아래 단추) -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>

@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.swcome.donong.mapper.RentalMapper">
 
-  
   <insert id="insertFarm" parameterType="RentalDTO">
   	INSERT INTO rentals
   	VALUES (rental_num_seq.nextval, #{member_num}, #{writer}, #{address}, #{title}, 
@@ -37,6 +36,7 @@
   
   <select id="selectRentalList" resultType="RentalDTO">
   	SELECT * FROM rentals
+  	ORDER BY num
   </select>
   
   <select id="selectRepresentImg" resultType="String">
@@ -53,6 +53,74 @@
   	SELECT filepath1, filepath2, filepath3, filepath4, filename1, filename2, filename3, filename4 
   	FROM rentalfiles
 	WHERE board_num = #{board_num}
+  </select>
+  
+  <delete id="deleteRental" parameterType="int">
+  	DELETE FROM rentals
+  	WHERE num = #{board_num}
+  </delete>
+  
+  <delete id="deleteFiles" parameterType="int">
+  	DELETE FROM rentalfiles
+  	WHERE num = #{board_num}
+  </delete>
+  
+  <select id="selectSearch" parameterType="RentalDTO" resultType="RentalDTO">
+  	SELECT * FROM rentals
+  	
+  	<choose>
+  		<when test="num != null">
+  			WHERE num = #{num}
+  		</when>
+  		<when test="sido != 0 
+  					and num == 0 
+  				    and sigungu == 0 
+  				 	and price == 0">
+  			WHERE sido = #{sido}
+  		</when>
+  		<when test="sido != 0 
+  					and sigungu != 0 
+  					and num == 0 
+  					and price == 0">
+  			WHERE sido = #{sido}
+  			AND sigungu = #{sigungu}
+  		</when>
+  		<when test="sido != 0 
+  					and price != 0
+  					and sigungu == 0
+  					and num == 0
+  					and price &gt;= 50000">
+  			WHERE sido = #{sido}		
+  			AND price &gt;= #{price} 
+  		</when>
+  		<when test="sido != 0 
+  					and price != 0 
+  					and sigungu == 0 
+  					and num == 0 
+  					and price &lt; 50000">
+  			WHERE sido = #{sido}		
+  			AND price between #{price} and #{price}+10000
+  		</when>
+  		<when test="sido != 0
+  					and sigungu != 0
+  					and price != 0
+  					and price &lt; 50000">
+  			WHERE sido = #{sido}
+  			AND sigungu = #{sigungu}
+  			AND price between #{price} and #{price}+10000
+  		</when>
+  		<when test="sido != 0
+  					and sigungu != 0
+  					and price != 0
+  					and price &gt;= 50000">
+   			<![CDATA[
+   			WHERE sido = #{sido}
+  			AND sigungu = #{sigungu}
+  			AND price >= #{price} 
+  			]]>
+  		</when>
+  	</choose>
+  	
   </select>
   
   

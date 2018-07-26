@@ -54,7 +54,6 @@ public class RentalController {
 
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setPath(filepath[i]);
-			System.out.println("num = " + list.get(i).getNum());
 		}
 		
 		model.addAttribute("list", list);
@@ -74,6 +73,7 @@ public class RentalController {
 		return "rental/rentalWrite";
 	}
 	
+	/* 농지 대여 글쓰기 실행 */
 	@RequestMapping(value = "/rental/write_ok", method = RequestMethod.POST)
 	public String rentalWrite_ok(
 								 Model model,  
@@ -124,6 +124,51 @@ public class RentalController {
 		return list;
 	}
 	
+	/* 농지 대여 삭제 */
+	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
+	public String rentalDelete(Model model, HttpServletRequest request) {
+		int board_num = Integer.parseInt(request.getParameter("num"));
+		RentalService.deleteRental(board_num);
+		RentalService.deleteFiles(board_num);
+		return "redirect:/rental";
+	}
+	
+	/* 검색할 때 Ajax */
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	@ResponseBody
+	public Object searchJson(Model model, SessionBean sessionBean, HttpServletRequest request) {
+		int num = 0;
+		int sido = 0;
+		int sigungu = 0;
+		int price = 0;
+		
+		if(request.getParameter("num") != null) {
+			num = Integer.parseInt(request.getParameter("num"));
+		}
+		
+		if(request.getParameter("sido") != null) {
+			sido = Integer.parseInt(request.getParameter("sido"));
+		}
+		
+		if(request.getParameter("sigungu") != null) {
+			sigungu = Integer.parseInt(request.getParameter("sigungu"));
+		}
+		
+		if(request.getParameter("price") != null) {
+			price = Integer.parseInt(request.getParameter("price"));
+		}
+		
+		RentalDTO r = new RentalDTO();
+		r.setNum(num);
+		r.setSido(sido);
+		r.setSigungu(sigungu);
+		r.setPrice(price);
+		
+		List<RentalDTO> list = RentalService.selectSearch(r);
+		
+		return list;
+	}
+	
 	/*
 	//검색버튼 누르면 오는 곳
 	@RequestMapping(value = "rental/search", method = RequestMethod.GET)
@@ -134,10 +179,6 @@ public class RentalController {
 	//글쓰기 페이지에서 등록 버튼 누르면 오는 곳 
 	
 	
-	//삭제 버튼 누르면 오는 곳
-	@RequestMapping(value = "rental/delete", method = RequestMethod.POST)
-	public String rentalDelete(Locale locale, Model model) {
-		return "rental/rentalWrite";
-	}
+	
 	*/
 }

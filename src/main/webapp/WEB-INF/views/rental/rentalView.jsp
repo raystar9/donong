@@ -33,7 +33,7 @@
 		margin-bottom: 50px;
 		margin-top: 50px;
 	}
-	.writeTable{
+	.viewTable{
 		width:650px;
 		height:180px;
 		float:left;
@@ -84,16 +84,28 @@
 		width:450px;
 		height:350px;
 	}
+	#viewbtn{
+		width:900px;
+		height:50px;
+		float:right;
+	}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>대여 상세보기 페이지</title>
 </head>
 <body>
-
 <input type="hidden" id="lat" value="${rental.lat }"/>
 <input type="hidden" id="lng" value="${rental.lng }"/>
 <div id="main">
-	<table border="1" class="writeTable">
+<input type="hidden" id="board_num" value="${rental.num }"/>
+	<div id='viewbtn'>
+ 		<input type="button" value="목록" onclick="location.href='../rental'"/>
+ 		<c:if test="${rental.member_num eq member.num }">
+ 		  <input type="button" value="수정" onclick="location.href='../rental/modify'"/>
+ 		  <input type="button" value="삭제" onclick="del_click()"/>
+ 		</c:if>
+ 	</div>
+	<table border="1" class="viewTable">
 		<tr>
 			<td>번호</td>
 			<td>
@@ -109,13 +121,13 @@
 		<tr>
 			<td>면적</td>
 			<td>
-				${rental.area}
+				${rental.area}㎡
 			</td>
 		</tr>
 		<tr>
 			<td>임대료</td>
 			<td>
-				${rental.price}
+				${rental.price}원
 			</td>
 		</tr>
 		<tr>
@@ -145,20 +157,19 @@
 		<div id='bigImg'>
 			<img src="../resources/rental/upload${file.filePath1 }" class='img' id='big'/>
 		</div>
+		
 		<div id='separation'>
-			<div id='Img1' class="sepatateImg">
-			 	<c:if test="${file.fileName1 eq 'default2.png'}">
-					<img src="../resources/rental/upload${file.filePath1 }" class='img'/>
-			 	</c:if>
+			<div class="sepatateImg">
+				  <img src="../resources/rental/upload${file.filePath1 }" class='img' id='Img1'/>
 			</div>
-			<div id='Img2' class="sepatateImg">
-				<img src="../resources/rental/upload${file.filePath2 }" class='img'/>
+			<div class="sepatateImg">
+				  <img src="../resources/rental/upload${file.filePath2 }" class='img' id='Img2'/>
 			</div>
-			<div id='Img3' class="sepatateImg">
-					<img src="../resources/rental/upload${file.filePath3 }" class='img'/>
+			<div class="sepatateImg">
+				 <img src="../resources/rental/upload${file.filePath3 }" class='img' id='Img3'/>
 			</div>
-			<div id='Img4' class="sepatateImg">
-				<img src="../resources/rental/upload${file.filePath4 }" class='img'/>
+			<div class="sepatateImg">
+				 	<img src="../resources/rental/upload${file.filePath4 }" class='img' id='Img4'/>
 			</div>
 		</div>
 	</div>

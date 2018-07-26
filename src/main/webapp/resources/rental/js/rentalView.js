@@ -1,6 +1,44 @@
 $(document).ready(function() {
+	
+	/* image hover */
+	$("#Img1").hover(function(){
+		var img1 = $("#Img1").attr('src');
+		$("#big").attr('src', img1);
+	});
+	
+	$("#Img2").hover(function(){
+		var img2 = $("#Img2").attr('src');
+		var imgArr2 = img2.split('/');
+		if(imgArr2[4] != 'default.png')
+		$("#big").attr('src', img2);
+	});
+	
+	$("#Img3").hover(function(){
+		var img3 = $("#Img3").attr('src');
+		var imgArr3 = img3.split('/');
+		if(imgArr3[4] != 'default.png')
+		$("#big").attr('src', img3);
+	});
+	
+	$("#Img4").hover(function(){
+		var img4 = $("#Img4").attr('src');
+		var imgArr4 = img4.split('/');
+		if(imgArr4[4] != 'default.png')
+		$("#big").attr('src', img4);
+	});
 
 });//ready()
+
+/* 게시글 삭제버튼 onClick 이벤트 */
+function del_click(){
+	var num = $("#board_num").val();
+	var result = confirm("게시글을 삭제하시겠습니까?");
+	if(result == true){
+		location.href='./delete?num=' + num;
+	}else{
+		return false;
+	}
+}
 
 /* 맵 필드 변수 설정 */
 var marker;

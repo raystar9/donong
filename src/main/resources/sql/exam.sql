@@ -1,10 +1,12 @@
 insert into member
 values (mem_num_seq.nextval, 'dahye', 'dada', '1234', '이다혜', 123456, '경기도 부천시 원미구', '금강시티빌 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
 
+insert into member
+values (mem_num_seq.nextval, 'qwe', 'qwe', 'qwe', '홍주성', 123456, '경기도 부천시 원미구', '금강시티빌 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
+
+
 select * from member;
 
-truncate table rentals;
-truncate table rentalFiles; 
 
 select * from SIGUNGU
 where name = '이문동';
@@ -85,3 +87,14 @@ select * from sigungu;
 select * from rentalFiles;
 
 select * from sido;
+
+select * from rentals
+where num = #{num}
+
+select * from rentals
+where sido = ?
+and sigungu = ?
+and price between ? and ?
+
+
+

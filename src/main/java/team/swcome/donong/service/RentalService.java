@@ -66,7 +66,7 @@ public class RentalService {
 		// 시도, 시군구 번호
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
-		map.put("sigungu", "%" + sigungu "%");
+		map.put("sigungu", "%" + sigungu +"%");
 
 		RentalDTO r2 = rentalMapper.selectSidoSigunguNum(map);
 		r.setSido(r2.getSido());
@@ -84,8 +84,6 @@ public class RentalService {
 	
 	/* 농지 대여 글 파일 삽입 */
 	public void insertFile(FileDTO f) throws IllegalStateException, IOException {
-		System.out.println();
-		
 		MultipartFile file1 = f.getFile1();
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
@@ -146,7 +144,8 @@ public class RentalService {
 			System.out.println("확장자2 = " + fileExtension);
 
 			// 새로운 파일명을 저장
-			refileName = "rental" + year + month + date + random + "." + fileExtension;
+			random = r.nextInt(100000000);
+			refileName = "farm" + year + month + date + random + "." + fileExtension;
 			System.out.println("refileName2 = " + refileName);
 
 			// 오라클 디비에 저장될 레코드 값
@@ -159,7 +158,7 @@ public class RentalService {
 			f.setFilePath2(fileDBName);
 		}else {
 			f.setFileName2("default.png");
-			f.setFilePath2("/default2.png");
+			f.setFilePath2("/default.png");
 		}
 
 		if (!file3.isEmpty()) {
@@ -174,7 +173,8 @@ public class RentalService {
 			System.out.println("확장자3 = " + fileExtension);
 
 			// 새로운 파일명을 저장
-			refileName = "rental" + year + month + date + random + "." + fileExtension;
+			random = r.nextInt(100000000);
+			refileName = "farm" + year + month + date + random + "." + fileExtension;
 			System.out.println("refileName3 = " + refileName);
 
 			// 오라클 디비에 저장될 레코드 값
@@ -182,12 +182,12 @@ public class RentalService {
 			System.out.println("fileDBName3 = " + fileDBName);
 
 			// transferTo(FIle path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-			file1.transferTo(new File(saveFolder + fileDBName));
+			file3.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath3(fileDBName);
 		}else {
 			f.setFileName3("default.png");
-			f.setFilePath3("/default2.png");
+			f.setFilePath3("/default.png");
 		}
 
 		if (!file4.isEmpty()) {
@@ -202,7 +202,8 @@ public class RentalService {
 			System.out.println("확장자4 = " + fileExtension);
 
 			// 새로운 파일명을 저장
-			refileName = "rental" + year + month + date + random + "." + fileExtension;
+			random = r.nextInt(100000000);
+			refileName = "farm" + year + month + date + random + "." + fileExtension;
 			System.out.println("refileName4 = " + refileName);
 
 			// 오라클 디비에 저장될 레코드 값
@@ -210,12 +211,12 @@ public class RentalService {
 			System.out.println("fileDBName4 = " + fileDBName);
 
 			// transferTo(FIle path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-			file1.transferTo(new File(saveFolder + fileDBName));
+			file4.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
 			f.setFilePath4(fileDBName);
 		}else {
 			f.setFileName4("default.png");
-			f.setFilePath4("/default2.png");
+			f.setFilePath4("/default.png");
 		}
 
 		rentalMapper.insertFile(f);
@@ -252,6 +253,43 @@ public class RentalService {
 	public FileDTO selectFileNamePath(int board_num) {
 		FileDTO f = rentalMapper.selectFileNamePath(board_num);
 		return f;
+	};
+	
+	/* 농지 대여 글 삭제 */
+	public void deleteRental(int board_num) {
+		rentalMapper.deleteRental(board_num);
+	};
+	
+	/* 농지 대여 파일 삭제 */
+	public void deleteFiles(int board_num) {
+		FileDTO f = rentalMapper.selectFileNamePath(board_num);
+		String[] fpath = new String[4];
+		
+		fpath[0] = f.getFilePath1();
+		fpath[1] = f.getFilePath2(); 
+		fpath[2] = f.getFilePath3();
+		fpath[3] = f.getFilePath4();
+		
+		for(int i=0; i<fpath.length; i++) {
+			if(fpath[i] != null) {
+				File file = new File(saveFolder + fpath[i]);
+				file.delete();
+			};
+		};
+		
+		rentalMapper.deleteFiles(board_num);
+	};
+	
+	/* 농지 게시글 검색 */
+	public List<RentalDTO> selectSearch(RentalDTO r){
+		int num = r.getNum();
+		int sido = r.getSido();
+		int sigungu = r.getSigungu();
+		int price = r.getPrice();
+		
+		rentalMapper.selectSearch(r);
+		
+		return null;
 	};
 	
 }

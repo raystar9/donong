@@ -58,7 +58,7 @@ $(document).ready(function() {
  	$.each(sido, function(key, value){
  		var num = key+1*1;
  		$("#sido").append("<option value='" + num + "'>" + value + "</option>");
- 	})//each()
+ 	})// each()
  	
  	
  	$("#sido").change(function(){
@@ -152,7 +152,7 @@ $(document).ready(function() {
  		 	})
  		}
  		
- 	})//change()
+ 	})// change()
  	
  	$('form').submit(function(){
 		
@@ -170,10 +170,52 @@ $(document).ready(function() {
             return false;
           }
 		
-	});//submit()
+	});// submit()
  		
 	
-});//ready()
+});// ready()
+
+/* 농지대여 글 검색 */
+function search(){
+	var num = $("#num").val();
+	var sido = $("#sido").val();
+	var sigungu = $("#sigungu").val();
+	var price = $("#price").val();
+	
+	 $.ajax({
+	 type : "GET",
+	 data : { "num":num , "sido":sido, "sigungu":sigungu, "price":price}, 
+	 url : '/donong/search',
+	 success : function(json){
+		 alert('Ajax 성공!')
+		 $(".viewbox").remove();
+		 alert(json[0].num);
+		 for(var i=0; i<json.length; i++){
+		 var content = "<div class='viewbox'>" +
+		 			   "<div id='top'>"+
+		 			   "No.&nbsp;"+ json[i].num +
+		 			   "</div>"+
+		 			   "<div class='row'>"+
+		 			   "<a href='./rental/view?num="+ json[i].num +"><img src='./resources/rental/upload"+json[i].path +"' class='img'></a>"+
+		 			   "</div>"+
+		 			   "<div class='row'>"+
+		 			   "<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+
+		 			   "</div>"+
+		 			   "<div class='row'>"+
+		 			   "<img src='./resources/rental/image/area3.png' class='mark'/>&nbsp;"+json[i].area+"㎡<br>"+
+		 			   "</div>"+
+		 			   "<div class='row'>"+
+		 			   "	<img src='./resources/rental/image/dollar.png' class='mark'/>&nbsp;"+ json[i].price+ "원<br>"+
+		 			   "</div>"+
+		 			   "</div>";
+		 	$("#List").append(content);
+		 }
+	 },
+	 error:function(){
+		 alert('Ajax 실패!');
+	 }
+	});// ajax()
+};// search()
 
 /* 맵 필드 변수 설정 */
 var marker;
@@ -183,7 +225,7 @@ var infoWindowArr = [];
 
 /* 맵 초기화 함수 */	
 function initMap(){
-	var seoul = {			//서울 시청으로 처음 위치 지정
+	var seoul = {			// 서울 시청으로 처음 위치 지정
 		lat : 36.58327953071077,
 		lng : 127.89600693824082	
 	};
@@ -194,7 +236,7 @@ function initMap(){
 		scrollwheel: true
 	});
 	
-}//initMap()
+}// initMap()
 
 /* Ajax로 DB에서 json받아 marker 생성 */
 function viewMarkers(){
@@ -212,10 +254,10 @@ function viewMarkers(){
 				  				  "* 면적&nbsp;&nbsp;&nbsp;&nbsp; : "+json[i].area+"㎡<br>"+
 				  				  "* 임대료 : "+json[i].price+"원"+
 				  				  "</div>";
-				//각 게시글마다의 내용들을 배열에 담는다.
+				// 각 게시글마다의 내용들을 배열에 담는다.
 				infoContentArr.push(infoContent);
 				
-				//생성 된 인포 윈도우 배열과 json으로 마커를 생성해 주는 함수에 전달
+				// 생성 된 인포 윈도우 배열과 json으로 마커를 생성해 주는 함수에 전달
 				addMarker(json[i],i)
 			}
 		},
@@ -227,13 +269,13 @@ function viewMarkers(){
 	
 }// viewMarkers()
 
-/* 마킹하는 함수  (json의 좌표값, 순서) */
+/* 마킹하는 함수 (json의 좌표값, 순서) */
 function addMarker(location, i){
 	
 	pins.push(new google.maps.Marker({
 		position : new google.maps.LatLng(location.lat, location.lng),
 		map : map,
-	})); //push()
+	})); // push()
 	
 	pins[i].addListener('click', function(){
 		var infoWindow = new google.maps.InfoWindow({
@@ -241,16 +283,16 @@ function addMarker(location, i){
 			maxWidth: 350
 		});
 		
-		//인포윈도우 배열에 담는다.
+		// 인포윈도우 배열에 담는다.
 		infoWindowArr.push(infoWindow);
-		//마커를 클릭 했을 때 인포 윈도우를 오픈 해 준다.
+		// 마커를 클릭 했을 때 인포 윈도우를 오픈 해 준다.
 		infoWindow.open(pins[i].get('map'), pins[i]);
-		//인포 윈도우 바깥의 지도 영역을 클릭 하면 인포윈도우를 닫아준다.
+		// 인포 윈도우 바깥의 지도 영역을 클릭 하면 인포윈도우를 닫아준다.
 		google.maps.event.addListener(map, 'click', function(){
 			infoWindow.close();
 		});
 		
-	});//addListener
+	});// addListener
 	
-}//addMarker()
+}// addMarker()
 

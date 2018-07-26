@@ -25,4 +25,10 @@ public interface RentalMapper {
 	
 	public FileDTO selectFileNamePath(int board_num);
 	
+	public void deleteRental(int board_num);
+	
+	public void deleteFiles(int board_num);
+	
+	public List<RentalDTO> selectSearch(RentalDTO r);
+	
 }

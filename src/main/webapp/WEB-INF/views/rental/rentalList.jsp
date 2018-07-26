@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%--<script src="http://code.jquery.com/jquery-latest.js"></script> --%>
 <%@ include file="/resources/common/jsp/import.jsp" %>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <script src="/donong/resources/rental/js/rentalList.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <title>대여 목록 페이지</title>
 <style>
 	*{
@@ -87,6 +86,10 @@
 		width:100%;
 	
 	}
+	.mark{
+		width:13px;
+		height:13px;
+	}
 </style>
 </head>
 <body>
@@ -102,7 +105,7 @@
 					<input type="text" name="num"  id="num">
 				</td>
 				<td rowspan="3">
-					<input type="submit" value="검색"> 
+					<input type="button" value="검색" id="searchBtn" onclick="search();"> 
 				</td>
 			</tr>
 			<tr>
@@ -120,7 +123,14 @@
 			<tr>
 				<td>임대료</td>
 				<td colspan="2">
-					<input type="text" name="price" id="price">
+					<select name="price">
+						<option value="0">선택</option>
+						<option value="10000">10000원 ~ 20000원</option>
+						<option value="20000">20000원 ~ 30000원</option>
+						<option value="30000">30000원 ~ 40000원</option>
+						<option value="40000">40000원 ~ 50000원</option>
+						<option value="50000">50000원 ~ 이상</option>
+					</select>
 				</td>
 			</tr>
 		</table>
@@ -142,13 +152,13 @@
 				<a href="./rental/view?num=${r.num }"><img src="./resources/rental/upload${r.path }" class='img'></a>
 			</div>
 			<div class='row'>
-				<img src="./resources/rental/image/flag.png" width='13px' height='13px'/>&nbsp;${r.title }<br>
+				<img src="./resources/rental/image/flag.png" class='mark'/>&nbsp;${r.title }<br>
 			</div>
 			<div class='row'>
-				<img src="./resources/rental/image/area3.png" width='13px' height='13px'/>&nbsp;${r.area }㎡<br>
+				<img src="./resources/rental/image/area3.png" class='mark'/>&nbsp;${r.area }㎡<br>
 			</div>
 			<div class='row'>
-				<img src="./resources/rental/image/dollar.png" width='13px' height='13px'/>&nbsp; ${r.price }원<br>
+				<img src="./resources/rental/image/dollar.png" class='mark'/>&nbsp; ${r.price }원<br>
 			</div>
 		</div>
 	</c:forEach>

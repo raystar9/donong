@@ -53,7 +53,10 @@
 			<input class="form-control" type="text" name="addressdetail" id="addressdetail" value="${member.addressdetail }" />
 			<label for="comments">코멘트</label><input class="form-control" type="text" name="comments" id="comments" />
 		<input class="btn btn-default" type="submit" value="주문하기" />
-	
+		<c:if test="${!isCart }">
+			<input type="hidden" name="goodsNum" value="${item.num}"/>
+			<input type="hidden" name="goodsQuantity" value="${item.quantity}"/>
+		</c:if>
 	</fieldset>
 	</form>
 </div>

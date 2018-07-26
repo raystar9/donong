@@ -13,7 +13,7 @@ INSERT INTO cart VALUES(1, 1, 1, 2);
 INSERT INTO cart VALUES(2, 2, 1, 1);
 INSERT INTO cart VALUES(3, 3, 2, 5);
 
-INSERT INTO orders VALUES(1, 1, '구명회', '경기도 남양주시 와부읍', '010-9195-0999', '부재시 경비실', 'npay');
+INSERT INTO orders VALUES(1, 1, '구명회', sysdate, '경기도 남양주시 와부읍', '010-9195-0999', '부재시 경비실', null, 'npay');
 --INSERT INTO orders VALUES(2, 1, 'prep');
 
 INSERT INTO goodsorders VALUES(1, 3, 5);

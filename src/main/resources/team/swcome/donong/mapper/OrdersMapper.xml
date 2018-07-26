@@ -19,15 +19,21 @@
 		WHERE member_num = #{memberNum} AND status in ('npay', 'prep', 'delv')
 	</select>
 	
-	<insert id="insertOrder" parameterType="OrdersDTO">
+	<insert id="insertOrder" parameterType="OrdersDTO" useGeneratedKeys="true" keyProperty="num">
 	
 	  <selectKey resultType="int" keyProperty="num" order="BEFORE">
 	  	SELECT MAX(num)+1 FROM ORDERS
 	  </selectKey>
 		INSERT INTO ORDERS
-		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, #{comments}, 'napy')
+		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, #{comments}, null, 'npay')
 	</insert>
-	
+	<insert id="insertOrderGoods" parameterType="GoodsOrdersDTO">
+		<selectKey resultType="int" keyProperty="num" order="BEFORE">
+			SELECT MAX(num)+1 FROM goodsorders
+		</selectKey>
+			INSERT INTO goodsorders
+			VALUES(#{num}, #{orderNum}, #{goodsNum}, #{quantity})
+	</insert>
 	<update id="updateOrder" parameterType="OrdersDTO">
 		UPDATE ORDERS 
 		SET member_num = #{memberNum} AND name = #{name} AND address = #{address} AND

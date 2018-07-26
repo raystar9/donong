@@ -73,7 +73,8 @@ public class MarketController {
 	@RequestMapping(value = "/market/order/cart", method = RequestMethod.GET)
 	public String orderByCart(Model model, SessionBean session) {
 		List<CartGoodsDTO> items = marketService.getCartItems(session.getMemberNum());
-		model.addAttribute("member", marketService.getMemberDetails(session.getMemberNum()));		
+		model.addAttribute("member", marketService.getMemberDetails(session.getMemberNum()));	
+		model.addAttribute("isCart", true);
 		if(items.size() == 0) {			
 			return "market/order";
 		} else if(items.size() == 1){
@@ -94,11 +95,17 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value = "/market/order/process", method = RequestMethod.POST)
-	public String paymentProcess(Model model, OrdersDTO order, @RequestParam("addressdetail") String addressDetail, SessionBean session) {
+	public String paymentProcess(Model model, OrdersDTO order, @RequestParam("addressdetail") String addressDetail,
+			@RequestParam(required=false) Integer goodsNum, @RequestParam(required=false) Integer goodsQuantity, SessionBean session) {
+		
 		order.setAddress(order.getAddress() + " " + addressDetail);
 		order.setNum(3);
 		order.setMemberNum(session.getMemberNum());
-		marketService.insertOrder(order);
+		if(goodsNum == null) {
+			marketService.insertOrder(order, marketService.getCartItems(session.getMemberNum()));
+		} else {
+			marketService.insertOrder(order, goodsNum, goodsQuantity);
+		}
 		return "redirect:/market/order/confirm";
 	}
 	

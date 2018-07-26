@@ -1,5 +1,6 @@
 package team.swcome.donong.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import team.swcome.donong.dto.CartDTO;
 import team.swcome.donong.dto.CartGoodsDTO;
 import team.swcome.donong.dto.GoodsDTO;
+import team.swcome.donong.dto.GoodsOrdersDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
 import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.OrdersDTO;
@@ -107,8 +109,25 @@ public class MarketService {
 		return ordersMapper.selectAllOrdersByMemberNum(memberNum);
 	}
 	
-	public void insertOrder(OrdersDTO orders) {
+	public void insertOrder(OrdersDTO orders, List<CartGoodsDTO> goods) {
 		ordersMapper.insertOrder(orders);
+		logger.debug("num: {}",orders.getNum());
+		for(CartGoodsDTO item : goods) {
+			GoodsOrdersDTO toOrder = new GoodsOrdersDTO();
+			toOrder.setOrderNum(orders.getNum());
+			toOrder.setGoodsNum(item.getNum());
+			toOrder.setQuantity(item.getQuantity());
+			ordersMapper.insertOrderGoods(toOrder);
+		}
+	}
+
+	public void insertOrder(OrdersDTO orders, int goodsNum, int quantity) {
+		List<CartGoodsDTO> goods = new ArrayList<>();
+		CartGoodsDTO item = new CartGoodsDTO();
+		item.setNum(goodsNum);
+		item.setQuantity(quantity);
+		goods.add(item);
+		insertOrder(orders, goods);
 	}
 	
 	public void updateOrder(OrdersDTO orders) {

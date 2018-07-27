@@ -31,4 +31,8 @@ public interface RentalMapper {
 	
 	public List<RentalDTO> selectSearch(RentalDTO r);
 	
+	public void updateRental(RentalDTO r);
+	
+	public void updateFiles(FileDTO f);
+	
 }

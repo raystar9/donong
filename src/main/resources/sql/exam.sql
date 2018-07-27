@@ -12,11 +12,15 @@ select * from SIGUNGU
 where name = '이문동';
 
 select * from RENTALS;
+select * from sido;
+delete from RENTALFILES
+where board_num = 68
 
 insert into RENTALS
 values (rental_num_seq.nextval, 1, '이다혜', '경기도 부천시 원미구 상동 226-11', '경기도', '부천시', 2400, );
 
-select * from RENTALFILES
+delete from RENTALS
+where num = 75;
 
 select * from RENTALFILES;
 
@@ -25,6 +29,18 @@ select num, id, nickname, realname, postnum, address, addressdetail, email, emai
 		where num = 2
 		
 select * from rentalFiles;
+
+delete from RENTALFILES
+where board_num = 72;
+
+delete from RENTALFILES
+where board_num = 73;
+
+delete from RENTALFILES
+where board_num = 74;
+
+delete from RENTALFILES
+where board_num = 75;
 
 INSERT INTO
 
@@ -96,5 +112,7 @@ where sido = ?
 and sigungu = ?
 and price between ? and ?
 
-
+UPDATE rentals
+  	SET content = '변경 ㅇㅋ?'
+  	WHERE num = 69 
 

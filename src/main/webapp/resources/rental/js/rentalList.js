@@ -3,7 +3,7 @@ $(document).ready(function() {
 	
 	var sido = [
 		'강원도', '경기도', '경상남도', '광주광역시', '대구광역시', '대전광역시', '부산광역시',
-		'부산광역시', '서울특별시', '울산광역시', '인천광역시', '인천광역시', '전라북도', '충청북도'
+		'서울특별시', '울산광역시', '인천광역시', '인천광역시', '전라북도', '충청북도'
 	];
 	
 	var Gangwondo1 = [
@@ -182,21 +182,26 @@ function search(){
 	var sigungu = $("#sigungu").val();
 	var price = $("#price").val();
 	
+	if(num == "")
+		num = 0;
+	
+	if(price == "")
+		price = 0;
+	
 	 $.ajax({
 	 type : "GET",
 	 data : { "num":num , "sido":sido, "sigungu":sigungu, "price":price}, 
 	 url : '/donong/search',
 	 success : function(json){
-		 alert('Ajax 성공!')
+		 console.log("Ajax 들어왔다");
 		 $(".viewbox").remove();
-		 alert(json[0].num);
 		 for(var i=0; i<json.length; i++){
 		 var content = "<div class='viewbox'>" +
 		 			   "<div id='top'>"+
 		 			   "No.&nbsp;"+ json[i].num +
 		 			   "</div>"+
 		 			   "<div class='row'>"+
-		 			   "<a href='./rental/view?num="+ json[i].num +"><img src='./resources/rental/upload"+json[i].path +"' class='img'></a>"+
+		 			   "<a href='./rental/view?num="+ json[i].num +"'><img src='./resources/rental/upload"+json[i].path +"' class='img'></a>"+
 		 			   "</div>"+
 		 			   "<div class='row'>"+
 		 			   "<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+

@@ -7,7 +7,6 @@
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <script src="/donong/resources/rental/js/rentalList.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
-<title>대여 목록 페이지</title>
 <style>
 	*{
 		box-sizing:border-box;
@@ -96,7 +95,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div id="main">
 <div id="searchBox">
-	<form action="rental/search" class="searchForm">
 		<table border="1" id="searchTable" >
 			<tr>
 				<td rowspan="3">토지 검색</td>
@@ -123,7 +121,7 @@
 			<tr>
 				<td>임대료</td>
 				<td colspan="2">
-					<select name="price">
+					<select name="price" id="price">
 						<option value="0">선택</option>
 						<option value="10000">10000원 ~ 20000원</option>
 						<option value="20000">20000원 ~ 30000원</option>
@@ -134,7 +132,6 @@
 				</td>
 			</tr>
 		</table>
-	</form>
 </div>
 
 <div id="map"></div>

@@ -17,7 +17,7 @@
 		width:800px;
 		height:1500px;
 	}
-	.writeTable{
+	.modifyTable{
 		margin: auto;
 		margin-top: 50px;
 		width: 700px;
@@ -46,62 +46,63 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div id="main">
- <form action="./write_ok" method="post" class="writeForm" enctype="multipart/form-data">
-	<table border="1" class="writeTable">
+ <form action="./modify_ok" method="post" class="modifyForm" enctype="multipart/form-data">
+	<table border="1" class="modifyTable">
 		<tr>
 			<td>임대자</td>
 			<td>
-				${name} 
+				${member.realname} 
 			</td>
 		</tr> 
 		<tr>
 			<td>연락처</td>
 			<td>
-				${phone}
+				${member.phone}
 			</td>
 		</tr>
 		<tr>
 			<td>면적</td>
 			<td>
-				<input type="text" name="area" id="area" placeholder="1,000" class="form-control">&nbsp;py
+				<input type="text" name="area" id="area" placeholder="1,000" class="form-control" value="${rental.area }">&nbsp;py
 			</td>
 		</tr>
 		<tr>
 			<td>임대료</td>
 			<td>
 				<div style='width:100px; display:inline-block'>
-				<input type="text" name="price" id="price" class="form-control">&nbsp;원
+				<input type="text" name="price" id="price" class="form-control" value="${rental.price }">&nbsp;원
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>대표이미지</td>
 			<td>
-				 <input type="file" name="file1" id="file1" class="form-control">
+				 <input type="file" name="file1" id="file1" class="form-control" value="${file.fileName1 }">
+				 <label for="file1">${file.fileName1 }</label>
 			</td>
 		</tr>
 		<tr id='file2_tr'>
 			<td>사진1</td>
 			<td>
-				 <input type="file" name="file2" id="file2" class="form-control">
+				 <input type="file" name="file2" id="file2" class="form-control" value="${file.fileName2 }">
 			</td>
 		</tr>
 		<tr id='file3_tr'>
 			<td>사진2</td>
 			<td>
-				 <input type="file" name="file3" id="file3" class="form-control">
+				 <input type="file" name="file3" id="file3" class="form-control" value="${file.fileName3 }">
 			</td>
 		</tr>
 		<tr id='file4_tr'>
 			<td>사진3</td>
 			<td>
-				 <input type="file" name="file4" id="file4" class="form-control">
+				 <input type="file" name="file4" id="file4" class="form-control" value="${file.fileName4 }">
 			</td>
 		</tr> 
 		<tr>
 			<td>상세설명</td>
 			<td>
-				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요." id="content" class="form-control"></textarea>
+				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요." id="content" class="form-control">${rental.content }</textarea>
 			</td>
 		</tr>
 	</table>
@@ -112,11 +113,11 @@
 	</div>
 	<div id="map">
 	</div>
-	<input type='hidden' id="markerLat" name="lat" value="">
-	<input type='hidden' id="markerLng" name="lng" value="">
+	<input type='hidden' id="markerLat" name="lat" value="${rental.lat }">
+	<input type='hidden' id="markerLng" name="lng" value="${rental.lng }">
 	<div class="button">
-		<input type="submit" value="등록">
-		<input type="button" value="취소" onclick="location.href='../rental'">
+		<input type="submit" value="수정">
+		<input type="button" value="취소" onclick="history.go(-1);">
 	</div>	
 	</form>
 </div>

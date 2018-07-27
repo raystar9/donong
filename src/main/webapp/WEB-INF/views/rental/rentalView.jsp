@@ -91,7 +91,6 @@
 	}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>대여 상세보기 페이지</title>
 </head>
 <body>
 <input type="hidden" id="lat" value="${rental.lat }"/>
@@ -101,7 +100,7 @@
 	<div id='viewbtn'>
  		<input type="button" value="목록" onclick="location.href='../rental'"/>
  		<c:if test="${rental.member_num eq member.num }">
- 		  <input type="button" value="수정" onclick="location.href='../rental/modify'"/>
+ 		  <input type="button" value="수정" onclick="location.href='../rental/modify?num=${rental.num}'"/>
  		  <input type="button" value="삭제" onclick="del_click()"/>
  		</c:if>
  	</div>
@@ -149,7 +148,7 @@
 	
 	<!-- 상세내용 넣는 곳 -->
 	<div id="content"> 
-		<textarea rows='19' cols='95' id='areaBox'>${rental.content }</textarea>
+		<textarea rows='19' cols='95' id='areaBox' readOnly>${rental.content }</textarea>
 	</div>		
 	
 	<!-- 이미지들 넣는 곳 -->

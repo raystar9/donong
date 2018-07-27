@@ -8,6 +8,6 @@
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
     <typeAlias alias="OrdersDTO" type="team.swcome.donong.dto.OrdersDTO" />
     <typeAlias alias="CartGoodsDTO" type="team.swcome.donong.dto.CartGoodsDTO" />
-    <typeAlias alias="OrderGoodsDTO" type="team.swcome.donong.dto.OrderGoodsDTO" />
+    <typeAlias alias="OrderItemsDTO" type="team.swcome.donong.dto.OrderItemsDTO" />
   </typeAliases>
 </configuration>

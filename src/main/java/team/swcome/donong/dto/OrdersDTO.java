@@ -12,7 +12,14 @@ public class OrdersDTO {
 	private String phone;
 	private String comments;
 	private String status;
+	private int waybill;
 	
+	public int getWaybill() {
+		return waybill;
+	}
+	public void setWaybill(int waybill) {
+		this.waybill = waybill;
+	}
 	public int getNum() {
 		return num;
 	}

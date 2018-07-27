@@ -3,7 +3,7 @@ package team.swcome.donong.dto;
 import java.sql.Date;
 import java.util.List;
 
-public class OrderGoodsDTO {
+public class OrderItemsDTO {
 	private int orderNum;
 	private int goodsNum;
 	private String ordererName;
@@ -13,7 +13,7 @@ public class OrderGoodsDTO {
 	private Date orderDate;
 	private List<GoodsDTO> goods;
 	private String address;
-	private String comment;
+	private String comments;
 	private int waybill;
 	public int getOrderNum() {
 		return orderNum;
@@ -69,11 +69,11 @@ public class OrderGoodsDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getComment() {
-		return comment;
+	public String getComments() {
+		return comments;
 	}
 	public void setComment(String comment) {
-		this.comment = comment;
+		this.comments = comment;
 	}
 	public int getWaybill() {
 		return waybill;

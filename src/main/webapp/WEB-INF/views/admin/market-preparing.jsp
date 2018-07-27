@@ -9,22 +9,16 @@
 		<th>상품명</th>
 		<th>주소</th>
 		<th>코멘트</th>
-		<th>주문정보</th>
+		<th>송장번호입력</th>
 	</tr>
+	<c:forEach items="${orderList}" var="orderItem">
 	<tr>
-		<td><input type="checkbox" name="pay-check" id="pay-check1" /></td>
-		<td>1</td>
-		<td>2</td>
-		<td>3</td>
-		<td>4</td>
-		<td><input class="btn btn-default" type="button" value="확인" /></td>
+		<td><input type="checkbox" name="pay-check${orderItem.orderNum }"/></td>
+		<td>${orderItem.receiverName}</td>
+		<td>${orderItem.orderName}</td>
+		<td>${orderItem.address}</td>
+		<td>${orderItem.comments}</td>		
+		<td><input class="form-control" type="text"/></td>
 	</tr>
-	<tr>
-		<td><input type="checkbox" name="pay-check" id="pay-check1" /></td>
-		<td>1</td>
-		<td>2</td>
-		<td>3</td>
-		<td>4</td>
-		<td><input class="btn btn-default" type="button" value="확인" /></td>
-	</tr>
+	</c:forEach>
 </tbody>

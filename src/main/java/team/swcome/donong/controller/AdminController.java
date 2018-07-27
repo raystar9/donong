@@ -1,12 +1,16 @@
 package team.swcome.donong.controller;
 
+import java.net.URLDecoder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import team.swcome.donong.service.AdminService;
 
@@ -34,14 +38,13 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/market/waiting", method = RequestMethod.GET)
 	public String adminMarketWaitingData(Model model) {
-//		logger.debug("{}",adminService.getOrders(1).get(0).getPrice());
-		model.addAttribute("orderList", adminService.getOrders(1));
+		model.addAttribute("orderList", adminService.getWaitingItems(1));
 		return "admin/market-waiting";
 	}
 	
 	@RequestMapping(value = "/admin/market/preparing", method = RequestMethod.GET)
-	public String adminMarketPreparingData(Model model) {
-		
+	public String adminMarketPreparingData(Model model) {		
+		model.addAttribute("orderList", adminService.getPreparingItems(1));
 		return "admin/market-preparing";
 	}
 	
@@ -55,5 +58,30 @@ public class AdminController {
 	public String adminMarketArrivedData(Model model) {
 		
 		return "admin/market-arrived";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/admin/market/preparing", method = RequestMethod.POST)
+	public void adminMarketPreparingStatus(@RequestBody String nums) throws Exception{
+		
+		String res = URLDecoder.decode(nums, "utf-8");
+		String[] list = res.split("&");
+		int[] values = new int[list.length];
+		for(int i = 0; i < list.length; i++) {
+			values[i] = Integer.parseInt(list[i].split("=")[1]);			
+			logger.debug("nums: {}", values[i]);
+		}
+		adminService.setStatusAsPreparing(values);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/admin/market/sending", method = RequestMethod.PUT)
+	public void adminMarketSendingStatus(Model model) {
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/admin/market/arrived", method = RequestMethod.PUT)
+	public void adminMarketArrivedStatus(Model model) {
 	}
 }

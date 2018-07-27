@@ -14,7 +14,7 @@
 	
 	<c:forEach items="${orderList}" var="orderItem">
 	<tr>
-		<td><input type="checkbox" name="pay-check" id="pay-check1" /></td>
+		<td><input type="checkbox" name="pay-check" value="${orderItem.orderNum }"/></td>
 		<td>${orderItem.ordererName}</td>
 		<td>${orderItem.orderName}</td>
 		<td>${orderItem.price }</td>

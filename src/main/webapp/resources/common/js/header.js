@@ -5,3 +5,6 @@ function pwd_find(){
 function id_find(){
 	window.open("id_find","ID찾기","width=700,height=400");
 }
+
+
+

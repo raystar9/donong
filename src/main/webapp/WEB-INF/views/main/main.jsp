@@ -41,7 +41,17 @@
     	width:100%;
     	height:100%
     }
-
+    
+     .carousel-indicators .active{
+    	background-color:red;
+    }  /* 이미지 슬라이드 버튼 활성화 시 색 설정 없을 경우 white */ 
+    
+    
+    .carousel-indicators li{
+    	background-color:black;
+    }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
+    
+  
   </style>
 </head>
 <body>
@@ -65,6 +75,9 @@
     <div class="carousel-inner">
       <div class="item active">
       	<a href="#1"><img id="sample" src="resources/main/image/sample1.png" alt="sample1" style="width:100%;"></a>
+      	      <div class="carousel-caption">
+        	<!-- 자막을 넣고 싶을 경우 넣는 곳(글자색은 기본으로 white) -->
+        </div>
       	</div>
       	 <div class="item">
 		<a href="#2"><img id="sample" src="resources/main/image/sample2.png" alt="sample2" style="width:100%;"></a>
@@ -86,6 +99,7 @@
       
       </div>
        
+       <!-- 분양정보 위치 지도 들어 가야 하는 곳 -->
    </div>
      <div class="col-sm-6 text-center">
    	 <h1>분양정보 예정위치</h1>
@@ -98,7 +112,11 @@
       <h1>판매중인 상품(판매페이지)</h1>
    <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+  
     </div>
+    
+    
+    <!-- 상품판매 사진 보여주는 곳 -->
      <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
     </div>

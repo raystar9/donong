@@ -80,6 +80,8 @@ function domain_list(){
 
 function check(){
 	
+	
+	
 	//도메인 주소값 유효성검사
 	if($.trim($("#join_maildomain").val())==""){
 		alert("도메인주소를 선택하세요");
@@ -95,11 +97,25 @@ function check(){
 		return false;
 	}
 	
+	var regNm = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;	
+	//이름 유효성 검사 정규식
+	
+	 if($("#join_name").val().length<2){
+         alert("이름을 2자 이상 입력해주십시오.")
+         $("#join_name").focus()
+         return false;
+     }else if(!regNm.test($("#join_name").val())){
+    	 alert("한글,영문 대소문자만 사용 가능합니다");
+    	 $("#join_name").focus();
+         return false;
+     }
+	
+	
+	
 	if($('#checkconfirmID').val()=="false" || checkid != $("#join_id").val()){
 	
 		$("#chkid").attr('class','btn btn-danger');
 	
-
 		alert("아이디 중복체크를 하세요");
 		return false;
 	}
@@ -116,18 +132,28 @@ function check(){
 	
 }
 
-function id_check(){		
+function id_check(){	
+	var msg = '';
+	
 	if($.trim($("#join_id").val())==""){
 		alert("아이디를 입력하세요");
 		$("#join_id").val("").focus();
 		return false;
-	}
+	}else if($("#join_id").val().indexOf(" ") >= 0){
+             $("#chkid").attr('class','btn btn-danger');
+             $('#idcheck').css('color', 'red');
+             $('#idcheck').text("ID에는 공백을 사용할 수 없습니다.");
+             $("#join_id").focus();
+             
+             return false;
+		}
+
 	
 	$('#idcheck').attr('');
 	
 	var inputId = $('#join_id').val();
 	var checkId = /^[a-z]{1}[a-z0-9_]{3, 11}$/;
-	var msg = '';
+
 
 	$.ajax({
 		type : "POST",
@@ -142,7 +168,6 @@ function id_check(){
 				$('#idcheck').css('color', 'blue');
 				checkid = inputId;
 				$("#chkid").attr('class','btn btn-info');
-				
 			} else {
 				msg = '사용중인 id입니다.';
 				$('#idcheck').css('color', 'red');
@@ -155,7 +180,8 @@ function id_check(){
 		}
 		
 });	
-	}
+	
+}
 	
 	var checknickname ='';
 	var inputNickname = '';
@@ -214,6 +240,7 @@ function onlynum(){
 <style>
 body {
   align-items:top;
+
 }
 #join_table{
 	margin:50px;

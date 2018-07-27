@@ -5,18 +5,20 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.swcome.donong.dto.ReplyDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.ReplyService;
 
-@RestController
-@RequestMapping("")
+@Controller
+@SessionAttributes("sessionBean")
 public class ReplyController {
 
 	@Inject
@@ -24,10 +26,14 @@ public class ReplyController {
 	
 	//댓글입력
 	@RequestMapping("reply/insert.do")
-	public void insert(@ModelAttribute ReplyDTO vo, HttpSession session) {
-		
+	@ResponseBody
+	public void insert(@ModelAttribute ReplyDTO vo, HttpSession session, SessionBean sessionBean) {
+		System.out.println(vo.getContents());
+		sessionBean.setMemberNum(1);
+		sessionBean.setNickname("admin");
 		String userId=(String)session.getAttribute("userId");
-		vo.setReplyer("admin");//vo.setReplyer(userId);
+		vo.setReplyer(sessionBean.getNickname());//vo.setReplyer(userId);
+		vo.setMemberNum(sessionBean.getMemberNum());
 		replyService.insert(vo);
 	}
 	

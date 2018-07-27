@@ -14,12 +14,13 @@ $(document).ready(function(){
 
 	//댓글 쓰기 버튼 클릭 이벤트
 	$("#btnReply").click(function(){
+		alert($("#replytext").val());
 		$.ajax({
 			type:"post",
 			url:"/donong/reply/insert.do",
 			data:{
-				replytext: $("#replytext").val(),
-				num: "${bbsbean.num}"
+				contents: $("#replytext").val(),
+				communityNum: "${bbsbean.num}"
 			},
 			success:function(){
 				alert("댓글이 등록되었습니다.");

@@ -8,6 +8,16 @@ regdate date, /*댓글 작성일자*/
 updatedate date /*댓글 수정일자*/
 );
 
+CREATE TABLE COMMUNITY_REPLY(
+num NUMBER CONSTRAINT community_reply_num_pk PRIMARY KEY,
+community_num NUMBER REFERENCES community(num) NOT NULL,
+member_num NUMBER REFERENCES member(num) NOT NULL,
+replyer VARCHAR2(100) NOT NULL,
+contents VARCHAR2(300) NOT NULL,
+regdate DATE NOT NULL,
+updatedate DATE
+)
+
 create sequence reply_seq
 increment by 1 start with 1
 

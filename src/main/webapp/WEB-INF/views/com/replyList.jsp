@@ -7,9 +7,9 @@
 <c:forEach var="row" items="${list }">
 <tr>
 <td>
-${row.userName }(<fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/> )
+${row.replyer }(<fmt:formatDate value="${row.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/> )
 <br>
-${row.replytext }
+${row.contents}
 </td>
 </tr>
 </c:forEach>

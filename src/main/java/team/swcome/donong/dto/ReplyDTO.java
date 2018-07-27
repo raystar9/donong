@@ -1,34 +1,34 @@
 package team.swcome.donong.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ReplyDTO {
-
 	
-	private int rno;
 	private int num;
-	private String replytext;
+	private int communityNum;
+	private int memberNum;
 	private String replyer;
-	private String userName;
-	private Date regdate;
+	private String contents;
+	private Date regDate;
 	private Date updatedate;
-	public int getRno() {
-		return rno;
-	}
-	public void setRno(int rno) {
-		this.rno = rno;
-	}
+	
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getReplytext() {
-		return replytext;
+	public int getCommunityNum() {
+		return communityNum;
 	}
-	public void setReplytext(String replytext) {
-		this.replytext = replytext;
+	public void setCommunityNum(int communityNum) {
+		this.communityNum = communityNum;
+	}
+	public int getMemberNum() {
+		return memberNum;
+	}
+	public void setMemberNum(int memberNum) {
+		this.memberNum = memberNum;
 	}
 	public String getReplyer() {
 		return replyer;
@@ -36,17 +36,17 @@ public class ReplyDTO {
 	public void setReplyer(String replyer) {
 		this.replyer = replyer;
 	}
-	public String getUserName() {
-		return userName;
+	public String getContents() {
+		return contents;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	public Date getUpdatedate() {
 		return updatedate;
@@ -54,12 +54,4 @@ public class ReplyDTO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	
-	@Override
-	public String toString() {
-		return "ReplyVO [rno=" + rno + ", num=" + num + ", replytext=" + replytext + ", replyer=" + replyer
-				+ ", userName=" + userName + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
-	}
-	
-	
 }

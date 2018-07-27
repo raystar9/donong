@@ -7,15 +7,16 @@
   
   <!-- 댓글입력 -->
   <insert id="insertReply">
-  insert into reply(rno,num,replytext,replyer)
-  values(reply_seq.nextval,#{num},#{replytext},#{replyer})
+  INSERT INTO community_reply(num, community_num, member_num, replyer, contents, regdate)
+  VALUES(reply_seq.nextval,#{communityNum},#{memberNum},#{replyer}, #{contents}, sysdate)
+  
   </insert>
   
   <select id="listReply" resultType="ReplyDTO">
-	select rno, num, replytext, replyer, userName, regdate, updatedate
-	from reply  
-	where  num= #{num}
-	order by rno;
+	SELECT num, community_num, contents, replyer, regdate, updatedate
+	FROM community_reply
+	WHERE community_num= #{num}
+	ORDER BY num
   </select>
  
   </mapper>

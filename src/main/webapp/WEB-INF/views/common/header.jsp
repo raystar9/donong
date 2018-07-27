@@ -10,17 +10,33 @@
 <ul class="nav navbar-nav">
 
    <li class="dropdown">
-    <a class="dropdown-toggle" >시작하기</a>
+    <a class="dropdown-toggle">시작하기</a>
     <ul class="dropdown-menu">
-      <li><a href="/donong/info">사전준비</a></li>
-      <li><a href="#">작물정보</a></li>
-      <li><a href="#">재배방법</a></li>
+      <li><a href="/donong/info">농사계획</a></li>
+      <li><a href="/donong/info_start_2">텃밭유형</a></li>
+      <li><a href="/donong/info_start_3">재배작물 선택</a></li>
+      <li><a href="/donong/info_start_4">작물배치도</a></li>
+      <li><a href="/donong/info_start_5">허브작물 재배</a></li>
+     </ul>
+  </li>
+  
+     <li class="dropdown">
+    <a class="dropdown-toggle">농사짓기</a>
+    <ul class="dropdown-menu">
+      <li><a href="/donong/info_farming_1">밭만들기</a></li>
+      <li><a href="/donong/info_farming_2">파종과 육묘,정식</a></li>
+      <li><a href="/donong/info_farming_3">작물돌보기</a></li>
+      <li><a href="/donong/info_farming_4">비료와 농약</a></li>
+      <li><a href="/donong/info_farming_5">태풍과 장마</a></li>
+      <li><a href="/donong/info_farming_6">수확하기</a></li>
+      <li><a href="/donong/info_farming_7">농사달력</a></li>
+      <li><a href="/donong/info_farming_8">병해충 정보</a></li>
      </ul>
   </li>
   
   
   <li class="dropdown">
-   <a class="dropdown-toggle" >마을회관</a>
+   <a class="dropdown-toggle">마을회관</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/communitylist">게시판</a><li>
       <li><a href="#">공유정보</a></li>
@@ -29,7 +45,7 @@
   </li>
   
     <li class="dropdown">
-     <a class="dropdown-toggle" >준비하기(구매)</a>
+     <a class="dropdown-toggle">준비하기(구매)</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/market?category=seed">종자</a></li>
       <li><a href="/donong/market?category=fertilizer">비료</a></li>
@@ -40,7 +56,7 @@
   	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
   	
   	 <li class="dropdown">
-     <a class="dropdown-toggle" >고객센터</a>
+     <a class="dropdown-toggle">고객센터</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/cs/main">메인</a></li>
       <li><a href="/donong/cs/qna">QnA</a></li>

@@ -6,5 +6,6 @@
   <typeAliases>
     <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
+    <typeAlias alias="ReplyDTO" type="team.swcome.donong.dto.ReplyDTO" />
   </typeAliases>
 </configuration>

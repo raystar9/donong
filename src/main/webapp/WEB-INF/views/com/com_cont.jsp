@@ -6,6 +6,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
+<script>
+
+$(document).ready(function(){
+	
+	listReply();//json 리턴방식
+
+	//댓글 쓰기 버튼 클릭 이벤트
+	$("#btnReply").click(function(){
+		$.ajax({
+			type:"post",
+			url:"/donong/reply/insert.do",
+			data:{
+				replytext: $("#replytext").val(),
+				num: "${bbsbean.num}"
+			},
+			success:function(){
+				alert("댓글이 등록되었습니다.");
+				listReply();
+			}
+		});
+		
+	});
+});
+//Controller방식
+function listReply(){
+	$.ajax({
+		type:"get",
+		url:"/donong/reply/list.do?num=${bbsbean.num}",
+		success:function(result){
+			$("#listReply").html(result);
+		}		
+	});
+	
+}
+
+</script>
 <title>Insert title here</title>
 </head>
 
@@ -43,8 +79,10 @@
 
 </c:if>
 </div>
-
-
+<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
+<br>
+<button type="button" id="btnReply">댓글 작성</button>
+<div id="listReply"></div>
 <hr>
 <div id="boardcont_menu" style="margin-left:75%">
 		

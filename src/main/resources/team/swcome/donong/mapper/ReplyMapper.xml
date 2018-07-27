@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="team.swcome.donong.mapper.ReplyMapper">
+  
+  <!-- 댓글입력 -->
+  <insert id="insertReply">
+  insert into reply(rno,num,replytext,replyer)
+  values(reply_seq.nextval,#{num},#{replytext},#{replyer})
+  </insert>
+  
+  <select id="listReply" resultType="ReplyDTO">
+	select rno, num, replytext, replyer, userName, regdate, updatedate
+	from reply  
+	where  num= #{num}
+	order by rno;
+  </select>
+ 
+  </mapper>

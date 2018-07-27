@@ -34,4 +34,4 @@ from reply r, community c
 where replyer = writer;
 
 select * from REPLY;
-select * from community;
+select * from community_reply;

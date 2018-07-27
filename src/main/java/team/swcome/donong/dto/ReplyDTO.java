@@ -1,6 +1,6 @@
 package team.swcome.donong.dto;
 
-import java.sql.Date;
+
 
 public class ReplyDTO {
 	
@@ -9,8 +9,8 @@ public class ReplyDTO {
 	private int memberNum;
 	private String replyer;
 	private String contents;
-	private Date regDate;
-	private Date updatedate;
+	private String regDate;
+	private String updatedate;
 	
 	public int getNum() {
 		return num;
@@ -42,16 +42,16 @@ public class ReplyDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public Date getUpdatedate() {
+	public String getUpdatedate() {
 		return updatedate;
 	}
-	public void setUpdatedate(Date updatedate) {
+	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
 }

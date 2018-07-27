@@ -14,7 +14,6 @@ $(document).ready(function(){
 
 	//댓글 쓰기 버튼 클릭 이벤트
 	$("#btnReply").click(function(){
-		alert($("#replytext").val());
 		$.ajax({
 			type:"post",
 			url:"/donong/reply/insert.do",
@@ -40,6 +39,17 @@ function listReply(){
 		}		
 	});
 	
+}
+
+function showReplyModify(num){
+	$.ajax({
+		type:"get",
+		url:"/donong/reply/detail/"+num,
+		success:function(result){
+			$("#modifyReply").html(result);
+			$("#modifyReply").css("visibility","visible");
+		}
+	});
 }
 
 </script>

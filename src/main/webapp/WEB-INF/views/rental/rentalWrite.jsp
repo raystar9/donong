@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="/donong/resources/rental/js/rentalModify.js"></script>
+<script src="/donong/resources/rental/js/rentalWrite.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <style>
 	*{
@@ -41,6 +41,17 @@
 	table tr td:first-child {
 		width: 150px;
 	}
+	.uploadIcon{
+		width:25px;
+		height:20px;
+		margin-left:10px;
+	}
+	input[type="file"]{
+		display:none;
+	}
+	#file2_tr, #file3_tr, #file4_tr{
+		display:none;
+	}
 </style>
 </head>
 <body>
@@ -70,32 +81,40 @@
 			<td>임대료</td>
 			<td>
 				<div style='width:100px; display:inline-block'>
-				<input type="text" name="price" id="price" class="form-control">&nbsp;원
+				<input type="text" name="price" id="price">&nbsp;원
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>대표이미지</td>
 			<td>
-				 <input type="file" name="file1" id="file1" class="form-control">
+				<label for="file1"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file1" id="file1">
+				<span id="filevalue1"></span>&nbsp;
 			</td>
 		</tr>
 		<tr id='file2_tr'>
 			<td>사진1</td>
 			<td>
-				 <input type="file" name="file2" id="file2" class="form-control">
+				<label for="file2"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file2" id="file2">
+				<span id="filevalue2"></span>&nbsp;
 			</td>
 		</tr>
 		<tr id='file3_tr'>
 			<td>사진2</td>
 			<td>
-				 <input type="file" name="file3" id="file3" class="form-control">
+				 <label for="file3"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				 <input type="file" name="file3" id="file3">
+				 <span id="filevalue3"></span>&nbsp;
 			</td>
 		</tr>
 		<tr id='file4_tr'>
 			<td>사진3</td>
 			<td>
+				 <label for="file4"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
 				 <input type="file" name="file4" id="file4" class="form-control">
+				 <span id="filevalue4"></span>&nbsp;
 			</td>
 		</tr> 
 		<tr>

@@ -3,7 +3,7 @@ $(document).ready(function() {
 	
 	var sido = [
 		'강원도', '경기도', '경상남도', '광주광역시', '대구광역시', '대전광역시', '부산광역시',
-		'서울특별시', '울산광역시', '인천광역시', '인천광역시', '전라북도', '충청북도'
+		'서울특별시', '울산광역시', '인천광역시','전라북도', '충청북도'
 	];
 	
 	var Gangwondo1 = [
@@ -193,28 +193,33 @@ function search(){
 	 data : { "num":num , "sido":sido, "sigungu":sigungu, "price":price}, 
 	 url : '/donong/search',
 	 success : function(json){
-		 console.log("Ajax 들어왔다");
 		 $(".viewbox").remove();
-		 for(var i=0; i<json.length; i++){
-		 var content = "<div class='viewbox'>" +
-		 			   "<div id='top'>"+
-		 			   "No.&nbsp;"+ json[i].num +
-		 			   "</div>"+
-		 			   "<div class='row'>"+
-		 			   "<a href='./rental/view?num="+ json[i].num +"'><img src='./resources/rental/upload"+json[i].path +"' class='img'></a>"+
-		 			   "</div>"+
-		 			   "<div class='row'>"+
-		 			   "<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+
-		 			   "</div>"+
-		 			   "<div class='row'>"+
-		 			   "<img src='./resources/rental/image/area3.png' class='mark'/>&nbsp;"+json[i].area+"㎡<br>"+
-		 			   "</div>"+
-		 			   "<div class='row'>"+
-		 			   "	<img src='./resources/rental/image/dollar.png' class='mark'/>&nbsp;"+ json[i].price+ "원<br>"+
-		 			   "</div>"+
-		 			   "</div>";
-		 	$("#List").append(content);
+		 var content = "";
+		 if(json.length == 0){
+			 alert('여기들어왔다.');
+			 content = "<img src='./resources/rental/upload/searchNo2.png' class='searchNo'>";
+		 }else{
+			 for(var i=0; i<json.length; i++){
+				content = "<div class='viewbox'>" +
+						"<div id='top'>"+
+						"No.&nbsp;"+ json[i].num +
+						"</div>"+
+		 			   	"<div class='row'>"+
+		 			   	"<a href='./rental/view?num="+ json[i].num +"'><img src='./resources/rental/upload"+json[i].path +"' class='img'></a>"+
+		 			   	"</div>"+
+		 			   	"<div class='row'>"+
+		 			   	"<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+
+		 			   	"</div>"+
+		 			   	"<div class='row'>"+
+		 			   	"<img src='./resources/rental/image/area3.png' class='mark'/>&nbsp;"+json[i].area+"㎡<br>"+
+		 			   	"</div>"+
+		 			   	"<div class='row'>"+
+		 			   	"	<img src='./resources/rental/image/dollar.png' class='mark'/>&nbsp;"+ json[i].price+ "원<br>"+
+		 			   	"</div>"+
+		 			   	"</div>";
+			 }
 		 }
+		 $("#List").append(content);
 	 },
 	 error:function(){
 		 alert('Ajax 실패!');

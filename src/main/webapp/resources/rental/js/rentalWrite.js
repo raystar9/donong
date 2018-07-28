@@ -1,24 +1,61 @@
 $(document).ready(function() {
-	$('#file2_tr').css('display','none');
-	$('#file3_tr').css('display','none');
-	$('#file4_tr').css('display','none');
+	
 	
 	/* 파일 선택 시 행 추가 */
 	$('#file1').change(function() {
-		$('#file2_tr').css('display','table-row');
+		var inputfile=$(this).val().split('\\');
+		var extension = $(this).val().split('.');
+		if(extension[1] != "png" && extension[1] != "PNG" &&
+		   extension[1] != "jpg" && extension[1] != "jpeg"	){
+			alert('이미지를 올려주세요.');
+			$('#flie1').val("");
+			$('#filevalue1').val("");
+		}else{
+			$("#filevalue1").text(inputfile[inputfile.length-1]);
+			$('#file2_tr').css('display','table-row');
+		}
 	});
 	
 	$('#file2').change(function() {
-		$('#file3_tr').css('display','table-row');
+		var inputfile=$(this).val().split('\\');
+		var extension = $(this).val().split('.');
+		if(extension[1] != "png" && extension[1] != "PNG" &&
+		   extension[1] != "jpg" && extension[1] != "jpeg"	){
+			alert('이미지를 올려주세요.');
+			$('#flie2').val("");
+			$('#filevalue2').val("");
+		}else{
+			$("#filevalue2").text(inputfile[inputfile.length-1]);
+			$('#file3_tr').css('display','table-row');
+		}
 	});
 	
 	$('#file3').change(function() {
-		$('#file4_tr').css('display','table-row');
+		var inputfile=$(this).val().split('\\');
+		var extension = $(this).val().split('.');
+		if(extension[1] != "png" && extension[1] != "PNG" &&
+		   extension[1] != "jpg" && extension[1] != "jpeg"	){
+			alert('이미지를 올려주세요.');
+			$('#flie3').val("");
+			$('#filevalue3').val("");
+		}else{
+			$("#filevalue3").text(inputfile[inputfile.length-1]);
+			$('#file4_tr').css('display','table-row');
+		}
 	});
 	
-	$('#file_4').change(function() {
-		file4 = $('#file_4').val();
-		$('#file4').val(file4);
+	$('#file4').change(function() {
+		var inputfile=$(this).val().split('\\');
+		var extension = $(this).val().split('.');
+		if(extension[1] != "png" && extension[1] != "PNG" &&
+		   extension[1] != "jpg" && extension[1] != "jpeg"	){
+			alert('이미지를 올려주세요.');
+			$('#flie4').val("");
+			$('#filevalue4').val("");
+		}else{
+			$("#filevalue4").text(inputfile[inputfile.length-1]);
+			$('#file4').val(file4);
+		}
 	});
 	
 	/* 유효성 검사 */

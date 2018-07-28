@@ -33,6 +33,7 @@
 		height: 700px;
 		margin-bottom: 70px;
 		padding: 10px;
+		text-align:center;
 	}
 	#searchTable{
 		width: 600px;
@@ -88,6 +89,11 @@
 	.mark{
 		width:13px;
 		height:13px;
+	}
+	.searchNo{
+		width:500px;
+		height:400px;
+		margin-top:100px;
 	}
 </style>
 </head>

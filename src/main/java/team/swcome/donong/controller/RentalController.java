@@ -179,9 +179,10 @@ public class RentalController {
 	
 	/* 농지 대여 수정 처리 */
 	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.POST)
-	public String rentalModify_ok(Model model, HttpServletRequest request, RentalDTO r, FileDTO f)
+	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f)
 			throws IllegalStateException, IOException {
-		int board_num = Integer.parseInt(request.getParameter("num"));
+		int board_num = r.getNum();
+		System.out.println("num = " + r.getNum());
 		r.setNum(board_num);
 		f.setBoard_num(board_num);
 

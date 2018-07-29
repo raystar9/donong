@@ -41,12 +41,21 @@
 	table tr td:first-child {
 		width: 150px;
 	}
+	.uploadIcon{
+		width:25px;
+		height:20px;
+		margin-left:10px;
+	}
+	input[type="file"]{
+		display:none;
+	}
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div id="main">
  <form action="./modify_ok" method="post" class="modifyForm" enctype="multipart/form-data">
+ <input type="hidden" value="${rental.num }" name="num">
 	<table border="1" class="modifyTable">
 		<tr>
 			<td>임대자</td>
@@ -77,26 +86,33 @@
 		<tr>
 			<td>대표이미지</td>
 			<td>
-				 <input type="file" name="file1" id="file1" class="form-control" value="${file.fileName1 }">
-				 <label for="file1">${file.fileName1 }</label>
+				<label for="file1"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file1" id="file1">
+				<span id="filevalue1">${file.fileName1 }</span>&nbsp;
 			</td>
 		</tr>
 		<tr id='file2_tr'>
 			<td>사진1</td>
 			<td>
-				 <input type="file" name="file2" id="file2" class="form-control" value="${file.fileName2 }">
+				<label for="file2"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file2" id="file2">
+				<span id="filevalue2">${file.fileName2 }</span>&nbsp;
 			</td>
 		</tr>
 		<tr id='file3_tr'>
 			<td>사진2</td>
 			<td>
-				 <input type="file" name="file3" id="file3" class="form-control" value="${file.fileName3 }">
+				 <label for="file3"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				 <input type="file" name="file3" id="file3">
+				 <span id="filevalue3">${file.fileName3 }</span>&nbsp;
 			</td>
 		</tr>
 		<tr id='file4_tr'>
 			<td>사진3</td>
 			<td>
-				 <input type="file" name="file4" id="file4" class="form-control" value="${file.fileName4 }">
+				<label for="file4"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file4" id="file4" class="form-control">
+				<span id="filevalue4">${file.fileName4 }</span>&nbsp;
 			</td>
 		</tr> 
 		<tr>
@@ -108,7 +124,7 @@
 	</table>
 	
 	<div id="search">
-		주소:&nbsp;<input type="text" placeholder="농지 위치를 설정하세요." id="autocomplete" name="address"><br>
+		주소:&nbsp;<input type="text" placeholder="농지 위치를 설정하세요." id="autocomplete" name="address" value="${rental.address }"><br>
 		(주소와 위치가 일치하는지 확인하세요)
 	</div>
 	<div id="map">

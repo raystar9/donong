@@ -196,7 +196,6 @@ function search(){
 		 $(".viewbox").remove();
 		 var content = "";
 		 if(json.length == 0){
-			 alert('여기들어왔다.');
 			 content = "<img src='./resources/rental/upload/searchNo2.png' class='searchNo'>";
 		 }else{
 			 for(var i=0; i<json.length; i++){

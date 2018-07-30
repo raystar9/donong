@@ -1,21 +1,19 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<c:if test="${listCount != 0 }">
 <tr>
-	<th colspan="6">나의 문의내역</th>
-</tr>
-<tr>
-	<th width="5%">번호</th>
+	<th width="10%">번호</th>
 	<th width="15%">문의유형</th>
-	<th width="40%">문의제목</th>
-	<th width="20%">문의일</th>
+	<th width="45%">문의제목</th>
+	<th width="10%">문의일</th>
 	<th width="10%">답변일</th>
 	<th width="10%">처리상태</th>
 </tr>
 
 <c:set var="num" value="${listCount - (page - 1) * 10 }"/>
 <c:forEach var="content" items="${qnaList }">
-	<tr>
+	<tr class="qna_tr">
 		<td>
 			<c:out value="${num }" />
 			<c:set var="num" value="${num - 1 }" />
@@ -89,3 +87,4 @@
 		</c:if>
 	</td>
 </tr>
+</c:if>

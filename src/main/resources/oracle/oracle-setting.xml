@@ -9,8 +9,7 @@
 	</settings>
 
 	<typeAliases>
-    <typeAlias alias="DefaultDTO" type="team.swcome.donong.dto.DefaultDTO" />
-    <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
+	    <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
 		<typeAlias alias="faq" type="team.swcome.donong.dto.FAQDTO" />
 		<typeAlias alias="notice" type="team.swcome.donong.dto.NoticeDTO" />
 		<typeAlias alias="qna" type="team.swcome.donong.dto.QNADTO" />

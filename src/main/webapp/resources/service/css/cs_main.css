@@ -1,12 +1,3 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    font-size: 100%;
-    vertical-align: baseline;
-    box-sizing: border-box;
-}
 
 #cs {
 	margin-top: 50px;
@@ -104,6 +95,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	height: 50%;
 	margin-top: 30px;
 	font-size: 20px;
+	line-height: 50%;
 }
 
 /* 퀵메뉴 */
@@ -124,11 +116,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .faqBox th {
 	width: 14.285%;
-	height: 40px;
+	height: 50px;
 	font-size: 17px;
 	text-align: left;
 	border-bottom: 1px solid green;
-	line-height: 40px;
+	line-height: 50px;
 }
 
 .faqBox tbody p {
@@ -181,16 +173,25 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	float: left;
 }
 
-#noticeList th {
-	height: 40px;
-	line-height: 40px;
+#noticeList th:first-child {
+	height: 50px;
+	line-height: 50px;
 	font-size: 20px;
 	font-weight: 500;
 	border-bottom: 1px solid green;
 }
 
+#noticeList th:last-child {
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	font-weight: 500;
+	border-bottom: 1px solid green;
+	text-align: left;
+}
+
 #noticeList tr td:first-child {
-	text-align: center;
+	text-align: left;
 }
 
 #noticeList tr td {
@@ -206,8 +207,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 #faqList th {
-	height: 40px;
-	line-height: 40px;
+	height: 50px;
+	line-height: 50px;
 	font-size: 20px;
 	font-weight: 500;
 	border-bottom: 1px solid green;
@@ -219,4 +220,13 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 #faqList tr td {
 	line-height: 30px;
+}
+
+#faqList a, #noticeList a {
+	text-decoration: none;
+	color: black;
+}
+
+#faqList a:hover, #noticeList a:hover {
+	color: green;
 }

@@ -1,3 +1,6 @@
+#cs {
+	margin-top: 50px;
+}
 
 #pagingTd {
 	text-align: center;
@@ -18,4 +21,103 @@
 #pagingTd a:hover:not(#currPage) {
 	background-color: #ddd;
 }
+
+#write_form_div {
+	width: 80%;
+	height: 600px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+#write_form_div h2 {
+	font-size: 23px;
+	font-weight: bold;
+	margin-bottom: 40px;
+}
+
+#write_form_div h2 span {
+	color: #8BC34A;
+}
+
+#write_form_div label {
+	width: 20%;
+	margin-bottom: 25px;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#write_form_div input, #write_form_div select {
+	width: 79%;
+	height: 35px;
+}
+
+#write_form_div textarea {
+	width: 79%;
+	height: 300px;
+}
+
+#sub_reset input:first-child {
+	width: 49% !important;
+	height: 40px;
+	float: left;
+	background-color: #1B5E20;
+	color: white;
+	border: 0;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#sub_reset input:last-child {
+	width: 49% !important;
+	height: 40px;
+	float: right;
+	border: 0;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#qna_title {
+	width: 80%;
+	height: 50px;
+	color: #8BC34A;
+	font-size: 23px;
+	font-weight: bold;
+	margin: 0 auto;
+	margin-top: 70px;
+}
+
+#boardList {
+	width: 80%;
+	margin: 0 auto;
+	border-top: 1px solid green;
+	margin-bottom: 150px;
+}
+
+#boardList tr:first-child {
+	font-size: 20px;
+	font-weight: 500;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 1px solid green;
+}
+
+#boardList th, #boardList td {
+	text-align: center;
+}
+
+#boardList tr td:nth-child(2), #boardList tr td:nth-child(3) {
+	text-align: left;
+}
+
+.qna_tr * {
+	height: 50px !important;
+	line-height: 50px;
+	text-decoration: none;
+	color: black;
+}
+
+.qna_tr:hover {
+	background-color: #F1F8E9;
+}
+
 

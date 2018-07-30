@@ -16,6 +16,8 @@ public interface OrdersMapper {
 	public int insertOrder(OrdersDTO orders);
 	public int updateOrder(OrdersDTO orders);
 	public int updateStatusToPrep(List<OrdersDTO> orders);
+	public int updateStatusToSend(OrdersDTO order);
+	public int updateStatusToArrv(List<OrdersDTO> orders);
 	public int updateStatusAndWaybill(List<OrdersDTO> orders);
 	public int deleteOrderByNum(int num);
 }

@@ -47,13 +47,13 @@
 	</select>
 	<select id="selectSendingOrders" resultType="OrderItemsDTO">
 	<![CDATA[
-		SELECT receivername, address, comment
+		SELECT ordernum, receivername, waybill
 		FROM (
-		    SELECT rownum as rnum, ordernum, orderername, orderdate
+		    SELECT rownum as rnum, ordernum, receivername, waybill
 				FROM(
-					SELECT orders.num as ordernum, realname AS orderername, orderdate
-					FROM member, orders
-					WHERE member_num = member.num AND status = 'npay'
+					SELECT num as ordernum, name AS receivername, waybill
+					FROM orders
+					WHERE status = 'send'
 		            ORDER BY ORDERNUM DESC
 				)
 				WHERE rownum <= #{param2}
@@ -63,13 +63,13 @@
 	</select>
 	<select id="selectArrivedOrders" resultType="OrderItemsDTO">
 	<![CDATA[
-		SELECT ordernum, orderername, orderdate
+		SELECT ordernum, receivername, waybill
 		FROM (
-		    SELECT rownum as rnum, ordernum, orderername, orderdate
+		    SELECT rownum as rnum, ordernum, receivername, waybill
 				FROM(
-					SELECT orders.num as ordernum, realname AS orderername, orderdate
-					FROM member, orders
-					WHERE member_num = member.num AND status = 'npay'
+					SELECT num as ordernum, name AS receivername, waybill
+					FROM orders
+					WHERE status = 'arrv'
 		            ORDER BY ORDERNUM DESC
 				)
 				WHERE rownum <= #{param2}
@@ -102,6 +102,22 @@
 	<update id="updateStatusToPrep" parameterType="OrdersDTO">
 		UPDATE ORDERS 
 		SET status = 'prep'
+		WHERE 
+		<foreach collection="list" item="order" separator="OR">
+			num = #{order.num}
+		</foreach>
+	</update>
+	
+	<update id="updateStatusToSend" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'send', waybill = #{waybill}
+		WHERE 
+		num = #{num}
+	</update>
+	
+	<update id="updateStatusToArrv" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'arrv'
 		WHERE 
 		<foreach collection="list" item="order" separator="OR">
 			num = #{order.num}

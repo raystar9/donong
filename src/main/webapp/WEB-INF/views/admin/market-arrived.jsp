@@ -9,16 +9,12 @@
 		<th>운송장 번호</th>
 		<th>배송 상태 확인</th>
 	</tr>
+	<c:forEach items="${orderList}" var="orderItem">
 	<tr>
-		<td>1</td>
-		<td>2</td>
-		<td>3</td>
+		<td>${orderItem.receiverName}</td>
+		<td>${orderItem.orderName}</td>
+		<td>${orderItem.waybill}</td>
 		<td><input class="btn btn-default" type="button" value="확인" /></td>
 	</tr>
-	<tr>
-		<td>1</td>
-		<td>2</td>
-		<td>3</td>
-		<td><input class="btn btn-default" type="button" value="확인" /></td>
-	</tr>
+	</c:forEach>
 </tbody>

@@ -43,7 +43,7 @@
 						method: "post",
 						data: $(".market-form").serialize(),
 						success: ()=>{
-							alert("젼송 완료");
+							alert("전송 완료");
 							showDefaultTable();
 						},
 						error: ()=>{
@@ -72,12 +72,22 @@
 					$(".market-submit").show().val("배송하기");
 					$(".market-form").off().submit(e=>{
 						e.preventDefault();
+						var $checkedBoxes = $(".market-form input:checkbox:checked");
+						var queryString = "";
+						for(let i = 0; i < $checkedBoxes.length; i++) {
+							if(i != 0) {
+								queryString += "&"
+							}
+							queryString += "pay-check="+$checkedBoxes.eq(i).val() + "&";
+							var waybillId = "waybill-"+$checkedBoxes.eq(i).val();
+							queryString += waybillId + "=" + $('#'+waybillId).val();
+						}
 						$.ajax({
 							url: "/donong/admin/market/sending",
 							method: "put",
-							data: $(".market-form").serialize(),
+							data: queryString,
 							success: ()=>{
-								alert("젼송 완료");
+								alert("전송 완료");
 								showPrepareTable();
 							},
 							error: ()=>{
@@ -108,7 +118,7 @@
 							method: "put",
 							data: $(".market-form").serialize(),
 							success: ()=>{
-								alert("젼송 완료");
+								alert("전송 완료");
 								showSendTable();
 							},
 							error: ()=>{

@@ -1,7 +1,5 @@
 package team.swcome.donong.controller;
 
-import java.net.URLDecoder;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,71 +15,66 @@ import team.swcome.donong.service.AdminService;
 @Controller
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
+
 	@Autowired
 	AdminService adminService;
-	
+
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminMain(Model model) {
-		
+
 		return "admin/main";
 	}
-	
+
 	/*
 	 * 마켓 관리 페이지
 	 */
 	@RequestMapping(value = "/admin/market", method = RequestMethod.GET)
 	public String adminMarketMain(Model model) {
-		
+
 		return "admin/market";
 	}
-	
+
 	@RequestMapping(value = "/admin/market/waiting", method = RequestMethod.GET)
 	public String adminMarketWaitingData(Model model) {
 		model.addAttribute("orderList", adminService.getWaitingItems(1));
 		return "admin/market-waiting";
 	}
-	
+
 	@RequestMapping(value = "/admin/market/preparing", method = RequestMethod.GET)
-	public String adminMarketPreparingData(Model model) {		
+	public String adminMarketPreparingData(Model model) {
 		model.addAttribute("orderList", adminService.getPreparingItems(1));
 		return "admin/market-preparing";
 	}
-	
+
 	@RequestMapping(value = "/admin/market/sending", method = RequestMethod.GET)
 	public String adminMarketSendingData(Model model) {
-		
+		model.addAttribute("orderList", adminService.getSendingItems(1));
 		return "admin/market-sending";
 	}
-	
+
 	@RequestMapping(value = "/admin/market/arrived", method = RequestMethod.GET)
 	public String adminMarketArrivedData(Model model) {
-		
+		model.addAttribute("orderList", adminService.getArrivedItems(1));
 		return "admin/market-arrived";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/admin/market/preparing", method = RequestMethod.POST)
-	public void adminMarketPreparingStatus(@RequestBody String nums) throws Exception{
-		
-		String res = URLDecoder.decode(nums, "utf-8");
-		String[] list = res.split("&");
-		int[] values = new int[list.length];
-		for(int i = 0; i < list.length; i++) {
-			values[i] = Integer.parseInt(list[i].split("=")[1]);			
-			logger.debug("nums: {}", values[i]);
-		}
-		adminService.setStatusAsPreparing(values);
-		
+	public void adminMarketPreparingStatus(@RequestBody String queryString) throws Exception {
+		adminService.setStatusAsPreparing(adminService.getOrderNumList(queryString));
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/admin/market/sending", method = RequestMethod.PUT)
-	public void adminMarketSendingStatus(Model model) {
+	public void adminMarketSendingStatus(@RequestBody String queryString) throws Exception {
+		int[] nums = adminService.getOrderNumList(queryString);
+		adminService.setStatusAsSending(nums, adminService.getWaybillList(queryString, nums));
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/admin/market/arrived", method = RequestMethod.PUT)
-	public void adminMarketArrivedStatus(Model model) {
+	public void adminMarketArrivedStatus(@RequestBody String nums) throws Exception {
+		adminService.setStatusAsArrived(adminService.getOrderNumList(nums));
 	}
+
 }

@@ -13,12 +13,12 @@
 	</tr>
 	<c:forEach items="${orderList}" var="orderItem">
 	<tr>
-		<td><input type="checkbox" name="pay-check${orderItem.orderNum }"/></td>
+		<td><input type="checkbox" name="pay-check" value="${orderItem.orderNum }"/></td>
 		<td>${orderItem.receiverName}</td>
 		<td>${orderItem.orderName}</td>
 		<td>${orderItem.address}</td>
-		<td>${orderItem.comments}</td>		
-		<td><input class="form-control" type="text"/></td>
+		<td>${orderItem.comments}</td>
+		<td><input class="form-control" type="text" name="waybill-${orderItem.orderNum }" id="waybill-${orderItem.orderNum }"/></td>
 	</tr>
 	</c:forEach>
 </tbody>

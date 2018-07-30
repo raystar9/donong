@@ -2,166 +2,41 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
-<html>
-<head>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-
-
-	<title>header</title>
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 	<script>
-	function pwd_find(){
-		window.open("pwd_find","비번찾기","width=400,height=300");
-	
-	}
-		
-		function id_find(){
-		window.open("id_find","ID찾기","width=400,height=300");
-			
-	}
- 	
- 	</script>
- 
- <style>
- 
-.container-fluid{
-background-color: #ACD17F;
-
-}
-
-.dropdown{
-	width:200px;
-	font-size:15pt;
-	font-weight:bold;
-	text-align:center;
-}
-
-#full{
-	width:100%;
-	height:100%;
-}
-
-#logo{
- width:55.56px;
-  height:55.56px;
-  margin:0 auto;
-  padding:0;
-}
-.dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
-    width:200px;
-    font-size:15pt;
-	font-weight:bold;
-	text-align:center;
-	background-color: #ACD17F;
-	color:white;
-}
-
-
-.navbar-nav {
-
-  display: inline-block;
-
-  float: none;
-
-}
-
-.navbar-collapse {
-
-  text-align: center;
-
-}
-
-.nav > li > a:hover,
-.nav > li > a:focus {
-  text-decoration: none;
-   background-color:#9CCE5F;
-  color:white;
-}
-
-.nav > li > a,
-.nav > li > a {
-  text-decoration: none;
-   background-color:#ACD17F;
-  color:white;
-}
-
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-  text-decoration: none;
-   background-color:#9CCE5F;
-  color:white;
-}
-
-.dropdown-menu > li > a,
-.dropdown-menu > li > a {
-  text-decoration: none;
-   background-color:#ACD17F;
-  color:white;
-}
-
-.form-group{
-	margin:5px,0,0,0;
-}
-
-<!-- 로그인창 가운데로 나오게 하는거 -->
-.modal {
-        text-align: center;
-}
- 
-@media screen and (min-width: 768px) { 
-        .modal:before {
-                display: inline-block;
-                vertical-align: middle;
-                content: " ";
-                height: 100%;
-        }
-}
- 
-.modal-dialog {
-        display: inline-block;
-        text-align: left;
-        vertical-align: middle;
-}
-<!-- 여기까지 -->
-
-.find{
-	float:right;
-}
-
-</style>
-
-	
-</head>
-<body>
-<div id="full">
-
-<div class="container-fluid">
+<div class="navbar">
 <div class="navbar-header">
-<a class="dropdown" href="main"><img id="logo" src="resources/main/image/logo.jpg"></a>
+<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo.jpg"></a>
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
 
    <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown">시작하기</a>
+    <a class="dropdown-toggle">시작하기</a>
     <ul class="dropdown-menu">
-      <li><a href="/donong/info">사전준비</a></li>
-      <li><a href="#">작물정보</a></li>
-      <li><a href="#">재배방법</a></li>
+      <li><a href="/donong/info">농사계획</a></li>
+      <li><a href="/donong/info_start_2">텃밭유형</a></li>
+      <li><a href="/donong/info_start_3">재배작물 선택</a></li>
+      <li><a href="/donong/info_start_4">작물배치도</a></li>
+      <li><a href="/donong/info_start_5">허브작물 재배</a></li>
+     </ul>
+  </li>
+  
+     <li class="dropdown">
+    <a class="dropdown-toggle">농사짓기</a>
+    <ul class="dropdown-menu">
+      <li><a href="/donong/info_farming_1">밭만들기</a></li>
+      <li><a href="/donong/info_farming_2">파종과 육묘,정식</a></li>
+      <li><a href="/donong/info_farming_3">작물돌보기</a></li>
+      <li><a href="/donong/info_farming_4">비료와 농약</a></li>
+      <li><a href="/donong/info_farming_5">태풍과 장마</a></li>
+      <li><a href="/donong/info_farming_6">수확하기</a></li>
+      <li><a href="/donong/info_farming_7">농사달력</a></li>
+      <li><a href="/donong/info_farming_8">병해충 정보</a></li>
      </ul>
   </li>
   
   
   <li class="dropdown">
-   <a class="dropdown-toggle" data-toggle="dropdown">마을회관</a>
+   <a class="dropdown-toggle">마을회관</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/communitylist">게시판</a><li>
       <li><a href="#">공유정보</a></li>
@@ -170,7 +45,7 @@ background-color: #ACD17F;
   </li>
   
     <li class="dropdown">
-     <a class="dropdown-toggle" data-toggle="dropdown">준비하기(구매)</a>
+     <a class="dropdown-toggle">준비하기(구매)</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/market?category=seed">종자</a></li>
       <li><a href="/donong/market?category=fertilizer">비료</a></li>
@@ -181,7 +56,7 @@ background-color: #ACD17F;
   	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
   	
   	 <li class="dropdown">
-     <a class="dropdown-toggle" data-toggle="dropdown">고객센터</a>
+     <a class="dropdown-toggle">고객센터</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/cs/main">메인</a></li>
       <li><a href="/donong/cs/qna">QnA</a></li>
@@ -257,15 +132,7 @@ background-color: #ACD17F;
     </div> <!-- end modal-dialog -->
   </div> <!-- end modal fade -->
 </div> <!-- end navbar-collapse -->
-</div> <!-- end container-fluid -->
-</div> <!-- end full -->
-
-
-
-	
-	
-</body>
-</html>
+</div>
 
 
 	

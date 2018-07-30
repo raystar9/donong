@@ -1,20 +1,26 @@
 insert into member
 values (mem_num_seq.nextval, 'dahye', 'dada', '1234', '이다혜', 123456, '경기도 부천시 원미구', '금강시티빌 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
 
+insert into member
+values (mem_num_seq.nextval, 'qwe', 'qwe', 'qwe', '홍주성', 123456, '경기도 부천시 원미구', '금강시티빌 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
+
+
 select * from member;
 
-truncate table rentals;
-truncate table rentalFiles; 
 
 select * from SIGUNGU
 where name = '이문동';
 
 select * from RENTALS;
+select * from sido;
+delete from RENTALFILES
+where board_num = 68
 
 insert into RENTALS
 values (rental_num_seq.nextval, 1, '이다혜', '경기도 부천시 원미구 상동 226-11', '경기도', '부천시', 2400, );
 
-select * from RENTALFILES
+delete from RENTALS
+where num = 75;
 
 select * from RENTALFILES;
 
@@ -23,6 +29,23 @@ select num, id, nickname, realname, postnum, address, addressdetail, email, emai
 		where num = 2
 		
 select * from rentalFiles;
+
+delete from RENTALFILES
+where board_num = 72;
+
+delete from RENTALFILES
+where board_num = 73;
+
+delete from RENTALFILES
+where board_num = 74;
+
+delete from RENTALFILES
+where board_num = 75;
+
+INSERT INTO
+
+select * from sido;
+select * from sigungu;
 
 	INSERT INTO rentals
   	VALUES (rental_num_seq.nextval, 2, '이다혜', '대한민국 경기도 부천시', '경기도 부천시', 
@@ -76,5 +99,20 @@ where num = 53;
 select filepath1, filepath2, filepath3, filepath4  from RENTALFILES
 where board_num = #{num};
   		    
-
+select * from sigungu;
 select * from rentalFiles;
+
+select * from sido;
+
+select * from rentals
+where num = #{num}
+
+select * from rentals
+where sido = ?
+and sigungu = ?
+and price between ? and ?
+
+UPDATE rentals
+  	SET content = '변경 ㅇㅋ?'
+  	WHERE num = 69 
+

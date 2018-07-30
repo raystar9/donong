@@ -1,5 +1,16 @@
 $(document).ready(function() {
 	
+	if($("#filevalue2").text() == "default.png"){
+		$("#filevalue2").text("");
+	}
+	
+	if($("#filevalue3").text() == "default.png"){
+		$("#filevalue3").text("");
+	}
+	
+	if($("#filevalue4").text() == "default.png"){
+		$("#filevalue4").text("");
+	}
 	
 	/* 파일 선택 시 행 추가 */
 	$('#file1').change(function() {
@@ -57,6 +68,7 @@ $(document).ready(function() {
 			$('#file4').val(file4);
 		}
 	});
+	
 	
 	/* 유효성 검사 */
 	$('form').submit(function(){
@@ -128,16 +140,20 @@ var pins = [];
 
 /* 맵 초기화 함수 */	
 function initMap(){
-	var seoul = {			//서울 시청으로 처음 위치 지정
-		lat : 37.566697,
-		lng : 126.978457
+	var location = {	
+		lat : $("#markerLat").val()*1.0,
+		lng : $("#markerLng").val()*1.0
 	};
+	console.log(location.lat);
+	console.log(location.lng);
 	
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom : 14,
-		center : seoul,
+		center : location,
 		scrollwheel: true
 	});
+	
+	addMarker(location);
 	
 	//검색 자동완성 기능 
 	var autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
@@ -166,8 +182,8 @@ function addMarker(location){
       });
 	pins.push(marker);
 	
-	$('#markerLat').val(location.lat());
-	$('#markerLng').val(location.lng());
+	$('#markerLat').val(location.lat);
+	$('#markerLng').val(location.lng);
 	
 	
 }//addMarker()

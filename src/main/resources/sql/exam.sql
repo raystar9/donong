@@ -16,13 +16,15 @@ select * from sido;
 delete from RENTALFILES
 where board_num = 68
 
+select * from rentalfiles;
+
 insert into RENTALS
 values (rental_num_seq.nextval, 1, '이다혜', '경기도 부천시 원미구 상동 226-11', '경기도', '부천시', 2400, );
 
 delete from RENTALS
 where num = 75;
 
-select * from RENTALFILES;
+select * from RENTALs;
 
 select num, id, nickname, realname, postnum, address, addressdetail, email, emaildomain, phone, registdate
 		from member 

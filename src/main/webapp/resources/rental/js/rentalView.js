@@ -29,16 +29,18 @@ $(document).ready(function() {
 
 });//ready()
 
+
 /* 게시글 삭제버튼 onClick 이벤트 */
 function del_click(){
 	var num = $("#board_num").val();
 	var result = confirm("게시글을 삭제하시겠습니까?");
 	if(result == true){
-		location.href='./delete?num=' + num;
+		location.href='./delete?num=' + num+ '&directory=rent';
 	}else{
 		return false;
 	}
 }
+
 
 /* 맵 필드 변수 설정 */
 var marker;

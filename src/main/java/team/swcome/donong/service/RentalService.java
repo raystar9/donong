@@ -283,127 +283,84 @@ public class RentalService {
 		
 		String uploadPath = "rent";	// aws 폴더명
 		
-		//올린주소 리턴받음
-		ResponseEntity<String> img_path = new ResponseEntity<>
-		(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
-		
-		//받은걸 주소 String 으로 바꿔줌
-		String certificatePath = (String) img_path.getBody();
-
-		/* 첫번째 파일 */
-		// 원래 파일명 저장
-		String fileName = file1.getOriginalFilename();
-		f.setFileName1(fileName);
-
-		// 바뀐 파일명으로 저장
-		f.setFilePath1(certificatePath);
-		
-
 		FileDTO f2 = rentalMapper.selectFileNamePath(f.getBoard_num());
-
-		// 대표이미지
-		File DelFile = new File(saveFolder + f2.getFile1());
-		if (DelFile.exists()) {
-			DelFile.delete();
-		}
-
-		String fileName = file1.getOriginalFilename();
-		f.setFileName1(fileName);
-
-		Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH) + 1;
-		int date = c.get(Calendar.DATE);
-		String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
-
-		File path1 = new File(homedir);
-
-		if (!(path1.exists())) {
-			System.out.println("폴더 만들어요");
-			path1.mkdir(); // 새로운 폴더를 생성
-		}
-
-		Random r = new Random();
-		int random = r.nextInt(100000000);
-
-		int index = fileName.lastIndexOf(".");
-		String fileExtension = fileName.substring(index + 1);
-
-		String refileName = "farm" + year + month + date + random + "." + fileExtension;
-
-		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-		file1.transferTo(new File(saveFolder + fileDBName));
-
-		// 두번째 이미지
-		if (!file2.isEmpty()) {
-			DelFile = new File(saveFolder + f2.getFile2());
-			if (DelFile.exists()) {
-				DelFile.delete();
-			}
+		
+		
+		if(!f.getFile1().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
 			
-			fileName = file2.getOriginalFilename();
+			//받은걸 주소 String 으로 바꿔줌
+			String certificatePath = (String) img_path.getBody();
+
+			// 원래 파일명 저장
+			String fileName = file1.getOriginalFilename();
+			f.setFileName1(fileName);
+
+			// 바뀐 파일명으로 저장
+			f.setFilePath1(certificatePath);
+		}else {	//파일1이 변경되지 않았을 때
+			f.setFileName1(f2.getFileName1());
+			f.setFilePath1(f2.getFilePath1());
+		}
+		
+		if(!f.getFile2().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
+			
+			//받은걸 주소 String 으로 바꿔줌
+			String certificatePath = (String) img_path.getBody();
+
+			// 원래 파일명 저장
+			String fileName = file2.getOriginalFilename();
 			f.setFileName2(fileName);
 
-			r = new Random();
-			random = r.nextInt(100000000);
-			index = fileName.lastIndexOf(".");
-			fileExtension = fileName.substring(index + 1);
-			refileName = "farm" + year + month + date + random + "." + fileExtension;
-			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-			file2.transferTo(new File(saveFolder + fileDBName));
-		}else {
-			f.setFileName2(defName);
-			f.setFilePath2(defPath);
+			// 바뀐 파일명으로 저장
+			f.setFilePath2(certificatePath);
+		}else {	//파일1이 변경되지 않았을 때
+			f.setFileName2(f2.getFileName2());
+			f.setFilePath2(f2.getFilePath2());
 		}
-
-		// 세번째 이미지
-		if (!file3.isEmpty()) {
-			DelFile = new File(saveFolder + f2.getFile3());
-			if (DelFile.exists()) {
-				DelFile.delete();
-			}
+		
+		if(!f.getFile3().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file3.getOriginalFilename(), file3), HttpStatus.CREATED);
 			
-			fileName = file3.getOriginalFilename();
+			//받은걸 주소 String 으로 바꿔줌
+			String certificatePath = (String) img_path.getBody();
+
+			// 원래 파일명 저장
+			String fileName = file3.getOriginalFilename();
 			f.setFileName3(fileName);
 
-			r = new Random();
-			random = r.nextInt(100000000);
-			index = fileName.lastIndexOf(".");
-			fileExtension = fileName.substring(index + 1);
-			refileName = "farm" + year + month + date + random + "." + fileExtension;
-			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-			file3.transferTo(new File(saveFolder + fileDBName));
-		}else {
-			f.setFileName3(defName);
-			f.setFilePath3(defPath);
+			// 바뀐 파일명으로 저장
+			f.setFilePath3(certificatePath);
+		}else {	//파일1이 변경되지 않았을 때
+			f.setFileName2(f2.getFileName3());
+			f.setFilePath2(f2.getFilePath3());
 		}
-
-		// 네번째 이미지
-		if (!file4.isEmpty()) {
-			DelFile = new File(saveFolder + f2.getFile4());
-			if (DelFile.exists()) {
-				DelFile.delete();
-			}
+		
+		if(!f.getFile4().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file4.getOriginalFilename(), file4), HttpStatus.CREATED);
 			
-			fileName = file4.getOriginalFilename();
+			//받은걸 주소 String 으로 바꿔줌
+			String certificatePath = (String) img_path.getBody();
+
+			// 원래 파일명 저장
+			String fileName = file4.getOriginalFilename();
 			f.setFileName4(fileName);
 
-			r = new Random();
-			random = r.nextInt(100000000);
-			index = fileName.lastIndexOf(".");
-			fileExtension = fileName.substring(index + 1);
-			refileName = "farm" + year + month + date + random + "." + fileExtension;
-			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-			file4.transferTo(new File(saveFolder + fileDBName));
-		}else {
-			f.setFileName4(defName);
-			f.setFilePath4(defPath);
+			// 바뀐 파일명으로 저장
+			f.setFilePath4(certificatePath);
+		}else {	//파일1이 변경되지 않았을 때
+			f.setFileName4(f2.getFileName4());
+			f.setFilePath4(f2.getFilePath4());
 		}
-
 		rentalMapper.updateFiles(f);
 	};
 }

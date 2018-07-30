@@ -204,7 +204,7 @@ function search(){
 						"No.&nbsp;"+ json[i].num +
 						"</div>"+
 		 			   	"<div class='row'>"+
-		 			   	"<a href='./rental/view?num="+ json[i].num +"'><img src='./resources/rental/upload"+json[i].path +"' class='img'></a>"+
+		 			   	"<a href='./rental/view?num="+ json[i].num +"'><img src='/donong/rental/displayFile?fileName="+json[i].path +"&directory=rent' class='img'></a>"+
 		 			   	"</div>"+
 		 			   	"<div class='row'>"+
 		 			   	"<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+

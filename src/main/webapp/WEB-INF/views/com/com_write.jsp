@@ -5,7 +5,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<script>
+function check(){
+	if($.trim($('#category').val())==""){
+		alert('카테고리를 선택하세요.');
+		$('#category').focus();
+		return false;
+	}
+	if($.trim($('#subject').val())==""){
+		alert('제목을 입력하세요.');
+		$('#subject').focus();
+		return false;
+	}
+	if($.trim($('#content').val())==""){
+		alert('내용을 이력하세요.');
+		$('#content').focus();
+		return false;
+	}
+}
+</script>
 <script src="resources/js/jquery-3.3.1.js"></script>
 <!-- <script src="resources/js/bbs.js"></script> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,19 +37,21 @@
 				<!-- 
 				<tr>
 					<th>글쓴이</th>
-					<td><input type="hidden" name="com_name" id="com_name" size="14"
-						class="input_box"></td>
+					<td></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="hidden" name="com_pass" id="com_pass"
-						size="14" class="input_box"></td>
+					<td></td>
 				</tr>
 				 -->
+				
 				<tr class="form-group">
 					<th class="well well-sm" style="text-align:center;">제목</th>
 					<td><input name="subject" id="subject"
-						class="form-control"></td>
+						class="form-control"> <input type="hidden" name="writer" id="writer" size="14"
+						class="input_box" value="admin"><input type="hidden" name="password" id="password" value="1111"
+						size="14" class="input_box"><input type="hidden" name="member_num" id="member_num" value="1"
+						size="14" class="input_box"></td>
 						
 				</tr>
 				
@@ -39,19 +59,19 @@
 				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
 				<label for="upfile"></label>
-				<input type="file" id="upfile" name="uploadfile" value=" " class="form-control">
+				<input type="file" id="filename" name="uploadfile" value=" " class="form-control">
 				<span id="filevalue"></span>
 				</td>
 				</tr>
 				<tr>
 				<th class="well well-sm" style="text-align:center;">분류</th>
 				<td>
-				<select class="form-control">
-				<option>선택하세요.</option>
-				<option>잡담</option>
-				<option>질문</option>
-				<option>정보</option>
-				<option>모임</option>
+				<select class="form-control" name="category" id="category">
+					<option value="">선택하세요.</option>
+				<option value="잡담">잡담</option>
+				<option value="질문">질문</option>
+				<option value="정보">정보</option>
+				<option value="모임">모임</option>
 				</select>
 				
 				</td>

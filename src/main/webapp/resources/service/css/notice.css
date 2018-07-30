@@ -1,0 +1,10 @@
+#boardList {
+	width: 80%;
+	height: 70%;
+	
+}
+
+#pagingTd a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,16 +9,35 @@
 <script src="resources/js/jquery-3.3.1.js"></script>
 <!--  <script src="resources/js/bbs.js"></script>-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<script>
+function check(){
+	if($.trim($('#category').val())==""){
+		alert('카테고리를 선택하세요.');
+		$('#category').focus();
+		return false;
+	}
+	if($.trim($('#subject').val())==""){
+		alert('제목을 입력하세요.');
+		$('#subject').focus();
+		return false;
+	}
+	if($.trim($('#content').val())==""){
+		alert('내용을 이력하세요.');
+		$('#content').focus();
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 	<div class="container">
 		<h2 class="comwrite_title">커뮤니티게시판 수정</h2>
-		<form method="get" action="communitylist" onsubmit="return check()" enctype="multipart/form-data">
-			<input type="hidden" name="num" value="${bbsbean.num}">
+		<form method="post" action="communityedit_ok" onsubmit="return check()" enctype="multipart/form-data">
+			<input type="hidden" name="num" value="${num}">
 			<input type="hidden" name="page" value="${page}">
 			<table id="comwrite_t">
-			<!-- 
+			
+			<%--
 				<tr>
 					<th>글쓴이</th>
 					<td><input name="com_name" id="com_name" size="14"
@@ -28,30 +48,28 @@
 					<td><input type="password" name="com_pass" id="com_pass"
 						size="14" class="input_box"></td>
 				</tr>
-				 -->
+				 --%>
 				<tr class="form-group"> 
 					<th class="well well-sm" style="text-align:center;">제목</th>
 					<td><input name="subject" id="subject" size="40"
-						class="form-control" value="${bbsbean.subject }"></td>
+						class="form-control" value="${bbsbean.subject }"><input type="hidden" name="writer" id="writer" size="14"
+						class="input_box" value="admin"><input type="hidden" name="password" id="password" value="1111"
+						size="14" class="input_box"><input type="hidden" name="member_num" id="member_num" value="1"
+						size="14" class="input_box"></td>
 				</tr>
 				<tr>
 				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
 				<label for="upfile"></label>
-				<input type="file" id="upfile" name="uploadfile" value=" " class="form-control">
+				<input type="file" id="filename" name="uploadfile" value="${bbsbean.filename } " class="form-control">
 				<span id="filevalue"></span>
 				</td>
 				</tr>
 				<tr>
 				<th class="well well-sm" style="text-align:center;">분류</th>
 				<td>
-				<select class="form-control">
-				<option>선택하세요.</option>
-				<option>잡담</option>
-				<option>질문</option>
-				<option>정보</option>
-				<option>모임</option>
-				</select>
+				<input name="category" id="category" value="${bbsbean.category }" class="form-control" readonly>
+			
 				
 				</td>
 				</tr>

@@ -6,15 +6,22 @@ import javax.annotation.Resource;
 
 @Resource
 public class GoodsDTO {
-	private int num;
-	private String name;
-	private int price;
-	private int category;
-	private String title;
-	private Date regitdate;
-	private String content;
-	private String filePath;
+	int num;
+	String name;
+	int price;
+	int category;
+	String title;
+	Date regitdate;
+	String content;
+	String filePath;
+	int quantity;
 	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public int getNum() {
 		return num;
 	}

@@ -55,14 +55,20 @@ quantity NUMBER NOT NULL
 CREATE TABLE orders(
 num NUMBER CONSTRAINT order_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT order_member_num_fk REFERENCES member(num) NOT NULL,
+name VARCHAR2(100) NOT NULL,
+orderdate DATE NOT NULL,
+address VARCHAR2(200) NOT NULL,
+phone VARCHAR2(15) NOT NULL,
+comments VARCHAR2(300) NOT NULL,
+waybill number,
 status varchar2(20) NOT NULL
 );
 
 CREATE TABLE goodsorders(
+num NUMBER CONSTRAINT goodsorder_num_pk PRIMARY KEY,
 order_num NUMBER CONSTRAINT goodsorders_order_num_fk REFERENCES orders(num) NOT NULL,
 goods_num NUMBER CONSTRAINT goodsorders_goods_num_fk REFERENCES goods(num) NOT NULL,
-quantity NUMBER,
-PRIMARY KEY(order_num, goods_num)
+quantity NUMBER
 );
 
 CREATE TABLE sido(
@@ -81,6 +87,7 @@ num NUMBER CONSTRAINT rentals_num_pk PRIMARY KEY,
 member_num NUMBER CONSTRAINT rental_writer_fk REFERENCES member(num) NOT NULL,
 writer VARCHAR(100) NOT NULL,
 address varchar2(400) NOT NULL,
+title varchar2(100) NOT NULL,
 sido NUMBER CONSTRAINT rentals_sido_fk REFERENCES sido(num) NOT NULL,
 sigungu NUMBER CONSTRAINT rentals_sigungu_fk REFERENCES sigungu(num) NOT NULL,
 area number NOT NULL,
@@ -90,10 +97,17 @@ lat NUMBER,
 lng NUMBER
 );
 
-CREATE TABLE rentalFiles(
-num NUMBER CONSTRAINT rentalfiles_num_pk PRIMARY KEY,
-rentals_num NUMBER CONSTRAINT rentalfiles_rental_fk REFERENCES rentals(num) NOT NULL,
-filepath VARCHAR2(200) NOT NULL
+CREATE TABLE rentalfiles(
+num NUMBER CONSTRAINT rental_files_num_pk PRIMARY KEY,
+board_num NUMBER CONSTRAINT rental_board_num REFERENCES rentals(num) NOT NULL,			-- 그 테이블의 게시글 번호
+filename1 VARCHAR2(200) NOT NULL,
+filename2 VARCHAR2(200) ,
+filename3 VARCHAR2(200) ,
+filename4 VARCHAR2(200) ,
+filepath1 VARCHAR2(200) NOT NULL,
+filepath2 VARCHAR2(200) ,
+filepath3 VARCHAR2(200) ,
+filepath4 VARCHAR2(200) 
 );
 
 CREATE TABLE community(
@@ -105,12 +119,12 @@ subject VARCHAR2(200) NOT NULL,
 category VARCHAR2(50) NOT NULL,
 content VARCHAR2(4000) NOT NULL,
 regitdate DATE NOT NULL,
-readcount NUMBER,
-re_ref NUMBER,
-re_lev NUMBER,
-re_seq NUMBER,
-filename VARCHAR2(200) NOT NULL,
-filepath VARCHAR2(200) NOT NULL
+readcount NUMBER NOT NULL,
+re_ref NUMBER NOT NULL,
+re_lev NUMBER NOT NULL,
+re_seq NUMBER NOT NULL,
+filename VARCHAR2(200),
+filepath VARCHAR2(200)
 );
 
 CREATE TABLE cs_category(
@@ -122,7 +136,8 @@ CREATE TABLE faq(
 num NUMBER CONSTRAINT faq_num_pk PRIMARY KEY,
 category NUMBER CONSTRAINT faq_category_fk REFERENCES cs_category(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
-content VARCHAR2(4000) NOT NULL
+content VARCHAR2(4000) NOT NULL,
+readcount number
 );
 
 CREATE TABLE qna(
@@ -131,8 +146,10 @@ category NUMBER CONSTRAINT qna_category_fk REFERENCES cs_category(num) NOT NULL,
 writer NUMBER CONSTRAINT qna_writer_fk REFERENCES member(num) NOT NULL,
 title VARCHAR2(200) NOT NULL,
 content varchar2(4000) NOT NULL,
-filename VARCHAR2(200) NOT NULL,
-filepath VARCHAR2(200) NOT NULL
+regitdate DATE NOT NULL,
+answer varchar2(4000),
+ansdate DATE,
+state varchar2(20)
 );
 
 CREATE TABLE notice(

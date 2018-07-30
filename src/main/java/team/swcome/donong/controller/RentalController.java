@@ -1,71 +1,244 @@
 package team.swcome.donong.controller;
 
-import java.util.Locale;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.amazonaws.util.IOUtils;
+
+import team.swcome.donong.dto.FileDTO;
+import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.RentalDTO;
+import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.RentalService;
+import team.swcome.donong.service.S3Service;
+import team.swcome.donong.service.S3Util;
 
-
+@SessionAttributes("sessionBean")
 @Controller
 public class RentalController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	@Autowired
 	RentalService RentalService;
-	
-	
-	/*@RequestMapping(value = "rental", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		RentalService.getMainList();
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		return "rental/home";
-	}*/
-	
-	/* ³óÁö ´ë¿© ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ */
+	@Autowired
+	S3Service s3Service;
+	S3Util s3Util = new S3Util();
+	String bucketName = "donong-s3";
+
+	/* ë†ì§€ ëŒ€ì—¬ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™ */
 	@RequestMapping(value = "/rental", method = RequestMethod.GET)
-	public String rentalList() {
+	public String rentalList(Model model) {
+		List<RentalDTO> list = RentalService.selectRentalList();
+		String[] filepath = RentalService.selectRepresentImg();
+
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setPath(filepath[i]);
+		}
+
+		model.addAttribute("list", list);
 		return "rental/rentalList";
 	}
-	
-	/* ³óÁö ´ë¿© ±Û¾²±â ÆäÀÌÁö·Î ÀÌµ¿ */
+
+	/* ë†ì§€ ëŒ€ì—¬ ê¸€ì“°ê¸° í˜ì´ì§€ë¡œ ì´ë™ */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
-	public String rentalWrite() {
+	public String rentalWrite(Model model, SessionBean sessionBean) {
+		sessionBean.setMemberNum(2); // ì„ì‹œë¡œ ì •í•´ë†“ìŒ
+		int member_num = sessionBean.getMemberNum();
+		MemberDTO m = RentalService.selectNameByPhone(member_num);
+
+		model.addAttribute("name", m.getRealname());
+		model.addAttribute("phone", m.getPhone());
+
 		return "rental/rentalWrite";
 	}
-	
+
+	/* ë†ì§€ ëŒ€ì—¬ ê¸€ì“°ê¸° ì‹¤í–‰ */
 	@RequestMapping(value = "/rental/write_ok", method = RequestMethod.POST)
-	public String rentalWrite_ok(Locale locale, Model model) {
-		return "rental/rentalWrite";
+	public String rentalWrite_ok(Model model, 
+								 SessionBean sessionBean, 
+								 RentalDTO r, 
+								 FileDTO f)
+			throws IllegalStateException, IOException {
+		// int member_num = sessionBean.getMemberNum(); - ë¡œê·¸ì¸ ì—°ê²°ë˜ë©´ ì´ë ‡ê²Œ ê°€ì ¸ì˜¬ ê²ƒ
+		sessionBean.setMemberNum(2); // ì„ì‹œë¡œ ì •í•´ë†“ìŒ
+		int member_num = sessionBean.getMemberNum();
+		r.setMember_num(member_num);
+
+		int board_num = RentalService.insertFarm(r); // ê²Œì‹œê¸€ ë²ˆí˜¸ë¥¼ ê°€ì ¸ì™€ì„œ ì§€ì •
+		f.setBoard_num(board_num);
+		RentalService.insertFile(f);
+
+		return "redirect:/rental";
+	}
+
+	/* ë†ì§€ ëŒ€ì—¬ ìƒì„¸ë³´ê¸° í˜ì´ì§€ë¡œ ì´ë™ */
+	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
+	public String rentalView(Model model, SessionBean sessionBean, HttpServletRequest request) {
+		sessionBean.setMemberNum(2); // ì„ì‹œë¡œ ì •í•´ë†“ìŒ
+		int member_num = sessionBean.getMemberNum();
+		MemberDTO m = RentalService.selectNameByPhone(member_num);
+
+		int board_num = Integer.parseInt(request.getParameter("num"));
+		RentalDTO r = RentalService.selectRentalView(board_num);
+
+		FileDTO f = RentalService.selectFileNamePath(board_num);
+
+		model.addAttribute("file", f);
+		model.addAttribute("member", m);
+		model.addAttribute("rental", r);
+		return "rental/rentalView";
+	}
+
+	/* ë§ˆì»¤ ì°ì„ ë•Œ Ajax */
+	@RequestMapping(value = "/markerJson", method = RequestMethod.POST)
+	@ResponseBody
+	public Object markerJson(Model model, SessionBean sessionBean) {
+		List<RentalDTO> list = RentalService.selectRentalList();
+		String[] imgs = RentalService.selectRepresentImg();
+
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setPath(imgs[i]);
+		}
+
+		return list;
+	}
+
+	/* ë†ì§€ ëŒ€ì—¬ ì‚­ì œ */
+	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
+	public String rentalDelete(Model model, HttpServletRequest request, String directory) {
+		int board_num = Integer.parseInt(request.getParameter("num"));
+		
+		Map m = new HashMap();
+		m.put("board_num", board_num);
+		m.put("directory", directory);
+		
+		RentalService.deleteFiles(m);
+		RentalService.deleteRental(board_num);
+		
+		return "redirect:/rental";
+	}
+
+	/* ê²€ìƒ‰í•  ë•Œ Ajax */
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	@ResponseBody
+	public Object searchJson(Model model, SessionBean sessionBean, HttpServletRequest request) {
+		int num = 0;
+		int sido = 0;
+		int sigungu = 0;
+		int price = 0;
+
+		if (!request.getParameter("num").equals("")) {
+			num = Integer.parseInt(request.getParameter("num"));
+		}
+		if (!request.getParameter("sido").equals("")) {
+			sido = Integer.parseInt(request.getParameter("sido"));
+		}
+		if (!request.getParameter("sigungu").equals("")) {
+			sigungu = Integer.parseInt(request.getParameter("sigungu"));
+		}
+		if (!request.getParameter("price").equals("")) {
+			price = Integer.parseInt(request.getParameter("price"));
+		}
+
+		RentalDTO r = new RentalDTO();
+		r.setNum(num);
+		r.setSido(sido);
+		r.setSigungu(sigungu);
+		r.setPrice(price);
+
+		List<RentalDTO> list = RentalService.selectSearch(r);
+		return list;
+	}
+
+	/* ë†ì§€ ëŒ€ì—¬ ìˆ˜ì • í˜ì´ì§€ ì´ë™ */
+	@RequestMapping(value = "/rental/modify", method = RequestMethod.GET)
+	public String rentalModify(Model model, HttpServletRequest request, SessionBean sessionBean){
+		sessionBean.setMemberNum(2); // ì„ì‹œë¡œ ì •í•´ë†“ìŒ
+		int member_num = sessionBean.getMemberNum();
+		MemberDTO m = RentalService.selectNameByPhone(member_num);
+
+		int board_num = Integer.parseInt(request.getParameter("num"));
+		RentalDTO r = RentalService.selectRentalView(board_num);
+
+		FileDTO f = RentalService.selectFileNamePath(board_num);
+
+		model.addAttribute("file", f);
+		model.addAttribute("member", m);
+		model.addAttribute("rental", r);
+		
+		return "rental/rentalModify";
 	}
 	
-	/*
-	//°Ë»ö¹öÆ° ´©¸£¸é ¿À´Â °÷
-	@RequestMapping(value = "rental/search", method = RequestMethod.GET)
-	public String rentalSearch(Locale locale, Model model) {
-		return "rental/rentalWrite";
+	/* ë†ì§€ ëŒ€ì—¬ ìˆ˜ì • ì²˜ë¦¬ */
+	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.POST)
+	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f)
+			throws IllegalStateException, IOException {
+		int board_num = r.getNum();
+		r.setNum(board_num);
+		f.setBoard_num(board_num);
+
+		RentalService.updateRental(r);
+		RentalService.updateFiles(f);
+
+		return "redirect:/rental/view?num=" + board_num;
 	}
-	
-	//±Û¾²±â ÆäÀÌÁö¿¡¼­ µî·Ï ¹öÆ° ´©¸£¸é ¿À´Â °÷ 
-	
-	
-	//»èÁ¦ ¹öÆ° ´©¸£¸é ¿À´Â °÷
-	@RequestMapping(value = "rental/delete", method = RequestMethod.POST)
-	public String rentalDelete(Locale locale, Model model) {
-		return "rental/rentalWrite";
+
+	/* aws ì‚¬ì§„ View */
+	@SuppressWarnings("resource")
+	@ResponseBody
+	@RequestMapping("/rental/displayFile")
+	public ResponseEntity<byte[]> displayFile(String fileName, String directory) throws Exception {
+		logger.info(directory);
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection conn = null;
+		logger.info("FILE NAME: " + fileName);
+
+		String inputDirectory = null;
+		if(directory.equals("rent")) {
+			inputDirectory = "rent";
+		}
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				url = new URL(s3Util.getFileURL(bucketName, inputDirectory + fileName));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream(); // ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜´
+			} catch (Exception e) {
+				url = new URL(s3Util.getFileURL(bucketName, "default.png"));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
 	}
-	*/
 }

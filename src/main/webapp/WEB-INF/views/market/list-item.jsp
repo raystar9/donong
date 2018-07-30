@@ -2,14 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
-<div class="item-thumbnail">
-<div class="col-sm-2">
-	<img src="${item.filePath }" alt="#" width="160px" height="160px"/>
+<div class="row panel panel-default">
+<div class="item-cell">
+	<img class="img-thumbnail item-img" src="${item.filePath }" alt="#" width="160px" height="160px"/>
 </div>
-<div class="col-sm-6">
-	<a href="/donong/market/item/${item.num}">${item.title}</a>
-</div>
-<div class="col-sm-4">
-	${item.price }원
-</div>
+	<div class="item-name item-cell">
+		<a href="/donong/market/item/${item.num}">${item.title}</a>
+	</div>
+	<div class="item-price item-cell">
+		${item.price }원
+	</div>
 </div>

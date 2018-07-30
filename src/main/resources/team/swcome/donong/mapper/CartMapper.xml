@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.CartMapper">
+  <select id="selectCartGoodsListByMemberNum" resultType="CartGoodsDTO">
+  	select goods.*, cartNum, memberNum, quantity
+  	from goods, (
+  		SELECT goods_num, cart.num as cartNum, member.num as memberNum, quantity
+  		FROM cart, member
+  		WHERE cart.member_num = member.num
+  		AND cart.member_num = #{memberNum}
+  	) 
+  	where goods_num = goods.num
+  </select>
+  <insert id="insertCartItem" parameterType="CartDTO">
+  	<selectKey resultType="int" keyProperty="num" order="BEFORE">
+  	  select max(num)+1 from cart
+  	</selectKey>
+  	INSERT INTO cart
+  	VALUES (#{num}, #{goodsNum}, #{memberNum}, #{quantity})
+  </insert>
+  <update id="updateCartItem" parameterType="CartDTO">
+  	UPDATE cart
+  	SET goods_num = #{goodsNum} AND member_num = #{memberNum} AND quantity = #{quantity}
+  	WHERE num = #{num}
+  </update>
+  <update id="updateCartQuantityByCartNum" parameterType="CartDTO">
+  	UPDATE cart
+  	SET quantity = #{param2}
+  	WHERE num = #{param1}
+  </update>
+  <delete id="deleteCartItemByNum">
+  	DELETE FROM cart
+  	WHERE num = #{num}
+  </delete>
+  
+</mapper>

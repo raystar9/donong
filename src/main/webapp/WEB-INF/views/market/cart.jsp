@@ -4,33 +4,35 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/resources/market/css/a.css">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	<%@ include file="/resources/common/jsp/import.jsp" %>
+	<script src="/donong/resources/market/js/cart.js"></script>
 	<title>Home</title>
 	<style>
-		html, body {
-			margin: 0px;
-			padding: 0px;
-		}
 		.left-navbar {
 			width: 150px;
+		}
+		input[type=number]::-webkit-inner-spin-button, 
+		input[type=number]::-webkit-outer-spin-button { 
+		  -webkit-appearance: none; 
+		  margin: 0; 
 		}
 	</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
-<form action="">
 	<div>
 		<h1>장바구니 페이지</h1>
 	</div>
 	<div>
-		<c:forEach items="${items}" var="item">
+		<c:forEach items="${items}" var="item" varStatus="status">
 			<%@ include file="/WEB-INF/views/market/cart-item.jsp" %>
 		</c:forEach>
-		<p class="form-control-static">총 결제가격</p>
-		<p class="form-control-static">2000원</p>
+		<label for="price">총 가격 : </label>
+		<p class="form-control-static" id="total-price">${totalPrice }원</p>
 	</div>
-	</form>
+		<input type="button" class="btn btn-default" value="주문하기" onclick="location.href='/donong/market/order/cart'"/>
+		<!-- <input type="button" value="돌아가기" onclick="history.back();"/> -->
 </div>
 </body>
 </html>

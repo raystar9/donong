@@ -34,6 +34,39 @@ public class AccountService {
 		return mainMapper.selectMemberCountByIdAndRealname(id, realname);
 	}
 	
-	
+	public MemberDTO findId(String realname, String phone) {
+		return mainMapper.selectMemberCountByRealnameAndPhone(realname, phone);
+	}
+
+	public int checkMemberId(String id) {
+		
+		int result = 0;
+		
+		MemberDTO memberDTO = mainMapper.selectMemberCountById(id);
+		
+		if(memberDTO == null) {
+			result = 0;
+		} else {
+			result = 1;
+		}
+		
+		return result;
+			
+	}
+
+	public int checkMemberNickname(String nickname) {
+		
+	int result = 0;
+		
+		MemberDTO memberDTO = mainMapper.selectMemberCountByNickName(nickname);
+		
+		if(memberDTO == null) {
+			result = 0;
+		} else {
+			result = 1;
+		}
+		
+		return result;
+	}
 	
 }

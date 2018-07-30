@@ -4,21 +4,41 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @Resource
 public class BoardDTO {
-	int num;
-	int member_num;
-	String password;
-	String writer;
-	String subject;
-	String category;
-	String content;
-	Date regitdate;
-	int readcount;
-	String file;
-	int re_ref;
-	int re_lev;
-	int re_seq;
+	private int num;
+	private int member_num;
+	private String password;
+	private String writer;
+	private String subject;
+	private String category;
+	private String content;
+	private Date regitdate;
+	private int readcount;
+	
+	private int re_ref;
+	private int re_lev;
+	private int re_seq;
+	private String filename;
+	private String filepath;
+	
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getFilepath() {
+		return filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
 
 	public int getNum() {
 		return num;
@@ -92,14 +112,6 @@ public class BoardDTO {
 
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
-	}
-
-	public String getFile() {
-		return file;
-	}
-
-	public void setFile(String file) {
-		this.file = file;
 	}
 
 	public int getRe_ref() {

@@ -1,6 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,10 +7,19 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	
-	<script src="resources/service/js/notice_list.js"></script>
+	<script src="/donong/resources/service/js/notice_list.js"></script>
+	
+	<link rel="stylesheet" href="/donong/resources/service/css/notice.css" type="text/css">	
+	
 </head>
 <body>
-
+	<h1>
+		공지사항 페이지 입니다.  
+	</h1>
+	<a href="/donong/cs/main">main</a>
+	<a href="/donong/cs/notice">notice</a>
+	<a href="/donong/cs/qna">qna</a>
+	
 	<table id="boardList">
 		<c:if test="${listCount != 0 }">
 			<tr>
@@ -23,7 +31,7 @@
 				<th width="20%">등록일</th>
 			</tr>
 
-			<c:set var="num" value="${listCount - (page - 1) * limit }"/>
+			<c:set var="num" value="${listCount - (page - 1) * 10 }"/>
 			<c:forEach var="content" items="${noticeList }">
 				<tr>
 					<td>
@@ -41,20 +49,20 @@
 				</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="3">
+				<td colspan="3" id="pagingTd">
 					<c:if test="${page <= 1 }">
 						이전&nbsp;
 					</c:if>
 					<c:if test="${page > 1 }">
-						<a href="./bbs_list.nhn?page=${page - 1 }&searchOpt=${searchOpt}&searchTxt=${searchTxt}">이전</a>
+						<a>이전</a>
 					</c:if>
 					
 					<c:forEach var="pageNum" begin="${startPage }" end="${endPage }">
 						<c:if test="${pageNum == page }">
-							${pageNum }
+							<span id="currPage">${pageNum }</span>
 						</c:if>
 						<c:if test="${pageNum != page }">
-							<a href="./bbs_list.nhn?page=${pageNum }&searchOpt=${searchOpt}&searchTxt=${searchTxt}">${pageNum }</a>
+							<a>${pageNum }</a>
 						</c:if>
 					</c:forEach>
 					
@@ -62,7 +70,7 @@
 						&nbsp;다음
 					</c:if>
 					<c:if test="${page < maxPage }">
-						<a href="./bbs_list.nhn?page=${page + 1 }&searchOpt=${searchOpt}&searchTxt=${searchTxt}">다음</a>
+						<a>다음</a>
 					</c:if>
 				</td>
 			</tr>
@@ -72,23 +80,22 @@
 	<table>			
 		<tr>
 			<td>
-				<select id="searchOpt">
-					<option value="bbs_subject">제목</option>
-					<option value="bbs_content">내용</option>
-					<option value="bbs_name">작성자</option>
+				<select id="srcOpt">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
 				</select>
 			</td>
 			
 			<td colspan="2">
-				<input type="text" id="searchTxt" name="searchTxt" />
-				<input type="button" id="searchBtn" value="검색" />
+				<input type="text" id="srcTxt" name="searchTxt" />
+				<input type="button" id="srcBtn" value="검색" />
 			</td>
 			
-			<c:if test="${id = 'admin' }">
+			<%-- <c:if test="${id = 'admin' }"> --%>
 				<td style="text-align: right;">
-					<a href="./bbs_write.nhn">[글쓰기]</a>
+					<a href="./notice/write">[글쓰기]</a>
 				</td>
-			</c:if>
+			<%-- </c:if> --%>
 		</tr>
 	</table>
 	

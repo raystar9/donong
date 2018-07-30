@@ -26,8 +26,10 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
 	<context:component-scan base-package="team.swcome.donong" />
+
 	<aop:aspectj-autoproxy/>
+
 	<mybatis-spring:scan base-package="team.swcome.donong.mapper"/>
+
 </beans:beans>

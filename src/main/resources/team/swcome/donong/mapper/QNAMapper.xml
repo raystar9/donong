@@ -4,14 +4,45 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.swcome.donong.mapper.QNAMapper">
 	
-	<select id="selectAll" resultType="notice">
-		select * from qna
-	</select>
+	<insert id="insertQna" parameterType="qna" useGeneratedKeys="true" keyColumn="num" keyProperty="num">
+		<selectKey keyProperty="num" order="BEFORE" resultType="int">
+			select nvl(max(num), 0) + 1 from qna
+		</selectKey>
+		insert into qna (num, category, writer, title, content, regitdate, state)  
+		values(#{num}, #{category}, #{writer}, #{title}, #{content}, sysdate, '답변 대기')
+	</insert>
 	
-	<select id="select" resultType="notice">
+	<select id="getQna" resultType="qna">
 		select * from qna where num=#{num}
 	</select>
 	
+	<select id="getQnaListCountAll" resultType="int">
+		select count(num) from qna
+	</select>
 	
+	<select id="getQnaListAll" resultType="qna">
+		select * from qna order by regitdate desc
+	</select>
+	
+	<select id="getQnaListCount" resultType="int">
+		select count(num) from qna where writer=#{memberNum}
+	</select>
+	
+	<select id="getQnaList" resultType="qna">
+		select * from qna where writer=#{memberNum} order by regitdate desc
+	</select>
+	
+	<update id="updateQna" parameterType="qna">
+		update qna set category=#{category}, title=#{title}
+		, content=#{content} where num=#{num}
+	</update>
+	
+	<update id="updateAnswer" parameterType="qna">
+		update qna set answer=#{answer}, ansdate=sysdate, state='답변 완료' where num=#{num}
+	</update>
+	
+	<delete id="deleteQna" parameterType="int">
+		delete from qna where num=#{num}
+	</delete>
 	
 </mapper>

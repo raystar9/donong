@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDOe4IKBXOqkDF771joEPKg_wqglhjjv2Y&callback=initMap&libraries=places'></script> -->
- 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <script src="/donong/resources/rental/js/rentalWrite.js"></script>
-<title>대여 작성 페이지</title>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <style>
+	*{
+		box-sizing:border-box;
+	}
 	#main{
 		margin: auto;
 		border:1px solid black;
@@ -19,6 +20,7 @@
 	.writeTable{
 		margin: auto;
 		margin-top: 50px;
+		width: 700px;
 	}
 	#map {
 		width: 400px;
@@ -36,79 +38,104 @@
 		margin: auto;
 		text-align: center;
 	}
+	table tr td:first-child {
+		width: 150px;
+	}
+	.uploadIcon{
+		width:25px;
+		height:20px;
+		margin-left:10px;
+	}
+	input[type="file"]{
+		display:none;
+	}
+	#file2_tr, #file3_tr, #file4_tr{
+		display:none;
+	}
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div id="main">
-	<form action="rental/write_ok" method="post" class="writeForm">
+ <form action="./write_ok" method="post" class="writeForm" enctype="multipart/form-data">
 	<table border="1" class="writeTable">
 		<tr>
 			<td>임대자</td>
 			<td>
-				이다혜
+				${name} 
 			</td>
-		</tr>
+		</tr> 
 		<tr>
 			<td>연락처</td>
 			<td>
-				010-2350-3059
+				${phone}
 			</td>
 		</tr>
 		<tr>
 			<td>면적</td>
 			<td>
-				<input type="text" name="area" id="area" placeholder="1,000">&nbsp;py
+				<input type="text" name="area" id="area" placeholder="1,000" class="form-control">&nbsp;py
 			</td>
 		</tr>
 		<tr>
 			<td>임대료</td>
 			<td>
+				<div style='width:100px; display:inline-block'>
 				<input type="text" name="price" id="price">&nbsp;원
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>대표이미지</td>
 			<td>
-				 <input type="file" name="file1" id="file">
+				<label for="file1"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file1" id="file1">
+				<span id="filevalue1"></span>&nbsp;
 			</td>
 		</tr>
-		<tr>
+		<tr id='file2_tr'>
 			<td>사진1</td>
 			<td>
-				 <input type="file" name="file2" id="file">
+				<label for="file2"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				<input type="file" name="file2" id="file2">
+				<span id="filevalue2"></span>&nbsp;
 			</td>
 		</tr>
-		<tr>
+		<tr id='file3_tr'>
 			<td>사진2</td>
 			<td>
-				 <input type="file" name="file3" id="file">
+				 <label for="file3"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				 <input type="file" name="file3" id="file3">
+				 <span id="filevalue3"></span>&nbsp;
 			</td>
 		</tr>
-		<tr>
+		<tr id='file4_tr'>
 			<td>사진3</td>
 			<td>
-				 <input type="file" name="file4" id="file">
+				 <label for="file4"><img src="../resources/rental/image/upload.png" alt="파일열기" class="uploadIcon"/></label>
+				 <input type="file" name="file4" id="file4" class="form-control">
+				 <span id="filevalue4"></span>&nbsp;
 			</td>
-		</tr>
+		</tr> 
 		<tr>
 			<td>상세설명</td>
 			<td>
-				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요."></textarea>
+				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요." id="content" class="form-control"></textarea>
 			</td>
 		</tr>
 	</table>
 	
 	<div id="search">
-		위치:&nbsp;<input type="text" placeholder="농지 위치를 설정하세요." id="autocomplete" name="address"><br>
+		주소:&nbsp;<input type="text" placeholder="농지 위치를 설정하세요." id="autocomplete" name="address"><br>
 		(주소와 위치가 일치하는지 확인하세요)
 	</div>
 	<div id="map">
-		<input type="hidden" id="markerLat" name="Lat">
-		<input type="hidden" id="markerLng" name="Lng">
 	</div>
+	<input type='hidden' id="markerLat" name="lat" value="">
+	<input type='hidden' id="markerLng" name="lng" value="">
 	<div class="button">
 		<input type="submit" value="등록">
-		<input type="button" value="취소">
+		<input type="button" value="취소" onclick="location.href='../rental'">
 	</div>	
 	</form>
 </div>

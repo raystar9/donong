@@ -23,15 +23,18 @@ name VARCHAR2(20) NOT NULL
 );
 
 -- 주소에서 '시,군,구' 테이블
-CREATE TABLE sigungugungu(
+CREATE TABLE sigungu(
 num NUMBER CONSTRAINT sigungugungu_num_pk PRIMARY KEY,
 name VARCHAR2(20) NOT NULL,
 sido NUMBER CONSTRAINT sigungugungu_sido_fk REFERENCES sido(num) NOT NULL
 );
 
+
+select * from sigungu
 drop table rentals;
 drop table sigungu;
 drop table do;
+drop table files;
 
 -- 농지 대여 테이블
 CREATE TABLE rentals(

@@ -69,6 +69,8 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
     
     <!-- 슬라이드용 사진설정 -->
@@ -84,6 +86,12 @@
 		</div>
 		 <div class="item">
 		<a href="#3"><img id="sample" src="resources/main/image/logo.jpg" alt="logo" style="width:100%;"></a>
+		</div>
+		 <div class="item">
+		<a href="#4"><img id="sample" src="resources/main/image/sample2.png" alt="logo" style="width:100%;"></a>
+		</div>
+		 <div class="item">
+		<a href="#5"><img id="sample" src="resources/main/image/sample1.png" alt="logo" style="width:100%;"></a>
 		</div>
       </div>
       
@@ -107,32 +115,43 @@
     </div>
     </div>
  </div>
-    <div class="container text-center"> 
-      <div class="row content">
-      <h1>판매중인 상품(판매페이지)</h1>
+ 
+ 
+ <div class="container">
+ <h1>판매중인 상품(판매페이지)</h1>
+ 
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">종자</a></li>
+    <li><a data-toggle="tab" href="#menu1">비료</a></li>
+    <li><a data-toggle="tab" href="#menu2">도구</a></li>
+  </ul>
+
+
+  <div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <div class="row content">
+      
    <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-  
     </div>
+    <!-- 종자 사진 보여주는 곳 -->
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+    </div>
+    </div> <!-- end row content -->
     
-    
-    <!-- 상품판매 사진 보여주는 곳 -->
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
-  </div>
   <div class="row content">
    <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
@@ -152,8 +171,114 @@
      <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
     </div>
+    </div> <!-- end row content -->
+      
+      
+    </div>
+    <div id="menu1" class="tab-pane fade">
+
+      <div class="row content">
+      
+   <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+    <!-- 비료 사진 보여주는 곳 -->
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+   </div> <!-- end row content -->
+   
+  <div class="row content">
+   <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
+    </div>
+  </div> <!-- end row content -->
+      
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <div class="row content">
+      
+   <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+  
+    </div>
+    <!-- 도구 사진 보여주는 곳 -->
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+    </div> <!-- end row content -->
+  
+  <div class="row content">
+   <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
+    </div> 
+  </div> <!-- end row content -->
+    </div> <!-- end menu2 tab-pane -->
+ 
   </div>
-  </div>
+</div>
+ 
+ 
+ 
+ 
+   
+ 
+
+
 
 </body>
 </html>

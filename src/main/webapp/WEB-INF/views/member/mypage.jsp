@@ -37,7 +37,15 @@
 		margin-bottom:50px;
 	}
 	
+	.pagination > .active > a{
+	background-color:  #ACD17F;
+	border-color: #ACD17F;
+	}
 	
+	.pagination > .active > a:hover {
+	background-color:  #ACD17F;
+	border-color: #ACD17F;
+	}
 
   </style>
 </head>
@@ -46,14 +54,15 @@
   
   <div class="container mypage-buy">
   <div class="row">
-  <div class="col-sm-12 text-center">
+  <div class="container text-center">
   <h2>구매 내역</h2>
-  <p>${sessionBean.nickname}님의 구매내역 입니다.</p>  
+  <p><b>${sessionBean.nickname}</b>님의 구매내역 입니다.</p>  
   </div>
   </div>
 <div class="row">  
   <div class="col-sm-2"></div>
-    <div class="col-sm-8">          
+    <div class="col-sm-8" align="right">   
+      <font size=2>구매 건수 : ${listcount}</font>       
   <table class="table table-hover">
     <thead>
       <tr>
@@ -63,27 +72,65 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>모종삽</td>
-        <td>준비중</td>
-        <td>1번날짜</td>
-      </tr>
-      <tr>
-     	<td>고추씨</td>
-        <td>배송중</td>
-        <td>2번날짜</td>
-      </tr>
-      <tr>
-      	<td>화분</td>
-        <td>배송완료</td>
-        <td>3번날짜</td>
-      </tr>
-    </tbody>
+    <c:set var="num" value="${listcount-(page-1) * limit}"/>
+  	  <c:forEach var="order" items="${orderlist}">
+      	<tr>
+      		<td>
+     	 		${order.name }  	 
+     	 	</td>
+     	 	<td>
+     	 		 <c:if test="${order.status=='npay'}">
+     	 			입금대기
+     	 		 </c:if>
+     	 		  <c:if test="${order.status=='prep'}">
+     	 			배송준비중
+     	 		 </c:if>
+     	 		  <c:if test="${order.status=='send'}">
+     	 			배송중
+     	 		 </c:if>
+     	 		  <c:if test="${order.status=='arrv'}">
+     	 			배송완료
+     	 		 </c:if>
+     	 	</td>
+     	 	<td>
+     	 	Sysdate
+     	 	</td>
+   	   </tr>
+     </c:forEach> 
+     </tbody>
   </table>
   </div>
     <div class="col-sm-2"></div>
 </div>
+<div class="row">
+<div class="container text-center">
+   	   <ul class="pagination">
+   	  
+				<c:if test="${page <= 1}">
+					<li class='disabled'><a>이전</a></li>
+				</c:if>
+				<c:if test="${page > 1}">
+					<li><a href="./member_mypage?page=${page-1}">이전</a></li>
+				</c:if>
+				<c:forEach var ="a" begin="${startpage}" end="${endpage}">
+					<c:if test="${a == page}">
+						<li class="active"><a>${a}</a></li>
+					</c:if>
+					<c:if test="${a != page}">
+						<li><a href="./member_mypage?page=${a}">${a}</a></li>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${page >= maxpage}">
+					<li class='disabled'><a>다음</a></li>
+				</c:if>
+				<c:if test="${page < maxpage}">
+					<li><a href="./member_mypage?page=${page + 1}">다음</a></li>
+				</c:if>
+   	   </ul>
+   	  </div> 
   </div>
+</div>
 <div class="container mypage-write">
  <div class="col-sm-12 text-center">
 	<h2>최근에 작성한 글</h2>
@@ -91,9 +138,6 @@
 	<div class="col-sm-2"></div>
     <div class="col-sm-8">
 
-	
-	
-      
       <ul class="nav nav-pills nav-stacked">
         <li><a href="#1">작성글1</a></li>
         <li><a href="#2">작성글2</a></li>

@@ -9,21 +9,21 @@ $(document).ready(function() {
 	$("#Img2").hover(function(){
 		var img2 = $("#Img2").attr('src');
 		var imgArr2 = img2.split('/');
-		if(imgArr2[4] != 'default.png')
+		if(imgArr2.length == 8)
 		$("#big").attr('src', img2);
 	});
 	
 	$("#Img3").hover(function(){
 		var img3 = $("#Img3").attr('src');
 		var imgArr3 = img3.split('/');
-		if(imgArr3[4] != 'default.png')
+		if(imgArr3.length == 8)
 		$("#big").attr('src', img3);
 	});
 	
 	$("#Img4").hover(function(){
 		var img4 = $("#Img4").attr('src');
 		var imgArr4 = img4.split('/');
-		if(imgArr4[4] != 'default.png')
+		if(imgArr4.length == 8)
 		$("#big").attr('src', img4);
 	});
 

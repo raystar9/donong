@@ -29,7 +29,7 @@ name VARCHAR2(20) NOT NULL,
 sido NUMBER CONSTRAINT sigungugungu_sido_fk REFERENCES sido(num) NOT NULL
 );
 
-
+select * from member;
 select * from sigungu
 drop table rentals;
 drop table sigungu;
@@ -104,6 +104,10 @@ select * from sido;
 select * from sigungu order by sido;
 
 select * from files;
+
+select * from rentalfiles;
+
+alter table member ADD(addressdetail varchar(100));
 ----------------------------------------------------------------
 insert into sido values (sido_num_seq.nextval, '강원도');
 insert into sido values (sido_num_seq.nextval, '경기도');

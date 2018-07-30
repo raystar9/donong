@@ -11,6 +11,8 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +29,10 @@ public class RentalService {
 	RentalMapper rentalMapper;
 	@Autowired
 	MemberMapper memberMapper;
+	@Autowired
+	S3Service s3Service;
+	S3Util s3Util = new S3Util();
+	String bucketName = "donong-s3";
 
 	private String saveFolder = "C:\\Users\\이다혜\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
@@ -74,110 +80,70 @@ public class RentalService {
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
-
-		// 생성할 폴더 이름: 오늘 년+월+일
-		Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH) + 1;
-		int date = c.get(Calendar.DATE);
-		String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
-
-		// 파일 객체 생성합니다.
-		File path = new File(homedir);
-
-		// 폴더가 존재하는지 확인합니다.
-		if (!(path.exists())) {
-			System.out.println("폴더 만들어요");
-			path.mkdir(); // 새로운 폴더를 생성
-		}
-
-		// 난수를 구합니다.
-		Random r = new Random();
-		int random = r.nextInt(100000000);
+		
+		String uploadPath = "rent";	// aws 폴더명
+		
+		//올린주소 리턴받음
+		ResponseEntity<String> img_path = new ResponseEntity<>
+		(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
+		
+		//받은걸 주소 String 으로 바꿔줌
+		String certificatePath = (String) img_path.getBody();
 
 		/* 첫번째 파일 */
 		// 원래 파일명 저장
 		String fileName = file1.getOriginalFilename();
 		f.setFileName1(fileName);
 
-		// 확장자
-		int index = fileName.lastIndexOf(".");
-		String fileExtension = fileName.substring(index + 1);
-
-		// 새로운 파일명을 저장
-		String refileName = "farm" + year + month + date + random + "." + fileExtension;
-
-		// 오라클 디비에 저장될 레코드 값
-		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-		// transferTo(FIle path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-		file1.transferTo(new File(saveFolder + fileDBName));
 		// 바뀐 파일명으로 저장
-		f.setFilePath1(fileDBName);
+		f.setFilePath1(certificatePath);
 
+		/* 두번째 파일 */
 		if (!file2.isEmpty()) {
-			/* 두번째 파일 */
+			//올린주소 리턴받음
+			img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
+			
+			//받은걸 주소 String 으로 바꿔줌
+			certificatePath = (String) img_path.getBody();
+			
 			fileName = file2.getOriginalFilename();
+			
 			f.setFileName2(fileName);
-
-			index = fileName.lastIndexOf(".");
-			fileExtension = fileName.substring(index + 1);
-
-			random = r.nextInt(100000000);
-			refileName = "farm" + year + month + date + random + "." + fileExtension;
-
-			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-			file2.transferTo(new File(saveFolder + fileDBName));
-			f.setFilePath2(fileDBName);
-		} else {
-			f.setFileName2("default.png");
-			f.setFilePath2("/default.png");
+			f.setFilePath2(certificatePath);
 		}
 
+		/* 세번째 파일 */
 		if (!file3.isEmpty()) {
-			/* 세번째 파일 */
+			//올린주소 리턴받음
+			img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file3.getOriginalFilename(), file3), HttpStatus.CREATED);
+			
+			//받은걸 주소 String 으로 바꿔줌
+			certificatePath = (String) img_path.getBody();
+			
 			fileName = file3.getOriginalFilename();
+			
 			f.setFileName3(fileName);
-
-			index = fileName.lastIndexOf(".");
-			fileExtension = fileName.substring(index + 1);
-
-			random = r.nextInt(100000000);
-			refileName = "farm" + year + month + date + random + "." + fileExtension;
-
-			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-			file3.transferTo(new File(saveFolder + fileDBName));
-			f.setFilePath3(fileDBName);
-		} else {
-			f.setFileName3("default.png");
-			f.setFilePath3("/default.png");
+			f.setFilePath3(certificatePath);
 		}
 
+		/* 네번째 파일 */
 		if (!file4.isEmpty()) {
-			/* 네번째 파일 */
+			//올린주소 리턴받음
+			img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file4.getOriginalFilename(), file4), HttpStatus.CREATED);
+			
+			//받은걸 주소 String 으로 바꿔줌
+			certificatePath = (String) img_path.getBody();
+			
 			fileName = file4.getOriginalFilename();
+			
 			f.setFileName4(fileName);
-
-			index = fileName.lastIndexOf(".");
-			fileExtension = fileName.substring(index + 1);
-			System.out.println("확장자4 = " + fileExtension);
-
-			random = r.nextInt(100000000);
-			refileName = "farm" + year + month + date + random + "." + fileExtension;
-
-			fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-
-			file4.transferTo(new File(saveFolder + fileDBName));
-			f.setFilePath4(fileDBName);
-		} else {
-			f.setFileName4("default.png");
-			f.setFilePath4("/default.png");
-		}
-
+			f.setFilePath4(certificatePath);
+			
+		} 
 		rentalMapper.insertFile(f);
-
 	}
 
 	/* 로그인한 사람 이름, 핸드폰 가져오기 */
@@ -217,25 +183,53 @@ public class RentalService {
 	};
 
 	/* 농지 대여 파일 삭제 */
-	public void deleteFiles(int board_num) {
+	public ResponseEntity<String> deleteFiles(Map m) {
+		int board_num = (int)m.get("board_num");
+		String directory = (String)m.get("directory");
+		
 		FileDTO f = rentalMapper.selectFileNamePath(board_num);
 		String[] fpath = new String[4];
-
 		fpath[0] = f.getFilePath1();
 		fpath[1] = f.getFilePath2();
 		fpath[2] = f.getFilePath3();
 		fpath[3] = f.getFilePath4();
-
-		for (int i = 0; i < fpath.length; i++) {
-			if (fpath[i] != null) {
-				File file = new File(saveFolder + fpath[i]);
-				file.delete();
-			}
-			;
+		
+		String inputDirectory = null;
+		if(directory.equals("rent")) {
+			inputDirectory = "rent";
 		}
-		;
-
-		rentalMapper.deleteFiles(board_num);
+		
+		//첫 번째 이미지 삭제
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[0]);
+		
+		//두 번째 이미지 삭제
+		if(!fpath[1].isEmpty()) {
+			inputDirectory = null;
+			if(directory.equals("rent")) {
+				inputDirectory = "rent";
+			}
+			s3Util.fileDelete(bucketName, inputDirectory+fpath[1]);
+		}
+		
+		//세 번째 이미지 삭제
+		if(!fpath[2].isEmpty()) {
+			inputDirectory = null;
+			if(directory.equals("rent")) {
+				inputDirectory = "rent";
+			}
+			s3Util.fileDelete(bucketName, inputDirectory+fpath[2]);
+		}
+		
+		//네 번째 이미지 삭제
+		if(!fpath[3].isEmpty()) {
+			inputDirectory = null;
+			if(directory.equals("rent")) {
+				inputDirectory = "rent";
+			}
+			s3Util.fileDelete(bucketName, inputDirectory+fpath[3]);
+		}
+		rentalMapper.deleteFiles(m);
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	};
 
 	/* 농지 게시글 검색 */
@@ -287,8 +281,23 @@ public class RentalService {
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
 		
-		String defName = "default.png";
-		String defPath = "/default.png";
+		String uploadPath = "rent";	// aws 폴더명
+		
+		//올린주소 리턴받음
+		ResponseEntity<String> img_path = new ResponseEntity<>
+		(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
+		
+		//받은걸 주소 String 으로 바꿔줌
+		String certificatePath = (String) img_path.getBody();
+
+		/* 첫번째 파일 */
+		// 원래 파일명 저장
+		String fileName = file1.getOriginalFilename();
+		f.setFileName1(fileName);
+
+		// 바뀐 파일명으로 저장
+		f.setFilePath1(certificatePath);
+		
 
 		FileDTO f2 = rentalMapper.selectFileNamePath(f.getBoard_num());
 

@@ -143,7 +143,7 @@
 	</table>
 	
 	<div id="represent">
-		<img src="../resources/rental/upload${file.filePath1 }" id='representImg'/>
+		<img src="/donong/cs/displayFile?fileName=${file.filePath1 }&directory=rent" id='representImg'/>
 	</div>	<!-- 대표이미지 넣는 곳 -->
 	
 	<!-- 상세내용 넣는 곳 -->
@@ -154,21 +154,21 @@
 	<!-- 이미지들 넣는 곳 -->
 	<div id="images">
 		<div id='bigImg'>
-			<img src="../resources/rental/upload${file.filePath1 }" class='img' id='big'/>
+			<img src="/donong/rental/displayFile?fileName=${file.filePath1 }&directory=rent" class='img' id='big'/>
 		</div>
 		
 		<div id='separation'>
 			<div class="sepatateImg">
-				  <img src="../resources/rental/upload${file.filePath1 }" class='img' id='Img1'/>
+				 <img src="/donong/rental/displayFile?fileName=${file.filePath1 }&directory=rent" class='img' id='Img1' alt='/default.png'/>
 			</div>
 			<div class="sepatateImg">
-				  <img src="../resources/rental/upload${file.filePath2 }" class='img' id='Img2'/>
+				 <img src="/donong/rental/displayFile?fileName=${file.filePath2 }&directory=rent" class='img' id='Img2' alt='/default.png'/>
 			</div>
 			<div class="sepatateImg">
-				 <img src="../resources/rental/upload${file.filePath3 }" class='img' id='Img3'/>
+				 <img src="/donong/rental/displayFile?fileName=${file.filePath3 }&directory=rent" class='img' id='Img3' alt='/default.png'/>
 			</div>
 			<div class="sepatateImg">
-				 	<img src="../resources/rental/upload${file.filePath4 }" class='img' id='Img4'/>
+				 <img src="/donong/rental/displayFile?fileName=${file.filePath4 }&directory=rent" class='img' id='Img4' alt='/default.png'/>
 			</div>
 		</div>
 	</div>

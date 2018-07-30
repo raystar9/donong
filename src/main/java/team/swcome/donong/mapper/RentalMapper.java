@@ -27,7 +27,7 @@ public interface RentalMapper {
 	
 	public void deleteRental(int board_num);
 	
-	public void deleteFiles(int board_num);
+	public void deleteFiles(Map m);
 	
 	public List<RentalDTO> selectSearch(RentalDTO r);
 	

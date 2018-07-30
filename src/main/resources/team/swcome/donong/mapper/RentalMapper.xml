@@ -60,7 +60,7 @@
   	WHERE num = #{board_num}
   </delete>
   
-  <delete id="deleteFiles" parameterType="int">
+  <delete id="deleteFiles" parameterType="Map">
   	DELETE FROM rentalfiles
   	WHERE board_num = #{board_num}
   </delete>

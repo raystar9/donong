@@ -56,6 +56,7 @@
 <div id="main">
  <form action="./modify_ok" method="post" class="modifyForm" enctype="multipart/form-data">
  <input type="hidden" value="${rental.num }" name="num">
+ <input type="hidden" name="directory" value="rent" />
 	<table border="1" class="modifyTable">
 		<tr>
 			<td>임대자</td>

@@ -1,13 +1,21 @@
 package team.swcome.donong.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +23,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.amazonaws.util.IOUtils;
+
 import team.swcome.donong.dto.FileDTO;
 import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.RentalService;
+import team.swcome.donong.service.S3Service;
+import team.swcome.donong.service.S3Util;
 
 @SessionAttributes("sessionBean")
 @Controller
@@ -28,19 +40,10 @@ public class RentalController {
 	private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
 	@Autowired
 	RentalService RentalService;
-
-	/*
-	 * @RequestMapping(value = "rental", method = RequestMethod.GET) public String
-	 * home(Locale locale, Model model) {
-	 * logger.info("Welcome home! The client locale is {}.", locale);
-	 * 
-	 * Date date = new Date(); DateFormat dateFormat =
-	 * DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-	 * 
-	 * RentalService.getMainList(); String formattedDate = dateFormat.format(date);
-	 * 
-	 * model.addAttribute("serverTime", formattedDate ); return "rental/home"; }
-	 */
+	@Autowired
+	S3Service s3Service;
+	S3Util s3Util = new S3Util();
+	String bucketName = "donong-s3";
 
 	/* 농지 대여 목록 페이지로 이동 */
 	@RequestMapping(value = "/rental", method = RequestMethod.GET)
@@ -71,7 +74,10 @@ public class RentalController {
 
 	/* 농지 대여 글쓰기 실행 */
 	@RequestMapping(value = "/rental/write_ok", method = RequestMethod.POST)
-	public String rentalWrite_ok(Model model, SessionBean sessionBean, RentalDTO r, FileDTO f)
+	public String rentalWrite_ok(Model model, 
+								 SessionBean sessionBean, 
+								 RentalDTO r, 
+								 FileDTO f)
 			throws IllegalStateException, IOException {
 		// int member_num = sessionBean.getMemberNum(); - 로그인 연결되면 이렇게 가져올 것
 		sessionBean.setMemberNum(2); // 임시로 정해놓음
@@ -119,10 +125,15 @@ public class RentalController {
 
 	/* 농지 대여 삭제 */
 	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
-	public String rentalDelete(Model model, HttpServletRequest request) {
+	public String rentalDelete(Model model, HttpServletRequest request, String directory) {
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		RentalService.deleteRental(board_num);
-		RentalService.deleteFiles(board_num);
+		
+		Map m = new HashMap();
+		m.put("board_num", board_num);
+		m.put("directory", directory);
+		
+		RentalService.deleteFiles(m);
 		return "redirect:/rental";
 	}
 
@@ -192,4 +203,42 @@ public class RentalController {
 		return "redirect:/rental/view?num=" + board_num;
 	}
 
+	/* aws 사진 View */
+	@SuppressWarnings("resource")
+	@ResponseBody
+	@RequestMapping("/rental/displayFile")
+	public ResponseEntity<byte[]> displayFile(String fileName, String directory) throws Exception {
+		logger.info(directory);
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection conn = null;
+		logger.info("FILE NAME: " + fileName);
+
+		String inputDirectory = null;
+		if(directory.equals("rent")) {
+			inputDirectory = "rent";
+		}
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				url = new URL(s3Util.getFileURL(bucketName, inputDirectory + fileName));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream(); // 이미지를 불러옴
+			} catch (Exception e) {
+				url = new URL(s3Util.getFileURL(bucketName, "default.png"));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
 }

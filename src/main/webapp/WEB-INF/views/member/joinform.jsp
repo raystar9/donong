@@ -5,11 +5,9 @@
 <html>
 <head>
 <title>회원 가입 페이지</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+ <%@ include file="/resources/common/jsp/import.jsp" %>
 <script>
 //도로명 주소찾기 API
 
@@ -52,7 +50,7 @@ function Postcode() {
              
             } 
                 
-           
+
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postno').value = data.zonecode; //5자리 새우편번호 사용
@@ -82,6 +80,8 @@ function domain_list(){
 
 function check(){
 	
+	
+	
 	//도메인 주소값 유효성검사
 	if($.trim($("#join_maildomain").val())==""){
 		alert("도메인주소를 선택하세요");
@@ -97,12 +97,33 @@ function check(){
 		return false;
 	}
 	
+	var regNm = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;	
+	//이름 유효성 검사 정규식
+	
+	 if($("#join_name").val().length<2){
+         alert("이름을 2자 이상 입력해주십시오.")
+         $("#join_name").focus()
+         return false;
+     }else if(!regNm.test($("#join_name").val())){
+    	 alert("한글,영문 대소문자만 사용 가능합니다");
+    	 $("#join_name").focus();
+         return false;
+     }
+	
+	
+	
 	if($('#checkconfirmID').val()=="false" || checkid != $("#join_id").val()){
+	
+		$("#chkid").attr('class','btn btn-danger');
+	
 		alert("아이디 중복체크를 하세요");
 		return false;
 	}
 		
 	if($('#checkconfirmNickName').val()=="false" || checknickname != $("#join_nickname").val()){
+		
+		$("#chknick").attr('class','btn btn-danger');
+		
 		alert("별칭 중복체크를 하세요");
 		return false;
 	}
@@ -111,18 +132,28 @@ function check(){
 	
 }
 
-function id_check(){		
+function id_check(){	
+	var msg = '';
+	
 	if($.trim($("#join_id").val())==""){
 		alert("아이디를 입력하세요");
 		$("#join_id").val("").focus();
 		return false;
-	}
+	}else if($("#join_id").val().indexOf(" ") >= 0){
+             $("#chkid").attr('class','btn btn-danger');
+             $('#idcheck').css('color', 'red');
+             $('#idcheck').text("ID에는 공백을 사용할 수 없습니다.");
+             $("#join_id").focus();
+             
+             return false;
+		}
+
 	
 	$('#idcheck').attr('');
 	
 	var inputId = $('#join_id').val();
 	var checkId = /^[a-z]{1}[a-z0-9_]{3, 11}$/;
-	var msg = '';
+
 
 	$.ajax({
 		type : "POST",
@@ -136,10 +167,12 @@ function id_check(){
 				msg = '사용가능한 id입니다.';
 				$('#idcheck').css('color', 'blue');
 				checkid = inputId;
+				$("#chkid").attr('class','btn btn-info');
 			} else {
 				msg = '사용중인 id입니다.';
 				$('#idcheck').css('color', 'red');
 				$('#idcheck').text(msg);
+				$("#chkid").attr('class','btn btn-danger');
 				return false;
 			}
 			
@@ -147,10 +180,12 @@ function id_check(){
 		}
 		
 });	
-	}
+	
+}
 	
 	var checknickname ='';
 	var inputNickname = '';
+	
 function nickname_check(){		
 	if($.trim($("#join_nickname").val())==""){
 		alert("별칭을 입력하세요");
@@ -175,10 +210,12 @@ function nickname_check(){
 				msg = '사용가능한 별칭입니다.';
 				$('#nicknamecheck').css('color', 'blue');
 				checknickname = inputNickname;
+				$("#chknick").attr('class','btn btn-info');
 			} else {
 				msg = '사용중인 별칭입니다.';
 				$('#nicknamecheck').css('color', 'red');
 				$('#nicknamecheck').text(msg);
+				$("#chknick").attr('class','btn btn-danger');
 				return false;
 			}
 			
@@ -188,18 +225,27 @@ function nickname_check(){
 });	
 	}
 
+function onlynum(){
+	if(!((event.keyCode>=48&&event.keyCode<=57) // 숫자
+			|| (event.keyCode>=96 && event.keyCode <= 105)  //키패드 숫자
+			|| event.keyCode==8 || event.keyCode==116 || event.keyCode==9)){ //백스페이스 또는 F5키(새로고침)
+		event.returnValue=false;
+		alert("숫자만 입력할 수 있습니다.");
+	}
+}
+	
+	
+
 </script>
 <style>
 body {
-  display:flex;
   align-items:top;
+
 }
 #join_table{
 	margin:50px;
 }
-h2{
-	font-weight:bold;
-}
+
 .title{
 	margin:50px;
 	}
@@ -216,13 +262,17 @@ h2{
 
 </head>
 <body>
+
+
 <div class="container text-center">
+
 <input type="hidden" name="checkconfirmID" id="checkconfirmID" value="false">
 <input type="hidden" name="checkconfirmNickName" id="checkconfirmNickName" value="false">
-
+	
 	<form name="joinform" method="post" action="member_join_ok" class="form-horizontal" onsubmit="return check()">
 
 		<div id="join_table">
+	
 			<div class=title>
 					<div class="form-group">
 					<h2 class="col-sm-12">회원 가입 페이지</h2>
@@ -235,7 +285,7 @@ h2{
 					<input name="id" id="join_id" class="form-control" placeholder="입력 후 중복체크를 해주세요" required><!-- ID 입력 칸 -->
                 </div>
                 <div class="col-sm-2">
-           			<input type="button" value="ID 중복체크" class="btn btn-default" onclick="id_check()"> <!-- 중복체크 버튼 -->
+           			<input id="chkid" type="button" value="ID 중복체크" class="btn btn-success" onclick="id_check()"> <!-- 중복체크 버튼 -->
            		</div>	
            		<div class="col-sm-2">	
            			<div id="idcheck"></div> <!-- 중복체크 결과 표시칸 -->
@@ -270,7 +320,7 @@ h2{
 					<input name="nickname" id="join_nickname" class="form-control" placeholder="활동할 닉네임입니다." required>
 				</div>
 				<div class="col-sm-2">	
-					<input type="button" value="별칭 중복체크" class="btn btn-default" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
+					<input id="chknick" type="button" value="별칭 중복체크" class="btn btn-success" onclick="nickname_check()"> <!-- 중복체크 버튼 -->
            		</div>
            		<div class="col-sm-2">	
            			<div id="nicknamecheck"></div> <!-- 중복체크 결과 표시칸 -->
@@ -290,12 +340,12 @@ h2{
 			<div class="form-group">
 			<div class="col-sm-2"></div>
 				<label class="control-label col-sm-2" for="postbutton">우편번호</label>
-					<div class="col-sm-1">
+					<div class="col-sm-2">
 						<input type="text" id="postno" name="postnum" class="form-control" readonly>
 					</div>
-					<div class="col-sm-2"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						<input type="button" id="postbutton" class="btn btn-default" value="주소검색" onclick="Postcode()">
+						<input type="button" id="postbutton" class="btn btn-success" value="주소검색" onclick="Postcode()">
 					</div>	
 				<div class="col-sm-3"></div>
 			</div>
@@ -322,7 +372,7 @@ h2{
 			<div class="col-sm-2"></div>
 				<label class="control-label col-sm-2" for="join_phone">휴대폰 번호</label>
 				<div class="col-sm-3">
-					<input name="phone" id="join_phone" class="form-control" placeholder="하이픈(-) 없이 입력해주세요" required>
+					<input name="phone" id="join_phone" class="form-control" placeholder="하이픈(-) 없이 입력해주세요" onkeydown="onlynum()" maxlength="11" required>
 				</div>
 				<div class="col-sm-5"></div>
 			</div>
@@ -360,8 +410,8 @@ h2{
 		</div>
 			<div class="form-group text-center"> 
 			<div class="col-sm-12">
-					<input type="submit" value="회원가입" class="btn btn-default">
-					<input type="reset" value="초기화" class="btn btn-default" onclick="$('#join_id').focus();">
+					<input type="submit" value="회원가입" class="btn btn-success">
+					<input type="button" value="취소" class="btn btn-danger" onclick="history.back()">
 			</div>			
 			</div>	
 	</form>

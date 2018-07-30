@@ -82,10 +82,10 @@ public class MainController {
 		sessionBean.setNickname(null);
 	
 		
-		String error = "logout";
-		model.addAttribute("error", error);
+//		String error = "logout";
+//		model.addAttribute("error", error);
 
-		return "common/erroppage";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value = "member_mypage")

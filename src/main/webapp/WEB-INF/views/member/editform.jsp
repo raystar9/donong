@@ -5,11 +5,9 @@
 <html>
 <head>
 <title>회원 정보 수정 페이지</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+ <%@ include file="/resources/common/jsp/import.jsp" %>
 <script>
 //도로명 주소찾기 API
 
@@ -96,6 +94,7 @@ function check(){
 	
 
 	if($('#checkconfirmNickName').val()=="false" || checknickname != $("#join_nickname").val()){
+		$("#chknick").attr('class','btn btn-danger');
 		alert("별칭 중복체크를 하세요");
 		return false;
 	}
@@ -132,11 +131,13 @@ function nickname_check(){
 				$('#checkconfirmNickName').val('true');
 				msg = '사용가능한 별칭입니다.';
 				$('#nicknamecheck').css('color', 'blue');
+				$("#chknick").attr('class','btn btn-info');
 				checknickname = inputNickname;
 			} else {
 				msg = '사용중인 별칭입니다.';
 				$('#nicknamecheck').css('color', 'red');
 				$('#nicknamecheck').text(msg);
+				$("#chknick").attr('class','btn btn-danger');
 				return false;
 			}
 			
@@ -145,6 +146,15 @@ function nickname_check(){
 		
 });	
 	}
+	
+function onlynum(){
+	if(!((event.keyCode>=48&&event.keyCode<=57) // 숫자
+			|| (event.keyCode>=96 && event.keyCode <= 105)  //키패드 숫자
+			|| event.keyCode==8 || event.keyCode==116 || event.keyCode==9)){ //백스페이스 또는 F5키(새로고침)
+		event.returnValue=false;
+		alert("숫자만 입력할 수 있습니다.");
+	}
+}	
 
 
 
@@ -177,6 +187,7 @@ h2{
 
 </head>
 <body>
+
 <div class="container text-center">
 	<input type="hidden" name="checkconfirmID" id="checkconfirmID" value="false">
 	<input type="hidden" name="checkconfirmNickName" id="checkconfirmNickName" value="false">
@@ -193,7 +204,7 @@ h2{
 			
 			<div class="form-group">
 				<div class="col-sm-2"></div>
-				<label class="control-label col-sm-2" for="join_id">주소</label>
+				<label class="control-label col-sm-2" for="join_id">ID</label>
 				<div class="col-sm-4"><input name="id" id="join_id" class="form-control" placeholder="입력 후 중복체크를 해주세요" value="${memberDTO.id }"  readonly></div><!-- ID 입력 칸 -->
            		<div class="col-sm-4"></div>
 			</div>
@@ -222,7 +233,7 @@ h2{
 					<input name="nickname" id="join_nickname" class="form-control" placeholder="활동할 닉네임입니다." value="${memberDTO.nickname }" required>
 				</div>
 				<div class="col-sm-2">	
-					<input type="button" value="별칭 중복체크" class="btn btn-default" onclick="nickname_check()" > <!-- 중복체크 버튼 -->
+					<input id="chknick" type="button" value="별칭 중복체크" class="btn btn-success" onclick="nickname_check()" > <!-- 중복체크 버튼 -->
            		</div>
            		<div class="col-sm-2">	
            			<div id="nicknamecheck"></div> <!-- 중복체크 결과 표시칸 -->
@@ -242,12 +253,12 @@ h2{
 				<div class="form-group">
 			<div class="col-sm-2"></div>
 				<label class="control-label col-sm-2" for="postbutton">우편번호</label>
-					<div class="col-sm-1">
+					<div class="col-sm-2">
 						<input type="text" id="postno" name="postnum" class="form-control" readonly value="${memberDTO.postnum}">
 					</div>
-					<div class="col-sm-2"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						<input type="button" id="postbutton" class="btn btn-default" value="주소검색" onclick="Postcode()">
+						<input type="button" id="postbutton" class="btn btn-success" value="주소검색" onclick="Postcode()">
 					</div>	
 				<div class="col-sm-3"></div>
 			</div>
@@ -272,7 +283,7 @@ h2{
 			<div class="col-sm-2"></div>
 				<label class="control-label col-sm-2" for="join_phone">휴대폰 번호</label>
 				<div class="col-sm-3">
-					<input name="phone" id="join_phone" class="form-control" placeholder="하이픈(-) 없이 입력해주세요" required value="${memberDTO.phone }">
+					<input name="phone" id="join_phone" class="form-control" placeholder="하이픈(-) 없이 입력해주세요" onkeydown="onlynum()" maxlength="11" required value="${memberDTO.phone }">
 				</div>
 				<div class="col-sm-5"></div>
 			</div>
@@ -310,8 +321,8 @@ h2{
 		</div>
 			<div class="form-group text-center"> 
 			<div class="col-sm-12">
-					<input type="submit" value="정보수정" class="btn btn-default">
-					<input type="reset" value="초기화" class="btn btn-default" onclick="$('#join_id').focus();">
+					<input type="submit" value="정보수정" class="btn btn-success">
+					<input type="button" value="취소" class="btn btn-danger" onclick="history.back()">
 			</div>			
 			</div>	
 	</form>

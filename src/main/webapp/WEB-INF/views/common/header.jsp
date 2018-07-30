@@ -60,7 +60,8 @@
     <ul class="dropdown-menu">
       <li><a href="/donong/cs/main">메인</a></li>
       <li><a href="/donong/cs/qna">QnA</a></li>
-      <li><a href="#">내가 한 질문</a></li>
+      <li><a href="">내가 한 질문</a></li>
+
     </ul>
   </li>
   

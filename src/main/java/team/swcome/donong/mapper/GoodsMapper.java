@@ -8,6 +8,8 @@ public interface GoodsMapper {
 	public List<GoodsDTO> selectItemsAtPage(int startItem, int endItem, int category);
 
 	public GoodsDTO selectItemByNum(int itemNum);
+	
+	public List<GoodsDTO> selectItemsByOrderNum(int orderNum);
 
 	public int selectItemCount();
 	

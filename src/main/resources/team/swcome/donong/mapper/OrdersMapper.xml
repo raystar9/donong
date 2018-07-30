@@ -13,6 +13,70 @@
 		WHERE member_num = #{memberNum}
 	</select>
 	
+	<select id="selectWaitingOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, orderername, orderdate
+		FROM (
+		    SELECT rownum as rnum, ordernum, orderername, orderdate
+				FROM(
+					SELECT orders.num as ordernum, realname AS orderername, orderdate
+					FROM member, orders
+					WHERE member_num = member.num AND status = 'npay'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectPreparingOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, receivername, address, comments
+		FROM (
+		    SELECT rownum as rnum, ordernum, receivername, address, comments
+				FROM(
+					SELECT num as ordernum, name AS receivername, address, comments
+					FROM orders
+					WHERE status = 'prep'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectSendingOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, receivername, waybill
+		FROM (
+		    SELECT rownum as rnum, ordernum, receivername, waybill
+				FROM(
+					SELECT num as ordernum, name AS receivername, waybill
+					FROM orders
+					WHERE status = 'send'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectArrivedOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, receivername, waybill
+		FROM (
+		    SELECT rownum as rnum, ordernum, receivername, waybill
+				FROM(
+					SELECT num as ordernum, name AS receivername, waybill
+					FROM orders
+					WHERE status = 'arrv'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
 	<select id="selectCurrentOrdersByMemberNum" resultMap="OrdersResult">
 		SELECT * 
 		FROM ORDERS
@@ -38,6 +102,37 @@
 		UPDATE ORDERS 
 		SET member_num = #{memberNum} AND name = #{name} AND address = #{address} AND
 			phone = #{phone} AND comments = #{comments} AND status = #{status}
+		WHERE num = #{num}
+	</update>
+	
+	<update id="updateStatusToPrep" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'prep'
+		WHERE 
+		<foreach collection="list" item="order" separator="OR">
+			num = #{order.num}
+		</foreach>
+	</update>
+	
+	<update id="updateStatusToSend" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'send', waybill = #{waybill}
+		WHERE 
+		num = #{num}
+	</update>
+	
+	<update id="updateStatusToArrv" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'arrv'
+		WHERE 
+		<foreach collection="list" item="order" separator="OR">
+			num = #{order.num}
+		</foreach>
+	</update>
+	
+	<update id="updateStatusAndWaybill">
+		UPDATE ORDERS 
+		SET status = #{status} AND waybill = #{waybill}
 		WHERE num = #{num}
 	</update>
 	

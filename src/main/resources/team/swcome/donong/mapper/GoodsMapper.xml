@@ -20,6 +20,11 @@
   <select id="selectItemByNum" parameterType="int" resultType="CartGoodsDTO">
   	select * from goods where num = #{num}
   </select>
+  <select id="selectItemsByOrderNum" resultType="CartGoodsDTO">
+	SELECT name, price, quantity
+	FROM goods, goodsorders
+	WHERE goods.num = goodsorders.goods_num AND order_num = #{orderNum}
+  </select>
   
   <select id="selectItemCount" parameterType="int" resultType="int">
   	select count(*) from goods

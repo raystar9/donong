@@ -127,13 +127,14 @@ public class RentalController {
 	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
 	public String rentalDelete(Model model, HttpServletRequest request, String directory) {
 		int board_num = Integer.parseInt(request.getParameter("num"));
-		RentalService.deleteRental(board_num);
 		
 		Map m = new HashMap();
 		m.put("board_num", board_num);
 		m.put("directory", directory);
 		
 		RentalService.deleteFiles(m);
+		RentalService.deleteRental(board_num);
+		
 		return "redirect:/rental";
 	}
 
@@ -193,7 +194,6 @@ public class RentalController {
 	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f)
 			throws IllegalStateException, IOException {
 		int board_num = r.getNum();
-		System.out.println("num = " + r.getNum());
 		r.setNum(board_num);
 		f.setBoard_num(board_num);
 

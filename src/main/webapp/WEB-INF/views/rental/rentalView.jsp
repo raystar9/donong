@@ -143,7 +143,7 @@
 	</table>
 	
 	<div id="represent">
-		<img src="/donong/cs/displayFile?fileName=${file.filePath1 }&directory=rent" id='representImg'/>
+		<img src="/donong/rental/displayFile?fileName=${file.filePath1 }&directory=rent" id='representImg'/>
 	</div>	<!-- 대표이미지 넣는 곳 -->
 	
 	<!-- 상세내용 넣는 곳 -->

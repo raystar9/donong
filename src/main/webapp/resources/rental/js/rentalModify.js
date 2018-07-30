@@ -99,7 +99,7 @@ $(document).ready(function() {
             return false;
      	}
 	
-		if ($('#file1').val() == '') {
+		if ($('#filevalue1').text() == '') {
 			$('#file1').focus();
 			alert('대표이미지를 선택하세요.');
 			return false;
@@ -128,6 +128,13 @@ $(document).ready(function() {
 		if ($('#markerLat').val() == '') {
 			$('#markerLat').focus();
 			alert('농장위치를 지도에 마킹해주세요.');
+			return false;
+		}
+		
+		var result = confirm("게시글을 수정하시겠습니까?");
+		if(result == true){
+			location.href='./modify_ok';
+		}else{
 			return false;
 		}
 		

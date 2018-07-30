@@ -152,7 +152,7 @@
 				No.&nbsp;${r.num }
 			</div>
 			<div class='row'>
-				<a href="./rental/view?num=${r.num }"><img src="./resources/rental/upload${r.path }" class='img'></a>
+				<a href="./rental/view?num=${r.num }"><img src="/donong/rental/displayFile?fileName=${r.path }&directory=rent" class='img'></a>
 			</div>
 			<div class='row'>
 				<img src="./resources/rental/image/flag.png" class='mark'/>&nbsp;${r.title }<br>

@@ -9,10 +9,12 @@
 	</settings>
 
 	<typeAliases>
-	    <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
+	   <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
 		<typeAlias alias="faq" type="team.swcome.donong.dto.FAQDTO" />
 		<typeAlias alias="notice" type="team.swcome.donong.dto.NoticeDTO" />
 		<typeAlias alias="qna" type="team.swcome.donong.dto.QNADTO" />
-	</typeAliases>
+    <typeAlias alias="RentalDTO" type="team.swcome.donong.dto.RentalDTO" />
+    <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
+  </typeAliases>
 
 </configuration>

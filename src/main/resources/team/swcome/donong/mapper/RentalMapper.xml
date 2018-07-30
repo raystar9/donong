@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.RentalMapper">
+
+  <insert id="insertFarm" parameterType="RentalDTO">
+  	INSERT INTO rentals
+  	VALUES (rental_num_seq.nextval, #{member_num}, #{writer}, #{address}, #{title}, 
+  		    #{sido}, #{sigungu}, #{area}, #{price}, #{content}, #{lat}, #{lng})
+  		    
+  	<selectKey resultType="int" keyProperty="num" order="AFTER">
+  		SELECT max(num) 
+  		FROM rentals
+  		WHERE member_num = #{member_num}
+  	</selectKey>
+  </insert>
+  
+  <insert id="insertFile" parameterType="FileDTO">
+  	INSERT INTO rentalfiles
+  	VALUES (file_num_seq.nextval, #{board_num}, #{fileName1}, #{fileName2}, #{fileName3}, 
+  	       #{fileName4}, #{filePath1}, #{filePath2}, #{filePath3}, #{filePath4})
+  </insert>
+  
+  <select id="selectNameByPhone" parameterType="int" resultType="MemberDTO">
+  	SELECT name, phone 
+  	FROM member
+  </select> 
+  
+  <select id="selectSidoSigunguNum" parameterType="Map" resultType="RentalDTO">
+  	SELECT sido.num AS sido, sigungu.num AS sigungu
+	FROM sido , sigungu
+	WHERE sido.name like #{sido}
+	AND sigungu.name like #{sigungu}
+  </select>
+  
+  <select id="selectRentalList" resultType="RentalDTO">
+  	SELECT * FROM rentals
+  	ORDER BY num
+  </select>
+  
+  <select id="selectRepresentImg" resultType="String">
+  	SELECT filepath1 FROM rentalfiles
+  </select>
+  
+  <select id="selectRentalView" resultType="RentalDTO" parameterType="int">
+  	SELECT * 
+  	FROM rentals
+  	WHERE num = #{num}
+  </select>
+  
+  <select id="selectFileNamePath" resultType="FileDTO" parameterType="int">
+  	SELECT filepath1, filepath2, filepath3, filepath4, filename1, filename2, filename3, filename4 
+  	FROM rentalfiles
+	WHERE board_num = #{board_num}
+  </select>
+  
+  <delete id="deleteRental" parameterType="int">
+  	DELETE FROM rentals
+  	WHERE num = #{board_num}
+  </delete>
+  
+  <delete id="deleteFiles" parameterType="int">
+  	DELETE FROM rentalfiles
+  	WHERE board_num = #{board_num}
+  </delete>
+  
+  <select id="selectSearch" parameterType="RentalDTO" resultType="RentalDTO">
+  	SELECT * FROM rentals
+  	
+  	<choose>
+  		<when test="num != 0">
+  			WHERE num = #{num}
+  		</when>
+  		<when test="sido != 0 
+  					and num == 0 
+  				    and sigungu == 0 
+  				 	and price == 0">
+  			WHERE sido = #{sido}
+  		</when>
+  		<when test="sido != 0 
+  					and sigungu != 0 
+  					and num == 0 
+  					and price == 0">
+  			WHERE sido = #{sido}
+  			AND sigungu = #{sigungu}
+  		</when>
+  		<when test="sido != 0 
+  					and price != 0
+  					and sigungu == 0
+  					and num == 0
+  					and price &gt;= 50000">
+  			WHERE sido = #{sido}		
+  			AND price &gt;= #{price} 
+  		</when>
+  		<when test="sido != 0 
+  					and price != 0 
+  					and sigungu == 0 
+  					and num == 0 
+  					and price &lt; 50000">
+  			WHERE sido = #{sido}		
+  			AND price between #{price} and #{price}+10000
+  		</when>
+  		<when test="sido != 0
+  					and sigungu != 0
+  					and price != 0
+  					and price &lt; 50000">
+  			WHERE sido = #{sido}
+  			AND sigungu = #{sigungu}
+  			AND price between #{price} and #{price}+10000
+  		</when>
+  		<when test="sido != 0
+  					and sigungu != 0
+  					and price != 0
+  					and price &gt;= 50000">
+   			<![CDATA[
+   			WHERE sido = #{sido}
+  			AND sigungu = #{sigungu}
+  			AND price >= #{price} 
+  			]]>
+  		</when>
+  		<when test="price != 0
+  					and num == 0
+  					and sigungu == 0
+  					and price &lt; 50000">
+  			WHERE price between #{price} and #{price}+10000
+  		</when>
+  		<when test="price != 0
+  					and num == 0
+  					and sigungu == 0
+  					and price &gt;= 50000">
+  			WHERE price &gt;= #{price} 
+  		</when>
+  	</choose>
+  </select>
+  
+  <update id="updateRental" parameterType="RentalDTO">
+  	UPDATE rentals
+  	SET address = #{address}, title = #{title}, sido = #{sido}, sigungu = #{sigungu}, area = #{area},
+  	    price = #{price}, content = #{content}, lat = #{lat}, lng = #{lng}
+  	WHERE num = #{num}    
+  </update>
+  
+  <update id="updateFiles" parameterType="FileDTO">
+  	UPDATE rentalFiles
+  	SET filename1 = #{fileName1}, fileName2 = #{fileName2}, filename3 = #{fileName3}, filename4 = #{fileName4},
+  		filepath1 = #{filePath1}, filepath2 = #{filePath2}, filepath3 = #{filePath3}, filepath4 = #{filePath4}
+  	WHERE board_num = #{board_num}	
+  </update>
+  
+</mapper>
+

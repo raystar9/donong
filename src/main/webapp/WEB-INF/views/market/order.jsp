@@ -4,9 +4,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
+	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<title>Home</title>
-	<script src="/donong/resources/jquery/jquery-3.3.1.min.js"></script>
 	<style>
 		.left-navbar {
 			width: 150px;
@@ -22,6 +21,7 @@
 	</style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
 
 	<h1>결제 페이지</h1>
@@ -53,7 +53,10 @@
 			<input class="form-control" type="text" name="addressdetail" id="addressdetail" value="${member.addressdetail }" />
 			<label for="comments">코멘트</label><input class="form-control" type="text" name="comments" id="comments" />
 		<input class="btn btn-default" type="submit" value="주문하기" />
-	
+		<c:if test="${!isCart }">
+			<input type="hidden" name="goodsNum" value="${item.num}"/>
+			<input type="hidden" name="goodsQuantity" value="${item.quantity}"/>
+		</c:if>
 	</fieldset>
 	</form>
 </div>

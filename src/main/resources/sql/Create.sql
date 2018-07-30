@@ -65,10 +65,10 @@ status varchar2(20) NOT NULL
 );
 
 CREATE TABLE goodsorders(
+num NUMBER CONSTRAINT goodsorder_num_pk PRIMARY KEY,
 order_num NUMBER CONSTRAINT goodsorders_order_num_fk REFERENCES orders(num) NOT NULL,
 goods_num NUMBER CONSTRAINT goodsorders_goods_num_fk REFERENCES goods(num) NOT NULL,
-quantity NUMBER,
-PRIMARY KEY(order_num, goods_num)
+quantity NUMBER
 );
 
 CREATE TABLE sido(

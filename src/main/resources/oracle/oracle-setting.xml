@@ -20,5 +20,7 @@
     <typeAlias alias="CartDTO" type="team.swcome.donong.dto.CartDTO" />
     <typeAlias alias="CartGoodsDTO" type="team.swcome.donong.dto.CartGoodsDTO" />
     <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
+    <typeAlias alias="GoodsOrdersDTO" type="team.swcome.donong.dto.GoodsOrdersDTO" />
+    <typeAlias alias="OrderItemsDTO" type="team.swcome.donong.dto.OrderItemsDTO" />
   </typeAliases>
 </configuration>

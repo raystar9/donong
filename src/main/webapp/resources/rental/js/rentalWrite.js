@@ -87,7 +87,7 @@ $(document).ready(function() {
             return false;
      	}
 	
-		if ($('#filevalue1').val() == '') {
+		if ($('#filevalue1').text() == '') {
 			$('#file1').focus();
 			alert('대표이미지를 선택하세요.');
 			return false;

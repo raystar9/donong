@@ -193,11 +193,15 @@ function search(){
 	 data : { "num":num , "sido":sido, "sigungu":sigungu, "price":price}, 
 	 url : '/donong/search',
 	 success : function(json){
-		 $(".viewbox").remove();
 		 var content = "";
 		 if(json.length == 0){
-			 content = "<img src='./resources/rental/upload/searchNo2.png' class='searchNo'>";
+			 $(".viewbox").remove();
+			 content =	"<div id='searchNo'>"+
+			 			"<img src='./resources/rental/upload/searchNo2.png' class='searchNo'>"+
+			 			"</div>";
 		 }else{
+			 $(".viewbox").remove();
+			 $("#searchNo").remove();
 			 for(var i=0; i<json.length; i++){
 				content = "<div class='viewbox'>" +
 						"<div id='top'>"+

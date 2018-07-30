@@ -22,7 +22,7 @@ public class FAQService {
 	
 	public Map<String, Object> getFaqSrcList(String keyword, HttpServletRequest request) {
 		int page = 1;
-		int limit = 15;
+		int limit = 10;
 		int listCount = 0;
 		int maxPage = 0;
 		int startPage = 0;
@@ -67,6 +67,11 @@ public class FAQService {
 	public List<FAQDTO> getFaqTopTenList(RowBounds row) {
 
 		return faqMapper.getFaqTopTenList(row);
+	}
+
+	public void insertFaq(FAQDTO faq) {
+		
+		faqMapper.insertFaq(faq);
 	}
 
 	

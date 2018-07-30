@@ -1,11 +1,12 @@
-#boardList {
-	width: 80%;
-	height: 70%;
-	
+#cs {
+	margin-top: 50px;
 }
 
 #pagingTd {
+	border-top: 1px solid green;
 	text-align: center;
+	height: 60px;
+	line-height: 60px;
 }
 
 #pagingTd a {
@@ -22,5 +23,78 @@
 
 #pagingTd a:hover:not(#currPage) {
 	background-color: #ddd;
+}
+
+#notice_title {
+	width: 80%;
+	height: 50px;
+	color: #8BC34A;
+	font-size: 23px;
+	font-weight: bold;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+#boardList {
+	width: 80%;
+	margin: 0 auto;
+	border-top: 1px solid green;
+}
+
+#boardList tr:first-child {
+	font-size: 20px;
+	font-weight: 500;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 1px solid green;
+}
+
+#boardList th {
+	text-align: center;
+}
+
+.notice_tr * {
+	height: 50px;
+	line-height: 50px;
+	text-decoration: none;
+	color: black;
+}
+
+.notice_tr:hover {
+	background-color: #F1F8E9;
+}
+
+.notice_tr td:first-child, .notice_tr td:last-child {
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+
+table:last-child {
+	width: 80%;
+	margin: 0 auto;
+}
+
+table:last-child td {
+	text-align: center;
+	height: 50px;
+}
+
+#srcOpt {
+	width: 100px;
+	height: 40px;
+	font-size: 17px;
+}
+
+#srcTxt {
+	width: 500px;
+	height: 40px;
+	font-size: 17px;
+}
+
+#srcBtn {
+	width: 100px;
+	height: 40px;
+	font-size: 17px;
 }
 

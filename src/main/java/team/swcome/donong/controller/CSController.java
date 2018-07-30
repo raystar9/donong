@@ -1,9 +1,12 @@
 package team.swcome.donong.controller;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,20 +16,27 @@ import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amazonaws.util.IOUtils;
+
+import team.swcome.donong.dto.FAQDTO;
 import team.swcome.donong.dto.NoticeDTO;
 import team.swcome.donong.dto.QNADTO;
 import team.swcome.donong.dto.SessionBean;
+import team.swcome.donong.service.S3Service;
+import team.swcome.donong.service.S3Util;
 import team.swcome.donong.service.FAQService;
 import team.swcome.donong.service.NoticeService;
 import team.swcome.donong.service.QNAService;
@@ -44,7 +54,12 @@ public class CSController {
 	@Autowired
 	QNAService qnaService;
 	
-	@RequestMapping(value="/cs/main", method=RequestMethod.GET)
+	@Autowired
+	S3Service s3Service;
+	S3Util s3Util = new S3Util();
+	String bucketName = "donong-s3";
+	
+	@RequestMapping(value="/cs", method=RequestMethod.GET)
 	public ModelAndView csHome(
 			ModelAndView mv) {
 		RowBounds row = new RowBounds(0, 10);
@@ -175,6 +190,7 @@ public class CSController {
 	public ModelAndView faqList(
 			ModelAndView mv,
 			@RequestParam String keyword,
+			@RequestParam(value="state", defaultValue="none") String state,
 			HttpServletRequest request) {
 		Map<String, Object> map = faqService.getFaqSrcList(keyword, request);
 		
@@ -187,9 +203,26 @@ public class CSController {
 		mv.addObject("endPage", map.get("endPage"));
 		mv.addObject("keyword", keyword);
 		
-		mv.setViewName("service/faq");
+		if (state.equals("paging")) {
+			System.out.println("ajax 실행!!");
+			mv.setViewName("service/faq_ajax");
+		} else {			
+			mv.setViewName("service/faq");
+		}
 
 		return mv;
+	}
+	
+	@RequestMapping(value = "/cs/faq/write")
+	public String faqInsert() {
+		return "service/faq_write";
+	}
+	
+	@RequestMapping(value="/cs/faq", method=RequestMethod.POST)
+	public String faqInsert(FAQDTO faq) {
+		faqService.insertFaq(faq);
+		
+		return "redirect:/cs/faq?keyword=";
 	}
 	
 	@ResponseBody
@@ -206,8 +239,9 @@ public class CSController {
 			@RequestParam(defaultValue="none") String state,
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		session.setNickname("user1");
-		session.setMemberNum(2);
+		
+		session.setNickname("admin");
+		session.setMemberNum(1);
 		if (session.getNickname().equals("admin")) {
 			map = qnaService.getQnaListAll(request);
 			
@@ -296,5 +330,103 @@ public class CSController {
 		
 		return "cs/qna";
 	}
+	
+	@RequestMapping(value="/cs/s3_uploadpage")
+	public String s3_test() {
+		
+		return "service/s3_upload";
+	}
+	
+	@RequestMapping(value="/cs/s3_upload", method=RequestMethod.POST)
+	public ModelAndView s3_upload(@RequestParam("file") MultipartFile file, ModelAndView mv) throws Exception {
+		
+		try {
+			String uploadPath = "rent";
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file.getOriginalFilename(), file), HttpStatus.CREATED);
+			
+			String certificatePath = (String) img_path.getBody();
+
+			mv.addObject("imgPath", certificatePath);
+			mv.setViewName("service/s3_complete");
+			
+			return mv;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	//프로필 이미지
+	@SuppressWarnings("resource")
+	@ResponseBody
+	@RequestMapping("/cs/displayFile")
+	public ResponseEntity<byte[]> displayFile(String fileName, String directory) throws Exception {
+		logger.info(directory);
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection conn = null;
+		logger.info("FILE NAME: " + fileName);
+
+		String inputDirectory = null;
+		if(directory.equals("rent")) {
+			inputDirectory = "rent";
+		}
+//		else if(directory.equals("market")) {
+//			inputDirectory = "market";
+//		}else {
+//			inputDirectory = "profile";
+//		}
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				url = new URL(s3Util.getFileURL(bucketName, inputDirectory + fileName));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream(); // 이미지를 불러옴
+			} catch (Exception e) {
+				url = new URL(s3Util.getFileURL(bucketName, "default.jpg"));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "cs/deleteFile", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(String fileName, String directory)throws Exception {
+
+		logger.info("delete file: " + fileName);
+		logger.info("delete foloder:"+directory);
+		String inputDirectory = null;
+		if(directory.equals("rent")) {
+			inputDirectory = "rent";
+		}
+//		else if(directory.equals("market")) {
+//			inputDirectory = "market";
+//		} else {
+//			inputDirectory = "profile";
+//		}
+
+		try {
+			s3Util.fileDelete(bucketName, inputDirectory+fileName);
+		} catch (Exception e) {
+			// s3.fileDelete(bucketName, "s_user.jpg");
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
+
 	
 }

@@ -1,39 +1,20 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="/resources/common/jsp/import.jsp" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Home</title>
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	
 	<script src="/donong/resources/service/js/cs_main.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="/donong/resources/service/css/cs_main.css">
 </head>
 <body>
-		<a href="/donong/cs/main">main</a>
-		<a href="/donong/cs/notice">notice</a>
-		<a href="/donong/cs/qna">qna</a>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div id="cs">
 	
-		<div id="cs_header">
-			<span>Donong</span>&nbsp; <span>고객센터</span> <span>고객님과 함께하는 Donong 고객센터입니다.</span>
-		</div>
-			
-		<div id="faqSrcBar">
-			<form action="/donong/cs/faq" method="get">
-				<label id="faqLabel"><span>FAQ</span> 검색</label>
-				<div id="col2">
-					<div id="col2-row1">검색을 이용하시면 보다 빠르게 원하시는 답변을 얻으실 수 있습니다.</div>
-					<input type="text" id="keyword" name="keyword" placeholder=" 검색 후 문의가 해결되지 않으면 1:1 상담을 이용하세요." />
-					<input type="submit" value="검색" />
-				</div>
-				<div id="col3">
-					<input type="button" id="qnaBtn" value="1:1 상담하기" onclick="location.href='/donong/cs/qna'" />
-				</div>
-			</form>
-		</div>
+		<%@ include file="/WEB-INF/views/service/cs_header.jsp" %>
 		
 		<div id="quickMenu">
 			<div id="quickMenu_header">
@@ -182,17 +163,20 @@
 			
 			<table id="faqList">
 				<tr>
-					<th colspan="3">자주 묻는 질문 TOP 10</th>
+					<th colspan="3">&nbsp;자주 묻는 질문 TOP 10</th>
 				</tr>
 				<c:set var="num" value="1"/>
 				<c:forEach var="content" items="${faqList }">
 					<tr>
 						<td width="10%">
-							❁ ${num }
+							❁ 
 							<c:set var="num" value="${num + 1 }" />
 						</td>
 						<td width="90%">
 							<div>
+								[<a href="/donong/cs/faq?keyword=${content.category }">
+									${content.category }
+								</a>]&nbsp;
 								<a href="/donong/cs/faq?keyword=${content.title }">
 									${content.title } 
 								</a>
@@ -204,16 +188,17 @@
 			
 			<table id="noticeList">
 				<tr>
-					<th colspan="3">공지사항</th>
+					<th colspan="2">&nbsp;공지사항</th>
+					<th><a href="/donong/cs/notice">더보기</a></th>
 				</tr>
 				<c:forEach var="content" items="${noticeList }">
 					<tr>
 						<td width="10%">
-							❁
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❁
 						</td>
 						<td width="73%">
 							<div>
-								<a href="./notice/${content.num }?state=cont">
+								<a href="/donong/cs/notice/${content.num }?state=cont">
 									${content.title } 
 								</a>
 							</div>

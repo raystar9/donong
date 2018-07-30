@@ -17,21 +17,12 @@ contents VARCHAR2(300) NOT NULL,
 regdate DATE NOT NULL,
 updatedate DATE
 )
-
+insert into MEMBER values(2,'aadmin','aadmin','1111','aadmin','1','1','1','1','1','1',sysdate);
 create sequence reply_seq
 increment by 1 start with 1
 
-select * from reply;
-drop table reply;
 
-select rno, num, replytext, replyer, userName, regdate, updatedate
-	from reply  
-	where  num= 74
-	order by rno;
-
-select rno, r.num, replytext, replyer, r.userName, r.regdate, r.updatedate
-from reply r, community c 
-where replyer = writer;
+alter table community_reply add constraint community_re foreign key (community_writer_fk) references community (community_num_pk) on delete cascade;
 
 select * from REPLY;
 select * from community_reply;

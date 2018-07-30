@@ -107,4 +107,13 @@ public class ReplyController {
 		return entity;
 	}
 	
+	@RequestMapping(value="/list/{num}/",method=RequestMethod.GET)
+	public ModelAndView replyList(@PathVariable("num")int num, ModelAndView mav,HttpSession session) {
+		int start=0;
+		int end=0;
+		List<ReplyDTO> list=replyService.list(num, start, end, session);
+		mav.setViewName("board/replyList");
+		mav.addObject("list",list);
+		return mav;
+	}
 }

@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import team.swcome.donong.dto.BoardDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.BoardService;
+import team.swcome.donong.service.ReplyService;
 
 /**
  * Handles requests for the application home page.
@@ -44,6 +45,7 @@ public class CommunityController {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	@Autowired
 	BoardService boardService;
+	
 	private String saveFolder="C:\\Users\\user1\\git\\donong\\src\\main\\webapp\\resources\\upload\\";
 	
 	/**
@@ -57,6 +59,9 @@ public class CommunityController {
 			SessionBean sessionBean) {
 		List<BoardDTO> boardlist = new ArrayList<>();
 		HttpSession session = request.getSession();
+		sessionBean.setMemberNum(1);
+		sessionBean.setNickname("admin");
+		sessionBean.getMemberNum();
 		if (limit != null) {
 			session.setAttribute("limit", limit);
 		} else {
@@ -120,7 +125,7 @@ public class CommunityController {
 
 	@RequestMapping(value = "/communitywrite", method = RequestMethod.GET)
 	public String write(Locale locale, Model model, SessionBean sessionBean) {
-
+		sessionBean.getMemberNum();
 		return "com/com_write";
 	}
 
@@ -189,7 +194,7 @@ public class CommunityController {
 			@RequestParam("num") int bbs_num,
 			@RequestParam("state") String state,
 			SessionBean sessionBean) throws Exception{
-		
+		sessionBean.getMemberNum();
 		if(state.equals("cont")) {//내용보기일때만
 			boardService.bbsHit(bbs_num);
 		}
@@ -235,7 +240,7 @@ public class CommunityController {
 	public String edit(Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
 		 @RequestParam(value = "num") int num,
 		 SessionBean sessionBean) {
-		
+		sessionBean.getMemberNum();
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
@@ -309,6 +314,7 @@ public class CommunityController {
 
 	@RequestMapping(value = "/communitydel", method = RequestMethod.GET)
 	public String del(Model model, @RequestParam(value = "num") String num, SessionBean sessionBean) {
+		sessionBean.getMemberNum();
 		model.addAttribute("num", num);
 		return "com/com_del";
 	}
@@ -326,12 +332,13 @@ public class CommunityController {
 		if(fname!=null) {
 				File file=new File(saveFolder+fname);
 				file.delete();
-			
+				
 			boardService.deleteBbs(num);
 			
 			
 			
 		}
+	
 		boardService.deleteBbs(num);
 		return "redirect:/communitylist";
 	}
@@ -342,7 +349,7 @@ public class CommunityController {
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
-		
+		sessionBean.getMemberNum();
 		return "com/com_reply";
 	}
 	/* 게시판 답변 저장 */
@@ -365,6 +372,7 @@ public class CommunityController {
 			@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("find_name") String find_name,
 			@RequestParam("find_field") String find_field, SessionBean sessionBean) throws Exception{
+		sessionBean.getMemberNum();
 		int limit=10;
 		
 		Map<String, String> m=new HashMap<>();

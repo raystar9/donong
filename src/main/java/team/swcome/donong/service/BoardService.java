@@ -90,6 +90,7 @@ public class BoardService {
 		
 	}
 	public void deleteBbs(int num) {
+		boardMapper.deleteAllReply(num);
 		boardMapper.deleteBoard(num);
 		
 	}

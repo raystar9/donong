@@ -22,7 +22,7 @@ insert into community values(18,1,'admin','1111','제목','질문','내용',sysd
 
 
 
-
+select*from member;
 drop table community;
 select * from COMMUNITY where category ='모임';
 

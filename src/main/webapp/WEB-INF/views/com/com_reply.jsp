@@ -45,7 +45,7 @@ function check(){
 
 				<tr>
 					<th class="well well-sm" style="text-align:center;">글쓴이</th>
-					<td><input name="writer" id="writer" size="14" class="form-control"></td>
+					<td><input name="writer" id="writer" size="14" class="form-control" value="${sessionBean.nickname }" readonly></td>
 				</tr>
 				
 				<tr>

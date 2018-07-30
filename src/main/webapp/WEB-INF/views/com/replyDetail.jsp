@@ -17,13 +17,15 @@ $.ajax({
 		"Content-Type":"application/json"
 	},
 	data:JSON.stringify({
-		replytext:detailReplytext
+		contents:detailReplytext
 	}),
 	dataType:"text",
 	success:function(result){
+		alert("댓글이 수정되었습니다.");
 		if(result=="success"){
 			$("#modifyReply").css("visibility","hidden");
 			listReplyRest("1");
+			
 			}
 		}
 	});		
@@ -56,10 +58,8 @@ $("#btnReplyDelete").click(function(){
 <textarea id="detailReplytext" rows="5" cols="82">${vo.contents }</textarea>
 <div style="text-align:center;">
 
-
 <button type="button" id="btnReplyUpdate">수정</button>
 <button type="button" id="btnReplyDelete">삭제</button>
-
 <button type="button" id="btnReplyClose">닫기</button>
 </div>
 </body>

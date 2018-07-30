@@ -298,11 +298,12 @@ $(function(){
     <br>
     <form method="get" action="./communitywrite" style="float:right;">
     <table id="table_third">
-	
+	<c:if test="${sessionBean.nickname != null}">
 	<tr><td>
 			<button type="submit" class="btn" style=>글쓰기</button>
 	</td>
 	</tr>
+	</c:if>
 </table>
 </form>
 </div>

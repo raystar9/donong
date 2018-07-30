@@ -35,6 +35,7 @@ public interface BoardMapper {
 	public List<BoardDTO> selectCircle(HashMap<String, Integer> hm);
 	
 	public List<BoardDTO> bbs_find(Map<String, String> m);
+	public void deleteAllReply(int num);
 
 	
 	

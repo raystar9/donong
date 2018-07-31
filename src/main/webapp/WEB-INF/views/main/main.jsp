@@ -4,10 +4,18 @@
 <html lang="en">
 <head>
   <title>나만따라와 도시농부</title>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%@ include file="/resources/common/jsp/import.jsp" %>
+  
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
+  <!-- google font 링크 -->
   <style>
+  body{
+	font-family: 'Sunflower', sans-serif;
+  }
+  
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;
@@ -38,8 +46,8 @@
     }
     
     #sample1{
-    	width:100%;
-    	height:100%
+    	width:180px;
+    	height:135px;
     }
     
      .carousel-indicators .active{
@@ -111,7 +119,7 @@
    </div>
      <div class="col-sm-6 text-center">
    	 <h1>분양정보 예정위치</h1>
-     <p><a href="#"><img id="sample" src="resources/main/image/logo.jpg"></a></p> 
+     <p><a href="#"><img id="sample" src="resources/main/image/map.png"></a></p> 
     </div>
     </div>
  </div>
@@ -272,13 +280,9 @@
   </div>
 </div>
  
- 
- 
- 
-   
- 
-
-
+ <footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
 
 </body>
 </html>

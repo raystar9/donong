@@ -142,7 +142,7 @@
 
 <div id="map"></div>
 <div id="btn">
-	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite">
+	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite" class="btn btn-default">
 </div>
 
 <div id="List" style="overflow-y:scroll;">

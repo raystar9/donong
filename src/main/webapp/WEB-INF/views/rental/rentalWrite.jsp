@@ -134,8 +134,8 @@
 	<input type='hidden' id="markerLat" name="lat" value="">
 	<input type='hidden' id="markerLng" name="lng" value="">
 	<div class="button">
-		<input type="submit" value="등록">
-		<input type="button" value="취소" onclick="location.href='../rental'">
+		<input type="submit" value="등록" class="btn btn-default">
+		<input type="button" value="취소" onclick="location.href='../rental'" class="btn btn-default">
 	</div>	
 	</form>
 </div>

@@ -133,8 +133,8 @@
 	<input type='hidden' id="markerLat" name="lat" value="${rental.lat }">
 	<input type='hidden' id="markerLng" name="lng" value="${rental.lng }">
 	<div class="button">
-		<input type="submit" value="수정">
-		<input type="button" value="취소" onclick="history.go(-1);">
+		<input type="submit" value="수정" class="btn btn-default">
+		<input type="button" value="취소" onclick="history.go(-1);" class="btn btn-default">
 	</div>	
 	</form>
 </div>

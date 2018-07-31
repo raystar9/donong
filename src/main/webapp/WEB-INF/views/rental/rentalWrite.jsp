@@ -5,58 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalWrite.css">
 <script src="/donong/resources/rental/js/rentalWrite.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
-<style>
-	*{
-		box-sizing:border-box;
-	}
-	#main{
-		margin: auto;
-		border:1px solid black;
-		width:800px;
-		height:1500px;
-	}
-	.writeTable{
-		margin: auto;
-		margin-top: 50px;
-		width: 700px;
-	}
-	#map {
-		width: 400px;
-		height: 400px;
-		margin: auto;
-		margin-top : 20px;
-	}
-	#autocomplete{
-		margin-top:50px;
-		width: 500px;
-		height: 35px;
-	}
-	#search{
-		margin-top:50px;
-		margin: auto;
-		text-align: center;
-	}
-	table tr td:first-child {
-		width: 150px;
-	}
-	.uploadIcon{
-		width:25px;
-		height:20px;
-		margin-left:10px;
-	}
-	input[type="file"]{
-		display:none;
-	}
-	#file2_tr, #file3_tr, #file4_tr{
-		display:none;
-	}
-</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<div id="main">
+<div class="container" id="con">
  <form action="./write_ok" method="post" class="writeForm" enctype="multipart/form-data">
 	<table border="1" class="writeTable">
 		<tr>

@@ -1,3 +1,59 @@
-body {
-	margin: 1px
+* {
+	box-sizing: border-box;
+}
+
+#con {
+	margin-left: 400px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#main {
+	margin: auto;
+	border: 1px solid black;
+	width: 800px;
+	height: 1500px;
+}
+
+.writeTable {
+	margin: auto;
+	margin-top: 50px;
+	width: 700px;
+}
+
+#map {
+	width: 400px;
+	height: 400px;
+	margin: auto;
+	margin-top: 20px;
+}
+
+#autocomplete {
+	margin-top: 50px;
+	width: 500px;
+	height: 35px;
+}
+
+#search {
+	margin-top: 50px;
+	margin: auto;
+	text-align: center;
+}
+
+table tr td:first-child {
+	width: 150px;
+}
+
+.uploadIcon {
+	width: 25px;
+	height: 20px;
+	margin-left: 10px;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+#file2_tr, #file3_tr, #file4_tr {
+	display: none;
 }

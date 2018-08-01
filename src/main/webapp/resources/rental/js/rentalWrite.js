@@ -119,9 +119,25 @@ $(document).ready(function() {
 			return false;
 		}
 		
+		var result = confirm("게시글을 등록하시겠습니까?");
+		if(result == true){
+			return true;
+		}else{
+			return false;
+			}
+		
 	});//submit()
 	
 });//ready()
+
+function can_click(){
+	var result = confirm("게시글 작성을 취소하시겠습니까?");
+	if(result == true){
+		location.href='../rental';
+	}else{
+		return false;
+	}
+}
 
 var marker;
 var pins = [];

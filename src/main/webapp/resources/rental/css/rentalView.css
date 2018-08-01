@@ -51,8 +51,8 @@
 	height: 400px;
 	padding: 5px;
 	background-color: #dff0d8;
-	border-top: 3px solid #555;
-	border-bottom: 3px solid #555;
+	border-top: 3px solid #777;
+	border-bottom: 3px solid #777;
 }
 
 #separation {
@@ -121,7 +121,7 @@
 }
 
 hr {
-	border-top: 2px solid #ddddddd1;
+	border-top: 2px solid #ccc;
 }
 
 .btn-default {
@@ -158,8 +158,8 @@ table tr {
 }
 
 #table_img {
-	border-top: 3px solid #555;
-	border-bottom: 3px solid #555;
+	border-top: 3px solid #777;
+	border-bottom: 3px solid #777;
 	width: 900px;
 	height: 225px;
 	padding-top: 10px;

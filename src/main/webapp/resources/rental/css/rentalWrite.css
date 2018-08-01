@@ -3,6 +3,7 @@
 }
 
 #con {
+	height:1300px;
 	margin-left: 250px;
 	text-align: center;
 }
@@ -16,10 +17,10 @@
 
 .writeTable {
 	margin: auto;
-	margin-top: 50px;
+	margin-top: 30px;
 	width: 600px;
 	height: 600px;
-	border-radius:10px;
+	border-radius: 10px;
 	border: 1px solid #ccc;
 }
 
@@ -60,58 +61,88 @@ input[type="file"] {
 #file2_tr, #file3_tr, #file4_tr {
 	display: none;
 }
+
 #viewTitle {
 	font-weight: bold;
 	color: #6c8564;
 }
+
 #page-header-size {
 	width: 1160px;
 	margin-top: 60px;
 	margin-left: 270px;
 }
+
 table tr td:nth-child(2) {
 	padding-left: 8px;
-	text-align:left;
+	text-align: left;
 }
+
 table tr td:nth-child(1) {
-	background-color:#dff0d8c9;
-	width:17%;
+	background-color: #dff0d8c9;
+	width: 17%;
+	font-weight: bold;
 }
+
 table {
 	font-size: 13px;
 }
-#area_div{
-	width:200px;
+
+#area_div {
+	width: 200px;
 }
-#text_td{
-	padding-left:0px;
+
+#text_td {
+	padding-left: 0px;
 }
-#area{
-	display:inline-block;
-	width:130px;
-	height:25px;
-	margin-top:5px;
-	margin-bottom:5px;
+
+#area {
+	display: inline-block;
+	width: 130px;
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
-#price{
-	display:inline-block;
-	width:130px;
-	height:25px;
-	margin-top:5px;
-	margin-bottom:5px;
+
+#price {
+	display: inline-block;
+	width: 130px;
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
-table tr{
-	border-bottom:1px solid #ccc;
-	height:6%;
+
+table tr {
+	border-bottom: 1px solid #ccc;
+	height: 6%;
 }
-#mark{
-	width:15px;
-	height:15px;
+
+#mark {
+	width: 15px;
+	height: 15px;
 }
-#content{
-	height:100%;
+
+#content {
+	height: 100%;
 }
-.button{
-	    margin-bottom: 100px;
-	    margin-top: 20px;
+
+.button {
+	margin-left: 50px;
+    margin-top: 40px;
+    margin-bottom: 150px;
+    width: 600px;
+}
+#subBtn, #canBtn{
+	float:right;
+	margin-right:7px;
+}
+hr{
+	border-top:2px solid #ccc
+}
+#window{
+	border:1px solid black;
+	width:650px;
+	height:1070px;
+	margin:0 auto;
+	margin-top:30px;
 }

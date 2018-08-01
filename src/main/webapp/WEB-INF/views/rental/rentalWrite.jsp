@@ -16,6 +16,7 @@
 </div>
 <div class="container" id="con">
  <form action="./write_ok" method="post" class="writeForm" enctype="multipart/form-data">
+ <div id="window">
 	<table class="writeTable">
 		<tr>
 			<td>임대자</td>
@@ -90,9 +91,10 @@
 	<input type='hidden' id="markerLat" name="lat" value="">
 	<input type='hidden' id="markerLng" name="lng" value="">
 	<div class="button">
-		<input type="submit" value="등록" class="btn btn-default">
-		<input type="button" value="취소" onclick="location.href='../rental'" class="btn btn-default">
+		<input type="button" value="취소" onclick="can_click()" class="btn btn-default" id="canBtn">
+		<input type="submit" value="등록" class="btn btn-default" id="subBtn">
 	</div>	
+</div>	
 	</form>
 </div>
 </body>

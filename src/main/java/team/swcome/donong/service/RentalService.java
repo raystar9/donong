@@ -1,14 +1,9 @@
 package team.swcome.donong.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,9 +29,9 @@ public class RentalService {
 	S3Util s3Util = new S3Util();
 	String bucketName = "donong-s3";
 
-	private String saveFolder = "C:\\Users\\?´?‹¤?˜œ\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
+	private String saveFolder = "C:\\Users\\?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
-	/* ?†ì§? ???—¬ê¸? ?‚½?… */
+	/* ?ï¿½ï¿½ï¿½? ???ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ */
 	public int insertFarm(RentalDTO r) {
 		String sido = "";
 		String sigungu = "";
@@ -45,21 +40,21 @@ public class RentalService {
 		String address = r.getAddress();
 		String writer = "";
 
-		// ë¡œê·¸?¸?•œ ?‚¬?Œ ?´ë¦? ê°?? ¸?˜¤ê¸?
+		// ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½?
 		MemberDTO m = new MemberDTO();
 		m = memberMapper.selectMemberByNum(r.getMember_num());
 		writer = m.getRealname();
 
-		// ?‹œ?„, ?‹œêµ°êµ¬, ? œëª?
+		// ?ï¿½ï¿½?ï¿½ï¿½, ?ï¿½ï¿½êµ°êµ¬, ?ï¿½ï¿½ï¿½?
 		String[] addArr = address.split("\\s");
 		sido = addArr[1];
 		sigungu = addArr[2];
 		ri = addArr[3];
 
-		// ê¸? ? œëª?
+		// ï¿½? ?ï¿½ï¿½ï¿½?
 		title = sido + " " + sigungu + " " + ri;
 
-		// ?‹œ?„, ?‹œêµ°êµ¬ ë²ˆí˜¸
+		// ?ï¿½ï¿½?ï¿½ï¿½, ?ï¿½ï¿½êµ°êµ¬ ë²ˆí˜¸
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
 		map.put("sigungu", "%" + sigungu + "%");
@@ -74,37 +69,37 @@ public class RentalService {
 		return r.getNum();
 	}
 
-	/* ?†ì§? ???—¬ ê¸? ?ŒŒ?¼ ?‚½?… */
+	/* ?ï¿½ï¿½ï¿½? ???ï¿½ï¿½ ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ */
 	public void insertFile(FileDTO f) throws IllegalStateException, IOException {
 		MultipartFile file1 = f.getFile1();
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
 		
-		String uploadPath = "rent";	// aws ?´?”ëª?
+		String uploadPath = "rent";	// aws ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 		
-		//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+		//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 		ResponseEntity<String> img_path = new ResponseEntity<>
 		(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
 		
-		//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+		//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 		String certificatePath = (String) img_path.getBody();
 
-		/* ì²«ë²ˆì§? ?ŒŒ?¼ */
-		// ?›?˜ ?ŒŒ?¼ëª? ???¥
+		/* ì²«ë²ˆï¿½? ?ï¿½ï¿½?ï¿½ï¿½ */
+		// ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½
 		String fileName = file1.getOriginalFilename();
 		f.setFileName1(fileName);
 
-		// ë°”ë?? ?ŒŒ?¼ëª…ìœ¼ë¡? ???¥
+		// ë°”ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½ëª…ìœ¼ï¿½? ???ï¿½ï¿½
 		f.setFilePath1(certificatePath);
 
-		/* ?‘ë²ˆì§¸ ?ŒŒ?¼ */
+		/* ?ï¿½ï¿½ë²ˆì§¸ ?ï¿½ï¿½?ï¿½ï¿½ */
 		if (!file2.isEmpty()) {
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			certificatePath = (String) img_path.getBody();
 			
 			fileName = file2.getOriginalFilename();
@@ -113,13 +108,13 @@ public class RentalService {
 			f.setFilePath2(certificatePath);
 		}
 
-		/* ?„¸ë²ˆì§¸ ?ŒŒ?¼ */
+		/* ?ï¿½ï¿½ë²ˆì§¸ ?ï¿½ï¿½?ï¿½ï¿½ */
 		if (!file3.isEmpty()) {
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file3.getOriginalFilename(), file3), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			certificatePath = (String) img_path.getBody();
 			
 			fileName = file3.getOriginalFilename();
@@ -128,13 +123,13 @@ public class RentalService {
 			f.setFilePath3(certificatePath);
 		}
 
-		/* ?„¤ë²ˆì§¸ ?ŒŒ?¼ */
+		/* ?ï¿½ï¿½ë²ˆì§¸ ?ï¿½ï¿½?ï¿½ï¿½ */
 		if (!file4.isEmpty()) {
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file4.getOriginalFilename(), file4), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			certificatePath = (String) img_path.getBody();
 			
 			fileName = file4.getOriginalFilename();
@@ -146,43 +141,43 @@ public class RentalService {
 		rentalMapper.insertFile(f);
 	}
 
-	/* ë¡œê·¸?¸?•œ ?‚¬?Œ ?´ë¦?, ?•¸?“œ?° ê°?? ¸?˜¤ê¸? */
+	/* ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?, ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½? */
 	public MemberDTO selectNameByPhone(int num) {
 		MemberDTO m = memberMapper.selectMemberByNum(num);
 		System.out.println("name = " + m.getRealname());
 		return m;
 	};
 
-	/* ?†ì§? ???—¬ ë¦¬ìŠ¤?Š¸ ê°?? ¸?˜¤ê¸? */
+	/* ?ï¿½ï¿½ï¿½? ???ï¿½ï¿½ ë¦¬ìŠ¤?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½? */
 	public List<RentalDTO> selectRentalList() {
 		List<RentalDTO> list = rentalMapper.selectRentalList();
 		return list;
 	};
 
-	/* ???‘œ ?´ë¯¸ì? path ê°?? ¸?˜¤ê¸? */
+	/* ???ï¿½ï¿½ ?ï¿½ï¿½ë¯¸ï¿½? path ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½? */
 	public String[] selectRepresentImg() {
 		String[] filepath = rentalMapper.selectRepresentImg();
 		return filepath;
 	};
 
-	/* ?†ì§? ???—¬ ê¸? ?ƒ?„¸ë³´ê¸° ê°?? ¸?˜¤ê¸? */
+	/* ?ï¿½ï¿½ï¿½? ???ï¿½ï¿½ ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ë³´ê¸° ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½? */
 	public RentalDTO selectRentalView(int board_num) {
 		RentalDTO r = rentalMapper.selectRentalView(board_num);
 		return r;
 	};
 
-	/* ?ƒ?„¸ë³´ê¸°?—?„œ ?‚¬ì§„ë“¤ ê²½ë¡œ êµ¬í•´?˜¤ê¸? */
+	/* ?ï¿½ï¿½?ï¿½ï¿½ë³´ê¸°?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ì§„ë“¤ ê²½ë¡œ êµ¬í•´?ï¿½ï¿½ï¿½? */
 	public FileDTO selectFileNamePath(int board_num) {
 		FileDTO f = rentalMapper.selectFileNamePath(board_num);
 		return f;
 	};
 
-	/* ?†ì§? ???—¬ ê¸? ?‚­? œ */
+	/* ?ï¿½ï¿½ï¿½? ???ï¿½ï¿½ ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ */
 	public void deleteRental(int board_num) {
 		rentalMapper.deleteRental(board_num);
 	};
 
-	/* ?†ì§? ???—¬ ?ŒŒ?¼ ?‚­? œ */
+	/* ?ï¿½ï¿½ï¿½? ???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ */
 	public ResponseEntity<String> deleteFiles(Map m) {
 		int board_num = (int)m.get("board_num");
 		String directory = (String)m.get("directory");
@@ -199,10 +194,10 @@ public class RentalService {
 			inputDirectory = "rent";
 		}
 		
-		//ì²? ë²ˆì§¸ ?´ë¯¸ì? ?‚­? œ
+		//ï¿½? ë²ˆì§¸ ?ï¿½ï¿½ë¯¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
 		s3Util.fileDelete(bucketName, inputDirectory+fpath[0]);
 		
-		//?‘ ë²ˆì§¸ ?´ë¯¸ì? ?‚­? œ
+		//?ï¿½ï¿½ ë²ˆì§¸ ?ï¿½ï¿½ë¯¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
 		if(!fpath[1].isEmpty()) {
 			inputDirectory = null;
 			if(directory.equals("rent")) {
@@ -211,7 +206,7 @@ public class RentalService {
 			s3Util.fileDelete(bucketName, inputDirectory+fpath[1]);
 		}
 		
-		//?„¸ ë²ˆì§¸ ?´ë¯¸ì? ?‚­? œ
+		//?ï¿½ï¿½ ë²ˆì§¸ ?ï¿½ï¿½ë¯¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
 		if(!fpath[2].isEmpty()) {
 			inputDirectory = null;
 			if(directory.equals("rent")) {
@@ -220,7 +215,7 @@ public class RentalService {
 			s3Util.fileDelete(bucketName, inputDirectory+fpath[2]);
 		}
 		
-		//?„¤ ë²ˆì§¸ ?´ë¯¸ì? ?‚­? œ
+		//?ï¿½ï¿½ ë²ˆì§¸ ?ï¿½ï¿½ë¯¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
 		if(!fpath[3].isEmpty()) {
 			inputDirectory = null;
 			if(directory.equals("rent")) {
@@ -232,7 +227,7 @@ public class RentalService {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	};
 
-	/* ?†ì§? ê²Œì‹œê¸? ê²??ƒ‰ */
+	/* ?ï¿½ï¿½ï¿½? ê²Œì‹œï¿½? ï¿½??ï¿½ï¿½ */
 	public List<RentalDTO> selectSearch(RentalDTO r) {
 		List<RentalDTO> list = rentalMapper.selectSearch(r);
 		String represent[] = rentalMapper.selectRepresentImg();
@@ -244,7 +239,7 @@ public class RentalService {
 		return list;
 	};
 
-	/* ?†ì§? ê¸? ?ˆ˜? • */
+	/* ?ï¿½ï¿½ï¿½? ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ */
 	public void updateRental(RentalDTO r) {
 		String sido = "";
 		String sigungu = "";
@@ -252,16 +247,16 @@ public class RentalService {
 		String title = "";
 		String address = r.getAddress();
 
-		// ?‹œ?„, ?‹œêµ°êµ¬, ? œëª?
+		// ?ï¿½ï¿½?ï¿½ï¿½, ?ï¿½ï¿½êµ°êµ¬, ?ï¿½ï¿½ï¿½?
 		String[] addArr = address.split("\\s");
 		sido = addArr[1];
 		sigungu = addArr[2];
 		ri = addArr[3];
 
-		// ê¸? ? œëª?
+		// ï¿½? ?ï¿½ï¿½ï¿½?
 		title = sido + " " + sigungu + " " + ri;
 
-		// ?‹œ?„, ?‹œêµ°êµ¬ ë²ˆí˜¸
+		// ?ï¿½ï¿½?ï¿½ï¿½, ?ï¿½ï¿½êµ°êµ¬ ë²ˆí˜¸
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
 		map.put("sigungu", "%" + sigungu + "%");
@@ -274,90 +269,90 @@ public class RentalService {
 		rentalMapper.updateRental(r);
 	};
 
-	/* ?†ì§? ?ŒŒ?¼ ?ˆ˜? • */
+	/* ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ */
 	public void updateFiles(FileDTO f) throws IllegalStateException, IOException {
 		MultipartFile file1 = f.getFile1();
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
 		
-		String uploadPath = "rent";	// aws ?´?”ëª?
+		String uploadPath = "rent";	// aws ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 		
 		FileDTO f2 = rentalMapper.selectFileNamePath(f.getBoard_num());
 		
 		
-		if(!f.getFile1().isEmpty()) {	//?ŒŒ?¼1?´ ë³?ê²½ë˜?—ˆ?„ ?•Œ
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+		if(!f.getFile1().isEmpty()) {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			String certificatePath = (String) img_path.getBody();
 
-			// ?›?˜ ?ŒŒ?¼ëª? ???¥
+			// ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½
 			String fileName = file1.getOriginalFilename();
 			f.setFileName1(fileName);
 
-			// ë°”ë?? ?ŒŒ?¼ëª…ìœ¼ë¡? ???¥
+			// ë°”ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½ëª…ìœ¼ï¿½? ???ï¿½ï¿½
 			f.setFilePath1(certificatePath);
-		}else {	//?ŒŒ?¼1?´ ë³?ê²½ë˜ì§? ?•Š?•˜?„ ?•Œ
+		}else {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
 			f.setFileName1(f2.getFileName1());
 			f.setFilePath1(f2.getFilePath1());
 		}
 		
-		if(!f.getFile2().isEmpty()) {	//?ŒŒ?¼1?´ ë³?ê²½ë˜?—ˆ?„ ?•Œ
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+		if(!f.getFile2().isEmpty()) {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			String certificatePath = (String) img_path.getBody();
 
-			// ?›?˜ ?ŒŒ?¼ëª? ???¥
+			// ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½
 			String fileName = file2.getOriginalFilename();
 			f.setFileName2(fileName);
 
-			// ë°”ë?? ?ŒŒ?¼ëª…ìœ¼ë¡? ???¥
+			// ë°”ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½ëª…ìœ¼ï¿½? ???ï¿½ï¿½
 			f.setFilePath2(certificatePath);
-		}else {	//?ŒŒ?¼1?´ ë³?ê²½ë˜ì§? ?•Š?•˜?„ ?•Œ
+		}else {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
 			f.setFileName2(f2.getFileName2());
 			f.setFilePath2(f2.getFilePath2());
 		}
 		
-		if(!f.getFile3().isEmpty()) {	//?ŒŒ?¼1?´ ë³?ê²½ë˜?—ˆ?„ ?•Œ
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+		if(!f.getFile3().isEmpty()) {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file3.getOriginalFilename(), file3), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			String certificatePath = (String) img_path.getBody();
 
-			// ?›?˜ ?ŒŒ?¼ëª? ???¥
+			// ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½
 			String fileName = file3.getOriginalFilename();
 			f.setFileName3(fileName);
 
-			// ë°”ë?? ?ŒŒ?¼ëª…ìœ¼ë¡? ???¥
+			// ë°”ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½ëª…ìœ¼ï¿½? ???ï¿½ï¿½
 			f.setFilePath3(certificatePath);
-		}else {	//?ŒŒ?¼1?´ ë³?ê²½ë˜ì§? ?•Š?•˜?„ ?•Œ
+		}else {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
 			f.setFileName2(f2.getFileName3());
 			f.setFilePath2(f2.getFilePath3());
 		}
 		
-		if(!f.getFile4().isEmpty()) {	//?ŒŒ?¼1?´ ë³?ê²½ë˜?—ˆ?„ ?•Œ
-			//?˜¬ë¦°ì£¼?†Œ ë¦¬í„´ë°›ìŒ
+		if(!f.getFile4().isEmpty()) {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
+			//?ï¿½ï¿½ë¦°ì£¼?ï¿½ï¿½ ë¦¬í„´ë°›ìŒ
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file4.getOriginalFilename(), file4), HttpStatus.CREATED);
 			
-			//ë°›ì?ê±? ì£¼ì†Œ String ?œ¼ë¡? ë°”ê¿”ì¤?
+			//ë°›ï¿½?ï¿½? ì£¼ì†Œ String ?ï¿½ï¿½ï¿½? ë°”ê¿”ï¿½?
 			String certificatePath = (String) img_path.getBody();
 
-			// ?›?˜ ?ŒŒ?¼ëª? ???¥
+			// ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½
 			String fileName = file4.getOriginalFilename();
 			f.setFileName4(fileName);
 
-			// ë°”ë?? ?ŒŒ?¼ëª…ìœ¼ë¡? ???¥
+			// ë°”ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½ëª…ìœ¼ï¿½? ???ï¿½ï¿½
 			f.setFilePath4(certificatePath);
-		}else {	//?ŒŒ?¼1?´ ë³?ê²½ë˜ì§? ?•Š?•˜?„ ?•Œ
+		}else {	//?ï¿½ï¿½?ï¿½ï¿½1?ï¿½ï¿½ ï¿½?ê²½ë˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
 			f.setFileName4(f2.getFileName4());
 			f.setFilePath4(f2.getFilePath4());
 		}

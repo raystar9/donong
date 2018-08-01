@@ -27,7 +27,7 @@ function initMap(){
 function viewMarkers(){
 	$.ajax({
 		type: "POST",
-		url: '/donong/markerJson',
+		url: '/donong/markJson',
 		success: function(json){
 			for(var i=0; i<json.length; i++){
 				

@@ -217,7 +217,7 @@ public class MainController {
 	}
 	
 	/* 지도 마커 찍을 때 Ajax */
-	@RequestMapping(value = "/markerJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/markJson", method = RequestMethod.POST)
 	@ResponseBody
 	public Object markerJson(Model model, SessionBean sessionBean) {
 		List<RentalDTO> list = rentalService.selectRentalList();

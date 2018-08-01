@@ -7,6 +7,16 @@
 	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<script src="/donong/resources/market/js/item-detail.js"></script>
 	<title>Home</title>
+	<script>
+		function onSubmitItem(){
+			if($("#quantity").val() <= 0){
+				alert("수량은 1개 이상을 입력해야합니다.");
+				return false;
+			} else {			
+				return true;
+			}
+		}
+	</script>
 	<style>
 		.item-count {
 			width: 100px;
@@ -25,7 +35,7 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
-	<form class="form-horizontal" action="/donong/market/order/item/${itemNo}" method="get">
+	<form id="item-detail-form" class="form-horizontal" action="/donong/market/order/item/${itemNo}" method="get" onsubmit="return onSubmitItem()">
 	<div>
 		<h1>타이틀임</h1>
 	</div>

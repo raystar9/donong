@@ -58,15 +58,30 @@ public class MarketService {
 		return mapper.selectItemsAtPage(startItem, endItem, categoryNum);
 	}
 	
-	public MarketPaginationDTO getPaginationInfo(int currentPage) {
+	public MarketPaginationDTO getPaginationInfo(int currentPage, String category) {
 		MarketPaginationDTO pagination = new MarketPaginationDTO();
-		int lastPage = (mapper.selectItemCount() / itemsPerPage) + 1;
 		
+		int categoryNum;
+		switch(category) {
+		case "seed":
+			categoryNum = 1;
+			break;
+		case "fertilizer":
+			categoryNum = 2;
+			break;
+		case "tools":
+		default:
+			categoryNum = 3;
+			break;
+		}
+		int lastPage = ((mapper.selectItemCountByCategory(categoryNum)-1) / itemsPerPage) + 1;
 		int startPage = currentPage - 2;
 		int endPage = currentPage + 2;
 		if(startPage < 1) {
 			startPage = 1;
 		}
+		logger.debug("lastPage = {}", lastPage);
+		logger.debug("endPage = {}", endPage);
 		if(endPage > lastPage) {
 			endPage = lastPage;
 		}
@@ -74,7 +89,7 @@ public class MarketService {
 		pagination.setCurrent(currentPage);
 		pagination.setStart(startPage);
 		pagination.setEnd(endPage);
-		
+		pagination.setCategory(category);
 		return pagination; 
 	}
 

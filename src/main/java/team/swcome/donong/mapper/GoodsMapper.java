@@ -13,6 +13,8 @@ public interface GoodsMapper {
 
 	public int selectItemCount();
 	
+	public int selectItemCountByCategory(int category);
+	
 	public int insertGoods(GoodsDTO goods);
 	
 	public int updateGoods(GoodsDTO goods);

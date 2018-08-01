@@ -13,6 +13,12 @@ phone VARCHAR2(15) NOT NULL,
 registdate DATE NOT NULL
 );
 
+
+select * from goods;
+
+insert into goods values(41, '방울토마토', 6000, 1, '제품 구성 - 종이케이스, 양철화분, 흙+분변토, 설명서, 씨앗','/donong/resource/image/market/seed/s17.jpg');
+
+ commit;
 drop table member;
 
 select * from member;
@@ -23,5 +29,6 @@ increment by 1
 nomaxvalue;
 
 drop sequence member_num;
+
 
 

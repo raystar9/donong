@@ -19,6 +19,29 @@
 			width: 80px;
 		}
 	</style>
+	<script>
+		$().ready(()=>{
+			var $form = $(".order-form");
+			$form.submit(e=>{
+				if($("#name").val() == ''){
+					alert("이름을 입력해주세요.");
+					return false;
+				}
+				if($("#phone").val() == ''){
+					alert("연락처를 입력해주세요.");
+					return false;
+				}
+				if($("#address").val() == ''){
+					alert("주소를 입력해주세요.");
+					return false;
+				}
+				if($("#addressdetail").val() == ''){
+					alert("상세 주소를 입력해주세요.");
+					return false;
+				}
+			});
+		})
+	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -39,7 +62,7 @@
 	<p>총 가격 : ${totalPrice }원</p>
 	</div>
 	
-	<form action="/donong/market/order/process" method="post">
+	<form class="order-form" action="/donong/market/order/process" method="post">
 	<fieldset>
 	<legend>배송정보</legend>
 			<label for="name">주문인</label><input class="form-control" type="text" name="name" id="name" value="${member.realname }"/>

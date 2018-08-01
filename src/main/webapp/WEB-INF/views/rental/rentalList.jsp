@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
+<link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalList.css">
 <script src="/donong/resources/rental/js/rentalList.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <style>
@@ -142,7 +143,7 @@
 
 <div id="map"></div>
 <div id="btn">
-	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite">
+	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite" class="btn btn-default">
 </div>
 
 <div id="List" style="overflow-y:scroll;">

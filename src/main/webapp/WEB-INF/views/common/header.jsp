@@ -2,9 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
+<style>
+	#logo{
+		width:120px;
+		height:80px;
+		margin-left:20px;
+		margin-top:5px;
+	}
+	.navbar-nav{
+		margin-top:20px;
+	}
+</style>
 <div class="navbar">
 <div class="navbar-header">
-<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo.jpg"></a>
+<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo2.png"></a>
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">

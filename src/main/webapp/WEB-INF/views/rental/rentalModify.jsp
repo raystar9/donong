@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalModify.css">
 <script src="/donong/resources/rental/js/rentalModify.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <style>
@@ -133,8 +134,8 @@
 	<input type='hidden' id="markerLat" name="lat" value="${rental.lat }">
 	<input type='hidden' id="markerLng" name="lng" value="${rental.lng }">
 	<div class="button">
-		<input type="submit" value="수정">
-		<input type="button" value="취소" onclick="history.go(-1);">
+		<input type="submit" value="수정" class="btn btn-default">
+		<input type="button" value="취소" onclick="history.go(-1);" class="btn btn-default">
 	</div>	
 	</form>
 </div>

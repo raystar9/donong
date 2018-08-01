@@ -16,8 +16,9 @@ registdate DATE NOT NULL
 
 select * from goods;
 
-insert into goods values(23, '인터팜 과일나라', 9200, 2, '인터팜 과일나라',sysdate, '황산칼리가 함유되어 맛, 때깔, 향기, 저장성을 증대','/donong/resource/image/market/fertilizer/f20.jpg');
-commit;
+insert into goods values(41, '방울토마토', 6000, 1, '제품 구성 - 종이케이스, 양철화분, 흙+분변토, 설명서, 씨앗','/donong/resource/image/market/seed/s17.jpg');
+
+ commit;
 drop table member;
 
 select * from member;

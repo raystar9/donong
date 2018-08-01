@@ -5,7 +5,7 @@
 <mapper namespace="team.swcome.donong.mapper.NoticeMapper">
 	
 	<select id="getNoticeList" resultType="notice">
-		select * from notice order by regitdate desc
+		select num, title, content, to_char(regitdate, 'yy/mm/dd') regitdate from notice order by regitdate desc
 	</select>
 	
 	<select id="getListCount" resultType="int">
@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getNoticeContent" resultType="notice">
-		select * from notice where num=#{num}
+		select num, title, content, to_char(regitdate, 'yy/mm/dd') regitdate from notice where num=#{num}
 	</select>
 	
 	<select id="getSrcListCount" parameterType="java.util.Map" resultType="int">
@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="getSrcList" parameterType="java.util.Map" resultType="notice">
-		select * from notice
+		select num, title, content, to_char(regitdate, 'yy/mm/dd') regitdate from notice
 		<where>
 			<if test="srcOpt == ''"></if>
 			<if test="srcOpt == 'title'">

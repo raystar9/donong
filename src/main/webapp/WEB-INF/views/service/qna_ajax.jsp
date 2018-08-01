@@ -1,21 +1,19 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<c:if test="${listCount != 0 }">
 <tr>
-	<th colspan="6">나의 문의내역</th>
-</tr>
-<tr>
-	<th width="5%">번호</th>
+	<th width="10%">번호</th>
 	<th width="15%">문의유형</th>
-	<th width="40%">문의제목</th>
-	<th width="20%">문의일</th>
+	<th width="45%">문의제목</th>
+	<th width="10%">문의일</th>
 	<th width="10%">답변일</th>
 	<th width="10%">처리상태</th>
 </tr>
 
 <c:set var="num" value="${listCount - (page - 1) * 10 }"/>
 <c:forEach var="content" items="${qnaList }">
-	<tr>
+	<tr class="qna_tr">
 		<td>
 			<c:out value="${num }" />
 			<c:set var="num" value="${num - 1 }" />
@@ -66,10 +64,10 @@
 <tr>
 	<td colspan="6" id="pagingTd">
 		<c:if test="${page <= 1 }">
-			이전&nbsp;
+			&laquo;&nbsp;
 		</c:if>
 		<c:if test="${page > 1 }">
-			<a>이전</a>
+			<a>&laquo;</a>
 		</c:if>
 		
 		<c:forEach var="pageNum" begin="${startPage }" end="${endPage }">
@@ -82,10 +80,11 @@
 		</c:forEach>
 		
 		<c:if test="${page >= maxPage }">
-			&nbsp;다음
+			&nbsp;&raquo;
 		</c:if>
 		<c:if test="${page < maxPage }">
-			<a>다음</a>
+			<a>&raquo;</a>
 		</c:if>
 	</td>
 </tr>
+</c:if>

@@ -3,7 +3,17 @@
 	height: auto;
 }
 
-#qna_cont {
+#notice_title {
+	width: 80%;
+	height: 50px;
+	color: #8BC34A;
+	font-size: 23px;
+	font-weight: bold;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+#notice_table {
 	width: 80%;
 	height: auto;
 	margin: 0 auto;
@@ -11,13 +21,13 @@
 	margin-bottom: 100px;
 }
 
-#qna_cont h1 {
+#notice_table h1 {
 	font-size: 25px;
 	font-weight: bold;
 	color: #8BC34A;
 }
 
-#qna_cont label {
+#notice_table label {
 	width: 20%;
 	margin-top: 25px;
 	height: 30px;
@@ -26,7 +36,7 @@
 	margin-right: 5px;
 }
 
-#qna_cont span {
+#notice_table span {
 	display: inline-block;
 	width: 79%;
 	height: 30px;
@@ -35,14 +45,7 @@
 	float: left;
 }
 
-#qna_cont textarea {
-	display: inline-block;
-	width: 79%;
-	margin-top: 5px;
-	float: left;
-}
-
-#qna_cont button, #deleteBtn, #updateReply {
+#notice_table button, #deleteBtn, #updateReply {
 	width: 30%;
 	float: left;
 	height: 40px;
@@ -51,7 +54,13 @@
 	margin-bottom: 100px;
 }
 
-
+#notice_content {
+	width: 79%;
+	height: auto;
+	margin-top: 25px;
+	border-bottom: 1px solid green;
+	display:inline-block;
+}
 
 
 

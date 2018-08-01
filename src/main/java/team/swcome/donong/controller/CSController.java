@@ -240,8 +240,8 @@ public class CSController {
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		session.setNickname("admin");
-		session.setMemberNum(1);
+		session.setNickname("user1");
+		session.setMemberNum(2);
 		if (session.getNickname().equals("admin")) {
 			map = qnaService.getQnaListAll(request);
 			
@@ -387,7 +387,7 @@ public class CSController {
 				conn = (HttpURLConnection) url.openConnection();
 				in = conn.getInputStream(); // 이미지를 불러옴
 			} catch (Exception e) {
-				url = new URL(s3Util.getFileURL(bucketName, "default.jpg"));
+				url = new URL(s3Util.getFileURL(bucketName, "default.png"));
 				conn = (HttpURLConnection) url.openConnection();
 				in = conn.getInputStream();
 			}

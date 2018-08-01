@@ -5,10 +5,67 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
+<script>
+
+$(document).ready(function(){
+	
+	listReply();//json 리턴방식
+
+	//댓글 쓰기 버튼 클릭 이벤트
+	$("#btnReply").click(function(){
+		$.ajax({
+			type:"post",
+			url:"/donong/reply/insert.do",
+			data:{
+				contents: $("#replytext").val(),
+				communityNum: "${bbsbean.num}"
+			},
+			success:function(){
+				alert("댓글이 등록되었습니다.");
+				listReply();
+			}
+		});
+		
+	});
+});
+//Controller방식
+function listReply(){
+	$.ajax({
+		type:"get",
+		url:"/donong/reply/list.do?num=${bbsbean.num}",
+		success:function(result){
+			$("#listReply").html(result);
+		}		
+	});
+	
+}
+
+function showReplyModify(num){
+	$.ajax({
+		type:"get",
+		url:"/donong/reply/detail/"+num,
+		success:function(result){
+			$("#modifyReply").html(result);
+			$("#modifyReply").css("visibility","visible");
+		}
+	});
+}
+function listReplyRest(num){
+	$.ajax({
+		type:"get",
+		url:"/donong/reply/list.do?num=${bbsbean.num}",
+		success:function(result){
+			$("#listReply").html(result);
+		}
+	});
+}
+</script>
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
 <h2 class="comcont_title" style="witdh:370px">
 커뮤니티 게시판</h2>
@@ -42,10 +99,16 @@
 </c:if>
 </div>
 <hr>
-<div id="boardcont_menu" style="margin-left:80%">
-		
+<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
+<br>
+<button type="button" id="btnReply">댓글 작성</button>
+<div id="listReply"></div>
+<hr>
+<div id="boardcont_menu" style="margin-left:75%">
+		<c:if test="${sessionBean.memberNum== bbsbean.member_num }">
 		<input type="button" value="수정" class="btn" onclick="location='communityedit?page=${page}&num=${num}'">
 		<input type="button" value="삭제" class="btn" onclick="location='communitydel?num=${num}'">
+		</c:if>
 		<input type="button" value="답변" class="btn" onclick="location='communityreply?page=${page}&num=${num}'">
 		<input type="button" value="목록" class="btn" onclick="location='communitylist?page=${page}'">
 		</div>

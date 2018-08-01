@@ -5,9 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="resources/js/jquery-3.3.1.js"></script>
 <script>
 $(function(){
 	var limit; 
@@ -65,6 +64,7 @@ $(function(){
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
   <div class="container">
   <div style="text-align:center; font-size:150px; top-margin:50px;">
    <a href ="communitylist?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
@@ -95,7 +95,7 @@ $(function(){
                 <c:forEach var = "a" begin = "0" end = "${b.re_lev*2}" step = "1">
                 &nbsp;
                 </c:forEach>
-             <img src="./resources/images/AnswerLine.gif"> 
+             
              </c:if>   
              
              <a href = "communitycont?num=${b.num}&page=${page}&state=cont">
@@ -143,7 +143,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='잡담' }">
+    <c:if test="${category=='잡담' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -171,7 +171,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='질문' }">
+    <c:if test="${category=='질문' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -199,7 +199,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='정보' }">
+    <c:if test="${category=='정보' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -227,7 +227,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='모임' }">
+    <c:if test="${category=='모임' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
@@ -255,6 +255,7 @@ $(function(){
        </td>                  
     </tr>
     </c:if>
+   
     <!-- 레코드가 없으면 -->
     <c:if test="${listcount == 0 }">
        <tr>
@@ -297,11 +298,12 @@ $(function(){
     <br>
     <form method="get" action="./communitywrite" style="float:right;">
     <table id="table_third">
-	
+	<c:if test="${sessionBean.nickname != null}">
 	<tr><td>
 			<button type="submit" class="btn" style=>글쓰기</button>
 	</td>
 	</tr>
+	</c:if>
 </table>
 </form>
 </div>

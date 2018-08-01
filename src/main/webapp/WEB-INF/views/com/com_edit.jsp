@@ -5,10 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
-<script src="resources/js/jquery-3.3.1.js"></script>
 <!--  <script src="resources/js/bbs.js"></script>-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script>
 function check(){
 	if($.trim($('#category').val())==""){
@@ -30,6 +29,7 @@ function check(){
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<h2 class="comwrite_title">커뮤니티게시판 수정</h2>
 		<form method="post" action="communityedit_ok" onsubmit="return check()" enctype="multipart/form-data">
@@ -53,25 +53,27 @@ function check(){
 					<th class="well well-sm" style="text-align:center;">제목</th>
 					<td><input name="subject" id="subject" size="40"
 						class="form-control" value="${bbsbean.subject }"><input type="hidden" name="writer" id="writer" size="14"
-						class="input_box" value="admin"><input type="hidden" name="password" id="password" value="1111"
-						size="14" class="input_box"><input type="hidden" name="member_num" id="member_num" value="1"
+						class="input_box" value="${sessionBean.nickname}"><input type="hidden" name="member_num" id="member_num" value="${sessionBean.memberNum}"
 						size="14" class="input_box"></td>
 				</tr>
 				<tr>
 				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
+				
 				<label for="upfile"></label>
-				<input type="file" id="filename" name="uploadfile" value="${bbsbean.filename } " class="form-control">
+				<input type="file" id="filename" name="uploadfile" value=" " class="form-control">
 				<span id="filevalue"></span>
+				
+				
 				</td>
 				</tr>
 				<tr>
+				
 				<th class="well well-sm" style="text-align:center;">분류</th>
 				<td>
 				<input name="category" id="category" value="${bbsbean.category }" class="form-control" readonly>
-			
-				
 				</td>
+				
 				</tr>
 				<tr>
 					<th  class="well well-sm" style="text-align:center;">글내용</th>

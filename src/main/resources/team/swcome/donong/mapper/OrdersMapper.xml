@@ -89,7 +89,12 @@
 	  	SELECT MAX(num)+1 FROM ORDERS
 	  </selectKey>
 		INSERT INTO ORDERS
+		<if test="comments != ''">
 		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, #{comments}, null, 'npay')
+		</if>
+		<if test="comments == ''">
+		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, ' ', null, 'npay')
+		</if>
 	</insert>
 	<insert id="insertOrderGoods" parameterType="GoodsOrdersDTO">
 		<selectKey resultType="int" keyProperty="num" order="BEFORE">

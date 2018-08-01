@@ -1,5 +1,7 @@
 package team.swcome.donong.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.AccountService;
+import team.swcome.donong.service.RentalService;
 
 /**
  * Handles requests for the application home page.
@@ -30,6 +34,9 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	@Autowired
 	AccountService accountService;
+	
+	@Autowired
+	RentalService rentalService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -207,6 +214,20 @@ public class MainController {
 
 		return "common/erroppage";
 
+	}
+	
+	/* 지도 마커 찍을 때 Ajax */
+	@RequestMapping(value = "/markerJson", method = RequestMethod.POST)
+	@ResponseBody
+	public Object markerJson(Model model, SessionBean sessionBean) {
+		List<RentalDTO> list = rentalService.selectRentalList();
+		String[] imgs = rentalService.selectRepresentImg();
+
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setPath(imgs[i]);
+		}
+
+		return list;
 	}
 	
 	

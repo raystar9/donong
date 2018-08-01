@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 <head>
   <title>나만따라와 도시농부</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%@ include file="/resources/common/jsp/import.jsp" %>
+<script src="/donong/resources/main/js/main.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -52,6 +53,10 @@
     	background-color:black;
     }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
     
+    #map{
+		width:500px;
+		height:375px;
+	}
   
   </style>
 </head>

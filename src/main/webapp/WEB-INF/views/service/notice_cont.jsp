@@ -22,25 +22,31 @@
 		</div>
 		
 		<div id="notice_table">
-			
+			<div class="row">
 			<label>번호</label>
 			<span>${notice.num }</span>
-			
+			</div>
+			<div class="row">
 			<label>제목</label>
 			<span>${notice.title }</span>
-			
+			</div>
+			<div class="row">
 			<label>내용</label>
 			<div id="notice_content">
 				${notice.content }
 			</div>
+			</div>
+			<div class="row">
 			<label>등록일</label>
 			<span>${notice.regitdate }</span>
-	
+			</div>
+			<div class="row">
 			<button onclick="location.href='/donong/cs/notice/${notice.num}?state=edit'">수정</button>
 			<f:form method="delete" action="/donong/cs/notice/${notice.num }">
 				<input id="deleteBtn" type="submit" value="삭제" />
 			</f:form>
 			<button onclick="location.href='/donong/cs/notice'">목록으로</button>
+			</div>
 		</div>
 		
 	</div>

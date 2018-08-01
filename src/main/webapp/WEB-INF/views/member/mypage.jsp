@@ -157,7 +157,7 @@
 		
 		<div class="col-sm-6">
 		<input type="button" value="정보수정"  class="btn btn-default" onclick="location='member_edit'">
-		<input type="button" value="내가 한 질문"  class="btn btn-default" onclick="location='member_del'">
+		<input type="button" value="내가 한 질문"  class="btn btn-default" onclick="location='/donong/cs/qna'">
 		<input type="button" value="회원탈퇴"  class="btn btn-default" onclick="location='member_del'">
 	
 		</div>

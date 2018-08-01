@@ -185,7 +185,7 @@ public class MainController {
 		String error = "editok";
 		model.addAttribute("error", error);
 		
-		return "/member/mypage";
+		return "redirect:/member_mypage";
 	}
 	
 	@RequestMapping(value = "pwd_find")

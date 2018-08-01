@@ -14,6 +14,7 @@
   <style>
   body{
 	font-family: 'Sunflower', sans-serif;
+	margin-bottom:20px;
   }
   
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -279,8 +280,8 @@
  
   </div>
 </div>
- 
- <footer class="container-fluid text-center">
+
+ <footer class="container-fluid text-center navbar-fixed-bottom">
   <p>Footer Text</p>
 </footer>
 

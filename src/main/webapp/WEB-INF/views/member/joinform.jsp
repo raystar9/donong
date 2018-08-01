@@ -258,6 +258,10 @@ body {
     text-align:center;
     margin:0 auto;
 }
+
+#and{
+	
+}
 </style>
 
 </head>
@@ -386,7 +390,7 @@ body {
 				</div>	
 				
 				<div class="no-gutter">
-				<div class="col-sm-1">
+				<div id="and" class="col-sm-1">
 					@
 				</div>
 				</div>	

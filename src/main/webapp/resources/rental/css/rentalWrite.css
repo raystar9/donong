@@ -3,8 +3,7 @@
 }
 
 #con {
-	margin-left: 400px;
-	margin-top: 50px;
+	margin-left: 250px;
 	text-align: center;
 }
 
@@ -18,18 +17,22 @@
 .writeTable {
 	margin: auto;
 	margin-top: 50px;
-	width: 700px;
+	width: 600px;
+	height: 600px;
+	border-radius:10px;
+	border: 1px solid #ccc;
 }
 
 #map {
-	width: 400px;
-	height: 400px;
+	width: 600px;
+	height: 300px;
 	margin: auto;
 	margin-top: 20px;
 }
 
 #autocomplete {
-	margin-top: 50px;
+	margin-top: 30px;
+	margin-bottom: 10px;
 	width: 500px;
 	height: 35px;
 }
@@ -56,4 +59,59 @@ input[type="file"] {
 
 #file2_tr, #file3_tr, #file4_tr {
 	display: none;
+}
+#viewTitle {
+	font-weight: bold;
+	color: #6c8564;
+}
+#page-header-size {
+	width: 1160px;
+	margin-top: 60px;
+	margin-left: 270px;
+}
+table tr td:nth-child(2) {
+	padding-left: 8px;
+	text-align:left;
+}
+table tr td:nth-child(1) {
+	background-color:#dff0d8c9;
+	width:17%;
+}
+table {
+	font-size: 13px;
+}
+#area_div{
+	width:200px;
+}
+#text_td{
+	padding-left:0px;
+}
+#area{
+	display:inline-block;
+	width:130px;
+	height:25px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+#price{
+	display:inline-block;
+	width:130px;
+	height:25px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+table tr{
+	border-bottom:1px solid #ccc;
+	height:6%;
+}
+#mark{
+	width:15px;
+	height:15px;
+}
+#content{
+	height:100%;
+}
+.button{
+	    margin-bottom: 100px;
+	    margin-top: 20px;
 }

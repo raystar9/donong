@@ -28,7 +28,7 @@
 	overflow: hidden;
 	width: 900px;
 	height: 300px;
-	margin-top: 30px;
+	margin-top: 20px;
 	margin-bottom: 150px;
 	border-radius: 10px;
 }
@@ -161,8 +161,8 @@ table tr {
 	border-top: 3px solid #555;
 	border-bottom: 3px solid #555;
 	width: 900px;
-	height: 234px;
-	padding-top: 15px;
+	height: 225px;
+	padding-top: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -178,4 +178,8 @@ table tr {
 textarea {
 	width: 885px;
 	height: 395px;
+}
+#footer{
+	width:100px;
+	height:100px;
 }

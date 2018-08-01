@@ -11,9 +11,12 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<div id="page-header-size">
+    <h2 id='viewTitle'>농지 대여</h2><hr>      
+</div>
 <div class="container" id="con">
  <form action="./write_ok" method="post" class="writeForm" enctype="multipart/form-data">
-	<table border="1" class="writeTable">
+	<table class="writeTable">
 		<tr>
 			<td>임대자</td>
 			<td>
@@ -35,9 +38,7 @@
 		<tr>
 			<td>임대료</td>
 			<td>
-				<div style='width:100px; display:inline-block'>
-				<input type="text" name="price" id="price">&nbsp;원
-				</div>
+				<input type="text" name="price" id="price" class="form-control" placeholder="10,000">&nbsp;원
 			</td>
 		</tr>
 		<tr>
@@ -74,15 +75,15 @@
 		</tr> 
 		<tr>
 			<td>상세설명</td>
-			<td>
+			<td id="text_td">
 				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요." id="content" class="form-control"></textarea>
 			</td>
 		</tr>
 	</table>
 	
 	<div id="search">
-		주소:&nbsp;<input type="text" placeholder="농지 위치를 설정하세요." id="autocomplete" name="address"><br>
-		(주소와 위치가 일치하는지 확인하세요)
+		주소:&nbsp;<input type="text" placeholder="&nbsp;농지 위치를 설정하세요." id="autocomplete" name="address"><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<img src="../resources/rental/image/strong2.png" id='mark'/>&nbsp;(주소와 위치가 일치하는지 확인하세요)&nbsp;<img src="../resources/rental/image/strong2.png" id='mark'/>
 	</div>
 	<div id="map">
 	</div>

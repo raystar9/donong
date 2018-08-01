@@ -7,6 +7,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%@ include file="/resources/common/jsp/import.jsp" %>
+<script src="/donong/resources/main/js/main.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -51,6 +53,10 @@
     	background-color:black;
     }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
     
+    #map{
+		width:500px;
+		height:375px;
+	}
   
   </style>
 </head>
@@ -102,8 +108,8 @@
        <!-- 분양정보 위치 지도 들어 가야 하는 곳 -->
    </div>
      <div class="col-sm-6 text-center">
-   	 <h1>분양정보 예정위치</h1>
-     <p><a href="#"><img id="sample" src="resources/main/image/logo.jpg"></a></p> 
+   	 <h1>농지 대여 정보 </h1>
+     <div id="map"></div>
     </div>
     </div>
  </div>

@@ -7,19 +7,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Resource
 public class FileDTO {
 	
-	private int board_num;			//ê²Œì‹œê¸? ë²ˆí˜¸
+	private int board_num;			//ê²Œì‹œê¸€ ë²ˆí˜¸
 	
-	private MultipartFile file1;	//?ŒŒ?¼1 (???‘œ?´ë¯¸ì?)
-	private MultipartFile file2;	//?ŒŒ?¼2 
-	private MultipartFile file3;	//?ŒŒ?¼3 
-	private MultipartFile file4;	//?ŒŒ?¼4 
+	private MultipartFile file1;	//íŒŒì¼1 (ëŒ€í‘œì´ë¯¸ì§€)
+	private MultipartFile file2;	//íŒŒì¼2 
+	private MultipartFile file3;	//íŒŒì¼3 
+	private MultipartFile file4;	//íŒŒì¼4 
 	
-	private String fileName1;		//?ŒŒ?¼ ?˜¤ë¦¬ì??„ ?´ë¦? (a.jpg)
+	private String fileName1;		//íŒŒì¼ ì˜¤ë¦¬ì§€ë„ ì´ë¦„ (a.jpg)
 	private String fileName2;
 	private String fileName3;
 	private String fileName4;
 	
-	private String filePath1;		//?ŒŒ?¼ ê²½ë¡œ 
+	private String filePath1;		//íŒŒì¼ ê²½ë¡œ 
 	private String filePath2;
 	private String filePath3;
 	private String filePath4;
@@ -104,7 +104,4 @@ public class FileDTO {
 	public void setFilePath4(String filePath4) {
 		this.filePath4 = filePath4;
 	}
-	
-	
-
 }

@@ -17,6 +17,7 @@ import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.mapper.MemberMapper;
 import team.swcome.donong.mapper.RentalMapper;
 
+
 @Service
 public class RentalService {
 
@@ -29,9 +30,8 @@ public class RentalService {
 	S3Util s3Util = new S3Util();
 	String bucketName = "donong-s3";
 
-	private String saveFolder = "C:\\Users\\?��?��?��\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
-	/* ?���? ???���? ?��?�� */
+	/* 농지 대여글 삽입 */
 	public int insertFarm(RentalDTO r) {
 		String sido = "";
 		String sigungu = "";
@@ -40,21 +40,21 @@ public class RentalService {
 		String address = r.getAddress();
 		String writer = "";
 
-		// 로그?��?�� ?��?�� ?���? �??��?���?
+		// 로그인한 사람 이름 가져오기
 		MemberDTO m = new MemberDTO();
 		m = memberMapper.selectMemberByNum(r.getMember_num());
 		writer = m.getRealname();
 
-		// ?��?��, ?��군구, ?���?
+		// 시도, 시군구, 제목
 		String[] addArr = address.split("\\s");
 		sido = addArr[1];
 		sigungu = addArr[2];
 		ri = addArr[3];
 
-		// �? ?���?
+		// 글 제목
 		title = sido + " " + sigungu + " " + ri;
 
-		// ?��?��, ?��군구 번호
+		// 시도, 시군구 번호
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
 		map.put("sigungu", "%" + sigungu + "%");
@@ -69,37 +69,37 @@ public class RentalService {
 		return r.getNum();
 	}
 
-	/* ?���? ???�� �? ?��?�� ?��?�� */
+	/* 농지 대여 글 파일 삽입 */
 	public void insertFile(FileDTO f) throws IllegalStateException, IOException {
 		MultipartFile file1 = f.getFile1();
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
 		
-		String uploadPath = "rent";	// aws ?��?���?
+		String uploadPath = "rent";	// aws 폴더명
 		
-		//?��린주?�� 리턴받음
+		//올린주소 리턴받음
 		ResponseEntity<String> img_path = new ResponseEntity<>
 		(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
 		
-		//받�?�? 주소 String ?���? 바꿔�?
+		//받은걸 주소 String 으로 바꿔줌
 		String certificatePath = (String) img_path.getBody();
 
-		/* 첫번�? ?��?�� */
-		// ?��?�� ?��?���? ???��
+		/* 첫번째 파일 */
+		// 원래 파일명 저장
 		String fileName = file1.getOriginalFilename();
 		f.setFileName1(fileName);
 
-		// 바�?? ?��?��명으�? ???��
+		// 바뀐 파일명으로 저장
 		f.setFilePath1(certificatePath);
 
-		/* ?��번째 ?��?�� */
+		/* 두번째 파일 */
 		if (!file2.isEmpty()) {
-			//?��린주?�� 리턴받음
+			//올린주소 리턴받음
 			img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			certificatePath = (String) img_path.getBody();
 			
 			fileName = file2.getOriginalFilename();
@@ -108,13 +108,13 @@ public class RentalService {
 			f.setFilePath2(certificatePath);
 		}
 
-		/* ?��번째 ?��?�� */
+		/* 세번째 파일 */
 		if (!file3.isEmpty()) {
-			//?��린주?�� 리턴받음
+			//올린주소 리턴받음
 			img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file3.getOriginalFilename(), file3), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			certificatePath = (String) img_path.getBody();
 			
 			fileName = file3.getOriginalFilename();
@@ -123,13 +123,13 @@ public class RentalService {
 			f.setFilePath3(certificatePath);
 		}
 
-		/* ?��번째 ?��?�� */
+		/* 네번째 파일 */
 		if (!file4.isEmpty()) {
-			//?��린주?�� 리턴받음
+			//올린주소 리턴받음
 			img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file4.getOriginalFilename(), file4), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			certificatePath = (String) img_path.getBody();
 			
 			fileName = file4.getOriginalFilename();
@@ -141,43 +141,43 @@ public class RentalService {
 		rentalMapper.insertFile(f);
 	}
 
-	/* 로그?��?�� ?��?�� ?���?, ?��?��?�� �??��?���? */
+	/* 로그인한 사람 이름, 핸드폰 가져오기 */
 	public MemberDTO selectNameByPhone(int num) {
 		MemberDTO m = memberMapper.selectMemberByNum(num);
 		System.out.println("name = " + m.getRealname());
 		return m;
 	};
 
-	/* ?���? ???�� 리스?�� �??��?���? */
+	/* 농지 대여 리스트 가져오기 */
 	public List<RentalDTO> selectRentalList() {
 		List<RentalDTO> list = rentalMapper.selectRentalList();
 		return list;
 	};
 
-	/* ???�� ?��미�? path �??��?���? */
+	/* 대표 이미지 path 가져오기 */
 	public String[] selectRepresentImg() {
 		String[] filepath = rentalMapper.selectRepresentImg();
 		return filepath;
 	};
 
-	/* ?���? ???�� �? ?��?��보기 �??��?���? */
+	/* 농지 대여 글 상세보기 가져오기 */
 	public RentalDTO selectRentalView(int board_num) {
 		RentalDTO r = rentalMapper.selectRentalView(board_num);
 		return r;
 	};
 
-	/* ?��?��보기?��?�� ?��진들 경로 구해?���? */
+	/* 상세보기에서 사진들 경로 구해오기 */
 	public FileDTO selectFileNamePath(int board_num) {
 		FileDTO f = rentalMapper.selectFileNamePath(board_num);
 		return f;
 	};
 
-	/* ?���? ???�� �? ?��?�� */
+	/* 농지 대여 글 삭제 */
 	public void deleteRental(int board_num) {
 		rentalMapper.deleteRental(board_num);
 	};
 
-	/* ?���? ???�� ?��?�� ?��?�� */
+	/* 농지 대여 파일 삭제 */
 	public ResponseEntity<String> deleteFiles(Map m) {
 		int board_num = (int)m.get("board_num");
 		String directory = (String)m.get("directory");
@@ -194,40 +194,16 @@ public class RentalService {
 			inputDirectory = "rent";
 		}
 		
-		//�? 번째 ?��미�? ?��?��
 		s3Util.fileDelete(bucketName, inputDirectory+fpath[0]);
-		
-		//?�� 번째 ?��미�? ?��?��
-		if(!fpath[1].isEmpty()) {
-			inputDirectory = null;
-			if(directory.equals("rent")) {
-				inputDirectory = "rent";
-			}
-			s3Util.fileDelete(bucketName, inputDirectory+fpath[1]);
-		}
-		
-		//?�� 번째 ?��미�? ?��?��
-		if(!fpath[2].isEmpty()) {
-			inputDirectory = null;
-			if(directory.equals("rent")) {
-				inputDirectory = "rent";
-			}
-			s3Util.fileDelete(bucketName, inputDirectory+fpath[2]);
-		}
-		
-		//?�� 번째 ?��미�? ?��?��
-		if(!fpath[3].isEmpty()) {
-			inputDirectory = null;
-			if(directory.equals("rent")) {
-				inputDirectory = "rent";
-			}
-			s3Util.fileDelete(bucketName, inputDirectory+fpath[3]);
-		}
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[1]);
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[2]);
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[3]);
+			
 		rentalMapper.deleteFiles(m);
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	};
 
-	/* ?���? 게시�? �??�� */
+	/* 농지 게시글 검색 */
 	public List<RentalDTO> selectSearch(RentalDTO r) {
 		List<RentalDTO> list = rentalMapper.selectSearch(r);
 		String represent[] = rentalMapper.selectRepresentImg();
@@ -239,7 +215,7 @@ public class RentalService {
 		return list;
 	};
 
-	/* ?���? �? ?��?�� */
+	/* 농지 글 수정 */
 	public void updateRental(RentalDTO r) {
 		String sido = "";
 		String sigungu = "";
@@ -247,16 +223,16 @@ public class RentalService {
 		String title = "";
 		String address = r.getAddress();
 
-		// ?��?��, ?��군구, ?���?
+		// 시도, 시군구, 제목
 		String[] addArr = address.split("\\s");
 		sido = addArr[1];
 		sigungu = addArr[2];
 		ri = addArr[3];
 
-		// �? ?���?
+		// 글 제목
 		title = sido + " " + sigungu + " " + ri;
 
-		// ?��?��, ?��군구 번호
+		// 시도, 시군구 번호
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("sido", "%" + sido + "%");
 		map.put("sigungu", "%" + sigungu + "%");
@@ -269,90 +245,90 @@ public class RentalService {
 		rentalMapper.updateRental(r);
 	};
 
-	/* ?���? ?��?�� ?��?�� */
+	/* 농지 파일 수정 */
 	public void updateFiles(FileDTO f) throws IllegalStateException, IOException {
 		MultipartFile file1 = f.getFile1();
 		MultipartFile file2 = f.getFile2();
 		MultipartFile file3 = f.getFile3();
 		MultipartFile file4 = f.getFile4();
 		
-		String uploadPath = "rent";	// aws ?��?���?
+		String uploadPath = "rent";	// aws 폴더명
 		
 		FileDTO f2 = rentalMapper.selectFileNamePath(f.getBoard_num());
 		
 		
-		if(!f.getFile1().isEmpty()) {	//?��?��1?�� �?경되?��?�� ?��
-			//?��린주?�� 리턴받음
+		if(!f.getFile1().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file1.getOriginalFilename(), file1), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			String certificatePath = (String) img_path.getBody();
 
-			// ?��?�� ?��?���? ???��
+			// 원래 파일명 저장
 			String fileName = file1.getOriginalFilename();
 			f.setFileName1(fileName);
 
-			// 바�?? ?��?��명으�? ???��
+			// 바뀐 파일명으로 저장
 			f.setFilePath1(certificatePath);
-		}else {	//?��?��1?�� �?경되�? ?��?��?�� ?��
+		}else {	//파일1이 변경되지 않았을 때
 			f.setFileName1(f2.getFileName1());
 			f.setFilePath1(f2.getFilePath1());
 		}
 		
-		if(!f.getFile2().isEmpty()) {	//?��?��1?�� �?경되?��?�� ?��
-			//?��린주?�� 리턴받음
+		if(!f.getFile2().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			String certificatePath = (String) img_path.getBody();
 
-			// ?��?�� ?��?���? ???��
+			// 원래 파일명 저장
 			String fileName = file2.getOriginalFilename();
 			f.setFileName2(fileName);
 
-			// 바�?? ?��?��명으�? ???��
+			// 바뀐 파일명으로 저장
 			f.setFilePath2(certificatePath);
-		}else {	//?��?��1?�� �?경되�? ?��?��?�� ?��
+		}else {	//파일1이 변경되지 않았을 때
 			f.setFileName2(f2.getFileName2());
 			f.setFilePath2(f2.getFilePath2());
 		}
 		
-		if(!f.getFile3().isEmpty()) {	//?��?��1?�� �?경되?��?�� ?��
-			//?��린주?�� 리턴받음
+		if(!f.getFile3().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file3.getOriginalFilename(), file3), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			String certificatePath = (String) img_path.getBody();
 
-			// ?��?�� ?��?���? ???��
+			// 원래 파일명 저장
 			String fileName = file3.getOriginalFilename();
 			f.setFileName3(fileName);
 
-			// 바�?? ?��?��명으�? ???��
+			// 바뀐 파일명으로 저장
 			f.setFilePath3(certificatePath);
-		}else {	//?��?��1?�� �?경되�? ?��?��?�� ?��
+		}else {	//파일1이 변경되지 않았을 때
 			f.setFileName2(f2.getFileName3());
 			f.setFilePath2(f2.getFilePath3());
 		}
 		
-		if(!f.getFile4().isEmpty()) {	//?��?��1?�� �?경되?��?�� ?��
-			//?��린주?�� 리턴받음
+		if(!f.getFile4().isEmpty()) {	//파일1이 변경되었을 때
+			//올린주소 리턴받음
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file4.getOriginalFilename(), file4), HttpStatus.CREATED);
 			
-			//받�?�? 주소 String ?���? 바꿔�?
+			//받은걸 주소 String 으로 바꿔줌
 			String certificatePath = (String) img_path.getBody();
 
-			// ?��?�� ?��?���? ???��
+			// 원래 파일명 저장
 			String fileName = file4.getOriginalFilename();
 			f.setFileName4(fileName);
 
-			// 바�?? ?��?��명으�? ???��
+			// 바뀐 파일명으로 저장
 			f.setFilePath4(certificatePath);
-		}else {	//?��?��1?�� �?경되�? ?��?��?�� ?��
+		}else {	//파일1이 변경되지 않았을 때
 			f.setFileName4(f2.getFileName4());
 			f.setFilePath4(f2.getFilePath4());
 		}

@@ -1,27 +1,23 @@
 package team.swcome.donong.dto;
 
-
-
 import javax.annotation.Resource;
-
 
 @Resource
 public class RentalDTO {
 	
-	private int num;		//ê²Œì‹œê¸? ê³ ìœ ë²ˆí˜¸
-	private int member_num;	//?‘?„±? ê³ ìœ ë²ˆí˜¸
-	private String writer;	//ê²Œì‹œê¸? ?‘?„±? ?´ë¦?
-	private String title;	//ê²Œì‹œê¸? ? œëª?
-	private String address;	//?†Œ?¬ì§?
-	private int sido; 		//?„
-	private int sigungu;	//?‹œ
+	private int num;		//ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+	private int member_num;	//ì‘ì„±ì ê³ ìœ ë²ˆí˜¸
+	private String writer;	//ê²Œì‹œê¸€ ì‘ì„±ì ì´ë¦„
+	private String title;	//ê²Œì‹œê¸€ ì œëª©
+	private String address;	//ì†Œì¬ì§€
+	private int sido; 		//ë„
+	private int sigungu;	//ì‹œ
 	private int area;		//ë©´ì 
-	private int price;		//?„??ë£?
-	private String content;	//ê²Œì‹œê¸? ?‚´?š©
-	private float lat;		//?œ„?„
+	private int price;		//ì„ëŒ€ë£Œ
+	private String content;	//ê²Œì‹œê¸€ ë‚´ìš©
+	private float lat;		//ìœ„ë„
 	private float lng;		//ê²½ë„
-	private String path;	//???‘œ?´ë¯¸ì? ê²½ë¡œ
-
+	private String path;	//ëŒ€í‘œì´ë¯¸ì§€ ê²½ë¡œ
 	
 	
 	public String getPath() {
@@ -102,6 +98,4 @@ public class RentalDTO {
 	public void setLng(float lng) {
 		this.lng = lng;
 	}
-	
-
 }

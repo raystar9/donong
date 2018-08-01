@@ -2,7 +2,10 @@ package team.swcome.donong.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,20 +24,28 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.amazonaws.util.IOUtils;
 
 import team.swcome.donong.dto.BoardDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.BoardService;
 import team.swcome.donong.service.ReplyService;
+import team.swcome.donong.service.S3Service;
+import team.swcome.donong.service.S3Util;
 
 /**
  * Handles requests for the application home page.
@@ -45,13 +57,12 @@ public class CommunityController {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	S3Service s3Service;
+	S3Util s3Util = new S3Util();
+	String bucketName = "donong-s3";
 	
-	private String saveFolder="C:\\Users\\user1\\git\\donong\\src\\main\\webapp\\resources\\upload\\";
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/communitylist", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/list", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "state", defaultValue = "no") String state,
@@ -123,72 +134,37 @@ public class CommunityController {
 		}
 	}
 
-	@RequestMapping(value = "/communitywrite", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/write", method = RequestMethod.GET)
 	public String write(Locale locale, Model model, SessionBean sessionBean) {
 		sessionBean.getMemberNum();
 		return "com/com_write";
 	}
 
-	@RequestMapping(value = "/communitywrite_ok", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/write_ok", method = RequestMethod.POST)
 	public String write_ok(Locale locale, Model model,@RequestParam MultipartFile uploadfile,@ModelAttribute BoardDTO boardDTO) throws IOException  {
-		
-		
+
 		if(!uploadfile.isEmpty()) {
+			String uploadPath = "community";
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, uploadfile.getOriginalFilename(), uploadfile), HttpStatus.CREATED);
+			
+			String certificatePath = (String) img_path.getBody();
+			
 			//원래 파일명 구해오기
 			String fileName = uploadfile.getOriginalFilename();
 			
 			//원래 파일명 저장
-			boardDTO.setFilepath(fileName);
-			
-			//생성할 폴더 이름: 오늘 년+월+일
-			Calendar c=Calendar.getInstance();
-			int year=c.get(Calendar.YEAR);
-			int month=c.get(Calendar.MONTH)+1;
-			int date=c.get(Calendar.DATE);
-			String homedir=saveFolder+"/"+year+"-"+month+"-"+date;
-			
-			//파일 객체 생성합니다.
-			File path1=new File(homedir);
-			
-			//폴더가 존재하는지 확인합니다.
-			if(!(path1.exists())) {
-				System.out.println("폴더 만들어요");
-				path1.mkdir();//새로운 폴더를 생성
-			}
-			//난수를 구합니다.
-			Random r= new Random();
-			int random=r.nextInt(100000000);
-			
-			/****확장자 구하기 시작****/
-			int index=fileName.lastIndexOf(".");
-			//문자열에서 특정 문자열의 위치 값(index)를 반환한다.
-			//indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면, lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다.
-			//(파일명에 점에 여러개 있을 경우 맨 마지막에 발견되는 문자열의 위치를 리턴합니다.)
-			System.out.println("index="+index);
-			
-			String fileExtension= fileName.substring(index+1);
-			System.out.println("fileExtension="+fileExtension);
-			
-			//새로운 파일명을 저장
-			String refileName="bbs"+year+month+date+random+"."+fileExtension;
-			System.out.println("refileName="+refileName);
-			
-			//오라클 디비에 저장될 레코드 값
-			String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;
-			System.out.println("fileDBName="+fileDBName);
-			
-			//transferTo(File path):업로드한 파일을 매개변수의 경로에 저장합니다.
-			uploadfile.transferTo(new File(saveFolder+fileDBName));
-			//바뀐 파일명으로 저장
-			boardDTO.setFilename(fileDBName);		
+			boardDTO.setFilename(fileName);		
+
+			boardDTO.setFilepath(certificatePath);
 		}
 		this.boardService.insertBbs(boardDTO);//저장 메서드 호출
 
-		return "redirect:/communitylist";
+		return "redirect:/community/list";
 		
 	}
 
-	@RequestMapping(value = "/communitycont", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/cont", method = RequestMethod.GET)
 	public ModelAndView cont(HttpServletRequest request,
 			HttpServletResponse response,Locale locale, Model model,@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("num") int bbs_num,
@@ -218,7 +194,7 @@ public class CommunityController {
 		return contM;
 	}
 	
-	@RequestMapping(value="/download.file",method= {RequestMethod.GET})
+	@RequestMapping(value="/community/download.file",method= {RequestMethod.GET})
 	public void downloadFile(HttpServletResponse response,
 			@RequestParam("filename") String storedFileName,
 			@RequestParam("filepath") String originalFileName,
@@ -226,17 +202,17 @@ public class CommunityController {
 		request.setCharacterEncoding("utf-8");
 		System.out.println("original="+originalFileName);
 		
-		byte fileByte[]=FileUtils.readFileToByteArray(new File(saveFolder+storedFileName));
+		//byte fileByte[]=FileUtils.readFileToByteArray(new File(saveFolder+storedFileName));
 		
 		response.setContentType("application/octet-stream");
-		response.setContentLength(fileByte.length);
+		//response.setContentLength(fileByte.length);
 		response.setHeader("Content-Disposition", "attachment;fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
-		response.getOutputStream().write(fileByte);
+		//response.getOutputStream().write(fileByte);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
 	}
 
-	@RequestMapping(value = "/communityedit", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/edit", method = RequestMethod.GET)
 	public String edit(Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
 		 @RequestParam(value = "num") int num,
 		 SessionBean sessionBean) {
@@ -247,7 +223,7 @@ public class CommunityController {
 		return "com/com_edit";
 	}
 	
-	@RequestMapping(value = "/communityedit_ok", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/edit_ok", method = RequestMethod.POST)
 	public ModelAndView board_edit_ok(Model model,BoardDTO bbsbean,MultipartFile uploadfile, @RequestParam int page, HttpServletResponse response, @RequestParam(value = "num") String num) throws Exception {
 		
 		response.setContentType("text/html;chaset=UTF-8");
@@ -256,69 +232,40 @@ public class CommunityController {
 		//번호를 기준으로 DB 내용을 가져옵니다.
 		BoardDTO bcont= boardService.getContent(bbsbean.getNum());
 		
-		//비번이 같다면
+		
+		if(!uploadfile.isEmpty()) {
+			String uploadPath = "community";
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, uploadfile.getOriginalFilename(), uploadfile), HttpStatus.CREATED);
 			
-			if(!uploadfile.isEmpty()) {
-				File DelFile=new File(saveFolder+bcont.getFilename());
-				if(DelFile.exists())
-				{
-					DelFile.delete();//기존 이전 파일을 삭제
-					}
-				String fileName=uploadfile.getOriginalFilename();
-				bbsbean.setFilepath(fileName);
-				Calendar c=Calendar.getInstance();
-				int year=c.get(Calendar.YEAR);
-				int month=c.get(Calendar.MONTH)+1;
-				int date=c.get(Calendar.DATE);
-				String homedir=saveFolder+"/"+year+"-"+month+"-"+date;
-				
-				//homedir에 file 객체 생성
-				File path1=new File(homedir);
-				
-				if(!(path1.exists())) {
-					System.out.println("폴더 만들어요");
-					path1.mkdir();//새로운 폴더를 생성
-				}
-				Random r= new Random();
-				int random=r.nextInt(100000000);
-				
-				/****확장자 구하기 시작****/
-				int index=fileName.lastIndexOf(".");
-				//문자열에서 특정 문자열의 위치 값(index)를 반환한다.
-				//indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면, lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다.
-				//(파일명에 점에 여러개 있을 경우 맨 마지막에 발견되는 문자열의 위치를 리턴합니다.)
-				System.out.println("index="+index);
-				
-				String fileExtension= fileName.substring(index+1);
-				System.out.println("fileExtension="+fileExtension);
-				
-				//새로운 파일명을 저장
-				String refileName="bbs"+year+month+date+random+"."+fileExtension;
-				System.out.println("refileName="+refileName);
-				
-				//오라클 디비에 저장될 레코드 값
-				String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;
-				System.out.println("fileDBName="+fileDBName);
-				
-				//transferTo(File path):업로드한 파일을 매개변수의 경로에 저장합니다.
-				uploadfile.transferTo(new File(saveFolder+fileDBName));
-				//바뀐 파일명으로 저장
-				bbsbean.setFilename(fileDBName);		
-				
-			this.boardService.editBbs(bbsbean);
-			response.sendRedirect("communitycont?num="+num+"&page="+page+"&state=cont");
+			String certificatePath = (String) img_path.getBody();
+			
+			//원래 파일명 구해오기
+			String fileName = uploadfile.getOriginalFilename();
+			
+			//원래 파일명 저장
+			bbsbean.setFilename(fileName);		
+
+			bbsbean.setFilepath(certificatePath);
+		}else if(uploadfile.isEmpty()) {
+			bbsbean.setFilename("");
+			bbsbean.setFilepath("");
 		}
+			
+			this.boardService.editBbs(bbsbean);
+			response.sendRedirect("/community/cont?num="+num+"&page="+page+"&state=cont");
+		
 		
 		return null;
 	}
 
-	@RequestMapping(value = "/communitydel", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/del", method = RequestMethod.GET)
 	public String del(Model model, @RequestParam(value = "num") String num, SessionBean sessionBean) {
 		sessionBean.getMemberNum();
 		model.addAttribute("num", num);
 		return "com/com_del";
 	}
-	@RequestMapping(value = "/communitydel_ok", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/del_ok", method = RequestMethod.POST)
 	public String board_del_ok(BoardDTO b, @RequestParam("page") String page, HttpServletResponse response) throws Exception {
 		
 		response.setContentType("text/html;chaset=UTF-8");
@@ -330,8 +277,8 @@ public class CommunityController {
 		String fname=b.getFilename();
 		
 		if(fname!=null) {
-				File file=new File(saveFolder+fname);
-				file.delete();
+				//File file=new File(saveFolder+fname);
+				//file.delete();
 				
 			boardService.deleteBbs(num);
 			
@@ -340,10 +287,10 @@ public class CommunityController {
 		}
 	
 		boardService.deleteBbs(num);
-		return "redirect:/communitylist";
+		return "redirect:/community/list";
 	}
 
-	@RequestMapping(value = "/communityreply", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/reply", method = RequestMethod.GET)
 	public String reply(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			 @RequestParam(value = "num") int num, SessionBean sessionBean) {
 		model.addAttribute("bbsbean", boardService.getContent(num));
@@ -353,7 +300,7 @@ public class CommunityController {
 		return "com/com_reply";
 	}
 	/* 게시판 답변 저장 */
-	@RequestMapping(value = "/communityreply_ok", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/reply_ok", method = RequestMethod.POST)
 	public String bbs_reply_ok(BoardDTO bbsbean, @RequestParam("page") String page) throws Exception {
 		boardService.refEdit(bbsbean);
 		bbsbean.setRe_lev(bbsbean.getRe_lev()+1);
@@ -361,11 +308,11 @@ public class CommunityController {
 		
 		boardService.bbsReplyOk(bbsbean);// 저장 메서드
 		
-		return "redirect:/communitylist?page="+page;
+		return "redirect:/community/list?page="+page;
 	}
 
 	/* 자료실 검색 목록*/
-	@RequestMapping(value="/communityfind",method=RequestMethod.GET)
+	@RequestMapping(value="/community/find",method=RequestMethod.GET)
 	public ModelAndView bbs_find_ok(
 			HttpServletRequest request,
 			HttpServletResponse response,
@@ -407,6 +354,91 @@ public class CommunityController {
 		model.addObject("bbslist",bbslist);
 		
 		return model;
+	}
+	
+	@RequestMapping(value="/community/s3_upload", method=RequestMethod.POST)
+	public ModelAndView s3_upload(@RequestParam("file") MultipartFile file, ModelAndView mv) throws Exception {
+		
+		try {
+			String uploadPath = "community";
+			ResponseEntity<String> img_path = new ResponseEntity<>
+			(S3Service.uploadFile(uploadPath, file.getOriginalFilename(), file), HttpStatus.CREATED);
+			
+			String certificatePath = (String) img_path.getBody();
+
+			mv.addObject("imgPath", certificatePath);
+			mv.setViewName("service/s3_complete");
+			
+			return mv;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	//프로필 이미지
+	@SuppressWarnings("resource")
+	@ResponseBody
+	@RequestMapping("/community/displayFile")
+	public ResponseEntity<byte[]> displayFile(String fileName, String directory) throws Exception {
+		logger.info(directory);
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection conn = null;
+		logger.info("FILE NAME: " + fileName);
+
+		String inputDirectory = null;
+		if(directory.equals("community")) {
+			inputDirectory = "community";
+		}
+//		else if(directory.equals("market")) {
+//			inputDirectory = "market";
+//		}else {
+//			inputDirectory = "profile";
+//		}
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				url = new URL(s3Util.getFileURL(bucketName, inputDirectory + fileName));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream(); // 이미지를 불러옴
+			} catch (Exception e) {
+				url = new URL(s3Util.getFileURL(bucketName, "default.png"));
+				conn = (HttpURLConnection) url.openConnection();
+				in = conn.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value = "/community/deleteFile", method = RequestMethod.GET)
+	public String deleteFile(String fileName, String directory,HttpServletRequest request)throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		logger.info("delete file: " + fileName);
+		logger.info("delete foloder:"+directory);
+		String inputDirectory = null;
+		if(directory.equals("community")) {
+			inputDirectory = "community";
+		}
+
+		try {
+			s3Util.fileDelete(bucketName, inputDirectory+fileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "com/delete_confirm";
 	}
 
 }

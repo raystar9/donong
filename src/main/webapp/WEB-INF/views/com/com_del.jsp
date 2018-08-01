@@ -10,7 +10,7 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
-<form action="communitydel_ok" method="post" name="boardform">
+<form action="del_ok" method="post" name="boardform">
 <input type="hidden" name="num" value="${num }">
 <input type="hidden" name="page" value="${page}">
 <table>

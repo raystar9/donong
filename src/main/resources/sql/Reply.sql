@@ -25,4 +25,4 @@ increment by 1 start with 1
 alter table community_reply add constraint community_re foreign key (community_writer_fk) references community (community_num_pk) on delete cascade;
 
 select * from REPLY;
-select * from community_reply;
+select * from community;

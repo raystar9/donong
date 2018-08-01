@@ -67,11 +67,11 @@ $(function(){
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   <div class="container">
   <div style="text-align:center; font-size:150px; top-margin:50px;">
-   <a href ="communitylist?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
-   <a href ="communitylist?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
+   <a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
     </div>
     <table class="table table-hover">
        
@@ -98,7 +98,7 @@ $(function(){
              
              </c:if>   
              
-             <a href = "communitycont?num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>
@@ -122,7 +122,7 @@ $(function(){
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -130,7 +130,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}">${status.index}</a>
+                <a href = "list?page=${status.index}">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -138,7 +138,7 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
@@ -150,7 +150,7 @@ $(function(){
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=잡담">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=잡담">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -158,7 +158,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=잡담">${status.index}</a>
+                <a href = "list?page=${status.index}&category=잡담">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -166,7 +166,7 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=잡담">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=잡담">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
@@ -178,7 +178,7 @@ $(function(){
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=질문">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=질문">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -186,7 +186,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=질문">${status.index}</a>
+                <a href = "list?page=${status.index}&category=질문">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -194,7 +194,7 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=질문">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=질문">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
@@ -206,7 +206,7 @@ $(function(){
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=정보">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=정보">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -214,7 +214,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=정보">${status.index}</a>
+                <a href = "list?page=${status.index}&category=정보">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -222,7 +222,7 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=정보">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=정보">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
@@ -234,7 +234,7 @@ $(function(){
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=모임">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=모임">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -242,7 +242,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=모임">${status.index}</a>
+                <a href = "list?page=${status.index}&category=모임">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -250,7 +250,7 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=모임">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=모임">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
@@ -270,7 +270,7 @@ $(function(){
     </table>
     <div id="bbsfind">
      
-    <form method="get" action="communityfind" onsubmit="return find_check()" style="position:relative;left:30%">
+    <form method="get" action="find" onsubmit="return find_check()" style="position:relative;left:30%">
     
     <table>
    
@@ -296,7 +296,7 @@ $(function(){
     </div>
     
     <br>
-    <form method="get" action="./communitywrite" style="float:right;">
+    <form method="get" action="write" style="float:right;">
     <table id="table_third">
 	<c:if test="${sessionBean.nickname != null}">
 	<tr><td>

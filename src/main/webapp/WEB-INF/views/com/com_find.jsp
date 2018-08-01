@@ -12,11 +12,11 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   <div class="container">
   <div style="text-align:center; font-size:150px; top-margin:50px;">
- <a href ="communitylist?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
-   <a href ="communitylist?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+ <a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
+   <a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
       </div>
     <table class="table table-hover">
     <tr>
@@ -41,7 +41,7 @@
             
              </c:if>   
              
-             <a href = "communitycont?com_num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?com_num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>
@@ -64,7 +64,7 @@
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communityfind?page=${page-1}&find_field=${find_field}&find_name=${find_name}">&lt;</a>&nbsp;   
+             <a href = "find?page=${page-1}&find_field=${find_field}&find_name=${find_name}">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -72,7 +72,7 @@
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communityfind?page=${status.index}&find_field=${find_field}&find_name=${find_name}">${status.index}</a>
+                <a href = "find?page=${status.index}&find_field=${find_field}&find_name=${find_name}">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -80,7 +80,7 @@
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communityfind?page=${page + 1}&find_fielde=${find_field}&find_name=${find_name}">&nbsp;&gt;</a>
+             <a href = "find?page=${page + 1}&find_fielde=${find_field}&find_name=${find_name}">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
@@ -106,7 +106,7 @@
     	}
     }
     </script>
-    <form method="get" action="communityfind" onsubmit="return find_check()"  style="position:relative;left:30%">
+    <form method="get" action="find" onsubmit="return find_check()"  style="position:relative;left:30%">
     <table>
     <tr>
     <th>
@@ -129,7 +129,7 @@
     </div>
     
     <br>
-    <form method="get" action="./communitywrite" style="float:right;">
+    <form method="get" action="write" style="float:right;">
     <table id="table_third">
 	
 	<tr><td>

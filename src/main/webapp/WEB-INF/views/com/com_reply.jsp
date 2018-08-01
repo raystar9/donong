@@ -34,7 +34,7 @@ function check(){
 	<div class="container">
 		<h2 class="bbswrite_title">답변 입력폼</h2>
 
-		<form method="post" action="communityreply_ok">
+		<form method="post" action="reply_ok">
 							<input type="hidden" name="num" value="${boarddata.num}">
 
 <input type="hidden" name="re_ref" value="${boarddata.re_ref}">

@@ -77,7 +77,7 @@ function listReplyRest(num){
 		<div class="container">
 		<div class="col-sm-9" style="float:left;">
 		<c:if test="${!empty bbsbean.filename }">
-<img src="resources/upload${bbsbean.filename }">
+<img src="displayFile?fileName=${bbsbean.filepath }&directory=community" alt="이상이상" />
 </c:if>
 <br>
 		${content}
@@ -85,7 +85,7 @@ function listReplyRest(num){
 
 </div>
 <div class="col-sm-3" >
-		<input type="button" value="목록" class="btn" style="vertical-align: top,right;float:right;" onclick="location='communitylist?page=${page}'">
+		<input type="button" value="목록" class="btn" style="vertical-align: top,right;float:right;" onclick="location='list?page=${page}'">
 	</div>
 	</div>
 	<hr>
@@ -93,7 +93,7 @@ function listReplyRest(num){
 	
 	파일 다운로드
 	
-	<a href="./download.file?filename=${bbsbean.filename}&filepath=${bbsbean.filepath } ">${bbsbean.filepath }</a>
+	<a href="https://s3.ap-northeast-2.amazonaws.com/donong-s3/community${bbsbean.filepath }">${bbsbean.filename }</a>
 
 
 </c:if>
@@ -106,11 +106,11 @@ function listReplyRest(num){
 <hr>
 <div id="boardcont_menu" style="margin-left:75%">
 		<c:if test="${sessionBean.memberNum== bbsbean.member_num }">
-		<input type="button" value="수정" class="btn" onclick="location='communityedit?page=${page}&num=${num}'">
-		<input type="button" value="삭제" class="btn" onclick="location='communitydel?num=${num}'">
+		<input type="button" value="수정" class="btn" onclick="location='edit?page=${page}&num=${num}'">
+		<input type="button" value="삭제" class="btn" onclick="location='del?num=${num}'">
 		</c:if>
-		<input type="button" value="답변" class="btn" onclick="location='communityreply?page=${page}&num=${num}'">
-		<input type="button" value="목록" class="btn" onclick="location='communitylist?page=${page}'">
+		<input type="button" value="답변" class="btn" onclick="location='reply?page=${page}&num=${num}'">
+		<input type="button" value="목록" class="btn" onclick="location='list?page=${page}'">
 		</div>
 </div>
 </body>

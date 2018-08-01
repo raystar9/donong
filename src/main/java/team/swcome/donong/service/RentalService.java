@@ -34,7 +34,6 @@ public class RentalService {
 	S3Util s3Util = new S3Util();
 	String bucketName = "donong-s3";
 
-	private String saveFolder = "C:\\Users\\이다혜\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
 	/* 농지 대여글 삽입 */
 	public int insertFarm(RentalDTO r) {

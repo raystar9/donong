@@ -196,13 +196,16 @@ function search(){
 		 var content = "";
 		 if(json.length == 0){
 			 $(".viewbox").remove();
+			 $("#searchNo").remove();
 			 content =	"<div id='searchNo'>"+
 			 			"<img src='./resources/rental/upload/searchNo2.png' class='searchNo'>"+
 			 			"</div>";
+			 $("#List").append(content);
 		 }else{
 			 $(".viewbox").remove();
 			 $("#searchNo").remove();
 			 for(var i=0; i<json.length; i++){
+				 alert(json.length);
 				content = "<div class='viewbox'>" +
 						"<div id='top'>"+
 						"No.&nbsp;"+ json[i].num +
@@ -220,9 +223,9 @@ function search(){
 		 			   	"	<img src='./resources/rental/image/dollar.png' class='mark'/>&nbsp;"+ json[i].price+ "원<br>"+
 		 			   	"</div>"+
 		 			   	"</div>";
+				$("#List").append(content);
 			 }
 		 }
-		 $("#List").append(content);
 	 },
 	 error:function(){
 		 alert('Ajax 실패!');
@@ -261,7 +264,7 @@ function viewMarkers(){
 				
 				var infoContent = "<div style='font-size:10px; font-weight:bold;'>" +
 								  "<h3>< "+json[i].title+" ></h3><br>"+
-				  				  "<a href='./rental/view?num="+json[i].num+"'><img src='./resources/rental/upload"+json[i].path+"' width='120px' height='80px''></a><br><br>"+
+				  				  "<a href='./rental/view?num="+json[i].num+"'><img src='/donong/rental/displayFile?fileName="+json[i].path+"&directory=rent' width='120px' height='80px''></a><br><br>"+
 				  				  "* 번호 &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;"+json[i].num+"<br>"+
 				  				  "* 소재지 : "+json[i].title+"<br>"+
 				  				  "* 면적&nbsp;&nbsp;&nbsp;&nbsp; : "+json[i].area+"㎡<br>"+

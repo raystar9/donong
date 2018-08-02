@@ -29,6 +29,10 @@
   <select id="selectItemCount" parameterType="int" resultType="int">
   	select count(*) from goods
   </select>
+  <select id="selectItemCountByCategory" parameterType="int" resultType="int">
+  	select count(*) from goods where category = #{category}
+  </select>
+  
   <insert id="insertGoods">
   	<selectKey resultType="int" keyProperty="num" order="BEFORE">
   	  SELECT MAX(num)+1 FROM goods

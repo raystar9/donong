@@ -72,7 +72,7 @@
 				</c:when>
 			
 				<c:otherwise>
-				<li><a href="#">${status.index}</a></li>
+				<li><a href="/donong/market?category=${page.category}&page=${status.index}">${status.index}</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

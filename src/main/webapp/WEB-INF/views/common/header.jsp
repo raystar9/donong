@@ -2,9 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
+<style>
+	#logo{
+		width:120px;
+		height:80px;
+		margin-left:20px;
+		margin-top:5px;
+	}
+	.navbar-nav{
+		margin-top:20px;
+	}
+</style>
 <div class="navbar">
 <div class="navbar-header">
-<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo.jpg"></a>
+<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo2.png"></a>
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
@@ -56,12 +67,7 @@
   	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
   	
   	 <li class="dropdown">
-     <a class="dropdown-toggle">고객센터</a>
-    <ul class="dropdown-menu">
-      <li><a href="/donong/cs/main">메인</a></li>
-      <li><a href="/donong/cs/qna">QnA</a></li>
-      <li><a href="#">내가 한 질문</a></li>
-    </ul>
+     <a class="dropdown-toggle" href="/donong/cs">고객센터</a>
   </li>
   
   
@@ -92,7 +98,7 @@
           
           <h4 class="modal-title">Login Page</h4>
         </div>
-	<form class="form-horizontal" method="post" action="member_login_ok" onsubmit="return check()">
+	<form class="form-horizontal" method="post" action="/donong/member_login_ok" onsubmit="return check()">
         <div class="modal-body">
 				<div class="form-group">
 						<label class="control-label col-sm-2" for="id">아이디</label>

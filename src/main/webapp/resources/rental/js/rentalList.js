@@ -205,7 +205,6 @@ function search(){
 			 $(".viewbox").remove();
 			 $("#searchNo").remove();
 			 for(var i=0; i<json.length; i++){
-				 alert(json.length);
 				content = "<div class='viewbox'>" +
 						"<div id='top'>"+
 						"No.&nbsp;"+ json[i].num +

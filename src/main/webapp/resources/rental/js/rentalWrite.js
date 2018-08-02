@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	
-	
 	/* 파일 선택 시 행 추가 */
 	$('#file1').change(function() {
 		var inputfile=$(this).val().split('\\');

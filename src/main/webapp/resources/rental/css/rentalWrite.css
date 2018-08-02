@@ -4,7 +4,7 @@
 
 #con {
 	height:1300px;
-	margin-left: 250px;
+	margin-left: 270px;
 	text-align: center;
 }
 
@@ -17,11 +17,8 @@
 
 .writeTable {
 	margin: auto;
-	margin-top: 30px;
-	width: 600px;
-	height: 600px;
-	border-radius: 10px;
-	border: 1px solid #ccc;
+	margin-top: 10px;
+	width: 800px;
 }
 
 #map {
@@ -29,10 +26,11 @@
 	height: 300px;
 	margin: auto;
 	margin-top: 20px;
+	margin-left: 20px;
 }
 
 #autocomplete {
-	margin-top: 30px;
+	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 500px;
 	height: 35px;
@@ -49,8 +47,8 @@ table tr td:first-child {
 }
 
 .uploadIcon {
-	width: 25px;
-	height: 20px;
+	width: 20px;
+	height: 18px;
 	margin-left: 10px;
 }
 
@@ -76,12 +74,16 @@ input[type="file"] {
 table tr td:nth-child(2) {
 	padding-left: 8px;
 	text-align: left;
+	background-color:#dddddd45;
+	border-radius: 0px 10px 10px 0px;
 }
 
 table tr td:nth-child(1) {
-	background-color: #dff0d8c9;
+	border-radius: 10px 0px 0px 10px;
+	background-color: #d5e5cf7d;
 	width: 17%;
 	font-weight: bold;
+	font-size: 14px;
 }
 
 table {
@@ -93,7 +95,7 @@ table {
 }
 
 #text_td {
-	padding-left: 0px;
+	padding:10px;
 }
 
 #area {
@@ -113,8 +115,7 @@ table {
 }
 
 table tr {
-	border-bottom: 1px solid #ccc;
-	height: 6%;
+	border-bottom: 5px solid #fff;
 }
 
 #mark {
@@ -124,11 +125,15 @@ table tr {
 
 #content {
 	height: 100%;
+	width:100%;
+	border:0;
+	padding: 10px;
 }
 
+
 .button {
-	margin-left: 50px;
-    margin-top: 40px;
+	margin-left: 45px;
+    margin-top: 430px;
     margin-bottom: 150px;
     width: 600px;
 }
@@ -140,9 +145,22 @@ hr{
 	border-top:2px solid #ccc
 }
 #window{
-	border:1px solid black;
-	width:650px;
-	height:1070px;
+	border-top:2px solid #fff;
+	border-bottom:2px solid #fff;
+	width:850px;
+	height:620px;
 	margin:0 auto;
 	margin-top:30px;
+}
+#bottom_win{
+	width: 660px;
+    margin-left: 245px;
+    height: 452px;
+    margin-top: 10px;
+    border: 10px solid #eee;
+}
+#warn{
+	margin-bottom: 20px; 
+	margin-top: 10px;
+	text-align: center;
 }

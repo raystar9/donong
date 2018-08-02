@@ -19,7 +19,9 @@ select * from orders where member_num=1;
 select * from member;
 select * from goods;
 
-update goods set filepath='/donong/resources/image/tools/tool3.jpg' where num=3;
+update goods set filepath='/donong/resources/image/market/fertilizer/f7.jpg' where num=7;
+
+update goods set content='철재재질 관목용 삽입니다.' where num=53;
 
 select filepath from goods as of timestamp(systimestamp-interval '15'minute);
 

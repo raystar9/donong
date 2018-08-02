@@ -93,7 +93,7 @@
      	 		 </c:if>
      	 	</td>
      	 	<td>
-     	 	Sysdate
+     	 	${order.orderDate } 
      	 	</td>
    	   </tr>
      </c:forEach> 

@@ -60,6 +60,25 @@
     	background-color:black;
     }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
     
+    
+    
+    #h {
+  animation-duration: 15s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: -20%;
+    width: 300%;
+  }
+}
   
   </style>
 </head>
@@ -141,23 +160,23 @@
     <div class="row content">
       
    <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
     </div>
     <!-- 종자 사진 보여주는 곳 -->
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
     </div>
     </div> <!-- end row content -->
     
@@ -169,16 +188,16 @@
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+     <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
     </div>
     </div> <!-- end row content -->
       
@@ -281,8 +300,8 @@
   </div>
 </div>
 
- <footer class="container-fluid text-center navbar-fixed-bottom">
-  <p>Footer Text</p>
+ <footer class="container-fluid navbar-fixed-bottom">
+     <p><a id="h" href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
 </footer>
 
 </body>

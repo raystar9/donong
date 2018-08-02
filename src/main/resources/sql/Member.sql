@@ -15,7 +15,16 @@ registdate DATE NOT NULL
 
 drop table member;
 
+select * from orders where member_num=1;
 select * from member;
+select * from goods;
+
+update goods set filepath='/donong/resources/image/tools/tool3.jpg' where num=3;
+
+select filepath from goods as of timestamp(systimestamp-interval '15'minute);
+
+ROLLBACK;
+select * from goods;
 
 create sequence member_num
 start with 1

@@ -46,14 +46,6 @@ table tr td:first-child {
 	margin-left: 10px;
 }
 
-input[type="file"] {
-	display: none;
-}
-
-#file2_tr, #file3_tr, #file4_tr {
-	display: none;
-}
-
 #viewTitle {
 	font-weight: bold;
 	color: #6c8564;

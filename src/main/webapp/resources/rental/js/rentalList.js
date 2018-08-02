@@ -172,8 +172,11 @@ $(document).ready(function() {
 		
 	});// submit()
  		
-	
 });// ready()
+
+function up(){
+	$("searchBox").scrollTop(0);
+}
 
 /* 농지대여 글 검색 */
 function search(){

@@ -224,15 +224,9 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/edit_ok", method = RequestMethod.POST)
-	public ModelAndView board_edit_ok(Model model,BoardDTO bbsbean,MultipartFile uploadfile, @RequestParam int page, HttpServletResponse response, @RequestParam(value = "num") String num) throws Exception {
-		
-		response.setContentType("text/html;chaset=UTF-8");
-		PrintWriter out = response.getWriter();//출력 스트림 생성
-		
-		//번호를 기준으로 DB 내용을 가져옵니다.
-		BoardDTO bcont= boardService.getContent(bbsbean.getNum());
-		
-		
+	public String board_edit_ok(Model model,BoardDTO bbsbean,MultipartFile uploadfile, @RequestParam int page, HttpServletResponse response, @RequestParam(value = "num") int num) throws Exception {
+	System.out.println(uploadfile);
+	num=bbsbean.getNum();
 		if(!uploadfile.isEmpty()) {
 			String uploadPath = "community";
 			ResponseEntity<String> img_path = new ResponseEntity<>
@@ -250,13 +244,15 @@ public class CommunityController {
 		}else if(uploadfile.isEmpty()) {
 			bbsbean.setFilename("");
 			bbsbean.setFilepath("");
+			boardService.deletefile(num);
 		}
-			
+			logger.debug("upload : {}", uploadfile.getName());
 			this.boardService.editBbs(bbsbean);
-			response.sendRedirect("/community/cont?num="+num+"&page="+page+"&state=cont");
+			
+			return "redirect:/community/cont?num="+num+"&page="+page+"&state=cont";
 		
 		
-		return null;
+		
 	}
 
 	@RequestMapping(value = "/community/del", method = RequestMethod.GET)
@@ -422,7 +418,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/deleteFile", method = RequestMethod.GET)
-	public String deleteFile(String fileName, String directory,HttpServletRequest request)throws Exception {
+	public String deleteFile(Model model,@RequestParam(value = "num") int num,BoardDTO b,String fileName, String directory,HttpServletRequest request,SessionBean sessionBean)throws Exception {
 		
 		request.setCharacterEncoding("utf-8");
 		logger.info("delete file: " + fileName);
@@ -437,7 +433,7 @@ public class CommunityController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return "com/delete_confirm";
 	}
 

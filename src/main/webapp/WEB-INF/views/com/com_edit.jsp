@@ -31,8 +31,8 @@ $(document).ready(function(){
 		$("#update-form").css("display","inline");
 	});
 	$("#delete").on("click",function(e){
-		var url="/donong/community/deleteFile?fileName=${bbsbean.filepath }&directory=community";
-		window.open(url,"","width=300,height=100,left=300");
+		var url="/donong/community/deleteFile?fileName=${bbsbean.filepath }&directory=community&num=${bbsbean.num}";
+		window.open(url,"","width=300,height=150,left=300");
 	});
 });
 
@@ -71,19 +71,17 @@ $(document).ready(function(){
 				<td>
 				<c:if test="${bbsbean.filename == null}">
 					<label for="upfile"></label>
-					<input type="file" name="file" class="form-control" />
+					<input type="file" name="uploadfile" class="form-control" />
 					<span id="filevalue"></span>
 				</c:if>
-					<c:if test="${bbsbean.filename != null}">
-					<a  id="update" name="update" class="btn btn-primary">${bbsbean.filename } &nbsp; 이미지 수정하기</a>
-					<a  id="delete" name="delete" class="btn btn-danger">${bbsbean.filename } &nbsp; 이미지 삭제하기</a>
+				<c:if test="${bbsbean.filename != null}">
+					<div id="update-form" >
+					<label for="upfile"></label>
+						<input type="file" name="uploadfile" class="form-control" style="width:88%;float:left;" />
+						<a  style="float:left;" id="delete" name="delete" class="btn btn-danger">삭제</a>
+						<span id="filevalue"></span>
+					</div>
 				</c:if>
-				<div id="update-form" style="display:none;">
-				<label for="upfile"></label>
-					<input type="file" name="file" class="form-control" />
-					<span id="filevalue"></span>
-				</div>
-				
 				
 				</td>
 				</tr>

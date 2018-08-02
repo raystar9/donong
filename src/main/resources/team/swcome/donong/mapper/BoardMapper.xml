@@ -8,6 +8,8 @@
 		delete from community
 		where num=#{num}
 	</delete>
+	
+	
   <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
   <select id="selectAll" parameterType="Integer" resultType="BoardDTO">
 	<![CDATA[
@@ -123,12 +125,16 @@
 		update community
 		set
 		subject=#{subject}, content=#{content}
-		<if test="filename==''">, filename=#{filename, jdbcType=VARCHAR}, filepath=#{filepath, jdbcType=VARCHAR}
+		<if test="filename!=''">, filename=#{filename, jdbcType=VARCHAR}, filepath=#{filepath, jdbcType=VARCHAR}
 		</if>
 		where num=#{num}
 	</update>
-	
-	
+	<update id="deleteFile" parameterType="int">
+		update community
+		set
+		filename=null, filepath=null
+		where num=#{num}
+	</update>
 	
 	<!-- 답변글 레벨 증가 -->
 	<update id="refEdit" parameterType="BoardDTO">

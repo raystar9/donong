@@ -63,7 +63,7 @@
     
     
     #h {
-  animation-duration: 15s;
+  animation-duration: 30s;
   animation-name: slidein;
   animation-iteration-count: infinite;
 }
@@ -75,7 +75,7 @@
   }
 
   to {
-    margin-left: -20%;
+    margin-left: -40%;
     width: 300%;
   }
 }
@@ -159,46 +159,46 @@
   <div id="home" class="tab-pane fade in active">
     <div class="row content">
       
-   <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
-    </div>
     <!-- 종자 사진 보여주는 곳 -->
-     <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+   <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s1.jpg"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s2.jpg"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s3.jpg"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s4.jpg"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s5.jpg"></a></p>
+    </div>
+     <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s6.jpg"></a></p>
     </div>
     </div> <!-- end row content -->
     
   <div class="row content">
    <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
+      <p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s7.jpg"></a></p>
     </div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
+		<p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s8.jpg"></a></p>    
+	</div>
      <div class="col-sm-2 text-center"> 
-       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
+		<p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s9.jpg"></a></p>    
+	</div>
      <div class="col-sm-2 text-center"> 
-       <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
+		<p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s10.jpg"></a></p>    
+	</div>
      <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
+		<p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s11.jpg"></a></p>    
+	</div>
      <div class="col-sm-2 text-center"> 
-     <p><a href="#"><img id="sample1" src="resources/main/image/sample2.png"></a></p>
-    </div>
+		<p><a href="#"><img id="sample1" src="resources/main/image/market/seed/s12.jpg"></a></p>   
+ 	</div>
     </div> <!-- end row content -->
       
       
@@ -207,10 +207,10 @@
 
       <div class="row content">
       
+    <!-- 비료 사진 보여주는 곳 -->
    <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
     </div>
-    <!-- 비료 사진 보여주는 곳 -->
      <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/sample1.png"></a></p>
     </div>
@@ -253,11 +253,10 @@
     <div id="menu2" class="tab-pane fade">
       <div class="row content">
       
-   <div class="col-sm-2 text-center"> 
-      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
-  
-    </div>
     <!-- 도구 사진 보여주는 곳 -->
+   <div class="col-sm-2 text-center"> 
+      <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>  
+    </div>
      <div class="col-sm-2 text-center"> 
       <p><a href="#"><img id="sample1" src="resources/main/image/logo.jpg"></a></p>
     </div>
@@ -301,8 +300,8 @@
 </div>
 
  <footer class="container-fluid navbar-fixed-bottom">
-     <p><a id="h" href="#"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
-</footer>
+     <p><a id="h" href="member_join"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+ </footer>
 
 </body>
 </html>

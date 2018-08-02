@@ -1,7 +1,9 @@
 package team.swcome.donong.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -110,8 +112,12 @@ public class MainController {
 		}
 		
 
-		int num = sessionBean.getMemberNum();
-		orderlist= accountService.selectAllOrdersByMemberNum(num);
+		
+		Map m = new HashMap();
+		m.put("page", page);
+		m.put("limit", limit);
+		
+		orderlist= accountService.selectPagingOrders(m);
 		int listcount = orderlist.size(); //쿼리문 select count(*) from order 넣어야 할거
 		
 		int maxpage = (listcount + limit - 1) / limit;
@@ -125,10 +131,6 @@ public class MainController {
 
 		if (endpage < page)
 			page = endpage;
-		
-		
-
-		
 				
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);

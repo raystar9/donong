@@ -1,6 +1,7 @@
 package team.swcome.donong.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import team.swcome.donong.dto.GoodsOrdersDTO;
 import team.swcome.donong.dto.OrderItemsDTO;
@@ -8,7 +9,7 @@ import team.swcome.donong.dto.OrdersDTO;
 
 public interface OrdersMapper {
 
-	public List<OrdersDTO> selectAllOrdersByMemberNum(int memberNum);
+	public List<OrdersDTO> selectPagingOrders(Map m);
 	public List<OrdersDTO> selectCurrentOrdersByMemberNum(int memberNum);
 	public List<OrderItemsDTO> selectWaitingOrders(int startItem, int endItem);
 	public List<OrderItemsDTO> selectPreparingOrders(int startItem, int endItem);

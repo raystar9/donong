@@ -1,6 +1,7 @@
 package team.swcome.donong.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,8 +77,10 @@ public class AccountService {
 		return result;
 	}
 
-	public List<OrdersDTO> selectAllOrdersByMemberNum(int num) {
-		return ordersMapper.selectAllOrdersByMemberNum(num);
+
+	public List<OrdersDTO> selectPagingOrders(Map m) {
+
+		return ordersMapper.selectPagingOrders(m);
 	}
 	
 }

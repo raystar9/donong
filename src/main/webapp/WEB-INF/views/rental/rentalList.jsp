@@ -14,34 +14,31 @@
 <div class="container" id="con">
 <div id="searchBox">
 	<span>
-		<img src= './resources/rental/image/search.png' id="searchLogo">
+		<img src= './resources/rental/image/search3.png' id="searchLogo">
 	</span>
 	<div id="box">
-		<table border="1" id="searchTable" >
+		<table id="searchTable" border="1">
 			<tr>
-				<td rowspan="3">토지 검색</td>
-				<td>번호</td>
+				<td style="width:25%"><strong>번호</strong></td>
 				<td colspan="2">
-					<input type="text" name="num"  id="num">
+					<div style="width:150px;"><input type="text" name="num" id="num" class="form-control" style="height:25px"></div>
 				</td>
 				<td rowspan="3">
-					<input type="button" value="검색" id="searchBtn" onclick="search();"> 
+					<input type="button" value="검색" id="searchBtn" onclick="search();" class="btn-default"> 
 				</td>
 			</tr>
 			<tr>
-				<td>지역</td>
+				<td><strong>지역</strong></td>
 				<td> 
 					<select name="sido" id="sido">
 					</select>
-				</td>
-				<td>
 					<select name="sigungu" id="sigungu">
 						<option value='0'>시,군,구 </option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td>임대료</td>
+				<td><strong>임대료</strong></td>
 				<td colspan="2">
 					<select name="price" id="price">
 						<option value="0">선택</option>
@@ -66,18 +63,18 @@
 	<c:forEach var="r" items="${list}">
 		<div class='viewbox'>
 			<div id='top'>
-				No.&nbsp;${r.num }
+				<strong>No.&nbsp;${r.num }</strong>
 			</div>
-			<div class='row'>
+			<div class='row2'>
 				<a href="./rental/view?num=${r.num }"><img src="/donong/rental/displayFile?fileName=${r.path }&directory=rent" class='img'></a>
 			</div>
-			<div class='row'>
+			<div class='row2'>
 				<img src="./resources/rental/image/flag.png" class='mark'/>&nbsp;${r.title }<br>
 			</div>
-			<div class='row'>
+			<div class='row2'>
 				<img src="./resources/rental/image/area3.png" class='mark'/>&nbsp;${r.area }㎡<br>
 			</div>
-			<div class='row'>
+			<div class='row2'>
 				<img src="./resources/rental/image/dollar.png" class='mark'/>&nbsp; ${r.price }원<br>
 			</div>
 		</div>

@@ -26,7 +26,7 @@
 	}
 	</style>
 	<script>
-		
+	
 	function showDefaultTable() {
 		$.ajax({
 			url: "/donong/admin/market/waiting",
@@ -36,11 +36,14 @@
 				$(".market-nav>li").removeClass("active");
 				$("#waiting").addClass("active");
 				$(".market-submit").show().val("입금 확인");
+				$(".detail-popover").popover();
 				$(".market-form").off().submit(e=>{
 					e.preventDefault();
+					var $checkedBoxes = $(".market-form input:checkbox:checked");
+					if($checkedBoxes.length != 0) {
 					$.ajax({
 						url: "/donong/admin/market/preparing",
-						method: "post",
+						method: "put",
 						data: $(".market-form").serialize(),
 						success: ()=>{
 							alert("전송 완료");
@@ -50,6 +53,9 @@
 							alert("오류가 발생했습니다.");
 						}
 					});
+					} else {
+						alert("선택된 항목이 없습니다.");
+					}
 				});
 			},
 			error: ()=>{
@@ -73,27 +79,35 @@
 					$(".market-form").off().submit(e=>{
 						e.preventDefault();
 						var $checkedBoxes = $(".market-form input:checkbox:checked");
-						var queryString = "";
-						for(let i = 0; i < $checkedBoxes.length; i++) {
-							if(i != 0) {
-								queryString += "&"
+						if($checkedBoxes.length != 0) {
+							var queryString = "";
+							for(let i = 0; i < $checkedBoxes.length; i++) {
+								var waybillId = "waybill-"+$checkedBoxes.eq(i).val();
+								if($('#'+waybillId).val().length != 10) {
+									alert("운송장 번호는 10자리의 숫자입니다.");
+									return false;
+								}
+								if(i != 0) {
+									queryString += "&"
+								}
+								queryString += "pay-check="+$checkedBoxes.eq(i).val() + "&";
+								queryString += waybillId + "=" + $('#'+waybillId).val();
 							}
-							queryString += "pay-check="+$checkedBoxes.eq(i).val() + "&";
-							var waybillId = "waybill-"+$checkedBoxes.eq(i).val();
-							queryString += waybillId + "=" + $('#'+waybillId).val();
+							$.ajax({
+								url: "/donong/admin/market/sending",
+								method: "put",
+								data: queryString,
+								success: ()=>{
+									alert("전송 완료");
+									showPrepareTable();
+								},
+								error: ()=>{
+									alert("오류가 발생했습니다.");
+								}
+							});
+						} else {
+							alert("선택된 항목이 없습니다.");
 						}
-						$.ajax({
-							url: "/donong/admin/market/sending",
-							method: "put",
-							data: queryString,
-							success: ()=>{
-								alert("전송 완료");
-								showPrepareTable();
-							},
-							error: ()=>{
-								alert("오류가 발생했습니다.");
-							}
-						});
 					});
 				},
 				error: ()=>{
@@ -113,18 +127,23 @@
 					$(".market-submit").show().val("수취 확인");
 					$(".market-form").off().submit(e=>{
 						e.preventDefault();
-						$.ajax({
-							url: "/donong/admin/market/arrived",
-							method: "put",
-							data: $(".market-form").serialize(),
-							success: ()=>{
-								alert("전송 완료");
-								showSendTable();
-							},
-							error: ()=>{
-								alert("오류가 발생했습니다.");
-							}
-						});
+						var $checkedBoxes = $(".market-form input:checkbox:checked");
+						if($checkedBoxes.length != 0) {
+							$.ajax({
+								url: "/donong/admin/market/arrived",
+								method: "put",
+								data: $(".market-form").serialize(),
+								success: ()=>{
+									alert("전송 완료");
+									showSendTable();
+								},
+								error: ()=>{
+									alert("오류가 발생했습니다.");
+								}
+							});
+						} else {
+							alert("선택된 항목이 없습니다.");
+						}
 					});
 				},
 				error: ()=>{

@@ -18,6 +18,20 @@
 		.input-phone{
 			width: 80px;
 		}
+		.item-info {
+			height: auto;
+		}
+		.item-title {
+			font-size: 22pt;
+			font-weight: bold;
+		}
+		.item-count {
+			font-size: 18pt;
+		}
+		.item-price {
+			font-size: 20pt;
+			vertical-align: bottom;
+		}
 	</style>
 	<script>
 		$().ready(()=>{
@@ -48,8 +62,39 @@
 <div class="container">
 
 	<h1>결제 페이지</h1>
+	<form class="order-form" action="/donong/market/order/process" method="post">
+	<div class="container-fluid">
+	<div class="col-sm-6 form-group">
+	<fieldset>
+	<legend>배송정보</legend>
+		<div class="form-group">
+			<label for="name">주문인</label><input class="form-control" type="text" name="name" id="name" value="${member.realname }"/>
+		</div>
+		<div class="form-group">
+			<label for="phone">연락처</label>
+			<input class="form-control" type="text" name="phone" id="phone" value="${member.phone }" />
+		</div>
+		<div class="form-group">
+			<label for="address">주소</label><input class="form-control" type="text" name="address" id="address" value="${member.address }" />
+			<input class="form-control" type="text" name="addressdetail" id="addressdetail" value="${member.addressdetail }" />
+		</div>
+		<div class="form-group">
+			<label for="comments">코멘트</label><input class="form-control" type="text" name="comments" id="comments" />
+		</div>
+		
+		
+		<c:if test="${!isCart }">
+			<input type="hidden" name="goodsNum" value="${item.num}"/>
+			<input type="hidden" name="goodsQuantity" value="${item.quantity}"/>
+		</c:if>
+	</fieldset>
+	
+	</div>
+	<div class="col-sm-6 item-info">
+	<fieldset>
+	<legend>구매 상품 정보</legend>
 	<div>
-	<p>${repItemTitle }</p>
+	<span class="item-title">${repItemTitle }</span>
 	<c:if test="${itemCount == 1 }">
 	
 		<p>단가 : ${item.price }원</p>
@@ -57,30 +102,16 @@
 		
 	</c:if>
 	<c:if test="${itemCount > 1 }">
-	 	외 ${itemCount -1 }개 제품
+	 	<span class="item-count">외 ${itemCount -1 }개 제품</span>
 	 </c:if>
-	<p>총 가격 : ${totalPrice }원</p>
+	<p class="item-price text-right">총 가격 : ${totalPrice }원</p>
 	</div>
-	
-	<form class="order-form" action="/donong/market/order/process" method="post">
-	<fieldset>
-	<legend>배송정보</legend>
-			<label for="name">주문인</label><input class="form-control" type="text" name="name" id="name" value="${member.realname }"/>
-			<label for="phone">연락처</label>
-			<div class="form-group row">
-				<div class="col-sm-2">
-				<input class="form-control" type="text" name="phone" id="phone" value="${member.phone }" />
-				</div>
-			</div>
-			<label for="address">주소</label><input class="form-control" type="text" name="address" id="address" value="${member.address }" />
-			<input class="form-control" type="text" name="addressdetail" id="addressdetail" value="${member.addressdetail }" />
-			<label for="comments">코멘트</label><input class="form-control" type="text" name="comments" id="comments" />
-		<input class="btn btn-default" type="submit" value="주문하기" />
-		<c:if test="${!isCart }">
-			<input type="hidden" name="goodsNum" value="${item.num}"/>
-			<input type="hidden" name="goodsQuantity" value="${item.quantity}"/>
-		</c:if>
 	</fieldset>
+	</div>
+	</div>
+	<div class="container-fluid">
+		<input class="btn btn-default" type="submit" value="주문하기" />
+	</div>
 	</form>
 </div>
 </body>

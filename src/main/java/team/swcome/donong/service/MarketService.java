@@ -40,7 +40,7 @@ public class MarketService {
 	
 	public List<GoodsDTO> getGoodsList(int page, String category){
 		int startItem = (page-1) * itemsPerPage;
-		int endItem = (page-1) * itemsPerPage + 9;
+		int endItem = (page) * itemsPerPage ;
 		int categoryNum;
 		switch(category) {
 		case "seed":

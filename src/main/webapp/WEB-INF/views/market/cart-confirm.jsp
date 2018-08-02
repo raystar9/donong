@@ -7,13 +7,38 @@
 	<meta charset="utf-8">
 	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<title>Home</title>
+	<style>
+		.main{
+			margin-top:130px;
+		}
+		.btn-container {		
+		}
+		.btn-group {
+			display : block;
+			margin: 0 auto;
+			margin-top: 15px;
+			width: 400px;
+			height: 50px;
+		}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
+	<div class="row main text-center">
 	해당 물건을 장바구니에 담았습니다.
-	<input type="button" class="btn btn-default" value="돌아가기" onclick="history.back()" />
-	<input type="button" class="btn btn-default" value="장바구니로" onclick="location.href='/donong/market/cart'" />
+	</div>
+	
+	<div class="container btn-container">
+	<div class="btn-group">
+	<div class="col-sm-6">
+	<input type="button" class="form-control btn btn-default btn-width" value="돌아가기" onclick="history.back()" />
+	</div>
+	<div class="col-sm-6">
+	<input type="button" class="form-control btn btn-default btn-width" value="장바구니로" onclick="location.href='/donong/market/cart'" />
+	</div>
+	</div>
+	</div>
 </div>
 </body>
 </html>

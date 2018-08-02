@@ -3,8 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
   <typeAliases>
     <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
+    <typeAlias alias="GoodsDTO" type="team.swcome.donong.dto.GoodsDTO" />
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
+    <typeAlias alias="OrdersDTO" type="team.swcome.donong.dto.OrdersDTO" />
+    <typeAlias alias="GoodsOrdersDTO" type="team.swcome.donong.dto.GoodsOrdersDTO" />
+    <typeAlias alias="OrderItemsDTO" type="team.swcome.donong.dto.OrderItemsDTO" />
   </typeAliases>
 </configuration>

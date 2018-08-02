@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.OrdersMapper">
+	<resultMap id="OrdersResult" type="OrdersDTO">
+	  	  <result column="member_num" property="memberNum"/>
+	</resultMap>
+	
+	<select id="selectAllOrdersByMemberNum" resultMap="OrdersResult">
+		SELECT * 
+		FROM ORDERS
+		WHERE member_num = #{memberNum}
+	</select>
+	
+	<select id="selectWaitingOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, orderername, orderdate
+		FROM (
+		    SELECT rownum as rnum, ordernum, orderername, orderdate
+				FROM(
+					SELECT orders.num as ordernum, realname AS orderername, orderdate
+					FROM member, orders
+					WHERE member_num = member.num AND status = 'npay'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectPreparingOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, receivername, address, comments
+		FROM (
+		    SELECT rownum as rnum, ordernum, receivername, address, comments
+				FROM(
+					SELECT num as ordernum, name AS receivername, address, comments
+					FROM orders
+					WHERE status = 'prep'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectSendingOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, receivername, waybill
+		FROM (
+		    SELECT rownum as rnum, ordernum, receivername, waybill
+				FROM(
+					SELECT num as ordernum, name AS receivername, waybill
+					FROM orders
+					WHERE status = 'send'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectArrivedOrders" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, receivername, waybill
+		FROM (
+		    SELECT rownum as rnum, ordernum, receivername, waybill
+				FROM(
+					SELECT num as ordernum, name AS receivername, waybill
+					FROM orders
+					WHERE status = 'arrv'
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
+	<select id="selectCurrentOrdersByMemberNum" resultMap="OrdersResult">
+		SELECT * 
+		FROM ORDERS
+		WHERE member_num = #{memberNum} AND status in ('npay', 'prep', 'delv')
+	</select>
+	
+	<insert id="insertOrder" parameterType="OrdersDTO" useGeneratedKeys="true" keyProperty="num">
+	
+	  <selectKey resultType="int" keyProperty="num" order="BEFORE">
+	  	SELECT order_num_seq.nextval FROM dual
+	  </selectKey>
+		INSERT INTO ORDERS
+		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, #{comments}, null, 'npay')
+	</insert>
+	<insert id="insertOrderGoods" parameterType="GoodsOrdersDTO">
+		<selectKey resultType="int" keyProperty="num" order="BEFORE">
+			SELECT ordersgoods_num_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO goodsorders
+			VALUES(#{num}, #{orderNum}, #{goodsNum}, #{quantity})
+	</insert>
+	<update id="updateOrder" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET member_num = #{memberNum} AND name = #{name} AND address = #{address} AND
+			phone = #{phone} AND comments = #{comments} AND status = #{status}
+		WHERE num = #{num}
+	</update>
+	
+	<update id="updateStatusToPrep" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'prep'
+		WHERE 
+		<foreach collection="list" item="order" separator="OR">
+			num = #{order.num}
+		</foreach>
+	</update>
+	
+	<update id="updateStatusToSend" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'send', waybill = #{waybill}
+		WHERE 
+		num = #{num}
+	</update>
+	
+	<update id="updateStatusToArrv" parameterType="OrdersDTO">
+		UPDATE ORDERS 
+		SET status = 'arrv'
+		WHERE 
+		<foreach collection="list" item="order" separator="OR">
+			num = #{order.num}
+		</foreach>
+	</update>
+	
+	<update id="updateStatusAndWaybill">
+		UPDATE ORDERS 
+		SET status = #{status} AND waybill = #{waybill}
+		WHERE num = #{num}
+	</update>
+	
+	<delete id="deleteOrderByNum">
+		DELETE 
+		FROM orders
+		WHERE member_num = #{memberNum}
+	</delete>
+</mapper>

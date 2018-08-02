@@ -16,6 +16,20 @@
 		  -webkit-appearance: none; 
 		  margin: 0; 
 		}
+		.item-thumbnail {
+			display: flex;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin-bottom: 15px;
+			padding: 10px;
+			
+		}
+		.cart-body {
+			margin-left: 25px;
+		}
+		.cart-button {
+			margin: auto;
+		}
 	</style>
 </head>
 <body>

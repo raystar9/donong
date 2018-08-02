@@ -86,19 +86,14 @@
 	<insert id="insertOrder" parameterType="OrdersDTO" useGeneratedKeys="true" keyProperty="num">
 	
 	  <selectKey resultType="int" keyProperty="num" order="BEFORE">
-	  	SELECT MAX(num)+1 FROM ORDERS
+	  	SELECT order_num_seq.nextval FROM dual
 	  </selectKey>
 		INSERT INTO ORDERS
-		<if test="comments != ''">
 		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, #{comments}, null, 'npay')
-		</if>
-		<if test="comments == ''">
-		VALUES(#{num}, #{memberNum}, #{name}, sysdate, #{address}, #{phone}, ' ', null, 'npay')
-		</if>
 	</insert>
 	<insert id="insertOrderGoods" parameterType="GoodsOrdersDTO">
 		<selectKey resultType="int" keyProperty="num" order="BEFORE">
-			SELECT MAX(num)+1 FROM goodsorders
+			SELECT ordersgoods_num_seq.nextval FROM dual
 		</selectKey>
 			INSERT INTO goodsorders
 			VALUES(#{num}, #{orderNum}, #{goodsNum}, #{quantity})

@@ -5,7 +5,14 @@ public class MarketPaginationDTO {
 	private int start;
 	private int end;
 	private int current;
+	private String category;
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public int getCurrent() {
 		return current;
 	}

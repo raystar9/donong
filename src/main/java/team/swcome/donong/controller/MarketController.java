@@ -46,7 +46,7 @@ public class MarketController {
 		marketService.getOrderListByMemberNum(sessionBean.getMemberNum());
 		
 		model.addAttribute("items", marketService.getGoodsList(page, category) );
-		model.addAttribute("page", marketService.getPaginationInfo(page));
+		model.addAttribute("page", marketService.getPaginationInfo(page, category));
 		return "market/list";
 	}
 	

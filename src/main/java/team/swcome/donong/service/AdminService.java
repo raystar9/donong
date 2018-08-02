@@ -30,19 +30,19 @@ public class AdminService {
 	private static final String SENDING = "sending";
 	private static final String ARRIVED = "arrived";
 
-	public List<OrderItemsDTO> getWaitingItems(int page) {
+	public List<OrderItemsDTO> getWaitingOrders(int page) {
 		return getOrders(page, "waiting");
 	}
 
-	public List<OrderItemsDTO> getPreparingItems(int page) {
+	public List<OrderItemsDTO> getPreparingOrders(int page) {
 		return getOrders(page, "preparing");
 	}
 	
-	public List<OrderItemsDTO> getSendingItems(int page) {
+	public List<OrderItemsDTO> getSendingOrders(int page) {
 		return getOrders(page, "sending");
 	}
 	
-	public List<OrderItemsDTO> getArrivedItems(int page) {
+	public List<OrderItemsDTO> getArrivedOrders(int page) {
 		return getOrders(page, "arrived");
 	}
 

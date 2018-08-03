@@ -34,7 +34,6 @@ public class RentalService {
 	S3Util s3Util = new S3Util();
 	String bucketName = "donong-s3";
 
-	private String saveFolder = "C:\\Users\\이다혜\\Desktop\\final\\donong\\src\\main\\webapp\\resources\\rental\\upload";
 
 	/* 농지 대여글 삽입 */
 	public int insertFarm(RentalDTO r) {
@@ -199,35 +198,11 @@ public class RentalService {
 			inputDirectory = "rent";
 		}
 		
-		//첫 번째 이미지 삭제
 		s3Util.fileDelete(bucketName, inputDirectory+fpath[0]);
-		
-		//두 번째 이미지 삭제
-		if(!fpath[1].isEmpty()) {
-			inputDirectory = null;
-			if(directory.equals("rent")) {
-				inputDirectory = "rent";
-			}
-			s3Util.fileDelete(bucketName, inputDirectory+fpath[1]);
-		}
-		
-		//세 번째 이미지 삭제
-		if(!fpath[2].isEmpty()) {
-			inputDirectory = null;
-			if(directory.equals("rent")) {
-				inputDirectory = "rent";
-			}
-			s3Util.fileDelete(bucketName, inputDirectory+fpath[2]);
-		}
-		
-		//네 번째 이미지 삭제
-		if(!fpath[3].isEmpty()) {
-			inputDirectory = null;
-			if(directory.equals("rent")) {
-				inputDirectory = "rent";
-			}
-			s3Util.fileDelete(bucketName, inputDirectory+fpath[3]);
-		}
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[1]);
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[2]);
+		s3Util.fileDelete(bucketName, inputDirectory+fpath[3]);
+			
 		rentalMapper.deleteFiles(m);
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	};

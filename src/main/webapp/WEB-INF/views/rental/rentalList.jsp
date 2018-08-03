@@ -5,102 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
+<link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalList.css">
 <script src="/donong/resources/rental/js/rentalList.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
-<style>
-	*{
-		box-sizing:border-box;
-	}
-	#btnwrite{
-		float:right;
-	}
-	#btn{
-		width:1000px;
-		margin-top:5px;
-		margin-bottom:5px;
-		height:32px;
-	}
-	#searchBox{
-		border:1px solid black;
-		width: 1000px;
-		height: 150px;
-		margin-bottom: 10px;
-		margin-top: 100px;
-	}
-	#List{
-		border:1px solid black;
-		width: 1000px;
-		height: 700px;
-		margin-bottom: 70px;
-		padding: 10px;
-		text-align:center;
-	}
-	#searchTable{
-		width: 600px;
-		margin: 0 auto;
-		margin-top: 30px;
-	}
-	.list_table{
-		text-align: center;
-		width: 140px;
-		height: 200px;
-		display: inline-block;
-		border: 1px solid #444444
-		
-	}
-	#main{
-		margin-left: 300px;
-	}
-	.viewbox{
-		text-align: center;
-		border: 1px solid black;
-		width: 180px;
-		height: 225px;
-		font-size: 13px;
-		margin-left: 10px;
-		margin-right: 10px;
-		margin-top:10px;
-		display: inline-block;
-	}
-	.img{
-		margin-bottom: 10px;
-		width: 100%;
-		border-bottom: 1px solid black;
-		height:120px;
-	}
-	.row{
-		margin-bottom: 3px;
-	}
-	#map {
-		width: 1000px;
-		height: 300px;
-		margin: auto;
-		margin-top : 20px;
-		margin-bottom : 20px;
-		display:inline-block;
-	}
-	#top{
-		height:20px;
-		background:#277623;
-		color:white;
-		width:100%;
-	
-	}
-	.mark{
-		width:13px;
-		height:13px;
-	}
-	.searchNo{
-		width:500px;
-		height:400px;
-		margin-top:100px;
-	}
-</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<div id="main">
+<div class="container" id="con">
 <div id="searchBox">
+	<span>
+		<img src= './resources/rental/image/search.png' id="searchLogo">
+	</span>
+	<div id="box">
 		<table border="1" id="searchTable" >
 			<tr>
 				<td rowspan="3">토지 검색</td>
@@ -138,14 +54,15 @@
 				</td>
 			</tr>
 		</table>
+	</div>
 </div>
 
 <div id="map"></div>
 <div id="btn">
-	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite">
+	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite" class="btn btn-default">
 </div>
 
-<div id="List" style="overflow-y:scroll;">
+<div id="List">
 	<c:forEach var="r" items="${list}">
 		<div class='viewbox'>
 			<div id='top'>

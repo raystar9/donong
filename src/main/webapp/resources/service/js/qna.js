@@ -3,9 +3,9 @@ $(document).ready(function () {
 	$(document).on('click', '#pagingTd a', function () {
 		var page;
 		                          
-		if ($(this).html() == '이전') {
+		if ($(this).html() == '«') {
 			page = $('#currPage').html() * 1 - 1;
-		} else if ($(this).html() == '다음') {
+		} else if ($(this).html() == '»') {
 			page = $('#currPage').html() * 1 + 1;
 		} else {
 			page = $(this).html();

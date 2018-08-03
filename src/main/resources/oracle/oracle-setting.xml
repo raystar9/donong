@@ -22,5 +22,6 @@
     <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
     <typeAlias alias="GoodsOrdersDTO" type="team.swcome.donong.dto.GoodsOrdersDTO" />
     <typeAlias alias="OrderItemsDTO" type="team.swcome.donong.dto.OrderItemsDTO" />
+    <typeAlias alias="ReplyDTO" type="team.swcome.donong.dto.ReplyDTO" />
   </typeAliases>
 </configuration>

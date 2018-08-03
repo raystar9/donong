@@ -31,5 +31,5 @@
 	<aop:aspectj-autoproxy/>
 
 	<mybatis-spring:scan base-package="team.swcome.donong.mapper"/>
-
+	
 </beans:beans>

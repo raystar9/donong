@@ -4,13 +4,11 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.multipart.MultipartFile;
 
 @Resource
 public class BoardDTO {
 	private int num;
 	private int member_num;
-	private String password;
 	private String writer;
 	private String subject;
 	private String category;
@@ -56,14 +54,6 @@ public class BoardDTO {
 
 	public void setMember_num(int member_num) {
 		this.member_num = member_num;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getWriter() {

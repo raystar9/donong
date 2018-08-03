@@ -14,7 +14,8 @@
 		<td>${orderItem.receiverName}</td>
 		<td>${orderItem.orderName}</td>
 		<td>${orderItem.waybill}</td>
-		<td><input class="btn btn-default" type="button" value="확인" /></td>
+		<td><input class="btn btn-default" type="button" value="확인" 
+		onclick="window.open('http://www.ilogen.com/d2d/delivery/invoice_search_popup.jsp?viewType=type1&invoiceNum=${orderItem.waybill}');"/></td>
 	</tr>
 	</c:forEach>
 </tbody>

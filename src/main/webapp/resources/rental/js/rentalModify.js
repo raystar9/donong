@@ -142,6 +142,15 @@ $(document).ready(function() {
 	
 });//ready()
 
+function can_click(){
+	var result = confirm("게시글 수정을 취소하시겠습니까?");
+	if(result == true){
+		history.go(-1);
+	}else{
+		return false;
+	}
+}
+
 var marker;
 var pins = [];
 

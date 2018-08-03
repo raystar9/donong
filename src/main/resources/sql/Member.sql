@@ -13,23 +13,22 @@ phone VARCHAR2(15) NOT NULL,
 registdate DATE NOT NULL
 );
 
-drop table member
 
-select * from member
+select * from goods;
 
-select password from member where id='xxx' and realname='xxxxx'
+insert into goods values(41, '방울토마토', 6000, 1, '제품 구성 - 종이케이스, 양철화분, 흙+분변토, 설명서, 씨앗','/donong/resource/image/market/seed/s17.jpg');
+
+ commit;
+drop table member;
+
+select * from member;
 
 create sequence member_num
 start with 1
 increment by 1
-nomaxvalue
+nomaxvalue;
 
-insert into member values(member_num.nextval, 'aaa', 'aaa', 
-  								'aaa', 'aaa', 'aaa', 'aaa',
-  								'aaa', sysdate
-  	)
-  	select num,password, nickname from member where id='xxx' AND password='xxx'
-  
-  	
-  	
-  	select id from member where id='xxx'
+drop sequence member_num;
+
+
+

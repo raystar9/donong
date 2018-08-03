@@ -2,14 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
-<div class="navbar">
+<style>
+	#logo{
+		width:120px;
+		height:80px;
+		margin-left:20px;
+		margin-top:5px;
+	}
+</style>
+<div id="main-navbar" class="navbar main-navbar">
+<div class="container-fluid">
 <div class="navbar-header">
-<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo.jpg"></a>
+<a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo2.png"></a>
 </div>
-<div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
 
-   <li class="dropdown">
+   <li class="dropdown main-menu">
     <a class="dropdown-toggle">시작하기</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/info">농사계획</a></li>
@@ -20,7 +28,7 @@
      </ul>
   </li>
   
-     <li class="dropdown">
+     <li class="dropdown main-menu">
     <a class="dropdown-toggle">농사짓기</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/info_farming_1">밭만들기</a></li>
@@ -35,7 +43,7 @@
   </li>
   
   
-  <li class="dropdown">
+  <li class="dropdown main-menu">
    <a class="dropdown-toggle">마을회관</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/communitylist">게시판</a><li>
@@ -44,8 +52,8 @@
     </ul>
   </li>
   
-    <li class="dropdown">
-     <a class="dropdown-toggle">준비하기(구매)</a>
+    <li class="dropdown main-menu">
+     <a class="dropdown-toggle">자재구매</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/market?category=seed">종자</a></li>
       <li><a href="/donong/market?category=fertilizer">비료</a></li>
@@ -53,16 +61,10 @@
     </ul>
   </li>
   	
-  	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
+  	<li class="dropdown main-menu"><a href='/donong/rental'>농지대여</a></li>
   	
-  	 <li class="dropdown">
-     <a class="dropdown-toggle">고객센터</a>
-    <ul class="dropdown-menu">
-      <li><a href="/donong/cs/main">메인</a></li>
-      <li><a href="/donong/cs/qna">QnA</a></li>
-      <li><a href="">내가 한 질문</a></li>
-
-    </ul>
+  	 <li class="dropdown main-menu">
+     <a class="dropdown-toggle" href="/donong/cs">고객센터</a>
   </li>
   
   
@@ -93,7 +95,7 @@
           
           <h4 class="modal-title">Login Page</h4>
         </div>
-	<form class="form-horizontal" method="post" action="member_login_ok" onsubmit="return check()">
+	<form class="form-horizontal" method="post" action="/donong/member_login_ok" onsubmit="return check()">
         <div class="modal-body">
 				<div class="form-group">
 						<label class="control-label col-sm-2" for="id">아이디</label>

@@ -5,14 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script>
-	
-</script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<c:if test="${listcount ==0 }">
 		<tr>
 			<td colspan="4">MVC 게시판</td>
@@ -53,7 +50,7 @@
 									<c:forEach var="a" begin="0" end="${b.re_lev*2}" step="1">
                 &nbsp;
                 </c:forEach>
-									<img src="./resources/images/AnswerLine.gif">
+									
 								</c:if>
 
 								<a href="communitycont?com_num=${b.num}&page=${page}&state=cont">

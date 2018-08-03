@@ -1,95 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
+<%@ include file="/resources/common/jsp/import.jsp" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	
 	<script src="/donong/resources/service/js/faq.js"></script>
 	
 	<link rel="stylesheet" href="/donong/resources/service/css/faq.css" type="text/css">
 </head>
 <body>
-	<a href="/donong/cs/main">main</a>
-	<a href="/donong/cs/notice">notice</a>
-	<a href="/donong/cs/qna">qna</a>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<div id="cs">
 	
-	<div id="faqList">
-		<c:if test="${listCount != 0 }">
-			<div id="faqSrcBar">
-				<h4>FAQ 검색 결과</h4><p><span id="keyword">"${keyword }"</span> 관련 총 <span id="listCount">${listCount }</span>개의 FAQ가 검색되었습니다.</p>
-				<form action="/donong/cs/faq" method="get">
-					<label id="faqLabel">FAQ 검색</label>
-					<p>검색을 이용하시면 보다 빠르게 원하시는 답변을 얻으실 수 있습니다.</p>
-					<input type="text" id="keyword" name="keyword" placeholder="검색 후 문의가 해결되지 않으면 1:1 상담을 이용하세요." value="${keyword }" />
-					<input type="submit" value="검색" />
-					<input type="button" value="1:1 상담" onclick="location.href='/donong/cs/qna'" />
-				</form>
-			</div>
-			
-			<div>
-				<h3>번호</h3>
-				<h3>제목</h3>
-			</div>
-
-			<c:set var="num" value="${listCount - (page - 1) * 10 }"/>
-			<c:forEach var="content" items="${faqList }">
-				<div class="faqRow">
-					<h3>
-						<c:out value="${num }" />
-						<c:set var="num" value="${num - 1 }" />
-					</h3>
-					<button class="accordian" value="${content.num }">
-						${content.title }
-					</button>
-					<div class="panel">
-						${content.content } <br />
-						<span class="readCount">${content.readcount }</span>
-					</div>
-				</div>
-			</c:forEach>
-			
-			<div id="pagingBar">
-				<c:if test="${page <= 1 }">
-					이전&nbsp;
-				</c:if>
-				<c:if test="${page > 1 }">
-					<a>이전</a>
-				</c:if>
+		<%@ include file="/WEB-INF/views/service/cs_header.jsp" %>
 				
-				<c:forEach var="pageNum" begin="${startPage }" end="${endPage }">
-					<c:if test="${pageNum == page }">
-						<span id="currPage">${pageNum }</span>
-					</c:if>
-					<c:if test="${pageNum != page }">
-						<a>${pageNum }</a>
-					</c:if>
-				</c:forEach>
-				
-				<c:if test="${page >= maxPage }">
-					&nbsp;다음
-				</c:if>
-				<c:if test="${page < maxPage }">
-					<a>다음</a>
-				</c:if>
-			</div>
+		<c:if test="${sessionBean.nickname == 'admin' }">
+			<a href="/donong/cs/faq/write">글쓰기</a>
 		</c:if>
 		
-		<c:if test="${listCount == 0 }">
-			<div id="faqSrcBar">
-				<h4>FAQ 검색 결과</h4><p><span id="keyword">"${keyword }"</span> 관련 총 <span id="listCount">${listCount }</span>개의 FAQ가 검색되었습니다.</p>
-				<form action="/donong/cs/faq" method="get">
-					<label id="faqLabel">FAQ 검색</label>
-					<p>검색을 이용하시면 보다 빠르게 원하시는 답변을 얻으실 수 있습니다.</p>
-					<input type="text" id="keyword" name="keyword" placeholder="검색 후 문의가 해결되지 않으면 1:1 상담을 이용하세요." />
-					<input type="submit" value="검색" />
-					<input type="button" value="1:1 상담" />
-				</form>
+		<div id="src_header">
+			<div id="src_header_row1">
+				<span>FAQ</span>
+				<span>검색결과</span>
 			</div>
+			<div id="src_header_row2">
+				<span>"${keyword }"</span>&nbsp;
+				<span>관련 총 </span>
+				<span>${listCount }개</span>
+				<span>의 FAQ가 검색되었습니다.</span>
+			</div>
+		</div>
 		
-			<h3>${keyword } 에 해당하는 검색 결과가 없습니다. 다시 검색하여 주세요. <br />질문하신 내용에서 띄어쓰기, 맞춤법, 검색한 어휘 등에 대해 다시 한 번 확인 부탁드립니다.</h3>
+		<c:if test="${listCount != 0 }">
+			<div id="faqList">
+			
+				<div>
+					<h3>번호</h3>
+					<h3>제목</h3>
+				</div>
+	
+				<c:set var="num" value="${listCount - (page - 1) * 10 }"/>
+				<c:forEach var="content" items="${faqList }">
+					<div class="faqRow">
+						<button class="accordian" value="${content.num }">
+							<c:out value="${num }" />
+							<c:set var="num" value="${num - 1 }" />
+							&nbsp;&nbsp;&nbsp;
+							<c:set var="attatchedStr" value="[${content.category}] ${content.title}"/>
+							<c:set var="contentArr" value="${attatchedStr.split(keyword)}"/>
+							
+							<c:choose>
+								<c:when test="${fn:length(contentArr) == 1 }">
+									<c:choose>
+										<c:when test="${!fn:contains(content.title, keyword)}">
+											${contentArr[0]}
+										</c:when>
+										<c:otherwise>									
+											${contentArr[0]}<font color="#FF0000">${keyword}</font>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+								
+								<c:when test="${fn:length(contentArr) >= 2 }">
+									${contentArr[0]}<c:forEach var="i" begin="1" end="${fn:length(contentArr) - 1 }"><font color="#FF0000">${keyword}</font>${contentArr[i]}</c:forEach>
+								</c:when>
+							</c:choose>
+							
+						</button>
+						<div class="panel">
+							${content.content }
+						</div>
+					</div>
+				</c:forEach>
+				
+				<div id="pagingTd">
+					<c:if test="${page <= 1 }">
+						&laquo;&nbsp;
+					</c:if>
+					<c:if test="${page > 1 }">
+						<a>&laquo;</a>
+					</c:if>
+					
+					<c:forEach var="pageNum" begin="${startPage }" end="${endPage }">
+						<c:if test="${pageNum == page }">
+							<span id="currPage">${pageNum }</span>
+						</c:if>
+						<c:if test="${pageNum != page }">
+							<a>${pageNum }</a>
+						</c:if>
+					</c:forEach>
+					
+					<c:if test="${page >= maxPage }">
+						&nbsp;&raquo;
+					</c:if>
+					<c:if test="${page < maxPage }">
+						<a>&raquo;</a>
+					</c:if>
+				</div>
+			</div>
+		</c:if>
+			
+		<c:if test="${listCount == 0 }">
+			<div id="noSrcResult">
+				<h3>"${keyword }" 에 해당하는 검색 결과가 없습니다. 다시 검색하여 주세요. <br /><br />질문하신 내용에서 띄어쓰기, 맞춤법, 검색한 어휘 등에 대해 다시 한 번 확인 부탁드립니다.</h3>
+			</div>
 		</c:if>
 	</div>
 </body>

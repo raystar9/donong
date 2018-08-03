@@ -13,7 +13,7 @@
 	</insert>
 	
 	<select id="getQna" resultType="qna">
-		select * from qna where num=#{num}
+		select num, category, writer, title, content, to_char(regitdate, 'yy/mm/dd') regitdate, answer, to_char(ansdate, 'yy/mm/dd') ansdate, state from qna where num=#{num}
 	</select>
 	
 	<select id="getQnaListCountAll" resultType="int">
@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="getQnaListAll" resultType="qna">
-		select * from qna order by regitdate desc
+		select num, category, writer, title, content, to_char(regitdate, 'yy/mm/dd') regitdate, answer, to_char(ansdate, 'yy/mm/dd') ansdate, state from qna order by regitdate desc
 	</select>
 	
 	<select id="getQnaListCount" resultType="int">
@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="getQnaList" resultType="qna">
-		select * from qna where writer=#{memberNum} order by regitdate desc
+		select num, category, writer, title, content, to_char(regitdate, 'yy/mm/dd') regitdate, answer, to_char(ansdate, 'yy/mm/dd') ansdate, state from qna where writer=#{memberNum} order by regitdate desc
 	</select>
 	
 	<update id="updateQna" parameterType="qna">

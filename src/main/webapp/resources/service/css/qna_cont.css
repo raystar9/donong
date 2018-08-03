@@ -1,0 +1,59 @@
+#cs {
+	margin-top: 50px;
+	height: auto;
+}
+
+#qna_cont {
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 40px;
+	margin-bottom: 100px;
+}
+
+#qna_cont h1 {
+	font-size: 25px;
+	font-weight: bold;
+	color: #8BC34A;
+}
+
+#qna_cont label {
+	width: 20%;
+	margin-top: 25px;
+	height: 30px;
+	border-bottom: 1px solid green;
+	float: left;
+	margin-right: 5px;
+}
+
+#qna_cont span {
+	display: inline-block;
+	width: 79%;
+	height: 30px;
+	margin-top: 25px;
+	border-bottom: 1px solid green;
+	float: left;
+}
+
+#qna_cont textarea {
+	display: inline-block;
+	width: 79%;
+	margin-top: 5px;
+	float: left;
+}
+
+#qna_cont button, #deleteBtn, #updateReply {
+	width: 30%;
+	float: left;
+	height: 40px;
+	margin-top: 50px;
+	margin-right: 50px;
+	margin-bottom: 100px;
+}
+
+
+
+
+
+
+

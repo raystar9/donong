@@ -5,7 +5,7 @@
 <mapper namespace="team.swcome.donong.mapper.MemberMapper">
   
 	<insert id="insertMember" parameterType="MemberDTO">
-  	insert into member values(member_num.nextval, #{id}, #{nickname}, 
+  	insert into member(num, id, nickname, password, realname, postnum, address, addressdetail, email, emaildomain, phone, registdate) values(member_num.nextval, #{id}, #{nickname}, 
   								#{password}, #{realname},#{postnum}, 
   								#{address}, #{addressdetail}, #{email}, 
   								#{emaildomain}, #{phone}, sysdate

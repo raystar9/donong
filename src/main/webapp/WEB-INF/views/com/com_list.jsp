@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="resources/js/jquery-3.3.1.js"></script>
 <script>
 $(function(){
 	var limit; 
@@ -65,13 +66,14 @@ $(function(){
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
   <div class="container">
   <div style="text-align:center; font-size:150px; top-margin:50px;">
-   <a href ="communitylist?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
-   <a href ="communitylist?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
-   <a href ="communitylist?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
+   <a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+   <a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
     </div>
     <table class="table table-hover">
        
@@ -95,10 +97,10 @@ $(function(){
                 <c:forEach var = "a" begin = "0" end = "${b.re_lev*2}" step = "1">
                 &nbsp;
                 </c:forEach>
-             <img src="./resources/images/AnswerLine.gif"> 
+             
              </c:if>   
              
-             <a href = "communitycont?num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>
@@ -107,7 +109,7 @@ $(function(){
           <div>${b.writer}</div>
        </td>
        <td>
-          <div>${b.regitdate}</div>
+          <div><fmt:formatDate value="${b.regitdate}" pattern="yyyy-MM-dd HH:mm:SS"></fmt:formatDate></div>
        </td>
        <td>
           <div>${b.readcount}</div>
@@ -122,7 +124,7 @@ $(function(){
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -130,7 +132,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}">${status.index}</a>
+                <a href = "list?page=${status.index}">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -138,19 +140,19 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='잡담' }">
+    <c:if test="${category=='잡담' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=잡담">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=잡담">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -158,7 +160,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=잡담">${status.index}</a>
+                <a href = "list?page=${status.index}&category=잡담">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -166,19 +168,19 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=잡담">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=잡담">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='질문' }">
+    <c:if test="${category=='질문' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=질문">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=질문">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -186,7 +188,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=질문">${status.index}</a>
+                <a href = "list?page=${status.index}&category=질문">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -194,19 +196,19 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=질문">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=질문">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='정보' }">
+    <c:if test="${category=='정보' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=정보">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=정보">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -214,7 +216,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=정보">${status.index}</a>
+                <a href = "list?page=${status.index}&category=정보">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -222,19 +224,19 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=정보">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=정보">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
     </c:if>
-    <c:if test="${category='모임' }">
+    <c:if test="${category=='모임' }">
       <tr class = "pagination">
        <td >
           <c:if test = "${page <= 1}">
              &lt;&nbsp;
           </c:if>
           <c:if test = "${page > 1}">
-             <a href = "communitylist?page=${page-1}&category=모임">&lt;</a>&nbsp;   
+             <a href = "list?page=${page-1}&category=모임">&lt;</a>&nbsp;   
           </c:if>
           
           <c:forEach varStatus = "status" begin = "${startpage}" end = "${endpage}">
@@ -242,7 +244,7 @@ $(function(){
                 ${status.index}
              </c:if>
              <c:if test = "${status.index != page}">
-                <a href = "communitylist?page=${status.index}&category=모임">${status.index}</a>
+                <a href = "list?page=${status.index}&category=모임">${status.index}</a>
              </c:if>   
           </c:forEach>
           
@@ -250,11 +252,12 @@ $(function(){
              &nbsp;&gt;
           </c:if>
           <c:if test = "${page < maxpage}">
-             <a href = "communitylist?page=${page + 1}&category=모임">&nbsp;&gt;</a>
+             <a href = "list?page=${page + 1}&category=모임">&nbsp;&gt;</a>
           </c:if>
        </td>                  
     </tr>
     </c:if>
+   
     <!-- 레코드가 없으면 -->
     <c:if test="${listcount == 0 }">
        <tr>
@@ -269,7 +272,7 @@ $(function(){
     </table>
     <div id="bbsfind">
      
-    <form method="get" action="communityfind" onsubmit="return find_check()" style="position:relative;left:30%">
+    <form method="get" action="find" onsubmit="return find_check()" style="position:relative;left:30%">
     
     <table>
    
@@ -295,13 +298,14 @@ $(function(){
     </div>
     
     <br>
-    <form method="get" action="./communitywrite" style="float:right;">
+    <form method="get" action="write" style="float:right;">
     <table id="table_third">
-	
+	<c:if test="${sessionBean.nickname != null}">
 	<tr><td>
 			<button type="submit" class="btn" style=>글쓰기</button>
 	</td>
 	</tr>
+	</c:if>
 </table>
 </form>
 </div>

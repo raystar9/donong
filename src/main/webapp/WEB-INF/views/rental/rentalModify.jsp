@@ -5,59 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalModify.css">
 <script src="/donong/resources/rental/js/rentalModify.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
-<style>
-	*{
-		box-sizing:border-box;
-	}
-	#main{
-		margin: auto;
-		border:1px solid black;
-		width:800px;
-		height:1500px;
-	}
-	.modifyTable{
-		margin: auto;
-		margin-top: 50px;
-		width: 700px;
-	}
-	#map {
-		width: 400px;
-		height: 400px;
-		margin: auto;
-		margin-top : 20px;
-	}
-	#autocomplete{
-		margin-top:50px;
-		width: 500px;
-		height: 35px;
-	}
-	#search{
-		margin-top:50px;
-		margin: auto;
-		text-align: center;
-	}
-	table tr td:first-child {
-		width: 150px;
-	}
-	.uploadIcon{
-		width:25px;
-		height:20px;
-		margin-left:10px;
-	}
-	input[type="file"]{
-		display:none;
-	}
-</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<div id="main">
+<div id="page-header-size">
+    <h2 id='viewTitle'>농지 대여</h2><hr>      
+</div>
+<div class="container" id="con">
  <form action="./modify_ok" method="post" class="modifyForm" enctype="multipart/form-data">
  <input type="hidden" value="${rental.num }" name="num">
  <input type="hidden" name="directory" value="rent" />
-	<table border="1" class="modifyTable">
+	<table class="modifyTable">
 		<tr>
 			<td>임대자</td>
 			<td>
@@ -73,15 +34,17 @@
 		<tr>
 			<td>면적</td>
 			<td>
-				<input type="text" name="area" id="area" placeholder="1,000" class="form-control" value="${rental.area }">&nbsp;py
+				<span>
+					<input type="text" name="area" id="area" placeholder="1,000" class="form-control" value="${rental.area }">&nbsp;
+					</span>py
 			</td>
 		</tr>
 		<tr>
 			<td>임대료</td>
 			<td>
-				<div style='width:100px; display:inline-block'>
-				<input type="text" name="price" id="price" class="form-control" value="${rental.price }">&nbsp;원
-				</div>
+				<span>
+					<input type="text" name="price" id="price" class="form-control" value="${rental.price }">&nbsp;원
+				</span>
 			</td>
 		</tr>
 		<tr>
@@ -118,23 +81,26 @@
 		</tr> 
 		<tr>
 			<td>상세설명</td>
-			<td>
-				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요." id="content" class="form-control">${rental.content }</textarea>
+			<td style="padding:8px;">
+				<textarea name="content" cols="50" rows="20" placeholder="농지에 대한 자세한 설명을 입력해주세요." id="content">${rental.content }</textarea>
 			</td>
+		</tr>
+		<tr>
+			<td>주소</td>
+			<td><input type="text" placeholder="&nbsp;농지 위치를 설정하세요." id="autocomplete" name="address" value="${rental.address }">
+			</td>
+		</tr>
+		<tr>
+			<td>지도</td>
+			<td><div id="map"></div><div id="warn"><img src="../resources/rental/image/strong2.png" id='mark'/>&nbsp;(주소와 위치가 일치하는지 확인하세요)&nbsp;<img src="../resources/rental/image/strong2.png" id='mark'/></div></td>
 		</tr>
 	</table>
 	
-	<div id="search">
-		주소:&nbsp;<input type="text" placeholder="농지 위치를 설정하세요." id="autocomplete" name="address" value="${rental.address }"><br>
-		(주소와 위치가 일치하는지 확인하세요)
-	</div>
-	<div id="map">
-	</div>
 	<input type='hidden' id="markerLat" name="lat" value="${rental.lat }">
 	<input type='hidden' id="markerLng" name="lng" value="${rental.lng }">
-	<div class="button">
-		<input type="submit" value="수정">
-		<input type="button" value="취소" onclick="history.go(-1);">
+	<div class="container" id="button">
+		<input type="submit" value="수정" class="btn btn-default">
+		<input type="button" value="취소" onclick="can_click()" class="btn btn-default">
 	</div>	
 	</form>
 </div>

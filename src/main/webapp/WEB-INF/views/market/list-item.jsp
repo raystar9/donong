@@ -7,9 +7,9 @@
 	<img class="img-thumbnail item-img" src="${item.filePath }" alt="#" width="160px" height="160px"/>
 </div>
 	<div class="item-name item-cell">
-		<a href="/donong/market/item/${item.num}">${item.title}</a>
+		<h3><a href="/donong/market/item/${item.num}">${item.title}</a></h3>
 	</div>
 	<div class="item-price item-cell">
-		${item.price }원
+		<h3>${item.price }원</h3>
 	</div>
 </div>

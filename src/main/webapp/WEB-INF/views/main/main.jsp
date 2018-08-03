@@ -60,7 +60,10 @@
     	background-color:black;
     }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
     
-    
+    #footani{
+   		 width:150px;
+    	height:120px;
+    }
     
     #h {
   animation-duration: 30s;
@@ -300,7 +303,7 @@
 </div>
 
  <footer class="container-fluid navbar-fixed-bottom">
-     <p><a id="h" href="member_join"><img id="sample1" src="resources/main/image/ani.gif"></a></p>
+     <p><a id="h" href="member_join"><img id="footani" src="resources/main/image/ani.gif"></a></p>
  </footer>
 
 </body>

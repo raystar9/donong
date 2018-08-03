@@ -82,5 +82,10 @@ public class AccountService {
 
 		return ordersMapper.selectPagingOrders(m);
 	}
+
+	public int getOrderListCount() {
+		
+		return ordersMapper.getOrderListCount();
+	}
 	
 }

@@ -21,6 +21,10 @@
 	]]>
 	</select>
 	
+	<select id="getOrderListCount" resultType="int">
+		select count(*) from orders
+	</select>
+	
 	<select id="selectWaitingOrders" resultType="OrderItemsDTO">
 	<![CDATA[
 		SELECT ordernum, orderername, orderdate

@@ -118,7 +118,8 @@ public class MainController {
 		m.put("limit", limit);
 		
 		orderlist= accountService.selectPagingOrders(m);
-		int listcount = orderlist.size(); //쿼리문 select count(*) from order 넣어야 할거
+		
+		int listcount = accountService.getOrderListCount(); //쿼리문 select count(*) from order 넣어야 할거
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		

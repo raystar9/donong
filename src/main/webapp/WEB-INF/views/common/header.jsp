@@ -67,12 +67,7 @@
   	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
   	
   	 <li class="dropdown">
-     <a class="dropdown-toggle">고객센터</a>
-    <ul class="dropdown-menu">
-      <li><a href="/donong/cs/main">메인</a></li>
-      <li><a href="/donong/cs/qna">QnA</a></li>
-      <li><a href="#">내가 한 질문</a></li>
-    </ul>
+     <a class="dropdown-toggle" href="/donong/cs">고객센터</a>
   </li>
   
   
@@ -103,7 +98,7 @@
           
           <h4 class="modal-title">Login Page</h4>
         </div>
-	<form class="form-horizontal" method="post" action="member_login_ok" onsubmit="return check()">
+	<form class="form-horizontal" method="post" action="/donong/member_login_ok" onsubmit="return check()">
         <div class="modal-body">
 				<div class="form-group">
 						<label class="control-label col-sm-2" for="id">아이디</label>

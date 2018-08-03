@@ -10,6 +10,7 @@
   <typeAliases>
     <typeAlias alias="MainDTO" type="team.swcome.donong.dto.MainDTO" />
     <typeAlias alias="GoodsDTO" type="team.swcome.donong.dto.GoodsDTO" />
+    <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
     <typeAlias alias="OrdersDTO" type="team.swcome.donong.dto.OrdersDTO" />
     <typeAlias alias="GoodsOrdersDTO" type="team.swcome.donong.dto.GoodsOrdersDTO" />

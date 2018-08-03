@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.BoardDTO;
 import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.OrdersDTO;
 import team.swcome.donong.dto.SessionBean;
@@ -97,10 +98,14 @@ public class MainController {
 	@RequestMapping(value = "member_mypage")
 	public String member_mypage(Model model,@RequestParam(value="page", defaultValue="1") int page, HttpServletRequest request, OrdersDTO ordersDTO, SessionBean sessionBean) throws Exception {
 		
-		//구매내역 페이지 list 객체 생성
-	
-		List<OrdersDTO> orderlist = new ArrayList<OrdersDTO>();
+		int num = sessionBean.getMemberNum();
+		//최신글 페이지 list 객체 생성
+		List<BoardDTO> boardlist = new ArrayList<BoardDTO>(num);
+		boardlist=accountService.selectNewestWrite(num);
 		
+		//구매내역 페이지 list 객체 생성
+		List<OrdersDTO> orderlist = new ArrayList<OrdersDTO>();
+				
 		//페이징 시작
 		int limit = 5;
 		if(request.getParameter("page") != null) {
@@ -111,15 +116,15 @@ public class MainController {
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
 		
-
-		
+		//map에 저장
 		Map m = new HashMap();
 		m.put("page", page);
 		m.put("limit", limit);
 		
 		orderlist= accountService.selectPagingOrders(m);
 		
-		int listcount = accountService.getOrderListCount(); //쿼리문 select count(*) from order 넣어야 할거
+		//주문글 총 갯수 산출
+		int listcount = accountService.getOrderListCount(); 
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		
@@ -139,6 +144,7 @@ public class MainController {
 		model.addAttribute("endpage", endpage);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("boardlist", boardlist);
 		
 		return "/member/mypage";
 	}

@@ -37,6 +37,7 @@ public interface BoardMapper {
 	public List<BoardDTO> bbs_find(Map<String, String> m);
 	public void deleteAllReply(int num);
 	public void deleteFile(int num);
+	public List<BoardDTO> selectNewestWrite(int num);
 
 	
 	

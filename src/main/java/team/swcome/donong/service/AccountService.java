@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import team.swcome.donong.dto.BoardDTO;
 import team.swcome.donong.dto.MemberDTO;
 import team.swcome.donong.dto.OrdersDTO;
+import team.swcome.donong.mapper.BoardMapper;
 import team.swcome.donong.mapper.MemberMapper;
 import team.swcome.donong.mapper.OrdersMapper;
 
@@ -19,6 +21,9 @@ public class AccountService {
 	
 	@Autowired
 	OrdersMapper ordersMapper;
+	
+	@Autowired
+	BoardMapper boardMapper;
 	
 	public void insertMember(MemberDTO m) {
 		mainMapper.insertMember(m);
@@ -87,5 +92,11 @@ public class AccountService {
 		
 		return ordersMapper.getOrderListCount();
 	}
+
+	public List<BoardDTO> selectNewestWrite(int num) {
+		return boardMapper.selectNewestWrite(num);
+	}
+
+
 	
 }

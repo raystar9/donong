@@ -33,7 +33,7 @@
 	
 
 	.mypage-write{
-		margin-top:100px;
+		margin-top:50px;
 		margin-bottom:50px;
 	}
 	
@@ -83,10 +83,10 @@
      	 			입금대기
      	 		 </c:if>
      	 		  <c:if test="${order.status=='prep'}">
-     	 			배송준비중
+     	 			배송준비
      	 		 </c:if>
      	 		  <c:if test="${order.status=='send'}">
-     	 			배송중
+     	 			배송진행
      	 		 </c:if>
      	 		  <c:if test="${order.status=='arrv'}">
      	 			배송완료
@@ -137,15 +137,15 @@
 </div>
 	<div class="col-sm-2"></div>
     <div class="col-sm-8">
+    
+    <c:forEach var="board" items="${boardlist}">
 
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#1">작성글1</a></li>
-        <li><a href="#2">작성글2</a></li>
-        <li><a href="#3">작성글3</a></li>
-        <li><a href="#4">작성글4</a></li>
-        <li><a href="#5">작성글5</a></li>
+        <li><a href="/donong/community/${board.num}">${board.subject}</a></li>
+
       </ul><br>
-   
+      
+   </c:forEach>
     </div>
   
     <div class="col-sm-2"></div>

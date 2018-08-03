@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalList.css">
 <script src="/donong/resources/rental/js/rentalList.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
@@ -17,46 +18,46 @@
 		<img src= './resources/rental/image/search3.png' id="searchLogo">
 	</span>
 	<div id="box">
-		<table id="searchTable" border="1">
-			<tr>
-				<td style="width:25%"><strong>번호</strong></td>
-				<td colspan="2">
-					<div style="width:150px;"><input type="text" name="num" id="num" class="form-control" style="height:25px"></div>
-				</td>
-				<td rowspan="3">
-					<input type="button" value="검색" id="searchBtn" onclick="search();" class="btn-default"> 
-				</td>
-			</tr>
-			<tr>
-				<td><strong>지역</strong></td>
-				<td> 
-					<select name="sido" id="sido">
-					</select>
-					<select name="sigungu" id="sigungu">
-						<option value='0'>시,군,구 </option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td><strong>임대료</strong></td>
-				<td colspan="2">
-					<select name="price" id="price">
-						<option value="0">선택</option>
-						<option value="10000">10000원 ~ 20000원</option>
-						<option value="20000">20000원 ~ 30000원</option>
-						<option value="30000">30000원 ~ 40000원</option>
-						<option value="40000">40000원 ~ 50000원</option>
-						<option value="50000">50000원 ~ 이상</option>
-					</select>
-				</td>
-			</tr>
-		</table>
+		<ul>
+			<li>
+				<div id="num_div" style="display: inline-block;">
+				<div class="s_title"><strong>번호</strong></div>
+				<div id="num_text"><input type="text" name="num" id="num" class="form-control" style="height:25px;"></div>
+				</div>
+			</li>
+			<li>
+				<div id="area_div" style="display: inline;">
+				<div class="s_title"><strong>지역</strong></div>
+				<select name="sido" id="sido" style="width:110px;"></select>
+				<select name="sigungu" id="sigungu" style="width:110px;">
+				<option value='0'>시,군,구 </option>
+				</select>
+				</div>
+			</li>
+			<li>
+				<div id="price_div" style="display: inline-block;">
+				<div class="s_title"><strong>임대료</strong></div>
+				<select name="price" id="price">
+				<option value="0">선택</option>
+				<option value="10000">10000원 ~ 20000원</option>
+				<option value="20000">20000원 ~ 30000원</option>
+				<option value="30000">30000원 ~ 40000원</option>
+				<option value="40000">40000원 ~ 50000원</option>
+				<option value="50000">50000원 ~ 이상</option>
+			</select>
+		</div>
+			</li>
+		</ul>
+		<div id="search_div" >
+			<input type="button" value="검색" id="searchBtn" onclick="search();" class="btn-default">
+		</div>
+		
 	</div>
 </div>
 
 <div id="map"></div>
 <div id="btn">
-	<input type="button" value="글쓰기" onclick="location.href='./rental/write'" id="btnwrite" class="btn btn-default">
+	<button onclick="location.href='./rental/write'" id="btnwrite" class="btn btn-default">글쓰기<i class="material-icons">border_color</i></button>
 </div>
 
 <div id="List">

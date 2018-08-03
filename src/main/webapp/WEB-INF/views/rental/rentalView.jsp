@@ -96,6 +96,6 @@
 	<div id="map"></div>	
 	
 	</div>	
-		
+
 </body>
 </html>

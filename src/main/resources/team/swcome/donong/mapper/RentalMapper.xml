@@ -86,7 +86,7 @@
   			AND sigungu = #{sigungu}
   		</when>
   		<when test="sido != 0 
-  					and price != 0
+  					and price != 0 
   					and sigungu == 0
   					and num == 0
   					and price &gt;= 50000">

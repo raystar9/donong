@@ -4,6 +4,8 @@ values (mem_num_seq.nextval, 'dahye', 'dada', '1234', '이다혜', 123456, '경�
 insert into member
 values (mem_num_seq.nextval, 'qwe', 'qwe', 'qwe', '홍주성', 123456, '경기도 부천시 원미구', '금강시티빌 111-111', 'dahye3059', 'naver.com', '010-2350-3059', sysdate);
 
+SELECT * FROM rentals WHERE sido = 2;
+
 truncate table rentals constraint cascade; 
 truncate table rentalfiles;
 

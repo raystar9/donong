@@ -1,3 +1,188 @@
-body {
-	margin: 1px
+* {
+	box-sizing: border-box;
+}
+
+#con {
+	height: 1300px;
+	margin-left: 270px;
+	text-align: center;
+}
+
+#main {
+	margin: auto;
+	border: 1px solid black;
+	width: 800px;
+	height: 1500px;
+}
+
+#map {
+	width: 600px;
+	height: 300px;
+	margin: auto;
+	margin-top: 20px;
+	margin-left: 15px;
+}
+
+#autocomplete {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 500px;
+	height: 35px;
+}
+
+#search {
+	margin-top: 50px;
+	margin: auto;
+	text-align: center;
+}
+
+table tr td:first-child {
+	width: 150px;
+}
+
+.uploadIcon {
+	width: 20px;
+	height: 18px;
+	margin-left: 10px;
+}
+
+#viewTitle {
+	font-weight: bold;
+	color: #6c8564;
+}
+
+#page-header-size {
+	width: 1160px;
+	margin-top: 60px;
+	margin-left: 270px;
+}
+
+table tr td:nth-child(2) {
+	padding-left: 8px;
+	text-align: left;
+	background-color: #dddddd45;
+	border-radius: 0px 10px 10px 0px;
+}
+
+table tr td:nth-child(1) {
+	border-radius: 10px 0px 0px 10px;
+	background-color: #d5e5cf7d;
+	width: 17%;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+table {
+	font-size: 13px;
+}
+
+#area_div {
+	width: 200px;
+}
+
+#text_td {
+	padding: 10px;
+}
+
+#area {
+	display: inline-block;
+	width: 130px;
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#price {
+	display: inline-block;
+	width: 130px;
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+table tr {
+	border-bottom: 5px solid #fff;
+	height: 35px;
+}
+
+#mark {
+	width: 15px;
+	height: 15px;
+}
+
+#content {
+	height: 100%;
+	width: 100%;
+	border: 0;
+	padding: 10px;
+}
+
+#button {
+	margin-left: 300px;
+	margin-top: 20px;
+	margin-bottom: 150px;
+	width: 600px;
+}
+
+#subBtn, #canBtn {
+	float: right;
+	margin-right: 7px;
+}
+
+hr {
+	border-top: 2px solid #ccc
+}
+
+#window {
+	border-top: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	width: 850px;
+	height: 620px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+#bottom_win {
+	width: 660px;
+	margin-left: 245px;
+	height: 452px;
+	margin-top: 10px;
+	border: 10px solid #eee;
+}
+
+#warn {
+	margin-bottom: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#main {
+	margin: auto;
+	border: 1px solid black;
+	width: 800px;
+	height: 1500px;
+}
+
+.modifyTable {
+	margin: auto;
+	margin-top: 50px;
+	width: 800px;
+}
+
+table tr td:first-child {
+	width: 150px;
+}
+
+.uploadIcon {
+	width: 25px;
+	height: 20px;
+	margin-left: 10px;
+}
+
+input[type="file"] {
+	display: none;
 }

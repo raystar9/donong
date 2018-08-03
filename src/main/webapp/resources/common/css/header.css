@@ -78,7 +78,6 @@ background-color: #ACD17F;
 	margin:5px,0,0,0;
 }
 
-<!-- 로그인창 가운데로 나오게 하는거 -->
 .modal {
         text-align: center;
 }
@@ -116,7 +115,6 @@ background-color: #ACD17F;
         text-align: left;
         vertical-align: middle;
 }
-<!-- 여기까지 -->
 
 .find{
 	float:right;

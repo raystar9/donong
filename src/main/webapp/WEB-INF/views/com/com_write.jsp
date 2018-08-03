@@ -30,7 +30,7 @@ function check(){
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<h2 class="comwrite_title">커뮤니티 게시판 글쓰기</h2>
-		<form method="post" action="communitywrite_ok" onsubmit="return check()"
+		<form method="post" action="write_ok" onsubmit="return check()"
 		      enctype="multipart/form-data">
 			<table id="comwrite_t">
 				<!-- 
@@ -57,7 +57,7 @@ function check(){
 				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
 				<label for="upfile"></label>
-				<input type="file" id="filename" name="uploadfile" value=" " class="form-control">
+				<input type="file" name="uploadfile" class="form-control"/>
 				<span id="filevalue"></span>
 				</td>
 				</tr>

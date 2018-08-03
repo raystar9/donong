@@ -26,13 +26,23 @@ function check(){
 		return false;
 	}
 }
+$(document).ready(function(){
+	$("#update").on("click",function(e){
+		$("#update-form").css("display","inline");
+	});
+	$("#delete").on("click",function(e){
+		var url="/donong/community/deleteFile?fileName=${bbsbean.filepath }&directory=community&num=${bbsbean.num}";
+		window.open(url,"","width=300,height=150,left=300");
+	});
+});
+
 </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container">
 		<h2 class="comwrite_title">커뮤니티게시판 수정</h2>
-		<form method="post" action="communityedit_ok" onsubmit="return check()" enctype="multipart/form-data">
+		<form method="post" action="edit_ok" onsubmit="return check()" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="${num}">
 			<input type="hidden" name="page" value="${page}">
 			<table id="comwrite_t">
@@ -59,11 +69,19 @@ function check(){
 				<tr>
 				<th class="well well-sm" style="text-align:center;">파일 첨부</th>
 				<td>
-				
-				<label for="upfile"></label>
-				<input type="file" id="filename" name="uploadfile" value=" " class="form-control">
-				<span id="filevalue"></span>
-				
+				<c:if test="${bbsbean.filename == null}">
+					<label for="upfile"></label>
+					<input type="file" name="uploadfile" class="form-control" />
+					<span id="filevalue"></span>
+				</c:if>
+				<c:if test="${bbsbean.filename != null}">
+					<div id="update-form" >
+					<label for="upfile"></label>
+						<input type="file" name="uploadfile" class="form-control" style="width:88%;float:left;" />
+						<a  style="float:left;" id="delete" name="delete" class="btn btn-danger">삭제</a>
+						<span id="filevalue"></span>
+					</div>
+				</c:if>
 				
 				</td>
 				</tr>

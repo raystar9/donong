@@ -110,4 +110,7 @@ public class BoardService {
 		list=boardMapper.bbs_find(m); 
 		return list;
 	}
+	public void deletefile(int num) {
+		boardMapper.deleteFile(num);
+	}
 }

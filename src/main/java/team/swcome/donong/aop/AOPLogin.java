@@ -27,7 +27,7 @@ public class AOPLogin {
 		}
 		logger.debug("{}", sessionBean.getMemberNum());
 		if(sessionBean.getMemberNum() == 0) {
-			return "redirect:/error";
+			return "common/login-error";
 		}
 		return (String)joinPoint.proceed();
 	}

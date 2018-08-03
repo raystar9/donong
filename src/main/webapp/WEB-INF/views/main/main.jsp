@@ -50,6 +50,11 @@
     	width:180px;
     	height:135px;
     }
+    .container-fluid{
+    padding-right:0px;
+    padding-left:0px;
+    }
+  
     
      .carousel-indicators .active{
     	background-color:red;
@@ -61,25 +66,31 @@
     }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
     
     #footani{
-   		 width:150px;
+   		 width:180px;
     	height:120px;
     }
+    #bg{
+        background-image: url("resources/main/image/backg.png"); 
+        width:100%;
+        margin-bottom:5px;
+    }
     
-    #h {
-  animation-duration: 120s;
+    #anibar {
+  animation-duration: 90s;
   animation-name: slidein;
-  animation-iteration-count: infinite;
+  animation-iteration-count: infinite; 	
+  font-size:25px;
 }
 
 @keyframes slidein {
   from {
     margin-left: 100%;
-    width: 300%;
+    width: 80%;
   }
 
   to {
     margin-left: -40%;
-    width: 300%;
+    width: 80%;
   }
 }
   
@@ -303,7 +314,9 @@
 </div>
 
  <footer class="container-fluid navbar-fixed-bottom">
-     <p><a id="h" href="member_join"><img id="footani" src="resources/main/image/aniu1.gif"></a></p>
+ <div id="bg">
+     <div id="anibar"><a href="member_join"><img id="footani" src="resources/main/image/aniu1.gif">도시 속 힐링 도시농부</a></div>
+ </div>    
  </footer>
 
 </body>

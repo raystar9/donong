@@ -1,16 +1,24 @@
 package team.swcome.donong.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.OrdersDTO;
 import team.swcome.donong.mapper.MemberMapper;
+import team.swcome.donong.mapper.OrdersMapper;
 
 @Service
 public class AccountService {
 	
 	@Autowired
 	MemberMapper mainMapper;
+	
+	@Autowired
+	OrdersMapper ordersMapper;
 	
 	public void insertMember(MemberDTO m) {
 		mainMapper.insertMember(m);
@@ -67,6 +75,17 @@ public class AccountService {
 		}
 		
 		return result;
+	}
+
+
+	public List<OrdersDTO> selectPagingOrders(Map m) {
+
+		return ordersMapper.selectPagingOrders(m);
+	}
+
+	public int getOrderListCount() {
+		
+		return ordersMapper.getOrderListCount();
 	}
 	
 }

@@ -14,8 +14,8 @@
     <typeAlias alias="RentalDTO" type="team.swcome.donong.dto.RentalDTO" />
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
     <typeAlias alias="faq" type="team.swcome.donong.dto.FAQDTO" />
-	<typeAlias alias="notice" type="team.swcome.donong.dto.NoticeDTO" />
-	<typeAlias alias="qna" type="team.swcome.donong.dto.QNADTO" />
+	  <typeAlias alias="notice" type="team.swcome.donong.dto.NoticeDTO" />
+	  <typeAlias alias="qna" type="team.swcome.donong.dto.QNADTO" />
     <typeAlias alias="OrdersDTO" type="team.swcome.donong.dto.OrdersDTO" />
     <typeAlias alias="CartDTO" type="team.swcome.donong.dto.CartDTO" />
     <typeAlias alias="CartGoodsDTO" type="team.swcome.donong.dto.CartGoodsDTO" />

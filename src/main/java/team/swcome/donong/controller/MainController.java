@@ -1,7 +1,9 @@
 package team.swcome.donong.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.MemberDTO;
-import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.OrdersDTO;
+import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.AccountService;
 import team.swcome.donong.service.RentalService;
@@ -98,7 +100,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "member_mypage")
-	public String member_mypage(Model model,@RequestParam(value="page", defaultValue="1") int page, HttpServletRequest request) throws Exception {
+	public String member_mypage(Model model,@RequestParam(value="page", defaultValue="1") int page, HttpServletRequest request, OrdersDTO ordersDTO, SessionBean sessionBean) throws Exception {
 		
 		//구매내역 페이지 list 객체 생성
 	
@@ -114,7 +116,15 @@ public class MainController {
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
 		
-		int listcount = 50; //쿼리문 select count(*) from order 넣어야 할거
+
+		
+		Map m = new HashMap();
+		m.put("page", page);
+		m.put("limit", limit);
+		
+		orderlist= accountService.selectPagingOrders(m);
+		
+		int listcount = accountService.getOrderListCount(); //쿼리문 select count(*) from order 넣어야 할거
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		
@@ -127,39 +137,7 @@ public class MainController {
 
 		if (endpage < page)
 			page = endpage;
-		
-		
-		OrdersDTO order = new OrdersDTO();
-		OrdersDTO order1 = new OrdersDTO();
-		OrdersDTO order2 = new OrdersDTO();
-		OrdersDTO order3 = new OrdersDTO();
-		OrdersDTO order4 = new OrdersDTO();
-		OrdersDTO order5 = new OrdersDTO();
-
-		order.setName("모종삽");
-		order.setStatus("npay");
-		orderlist.add(order);
-		
-		order1.setName("사과모종");
-		order1.setStatus("npay");
-		orderlist.add(order1);
-		
-		order2.setName("돼지비료");
-		order2.setStatus("prep");
-		orderlist.add(order2);
-		
-		order3.setName("원킬가위");
-		order3.setStatus("send");
-		orderlist.add(order3);
-		
-		order4.setName("엑스칼리버");
-		order4.setStatus("arrv");
-		orderlist.add(order4);
-		
-		order5.setName("고고모종");
-		order5.setStatus("arrv");
-		orderlist.add(order5);
-		
+				
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
@@ -299,7 +277,5 @@ public class MainController {
 
 		return list;
 	}
-	
-	
 	
 }

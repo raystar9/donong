@@ -1,11 +1,29 @@
 package team.swcome.donong.service;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.AmazonClientException;
@@ -18,13 +36,17 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.util.IOUtils;
 
 public class S3Util {
 	private static final Logger logger = LoggerFactory.getLogger(S3Util.class);
 	
-	private String accesskey = "AKIAJRWSCDHRF53AWIUQ";
-	private String secreteKey = "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";
+	private static final String accesskey = "AKIAJEOHZUFX2BJRWAVA";
+	private static final String secreteKey = "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";
 	
 	private AmazonS3 s3Client;
 	
@@ -88,5 +110,45 @@ public class S3Util {
 		return s3Client.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
 	}
 	
+	@Autowired
+	ResourceLoader resourceLoader;
+	
+	public ResponseEntity<byte[]> download(String bucketName, String key) throws IOException {
+		try {
+			
+            System.out.println("Downloading an object");
+            S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucketName, key));
+            
+            System.out.println("Content-Type: "  + s3Object.getObjectMetadata().getContentType());
+            logger.info("===================== Import File - Done! =====================");
+            
+            S3ObjectInputStream objectInputStream = s3Object.getObjectContent();
+
+            byte[] bytes = IOUtils.toByteArray(objectInputStream);
+
+            String fileName = URLEncoder.encode(key, "UTF-8").replaceAll("\\+", "%20");
+
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            httpHeaders.setContentLength(bytes.length);
+            httpHeaders.setContentDispositionFormData("attachment", fileName);
+
+            return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
+            
+        } catch (AmazonServiceException ase) {
+        	logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
+			logger.info("Error Message:    " + ase.getMessage());
+			logger.info("HTTP Status Code: " + ase.getStatusCode());
+			logger.info("AWS Error Code:   " + ase.getErrorCode());
+			logger.info("Error Type:       " + ase.getErrorType());
+			logger.info("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+        	logger.info("Caught an AmazonClientException: ");
+            logger.info("Error Message: " + ace.getMessage());
+        }
+
+		return null;
+	}
+
 	
 }

@@ -9,18 +9,15 @@
 		margin-left:20px;
 		margin-top:5px;
 	}
-	.navbar-nav{
-		margin-top:20px;
-	}
 </style>
-<div class="navbar">
+<div id="main-navbar" class="navbar main-navbar">
+<div class="container-fluid">
 <div class="navbar-header">
 <a class="dropdown" href="/donong/main"><img id="logo" src="/donong/resources/main/image/logo2.png"></a>
 </div>
-<div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
 
-   <li class="dropdown">
+   <li class="dropdown main-menu">
     <a class="dropdown-toggle">시작하기</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/info">농사계획</a></li>
@@ -31,7 +28,7 @@
      </ul>
   </li>
   
-     <li class="dropdown">
+     <li class="dropdown main-menu">
     <a class="dropdown-toggle">농사짓기</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/info_farming_1">밭만들기</a></li>
@@ -46,7 +43,7 @@
   </li>
   
   
-  <li class="dropdown">
+  <li class="dropdown main-menu">
    <a class="dropdown-toggle">마을회관</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/communitylist">게시판</a><li>
@@ -55,8 +52,8 @@
     </ul>
   </li>
   
-    <li class="dropdown">
-     <a class="dropdown-toggle">준비하기(구매)</a>
+    <li class="dropdown main-menu">
+     <a class="dropdown-toggle">자재구매</a>
     <ul class="dropdown-menu">
       <li><a href="/donong/market?category=seed">종자</a></li>
       <li><a href="/donong/market?category=fertilizer">비료</a></li>
@@ -64,9 +61,9 @@
     </ul>
   </li>
   	
-  	<li class="dropdown"><a href='/donong/rental'>농지대여</a></li>
+  	<li class="dropdown main-menu"><a href='/donong/rental'>농지대여</a></li>
   	
-  	 <li class="dropdown">
+  	 <li class="dropdown main-menu">
      <a class="dropdown-toggle" href="/donong/cs">고객센터</a>
   </li>
   

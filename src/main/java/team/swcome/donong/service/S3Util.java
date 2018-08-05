@@ -1,25 +1,13 @@
 package team.swcome.donong.service;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -109,9 +97,6 @@ public class S3Util {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		return s3Client.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
 	}
-	
-	@Autowired
-	ResourceLoader resourceLoader;
 	
 	public ResponseEntity<byte[]> download(String bucketName, String key) throws IOException {
 		try {

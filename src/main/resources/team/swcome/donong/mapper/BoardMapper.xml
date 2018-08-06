@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.swcome.donong.mapper.BoardMapper">
+<!-- 게시판 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		delete from community
+		where num=#{num}
+	</delete>
+	
+	
+  <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
+  <select id="selectAll" parameterType="Integer" resultType="BoardDTO">
+	<![CDATA[
+	 select * from
+         (select rownum rnum, num, member_num, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq, filename, filepath
+         from
+         (select * from community 
+            order by re_ref desc, re_seq asc)
+            )
+         where rnum >= ((#{page}-1) * 10 +1 )
+            and rnum <= (#{page} * 10)
+      ]]>
+	</select>
+	
+	 <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
+  <select id="selectAsk" parameterType="Integer" resultType="BoardDTO">
+	<![CDATA[
+	 select * from
+         (select rownum rnum, num, member_num, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq, filename, filepath
+         from
+         (select * from community where category = '질문'
+            order by re_ref desc, re_seq asc)
+            )
+         where rnum >= ((#{page}-1) * 10 +1 )
+            and rnum <= (#{page} * 10)
+      ]]>
+	</select> 
+	<!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
+  <select id="selectTalk" parameterType="Integer" resultType="BoardDTO">
+	<![CDATA[
+	 select * from
+         (select rownum rnum, num, member_num, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq, filename, filepath
+         from
+         (select * from community where category = '잡담'
+            order by re_ref desc, re_seq asc)
+            )
+         where rnum >= ((#{page}-1) * 10 +1 )
+            and rnum <= (#{page} * 10)
+      ]]>
+	</select>
+	 <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
+  <select id="selectInfo" parameterType="Integer" resultType="BoardDTO">
+	<![CDATA[
+	 select * from
+         (select rownum rnum, num, member_num, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq, filename, filepath
+         from
+         (select * from community where category = '정보'
+            order by re_ref desc, re_seq asc)
+            )
+         where rnum >= ((#{page}-1) * 10 +1 )
+            and rnum <= (#{page} * 10)
+      ]]>
+	</select>
+	 <!-- 자료실 목록(PAGE번호를 전달받아서 startRow와 endRow를 구함) -->
+  <select id="selectCircle" parameterType="Integer" resultType="BoardDTO">
+	<![CDATA[
+	 select * from
+         (select rownum rnum, num, member_num, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq, filename, filepath
+         from
+         (select * from community where category = '모임'
+            order by re_ref desc, re_seq asc)
+            )
+         where rnum >= ((#{page}-1) * 10 +1 )
+            and rnum <= (#{page} * 10)
+      ]]>
+	</select>
+	
+	<select id="getListCount" resultType="int">
+		select count(*) from community
+	</select>
+	
+	<!-- 자료실 총 게시물 수 -->
+	<select id="getListCountByCategory" resultType="int">
+		select count(*) from community
+		where category = #{category}
+	</select>
+	<!-- 자료실 저장 -->
+	<insert id="insertBbs" parameterType="BoardDTO">
+		insert into community
+		(num, member_num, writer, 
+		subject, category, content, regitdate, readcount,
+		re_ref, re_lev,	re_seq, filename, filepath)
+		values(community_num_seq1.nextval,#{member_num},#{writer},
+		#{subject},#{category},#{content},sysdate,0,
+		community_num_seq1.nextval,0,0,#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
+	</insert>
+	<!-- 게시판 조회수 증가 -->
+	<select id="selectCommunityByNum" resultType="BoardDTO" parameterType="int">
+		select
+		* from community
+		where num=#{num}
+	</select>
+	<!-- 게시판 조회수 증가 -->
+	<update id="bbs_hit" parameterType="int">
+		update community
+		set
+		readcount=readcount+1
+		where
+		num=#{num}
+	</update>
+	<!-- 게시판 수정 -->
+	<update id="bbs_edit" parameterType="BoardDTO">
+		update community
+		set
+		subject=#{subject}, content=#{content}
+		<if test="filename!=''">, filename=#{filename, jdbcType=VARCHAR}, filepath=#{filepath, jdbcType=VARCHAR}
+		</if>
+		where num=#{num}
+	</update>
+	<update id="deleteFile" parameterType="int">
+		update community
+		set
+		filename=null, filepath=null
+		where num=#{num}
+	</update>
+	
+	<!-- 답변글 레벨 증가 -->
+	<update id="refEdit" parameterType="BoardDTO">
+		update community
+		set
+		re_seq=re_seq+1
+		where re_ref=#{re_ref} and
+		re_seq <![CDATA[>]]>
+		#{re_seq}
+	</update>
+
+	<!-- 답변글 저장 -->
+	<insert id="bbsReplyOk" parameterType="BoardDTO">
+		insert into community
+		(num, member_num, writer,
+		subject, category, content, regitdate, readcount,
+		re_ref, re_lev,	re_seq, filename, filepath)
+		values(community_num_seq1.nextval,1,#{writer},
+		#{subject},#{category},#{content},sysdate,0,#{re_ref},
+		#{re_lev},#{re_seq},#{filename, jdbcType=VARCHAR},#{filepath, jdbcType=VARCHAR})
+	</insert>
+	<!-- 자료실 검색 결과 총 게시물 수 -->
+	<select id="getListCount3" parameterType="hashmap" resultType="int">
+	select count(*) from community
+	<!-- Mybatis 동적SQL문 <where>태그는 where 절을 반환합니다. <where>안의 하위 태그를 실행하고 반환값이 있으면 where 절을 만들어 반환하고 반환값이 없으면 where 절을 반환하지 않습니다. -->
+	<where>
+	<!-- 검색 조건이 없는 경우 -->
+	<if test="find_field==''">
+	</if>
+	<!-- 검색 조건이 글쓴이인 경우 -->
+	<if test="find_field=='writer'">
+	writer like #{find_name}
+	</if>
+	<!-- 검색 조건이 제목인 경우 -->
+	<if test="find_field=='subject'">
+	subject like #{find_name}
+	</if>
+	<!-- 검색 조건이 내용인 경우 -->
+	<if test="find_field=='content'">
+	content like #{find_name}
+	</if>
+	</where>
+	</select>
+	
+	<!-- 자료실 검색 목록 -->
+	<select id="bbs_find" parameterType="hashmap" resultType="BoardDTO">
+
+	 select * from
+         (select rownum rnum, num, member_num, writer,
+            subject, category, content, regitdate, readcount,
+            re_ref, re_lev, re_seq, filename, filepath
+         from
+         (select * from community
+          <!-- Mybatis 동적SQL문 <where>태그는 where 절을 반환합니다. <where>안의 하위 태그를 실행하고 반환값이 있으면 where 절을 만들어 반환하고 반환값이 없으면 where 절을 반환하지 않습니다. -->
+	<where>
+	<!-- 검색 조건이 없는 경우 -->
+	<if test="find_field==''">
+	</if>
+	<!-- 검색 조건이 글쓴이인 경우 -->
+	<if test="find_field=='writer'">
+	writer like #{find_name}
+	</if>
+	<!-- 검색 조건이 제목인 경우 -->
+	<if test="find_field=='subject'">
+	subject like #{find_name}
+	</if>
+	<!-- 검색 조건이 내용인 경우 -->
+	<if test="find_field=='content'">
+	content like #{find_name}
+	</if>
+	</where>
+      order by RE_REF desc, RE_SEQ asc))
+         where rnum <![CDATA[>= ((#{page}-1) * 10 +1 )
+            and rnum <= (#{page} * 10)]]>
+	</select>
+	<delete id="deleteAllReply">
+		delete from community_reply
+		where community_num = #{num}
+	</delete>
+</mapper>

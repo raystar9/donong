@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="team.swcome.donong.mapper.ReplyMapper">
+  
+  <!-- 댓글입력 -->
+  <insert id="insertReply">
+  INSERT INTO community_reply(num, community_num, member_num, replyer, contents, regdate)
+  VALUES(reply_seq.nextval,#{communityNum},#{memberNum},#{replyer}, #{contents}, sysdate)
+  
+  </insert>
+  
+  <select id="listReply" resultType="ReplyDTO">
+	SELECT num, community_num, contents, replyer, regdate, updatedate
+	FROM community_reply
+	WHERE community_num= #{num}
+	ORDER BY num
+  </select>
+ 
+ <select id="update">
+ update community_reply
+ set contents=#{contents}
+ where num = #{num}
+ </select>
+ 
+ <delete id="delete">
+ delete from community_reply
+ where num = #{num}
+ </delete>
+ 
+ <select id="detail" resultType="ReplyDTO">
+ select num,community_num,replyer,regdate,updatedate from community_reply
+ where num=#{num}
+ </select>
+ 
+ <select id="count" resultType="int">
+ select count(*) from community_reply where community_num =#{num}
+ </select>
+ 
+ <sql id="pagingHeader">
+ select * from(
+ select rownum as rn,A.*from(
+ </sql>
+ <sql id="pagingFooter">
+ ) A
+ ) where rn between #{start} and #{end}
+ </sql>
+ 
+  </mapper>

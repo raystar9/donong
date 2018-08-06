@@ -62,7 +62,7 @@ public class RentalController {
 	/* 농지 대여 글쓰기 페이지로 이동 */
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
 	public String rentalWrite(Model model, SessionBean sessionBean) {
-		sessionBean.setMemberNum(2); // 임시로 정해놓음
+		sessionBean.setMemberNum(9); // 임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		MemberDTO m = RentalService.selectNameByPhone(member_num);
 
@@ -80,7 +80,7 @@ public class RentalController {
 								 FileDTO f)
 			throws IllegalStateException, IOException {
 		// int member_num = sessionBean.getMemberNum(); - 로그인 연결되면 이렇게 가져올 것
-		sessionBean.setMemberNum(2); // 임시로 정해놓음
+		sessionBean.setMemberNum(9); // 임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		r.setMember_num(member_num);
 
@@ -94,7 +94,7 @@ public class RentalController {
 	/* 농지 대여 상세보기 페이지로 이동 */
 	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
 	public String rentalView(Model model, SessionBean sessionBean, HttpServletRequest request) {
-		sessionBean.setMemberNum(2); // 임시로 정해놓음
+		sessionBean.setMemberNum(9); // 임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		MemberDTO m = RentalService.selectNameByPhone(member_num);
 
@@ -173,7 +173,7 @@ public class RentalController {
 	/* 농지 대여 수정 페이지 이동 */
 	@RequestMapping(value = "/rental/modify", method = RequestMethod.GET)
 	public String rentalModify(Model model, HttpServletRequest request, SessionBean sessionBean){
-		sessionBean.setMemberNum(2); // 임시로 정해놓음
+		sessionBean.setMemberNum(9); // 임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		MemberDTO m = RentalService.selectNameByPhone(member_num);
 

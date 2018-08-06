@@ -32,8 +32,8 @@
 	width: 1000px;
 	height: 1500px;
 	margin-bottom: 70px;
-	text-align: center;
     margin-top: 20px;	
+    padding-left: 4px;
 }
 
 #searchTable {
@@ -58,7 +58,7 @@
 
 .viewbox {
 	text-align: center;
-	border: 1px solid #777;
+	border: 1px solid #ddd;
 	width: 180px;
 	height: 225px;
 	font-size: 13px;
@@ -106,7 +106,8 @@
 .searchNo {
 	width: 500px;
 	height: 400px;
-	margin-top: 100px;
+	margin-top: 30px;
+	text-align:center;
 }
 #box{
 	border: 1px solid white;
@@ -185,4 +186,7 @@ ul{
 #num_div{
 	margin-bottom: 7px;
     margin-top: 13px;
+}
+#searchNo{
+	text-align:center;
 }

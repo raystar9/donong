@@ -71,15 +71,23 @@
 </ul>
 
  <ul class="nav navbar-nav navbar-right">
+
   <c:if test = '${sessionBean.nickname == null }'>
       <li><a href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span> Log in</a></li>
-      <li><a href="member_join"><span class="glyphicon glyphicon-log-in"></span> Join</a></li>
+      <li><a href="/donong/member_join"><span class="glyphicon glyphicon-log-in"></span> Join</a></li>
   	</c:if>    
   	
 	<c:if test = '${sessionBean.nickname != null }'>
-		<li><a href="member_mypage">${sessionBean.nickname}님 마실나오셨네요</a></li>
-		<li><a href="member_mypage"><span class="glyphicon glyphicon-pencil"></span> My Page</a></li>
-		<li><a href="member_logout"><span class="glyphicon glyphicon-off"></span> Log out</a></li>
+			<c:if test = '${sessionBean.nickname == "admin"}'>
+				<li><a href="/donong/admin/market">관리자 모드로 접속하였습니다.</a></li>
+				<li><a href="/donong/admin/market"><span class="glyphicon glyphicon-pencil"></span> 관리자 Page</a></li>		
+			</c:if>
+			<c:if test = '${sessionBean.nickname != "admin"}'>
+				<li><a href="member_mypage">${sessionBean.nickname}님 마실나오셨네요</a></li>
+				<li><a href="/donong/member_mypage"><span class="glyphicon glyphicon-pencil"></span> My Page</a></li>
+			</c:if>
+			
+		<li><a href="/donong/member_logout"><span class="glyphicon glyphicon-off"></span> Log out</a></li>
 	</c:if> 
     </ul>
     

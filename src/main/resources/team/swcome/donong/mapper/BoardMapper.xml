@@ -214,4 +214,12 @@
 		delete from community_reply
 		where community_num = #{num}
 	</delete>
+	
+	<!-- 최신글 5개 찾는 쿼리문 -->
+	<select id="selectNewestWrite" parameterType="int" resultType="BoardDTO">
+	<![CDATA[
+	select num, subject, regitdate from COMMUNITY where member_num=#{member_num} and rownum<=5 order by num desc
+	 ]]>
+	</select>
+	
 </mapper>

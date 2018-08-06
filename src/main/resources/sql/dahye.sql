@@ -72,6 +72,10 @@ filepath4 VARCHAR2(200)
 
 drop sequence do_num_seq;
 drop sequence sigungu_num_seq;
+drop sequence rental_num_seq;
+drop sequence file_num_seq;
+drop table rentalfiles;
+drop table rentals;
 
 CREATE SEQUENCE mem_num_seq
 start with 1
@@ -266,5 +270,5 @@ insert into sigungu values (sigungu_num_seq.nextval, '음성군', 12);
 insert into sigungu values (sigungu_num_seq.nextval, '단양군', 12);
 ----------------------------------------------------------------
 
-
+select * from rentals;
 

@@ -210,18 +210,18 @@ function search(){
 			 for(var i=0; i<json.length; i++){
 				content = "<div class='viewbox'>" +
 						"<div id='top'>"+
-						"No.&nbsp;"+ json[i].num +
-						"</div>"+
-		 			   	"<div class='row'>"+
+						"<strong>No.&nbsp;"+ json[i].num +
+						"</strong></div>"+
+		 			   	"<div class='row2'>"+
 		 			   	"<a href='./rental/view?num="+ json[i].num +"'><img src='/donong/rental/displayFile?fileName="+json[i].path +"&directory=rent' class='img'></a>"+
 		 			   	"</div>"+
-		 			   	"<div class='row'>"+
+		 			   	"<div class='row2'>"+
 		 			   	"<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+
 		 			   	"</div>"+
-		 			   	"<div class='row'>"+
+		 			   	"<div class='row2'>"+
 		 			   	"<img src='./resources/rental/image/area3.png' class='mark'/>&nbsp;"+json[i].area+"㎡<br>"+
 		 			   	"</div>"+
-		 			   	"<div class='row'>"+
+		 			   	"<div class='row2'>"+
 		 			   	"	<img src='./resources/rental/image/dollar.png' class='mark'/>&nbsp;"+ json[i].price+ "원<br>"+
 		 			   	"</div>"+
 		 			   	"</div>";

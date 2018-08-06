@@ -93,11 +93,11 @@
 	</div>
 	<input type='hidden' id="markerLat" name="lat" value="">
 	<input type='hidden' id="markerLng" name="lng" value="">
-	</form>
-</div>
-	<div class="button">
+	<div class="button2">
 		<input type="button" value="취소" onclick="can_click()" class="btn btn-default" id="canBtn">
 		<input type="submit" value="등록" class="btn btn-default" id="subBtn">
 	</div>	
+	</form>
+</div>
 </body>
 </html>

@@ -16,5 +16,12 @@
 		<input type="submit" value="삭제" />
 	</form>
 	
+	<form action="/donong/cs/download" method="get">
+		<input type="hidden" name="directory" value="rent" />
+		<input type="hidden" name="fileName" value="${imgPath }" />
+		<input type="submit" value="다운로드" />
+	</form>
+	
+	
 </body>
 </html>

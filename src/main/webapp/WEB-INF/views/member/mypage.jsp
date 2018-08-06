@@ -141,7 +141,7 @@
     <c:forEach var="board" items="${boardlist}">
 
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="/donong/community/${board.num}">${board.subject}</a></li>
+        <li><a href="/donong/community/cont?num=${board.num}">${board.subject}</a></li>
 
       </ul><br>
       

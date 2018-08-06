@@ -1,5 +1,7 @@
+
 .main-navbar {
 	border: 0px;
+	font-family: 'Gamja Flower', cursive;
 	margin-bottom: 0px;
 	background-color: #ACD17F;
 }
@@ -22,7 +24,7 @@ background-color: #ACD17F;
 
 .dropdown{
 	width:180px;
-	font-size:15pt;
+	font-size:20pt;
 	font-weight:bold;
 	text-align:center;
 }
@@ -37,7 +39,7 @@ background-color: #ACD17F;
     display: block;
     margin-top: 0;
     width:180px;
-    font-size:15pt;
+    font-size:18pt;
 	font-weight:bold;
 	text-align:center;
 	background-color: #ACD17F;

@@ -44,12 +44,7 @@
   
   
   <li class="dropdown main-menu">
-   <a class="dropdown-toggle">마을회관</a>
-    <ul class="dropdown-menu">
-      <li><a href="/donong/communitylist">게시판</a><li>
-      <li><a href="#">공유정보</a></li>
-      <li><a href="#">수확후기</a></li>
-    </ul>
+   <a class="dropdown-toggle" href="/donong/community/list">마을회관</a>
   </li>
   
     <li class="dropdown main-menu">

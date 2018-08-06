@@ -93,7 +93,7 @@ public class RentalController {
 
 	/* 농지 대여 상세보기 페이지로 이동 */
 	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
-	public String rentalView(Model model, SessionBean sessionBean, HttpServletRequest request) {
+	public String rentalViewWithoutLogin(Model model, SessionBean sessionBean, HttpServletRequest request) {
 		sessionBean.setMemberNum(9); // 임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
 		MemberDTO m = RentalService.selectNameByPhone(member_num);
@@ -112,7 +112,7 @@ public class RentalController {
 	/* 마커 찍을 때 Ajax */
 	@RequestMapping(value = "/markerJson", method = RequestMethod.POST)
 	@ResponseBody
-	public Object markerJson(Model model, SessionBean sessionBean) {
+	public Object markerJson(Model model) {
 		List<RentalDTO> list = RentalService.selectRentalList();
 		String[] imgs = RentalService.selectRepresentImg();
 
@@ -125,7 +125,7 @@ public class RentalController {
 
 	/* 농지 대여 삭제 */
 	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
-	public String rentalDelete(Model model, HttpServletRequest request, String directory) {
+	public String rentalDelete(Model model, HttpServletRequest request, String directory, SessionBean sessionBean) {
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		
 		Map m = new HashMap();
@@ -141,7 +141,7 @@ public class RentalController {
 	/* 검색할 때 Ajax */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	@ResponseBody
-	public Object searchJson(Model model, SessionBean sessionBean, HttpServletRequest request) {
+	public Object searchJson(Model model, HttpServletRequest request) {
 		int num = 0;
 		int sido = 0;
 		int sigungu = 0;
@@ -191,7 +191,7 @@ public class RentalController {
 	
 	/* 농지 대여 수정 처리 */
 	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.POST)
-	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f)
+	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f, SessionBean sessionBean)
 			throws IllegalStateException, IOException {
 		int board_num = r.getNum();
 		r.setNum(board_num);

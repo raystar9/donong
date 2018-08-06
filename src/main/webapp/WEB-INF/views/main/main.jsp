@@ -11,14 +11,12 @@
 <script src="/donong/resources/main/js/main.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHdzdDM31uM0W0KvSAVn1awYGp0ujKE_g&callback=initMap&libraries=places"></script>
 
-<link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
   <!-- google font 링크 -->
   <style>
-  body{
-	font-family: 'Sunflower', sans-serif;
-	margin-bottom:20px;
-  }
-  
+  	body {
+  		margin-bottom:20px;
+  		font-family: 'Gamja Flower', cursive;
+  	}
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;

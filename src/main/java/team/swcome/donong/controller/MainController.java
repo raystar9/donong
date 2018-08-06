@@ -98,10 +98,10 @@ public class MainController {
 	@RequestMapping(value = "member_mypage")
 	public String member_mypage(Model model,@RequestParam(value="page", defaultValue="1") int page, HttpServletRequest request, OrdersDTO ordersDTO, SessionBean sessionBean) throws Exception {
 		
-		int num = sessionBean.getMemberNum();
+		int member_num = sessionBean.getMemberNum();
 		//최신글 페이지 list 객체 생성
-		List<BoardDTO> boardlist = new ArrayList<BoardDTO>(num);
-		boardlist=accountService.selectNewestWrite(num);
+		List<BoardDTO> boardlist = new ArrayList<BoardDTO>(member_num);
+		boardlist=accountService.selectNewestWrite(member_num);
 		
 		//구매내역 페이지 list 객체 생성
 		List<OrdersDTO> orderlist = new ArrayList<OrdersDTO>();

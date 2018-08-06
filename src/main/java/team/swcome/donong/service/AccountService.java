@@ -93,8 +93,8 @@ public class AccountService {
 		return ordersMapper.getOrderListCount();
 	}
 
-	public List<BoardDTO> selectNewestWrite(int num) {
-		return boardMapper.selectNewestWrite(num);
+	public List<BoardDTO> selectNewestWrite(int member_num) {
+		return boardMapper.selectNewestWrite(member_num);
 	}
 
 

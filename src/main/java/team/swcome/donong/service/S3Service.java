@@ -29,7 +29,7 @@ public class S3Service {
 		UUID uid = UUID.randomUUID();
 		
 		String savedName = "/" + uid.toString() + "_" + originalName;
-		logger.info("?��로드 경로: " + uploadPath);
+		logger.info("업로드 경로: " + uploadPath);
 		String savedPath = calcPath(uploadPath);
 		
 		String uploadedFileName = null;

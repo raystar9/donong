@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @Resource
 public class MemberDTO {
 	private int num;
@@ -19,6 +21,8 @@ public class MemberDTO {
 	private String phone;
 	private Date registdate;
 	
+	 
+
 	public int getNum() {
 		return num;
 	}

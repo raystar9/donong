@@ -8,5 +8,7 @@
     <typeAlias alias="MemberDTO" type="team.swcome.donong.dto.MemberDTO" />
     <typeAlias alias="RentalDTO" type="team.swcome.donong.dto.RentalDTO" />
     <typeAlias alias="FileDTO" type="team.swcome.donong.dto.FileDTO" />
+    <typeAlias alias="BoardDTO" type="team.swcome.donong.dto.BoardDTO" />
+    <typeAlias alias="ReplyDTO" type="team.swcome.donong.dto.ReplyDTO" />
   </typeAliases>
 </configuration>

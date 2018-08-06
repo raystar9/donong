@@ -50,10 +50,7 @@
     	width:180px;
     	height:135px;
     }
-    .container-fluid{
-    padding-right:0px;
-    padding-left:0px;
-    }
+
   
     
      .carousel-indicators .active{

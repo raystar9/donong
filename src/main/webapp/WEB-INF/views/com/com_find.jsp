@@ -41,7 +41,7 @@
             
              </c:if>   
              
-             <a href = "cont?com_num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>

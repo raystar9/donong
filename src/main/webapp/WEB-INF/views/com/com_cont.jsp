@@ -92,17 +92,18 @@ function listReplyRest(num){
 	<hr>
 	<c:if test="${!empty bbsbean.filename }">
 	
-	파일 다운로드
-	
-	<a href="https://s3.ap-northeast-2.amazonaws.com/donong-s3/community${bbsbean.filepath }">${bbsbean.filename }</a>
-
+	<form action="/donong/community/download" method="get">
+		<input type="hidden" name="directory" value="community" />
+		<input type="hidden" name="fileName" value="${bbsbean.filepath}" />
+		<input type="submit" value="파일다운로드" class="btn btn-success" />
+	</form>
 
 </c:if>
 </div>
 <hr>
 <textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
 <br>
-<button type="button" id="btnReply">댓글 작성</button>
+<button type="button" id="btnReply" class="btn">댓글 작성</button>
 <div id="listReply"></div>
 <hr>
 <div id="boardcont_menu" style="margin-left:75%">
@@ -114,5 +115,6 @@ function listReplyRest(num){
 		<input type="button" value="목록" class="btn" onclick="location='list?page=${page}'">
 		</div>
 </div>
+
 </body>
 </html>

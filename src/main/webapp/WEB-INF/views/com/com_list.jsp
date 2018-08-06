@@ -100,13 +100,18 @@ $(function(){
              
              </c:if>   
              
-             <a href = "cont?num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?num=${b.num}&page=${page}">
                       ${b.subject}
              </a>
           </div>
        </td>
        <td>
-          <div>${b.writer}</div>
+          <div>
+          <c:if test="${b.writer=='admin'}">
+          <b>${b.writer}</b></c:if>
+          <c:if test="${b.writer!='admin' }">
+          ${b.writer}</c:if>
+          </div>
        </td>
        <td>
           <div><fmt:formatDate value="${b.regitdate}" pattern="yyyy-MM-dd HH:mm:SS"></fmt:formatDate></div>

@@ -100,7 +100,7 @@
 						</td>
 						<td>
 							<div>
-								<a href="./qna/${content.num }?state=cont">
+								<a href="/donong/cs/qna/${content.num }?state=cont">
 									${content.title } 
 								</a>
 							</div>

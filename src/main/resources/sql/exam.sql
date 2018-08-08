@@ -18,6 +18,11 @@ select * from rentals;
 
 select * from member;
 
+SELECT realname, phone
+FROM member m, RENTALS r
+WHERE r.member_num = m.num
+AND r.num = ?
+
 
 select * from SIGUNGU
 where name = '이문동';
@@ -129,3 +134,5 @@ UPDATE rentals
   	SET content = '변경 ㅇㅋ?'
   	WHERE num = 69 
 
+select * from member;
+select * from rentals;

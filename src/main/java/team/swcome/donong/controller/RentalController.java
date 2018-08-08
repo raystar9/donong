@@ -63,7 +63,7 @@ public class RentalController {
 	@RequestMapping(value = "/rental/write", method = RequestMethod.GET)
 	public String rentalWrite(Model model, SessionBean sessionBean) {
 		int member_num = sessionBean.getMemberNum();
-		MemberDTO m = RentalService.selectNameByPhone(member_num);
+		MemberDTO m = RentalService.selectWriter(member_num);
 
 		model.addAttribute("name", m.getRealname());
 		model.addAttribute("phone", m.getPhone());
@@ -91,11 +91,10 @@ public class RentalController {
 
 	/* 농지 대여 상세보기 페이지로 이동 */
 	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
-	public String rentalViewWithoutLogin(Model model, SessionBean sessionBean, HttpServletRequest request) {
-		int member_num = sessionBean.getMemberNum();
-		MemberDTO m = RentalService.selectNameByPhone(member_num);
+	public String rentalViewWithoutLogin(Model model, HttpServletRequest request) {
 
 		int board_num = Integer.parseInt(request.getParameter("num"));
+		MemberDTO m = RentalService.selectNameByPhone(board_num);
 		RentalDTO r = RentalService.selectRentalView(board_num);
 
 		FileDTO f = RentalService.selectFileNamePath(board_num);
@@ -121,7 +120,7 @@ public class RentalController {
 	}
 
 	/* 농지 대여 삭제 */
-	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/rental/delete", method = RequestMethod.DELETE)
 	public String rentalDelete(Model model, HttpServletRequest request, String directory, SessionBean sessionBean) {
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		
@@ -186,7 +185,7 @@ public class RentalController {
 	}
 	
 	/* 농지 대여 수정 처리 */
-	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.POST)
+	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.PUT)
 	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f, SessionBean sessionBean)
 			throws IllegalStateException, IOException {
 		int board_num = r.getNum();

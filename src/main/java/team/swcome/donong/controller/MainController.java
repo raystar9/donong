@@ -120,11 +120,12 @@ public class MainController {
 		Map m = new HashMap();
 		m.put("page", page);
 		m.put("limit", limit);
+		m.put("member_num", member_num);
 		
 		orderlist= accountService.selectPagingOrders(m);
 		
 		//주문글 총 갯수 산출
-		int listcount = accountService.getOrderListCount(); 
+		int listcount = accountService.getOrderListCount(member_num); 
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		

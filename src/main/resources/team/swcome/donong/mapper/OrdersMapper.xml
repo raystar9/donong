@@ -17,12 +17,12 @@
 	<![CDATA[
 		select * from (select rownum rnum, num, member_num, name, orderdate, address, phone, comments, waybill, status 
 				from (select * from orders order by orderdate DESC)) 
-					where rnum >= ((#{page}-1) * #{limit} + 1) and rnum <= (#{page}*#{limit})
+					where rnum >= ((#{page}-1) * #{limit} + 1) and rnum <= (#{page}*#{limit}) and member_num = #{member_num} 
 	]]>
 	</select>
 	
 	<select id="getOrderListCount" resultType="int">
-		select count(*) from orders
+		select count(*) from orders where member_num = #{member_num} 
 	</select>
 	
 	<select id="selectWaitingOrders" resultType="OrderItemsDTO">

@@ -23,5 +23,5 @@ public interface OrdersMapper {
 	public int updateStatusToArrv(List<OrdersDTO> orders);
 	public int updateStatusAndWaybill(List<OrdersDTO> orders);
 	public int deleteOrderByNum(int num);
-	public int getOrderListCount();
+	public int getOrderListCount(int member_num);
 }

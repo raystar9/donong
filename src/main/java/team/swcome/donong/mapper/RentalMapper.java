@@ -35,4 +35,6 @@ public interface RentalMapper {
 	
 	public void updateFiles(FileDTO f);
 	
+	public MemberDTO selectWriter(int member_num);
+	
 }

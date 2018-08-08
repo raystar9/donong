@@ -64,7 +64,7 @@ public class RentalController {
 	public String rentalWrite(Model model, SessionBean sessionBean) {
 		sessionBean.setMemberNum(9); // 임시로 정해놓음
 		int member_num = sessionBean.getMemberNum();
-		MemberDTO m = RentalService.selectNameByPhone(member_num);
+		MemberDTO m = RentalService.selectWriter(member_num);
 
 		model.addAttribute("name", m.getRealname());
 		model.addAttribute("phone", m.getPhone());

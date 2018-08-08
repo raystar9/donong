@@ -1,14 +1,9 @@
 package team.swcome.donong.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -336,5 +331,9 @@ public class RentalService {
 			f.setFilePath4(f2.getFilePath4());
 		}
 		rentalMapper.updateFiles(f);
+	};
+	
+	public MemberDTO selectWriter(int member_num) {
+		return memberMapper.selectMemberByNum(member_num);
 	};
 }

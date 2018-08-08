@@ -83,7 +83,7 @@
 				<li><a href="/donong/admin/market"><span class="glyphicon glyphicon-pencil"></span> 관리자 Page</a></li>		
 			</c:if>
 			<c:if test = '${sessionBean.nickname != "admin"}'>
-				<li><a href="member_mypage">${sessionBean.nickname}님 마실나오셨네요</a></li>
+				<li><a href="/donong/member_mypage">${sessionBean.nickname}님 마실나오셨네요</a></li>
 				<li><a href="/donong/member_mypage"><span class="glyphicon glyphicon-pencil"></span> My Page</a></li>
 			</c:if>
 			

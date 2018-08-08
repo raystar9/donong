@@ -17,29 +17,31 @@
 	color: #8BC34A;
 }
 
+.qna_cont_row {
+	width: 100%;
+	float: left;	
+}
+
 #qna_cont label {
 	width: 20%;
 	margin-top: 25px;
 	height: 30px;
 	border-bottom: 1px solid green;
-	float: left;
 	margin-right: 5px;
 }
 
 #qna_cont span {
 	display: inline-block;
-	width: 79%;
+	width: 78%;
 	height: 30px;
 	margin-top: 25px;
 	border-bottom: 1px solid green;
-	float: left;
 }
 
 #qna_cont textarea {
 	display: inline-block;
-	width: 79%;
+	width: 78%;
 	margin-top: 5px;
-	float: left;
 }
 
 #qna_cont button, #deleteBtn, #updateReply {
@@ -50,10 +52,3 @@
 	margin-right: 50px;
 	margin-bottom: 100px;
 }
-
-
-
-
-
-
-

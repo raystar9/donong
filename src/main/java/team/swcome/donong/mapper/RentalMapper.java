@@ -13,7 +13,7 @@ public interface RentalMapper {
 	
 	public void insertFile(FileDTO f);
 	
-	public MemberDTO selectNameByPhone(int num);
+	public MemberDTO selectNameByPhone(int board_num);
 	
 	public RentalDTO selectSidoSigunguNum(Map<String,String> map);
 	

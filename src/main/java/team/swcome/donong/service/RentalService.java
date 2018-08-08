@@ -146,9 +146,8 @@ public class RentalService {
 	}
 
 	/* 로그인한 사람 이름, 핸드폰 가져오기 */
-	public MemberDTO selectNameByPhone(int num) {
-		MemberDTO m = memberMapper.selectMemberByNum(num);
-		System.out.println("name = " + m.getRealname());
+	public MemberDTO selectNameByPhone(int board_num) {
+		MemberDTO m = rentalMapper.selectNameByPhone(board_num);
 		return m;
 	};
 

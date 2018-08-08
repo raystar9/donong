@@ -280,7 +280,7 @@ public class RentalService {
 			f.setFilePath1(f2.getFilePath1());
 		}
 		
-		if(!f.getFile2().isEmpty()) {	//파일1이 변경되었을 때
+		if(!f.getFile2().isEmpty()) {	//파일2이 변경되었을 때
 			//올린주소 리턴받음
 			ResponseEntity<String> img_path = new ResponseEntity<>
 			(S3Service.uploadFile(uploadPath, file2.getOriginalFilename(), file2), HttpStatus.CREATED);
@@ -314,8 +314,8 @@ public class RentalService {
 			// 바뀐 파일명으로 저장
 			f.setFilePath3(certificatePath);
 		}else {	//파일1이 변경되지 않았을 때
-			f.setFileName2(f2.getFileName3());
-			f.setFilePath2(f2.getFilePath3());
+			f.setFileName3(f2.getFileName3());
+			f.setFilePath3(f2.getFilePath3());
 		}
 		
 		if(!f.getFile4().isEmpty()) {	//파일1이 변경되었을 때

@@ -92,7 +92,7 @@
 
 #top {
 	height: 20px;
-	background: #427940;
+	background: #658d55;
 	color: white;
 	width: 100%;
 	border-radius: 10px 10px 0px 0px;
@@ -130,6 +130,7 @@
 }
 #con{
 	margin-left:20%;
+	height:2500px;
 }
 table tr td:nth-child(1) {
 	text-align:center;
@@ -149,9 +150,6 @@ div strong{
 	height:30px;
 	margin-top: 10px;
 }
-#search_div{
-	float:right;
-}
 select{
 	height:22px;
 }
@@ -164,19 +162,20 @@ select{
     background-color: #dff0d88f;	
 }
 #search_div{
-	width:120px;
 	height:150px;
-	text-align: center;
-    margin-right: 80px;
-    margin-top: 20px;
+   	float:right;
+	width:180px;
+	margin-right: 40px;
+    margin-top: 25px;
 }
 #searchBtn{
-	height: 76px;
-    width: 86px;
+	height: 70px;
+    width: 70px;
     background-color: #dff0d85c;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
-    border-radius: 10px;    
+    border-radius: 10px;
+     margin-right: 15px;
 }
 ul{
 	list-style:none;
@@ -189,4 +188,19 @@ ul{
 }
 #searchNo{
 	text-align:center;
+}
+#MOVE_TOP_BTN {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+}
+#resetBtn{
+	height: 70px;
+    width: 70px;
+    background-color: #dff0d85c;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;    
 }

@@ -139,7 +139,7 @@
 			</c:if>
 		</table>
 		
-		<table>
+		<table id="boardList">
 			<c:if test="${listCount == 0 }">
 				<tr>
 					<th width="10%">번호</th>
@@ -151,7 +151,8 @@
 				</tr>
 				<tr>
 					<th colspan="6">
-						<font size="2">문의 내역이 존재하지 않습니다.</font>
+						<br>
+						<font size="4">문의 내역이 존재하지 않습니다.</font>
 					</th>
 				</tr>
 			</c:if>

@@ -5,7 +5,7 @@ $(document).ready(function() {
 		var inputfile=$(this).val().split('\\');
 		var extension = $(this).val().split('.');
 		if(extension[1] != "png" && extension[1] != "PNG" &&
-		   extension[1] != "jpg" && extension[1] != "jpeg"	){
+		   extension[1] != "jpg" && extension[1] != "jpeg" && extension[1] != "JPG" && extension[1] != "JPEG"){
 			alert('이미지를 올려주세요.');
 			$('#flie1').val("");
 			$('#filevalue1').val("");

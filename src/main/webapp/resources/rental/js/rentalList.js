@@ -1,6 +1,24 @@
 $(document).ready(function() {
 	viewMarkers();
 	
+	  /* 화면 맨위로가는 함수 */	
+	  $(function() {
+	        $(window).scroll(function() {
+	            if ($(this).scrollTop() > 500) {
+	                $('#MOVE_TOP_BTN').fadeIn();
+	            } else {
+	                $('#MOVE_TOP_BTN').fadeOut();
+	            }
+	        });
+	        
+	        $("#MOVE_TOP_BTN").click(function() {
+	            $('html, body').animate({
+	                scrollTop : 0
+	            }, 400);
+	            return false;
+	        });
+	    });
+	
 	var sido = [
 		'강원도', '경기도', '경상남도', '광주광역시', '대구광역시', '대전광역시', '부산광역시',
 		'서울특별시', '울산광역시', '인천광역시','전라북도', '충청북도'
@@ -174,8 +192,12 @@ $(document).ready(function() {
  		
 });// ready()
 
-function up(){
-	$("searchBox").scrollTop(0);
+/* 검색 초기화 */
+function reset(){
+	$("#num").val("");
+	$("#sido").val(0);
+	$("#sigungu").val(0);
+	$("#price").val(0);
 }
 
 /* 농지대여 글 검색 */
@@ -244,8 +266,8 @@ var infoWindowArr = [];
 /* 맵 초기화 함수 */	
 function initMap(){
 	var seoul = {			// 서울 시청으로 처음 위치 지정
-		lat : 36.58327953071077,
-		lng : 127.89600693824082	
+		lat : 37.06518570901358,
+		lng : 127.66496316804648
 	};
 	
 	map = new google.maps.Map(document.getElementById("map"), {

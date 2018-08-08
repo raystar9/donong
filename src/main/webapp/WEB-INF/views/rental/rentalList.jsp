@@ -50,6 +50,7 @@
 		</ul>
 		<div id="search_div" >
 			<input type="button" value="검색" id="searchBtn" onclick="search();" class="btn-default">
+			<input type="button" value="초기화" id="resetBtn" onclick="reset();" class="btn-default">
 		</div>
 		
 	</div>
@@ -81,6 +82,7 @@
 		</div>
 	</c:forEach>
 </div>
+<a id="MOVE_TOP_BTN" href="#"><img src='./resources/rental/image/top5.png' style="width: 80px;"></a>
 </div>
 </body>
 </html>

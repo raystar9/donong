@@ -70,9 +70,6 @@ public class CommunityController {
 			SessionBean sessionBean) {
 		List<BoardDTO> boardlist = new ArrayList<>();
 		HttpSession session = request.getSession();
-		sessionBean.setMemberNum(1);
-		sessionBean.setNickname("admin");
-		sessionBean.getMemberNum();
 		if (limit != null) {
 			session.setAttribute("limit", limit);
 		} else {
@@ -136,7 +133,6 @@ public class CommunityController {
 
 	@RequestMapping(value = "/community/write", method = RequestMethod.GET)
 	public String write(Locale locale, Model model, SessionBean sessionBean) {
-		sessionBean.getMemberNum();
 		return "com/com_write";
 	}
 
@@ -209,7 +205,6 @@ public class CommunityController {
 	public String edit(Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
 		 @RequestParam(value = "num") int num,
 		 SessionBean sessionBean) {
-		sessionBean.getMemberNum();
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
@@ -250,7 +245,6 @@ public class CommunityController {
 
 	@RequestMapping(value = "/community/del", method = RequestMethod.GET)
 	public String del(Model model, @RequestParam(value = "num") String num, SessionBean sessionBean) {
-		sessionBean.getMemberNum();
 		model.addAttribute("num", num);
 		return "com/com_del";
 	}
@@ -285,7 +279,6 @@ public class CommunityController {
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
-		sessionBean.getMemberNum();
 		return "com/com_reply";
 	}
 	/* 게시판 답변 저장 */
@@ -308,7 +301,6 @@ public class CommunityController {
 			@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("find_name") String find_name,
 			@RequestParam("find_field") String find_field, SessionBean sessionBean) throws Exception{
-		sessionBean.getMemberNum();
 		int limit=10;
 		
 		Map<String, String> m=new HashMap<>();

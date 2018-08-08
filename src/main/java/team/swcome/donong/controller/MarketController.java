@@ -25,8 +25,8 @@ import team.swcome.donong.service.MarketService;
 /**
  * Handles requests for the application home page.
  */
-@Controller
 @SessionAttributes("sessionBean")
+@Controller
 public class MarketController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MarketController.class);
@@ -38,10 +38,6 @@ public class MarketController {
 	@RequestMapping(value = "/market", method = RequestMethod.GET)
 	public String home(Model model, @RequestParam(required = false, defaultValue = "seed") String category,
 			@RequestParam(required = false, defaultValue = "1") int page, SessionBean sessionBean) {
-		if(sessionBean.getMemberNum() == 0) {
-			sessionBean.setMemberNum(1);
-			sessionBean.setNickname("raystar9");
-		}
 		
 		marketService.getOrderListByMemberNum(sessionBean.getMemberNum());
 		

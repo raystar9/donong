@@ -63,7 +63,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "member_login_ok", method =  {RequestMethod.POST,RequestMethod.GET})
-	public String member_login_ok(Model model, MemberDTO m, SessionBean sessionBean, 
+	public String member_login_okWithoutLogin(Model model, MemberDTO m, SessionBean sessionBean, 
 			@RequestParam String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			MemberDTO memberRes = accountService.getUserNum(m);
 			
@@ -279,7 +279,7 @@ public class MainController {
 	/* 지도 마커 찍을 때 Ajax */
 	@RequestMapping(value = "/markJson", method = RequestMethod.POST)
 	@ResponseBody
-	public Object markerJson(Model model, SessionBean sessionBean) {
+	public Object markerJson(Model model) {
 		List<RentalDTO> list = rentalService.selectRentalList();
 		String[] imgs = rentalService.selectRepresentImg();
 

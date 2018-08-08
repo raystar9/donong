@@ -15,6 +15,8 @@
   <style>
   	body {
   		margin-bottom:20px;
+  	}
+  	.main {
   		font-family: 'Gamja Flower', cursive;
   	}
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -112,7 +114,7 @@
 <body>
 
   <%@include file="/WEB-INF/views/common/header.jsp" %>
-
+<div class="main">
 <div class="container text-center">    
   <div class="row content">
     <div class="col-sm-6 text-center"> 
@@ -334,6 +336,6 @@
      <div id="anibar"><a href="member_join"><img id="footani" src="resources/main/image/aniu1.gif">도시 속 힐링 도시농부</a></div>
  </div>    
  </footer>
-
+</div>
 </body>
 </html>

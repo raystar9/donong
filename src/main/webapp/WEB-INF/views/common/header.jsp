@@ -85,8 +85,9 @@
 		<li><a href="/donong/member_logout"><span class="glyphicon glyphicon-off"></span> Log out</a></li>
 	</c:if> 
     </ul>
-    
-    <div class="modal fade" id="myModal" role="dialog">
+</div> <!-- end navbar-collapse -->
+</div>
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -137,8 +138,5 @@
       
     </div> <!-- end modal-dialog -->
   </div> <!-- end modal fade -->
-</div> <!-- end navbar-collapse -->
-</div>
-
 
 	

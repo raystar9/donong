@@ -71,9 +71,8 @@
 
     
     #map{
-		width:500px;
+		width:555px;
 		height:375px;
-		float:right;
     }
     
     #footani{

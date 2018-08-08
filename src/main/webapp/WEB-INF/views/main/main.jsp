@@ -50,21 +50,28 @@
     	width:180px;
     	height:135px;
     }
-
+    .footer-bg{
+    padding-right:0px;
+    padding-left:0px;
+    }
   
-    
+ 	/* 
      .carousel-indicators .active{
     	background-color:red;
-    }  /* 이미지 슬라이드 버튼 활성화 시 색 설정 없을 경우 white */ 
-    
-    
+    	
+    }  이미지 슬라이드 버튼 활성화 시 색 설정 없을 경우 white */ 
+     /* 
+     
     .carousel-indicators li{
     	background-color:black;
-    }   /* 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 */
+    	 이미지 슬라이드 버튼 비활성화 시 색 설정 없을 경우 반투명 
+    }  */
+
     
     #map{
 		width:500px;
 		height:375px;
+		float:right;
     }
     
     #footani{
@@ -95,6 +102,10 @@
     width: 80%;
   }
 }
+
+.carousel-caption{
+	font-size:20px;
+}
   
   </style>
 </head>
@@ -113,30 +124,33 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
     
     <!-- 슬라이드용 사진설정 -->
     <div class="carousel-inner">
       <div class="item active">
-      	<a href="#1"><img id="sample" src="resources/main/image/sample1.png" alt="sample1" style="width:100%;"></a>
-      	      <div class="carousel-caption">
-        	<!-- 자막을 넣고 싶을 경우 넣는 곳(글자색은 기본으로 white) -->
-        </div>
+      	<a href="/donong/info_start_1"><img id="sample" src="resources/main/image/main_start.png" alt="sample1" style="width:100%;"></a>
+      	    <div class="carousel-caption">
+        		애호박도 떡잎부터
+        	</div>
       	</div>
       	 <div class="item">
-		<a href="#2"><img id="sample" src="resources/main/image/sample2.png" alt="sample2" style="width:100%;"></a>
+		<a href="/donong/info_farming_7"><img id="sample" src="resources/main/image/main_ready.jpg" alt="main_ready" style="width:100%;"></a>
+			<div class="carousel-caption">
+	        		8월의 추천 작물 배추<br>
+	        		김장철에 수확할 수 있는 최적화된 시기 
+	        	</div>
 		</div>
 		 <div class="item">
-		<a href="#3"><img id="sample" src="resources/main/image/logo.jpg" alt="logo" style="width:100%;"></a>
+		<a href="/donong/community/list"><img id="sample" src="resources/main/image/main_community.jpg" alt="main_community" style="width:100%;"></a>
+			  <div class="carousel-caption">
+        		max님의 베스트 샷<br>
+        		벌써부터 자세가 남다릅니다
+        	</div>
+	
 		</div>
-		 <div class="item">
-		<a href="#4"><img id="sample" src="resources/main/image/sample2.png" alt="logo" style="width:100%;"></a>
-		</div>
-		 <div class="item">
-		<a href="#5"><img id="sample" src="resources/main/image/sample1.png" alt="logo" style="width:100%;"></a>
-		</div>
+	
+		
       </div>
       
       <!-- 옆 슬라이드 이동 화살표 -->
@@ -315,7 +329,7 @@
   </div>
 </div>
 
- <footer class="container-fluid navbar-fixed-bottom">
+ <footer class="container-fluid navbar-fixed-bottom footer-bg">
  <div id="bg">
      <div id="anibar"><a href="member_join"><img id="footani" src="resources/main/image/aniu1.gif">도시 속 힐링 도시농부</a></div>
  </div>    

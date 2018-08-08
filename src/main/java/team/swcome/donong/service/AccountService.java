@@ -82,15 +82,9 @@ public class AccountService {
 		return result;
 	}
 
-
-	public List<OrdersDTO> selectPagingOrders(Map m) {
-
-		return ordersMapper.selectPagingOrders(m);
-	}
-
-	public int getOrderListCount() {
+	public int getOrderListCount(int member_num) {
 		
-		return ordersMapper.getOrderListCount();
+		return ordersMapper.getOrderListCount(member_num);
 	}
 
 	public List<BoardDTO> selectNewestWrite(int member_num) {

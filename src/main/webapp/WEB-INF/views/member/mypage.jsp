@@ -76,7 +76,7 @@
   	  <c:forEach var="order" items="${orderlist}">
       	<tr>
       		<td>
-     	 		${order.name }  	 
+     	 		${order.goods.get(0).name }  	 
      	 	</td>
      	 	<td>
      	 		 <c:if test="${order.status=='npay'}">

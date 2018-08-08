@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import team.swcome.donong.dto.BoardDTO;
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.OrderItemsDTO;
 import team.swcome.donong.dto.OrdersDTO;
 import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.AccountService;
+import team.swcome.donong.service.MarketService;
 import team.swcome.donong.service.RentalService;
 
 /**
@@ -42,6 +44,9 @@ public class MainController {
 	
 	@Autowired
 	RentalService rentalService;
+	
+	@Autowired
+	MarketService marketService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -109,7 +114,7 @@ public class MainController {
 		boardlist=accountService.selectNewestWrite(member_num);
 		
 		//구매내역 페이지 list 객체 생성
-		List<OrdersDTO> orderlist = new ArrayList<OrdersDTO>();
+		List<OrderItemsDTO> orderlist = new ArrayList<OrderItemsDTO>();
 				
 		//페이징 시작
 		int limit = 5;
@@ -125,11 +130,12 @@ public class MainController {
 		Map m = new HashMap();
 		m.put("page", page);
 		m.put("limit", limit);
+		m.put("member_num", member_num);
 		
-		orderlist= accountService.selectPagingOrders(m);
+		orderlist= marketService.getMypageOrdersByMemberNum(page, member_num);
 		
 		//주문글 총 갯수 산출
-		int listcount = accountService.getOrderListCount(); 
+		int listcount = accountService.getOrderListCount(member_num);
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		

@@ -8,13 +8,13 @@
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
 <script>
-function check(){
+$(document).on("submit",function check(){
 	if($.trim($('#content').val())==""){
 		alert('내용을 입력하세요.');
 		$('#content').focus();
 		return false;
 	}
-}
+});
 </script>
 <script src="resources/js/bbs.js"></script>
 </head>

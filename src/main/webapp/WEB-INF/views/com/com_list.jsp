@@ -77,7 +77,7 @@ $(function(){
   	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
     </c:if>
   <c:if test="${category=='전체' }">
- 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg active" ></a>
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-success btn-lg" ></a>
   	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
   	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
   	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>  
 <html>
 <head>
 <%@ include file="/resources/common/jsp/import.jsp" %>
@@ -39,13 +40,13 @@
 		<tr>
 			<td>면적</td>
 			<td>
-				${rental.area}㎡
+				<fmt:formatNumber pattern="#,###">${rental.area}</fmt:formatNumber>㎡
 			</td>
 		</tr>
 		<tr>
 			<td>임대료</td>
 			<td>
-				${rental.price}원
+				<fmt:formatNumber pattern="#,###">${rental.price}</fmt:formatNumber>원
 			</td>
 		</tr>
 		<tr>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -39,11 +40,11 @@
 				<div class="s_title"><strong>임대료</strong></div>
 				<select name="price" id="price">
 				<option value="0">선택</option>
-				<option value="10000">10000원 ~ 20000원</option>
-				<option value="20000">20000원 ~ 30000원</option>
-				<option value="30000">30000원 ~ 40000원</option>
-				<option value="40000">40000원 ~ 50000원</option>
-				<option value="50000">50000원 ~ 이상</option>
+				<option value="10000">10,000원 ~ 20,000원</option>
+				<option value="20000">20,000원 ~ 30,000원</option>
+				<option value="30000">30,000원 ~ 40,000원</option>
+				<option value="40000">40,000원 ~ 50,000원</option>
+				<option value="50000">50,000원 ~ 이상</option>
 			</select>
 		</div>
 			</li>
@@ -74,10 +75,10 @@
 				<img src="./resources/rental/image/flag.png" class='mark'/>&nbsp;${r.title }<br>
 			</div>
 			<div class='row2'>
-				<img src="./resources/rental/image/area3.png" class='mark'/>&nbsp;${r.area }㎡<br>
+				<img src="./resources/rental/image/area3.png" class='mark'/>&nbsp;<fmt:formatNumber pattern="#,###">${r.area }</fmt:formatNumber>㎡<br>
 			</div>
 			<div class='row2'>
-				<img src="./resources/rental/image/dollar.png" class='mark'/>&nbsp; ${r.price }원<br>
+				<img src="./resources/rental/image/dollar.png" class='mark'/>&nbsp; <fmt:formatNumber pattern="#,###">${r.price }</fmt:formatNumber>원<br>
 			</div>
 		</div>
 	</c:forEach>

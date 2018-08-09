@@ -128,9 +128,9 @@ public class MainController {
 		
 		//map에 저장
 		Map m = new HashMap();
-		m.put("page", page);
-		m.put("limit", limit);
-		m.put("member_num", member_num);
+		m.put("page", page); //페이지
+		m.put("limit", limit); //페이지 제한
+		m.put("member_num", member_num); //세션저장 id번호
 		
 		orderlist= marketService.getMypageOrdersByMemberNum(page, member_num);
 		

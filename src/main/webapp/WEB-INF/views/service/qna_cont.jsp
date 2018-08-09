@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Insert title here</title>
+	<title>나만따라와 도시농부</title>
 	
 	<script src="/donong/resources/service/js/qna_cont.js"></script>
 	
@@ -21,99 +21,84 @@
 		<div id="qna_cont">
 			<h1>1:1 문의 상세보기</h1>
 			
-			<div class="qna_cont_row">
-				<label>문의유형</label>
-				<span>
-					<c:choose>
-						<c:when test="${qna.category == 1}">
-							고객정보
-						</c:when>
-						<c:when test="${qna.category == 2}">
-							주문/결제
-						</c:when>
-						<c:when test="${qna.category == 3}">
-							배송
-						</c:when>
-						<c:when test="${qna.category == 4}">
-							상품/상품평
-						</c:when>
-						<c:when test="${qna.category == 5}">
-							취소
-						</c:when>
-						<c:when test="${qna.category == 6}">
-							반품
-						</c:when>
-						<c:when test="${qna.category == 7}">
-							교환
-						</c:when>
-						<c:when test="${qna.category == 8}">
-							이벤트/제휴/기타
-						</c:when>
-						<c:when test="${qna.category == 9}">
-							고객의소리
-						</c:when>
-					</c:choose>
-				</span>
-			</div>
+			<label>문의유형</label>
+			<span>
+				<c:choose>
+					<c:when test="${qna.category == 1}">
+						고객정보
+					</c:when>
+					<c:when test="${qna.category == 2}">
+						주문/결제
+					</c:when>
+					<c:when test="${qna.category == 3}">
+						배송
+					</c:when>
+					<c:when test="${qna.category == 4}">
+						상품/상품평
+					</c:when>
+					<c:when test="${qna.category == 5}">
+						취소
+					</c:when>
+					<c:when test="${qna.category == 6}">
+						반품
+					</c:when>
+					<c:when test="${qna.category == 7}">
+						교환
+					</c:when>
+					<c:when test="${qna.category == 8}">
+						이벤트/제휴/기타
+					</c:when>
+					<c:when test="${qna.category == 9}">
+						고객의소리
+					</c:when>
+				</c:choose>
+			</span>
 			
-			<div class="qna_cont_row">
-				<label>작성자</label>
-				<span>${sessionBean.nickname }</span>
-			</div>
 			
-			<div class="qna_cont_row">
-				<label>문의제목</label>
-				<span>${qna.title } </span>
-			</div>
+			<label>작성자</label>
+			<span>${sessionBean.nickname }</span>
 			
-			<div class="qna_cont_row">
-				<label>문의내용</label>
-				<textarea name="cont_content" id="cont_content" cols="30" rows="10" readonly="readonly">${qna.content }</textarea>
-			</div>
+			<label>문의제목</label>
+			<span>${qna.title } </span>
 			
-			<div class="qna_cont_row">
-				<label>문의일</label>
-				<span>${qna.regitdate } </span>
-			</div>
+			<label>문의내용</label>
+			<span>${qna.content } </span>
 			
-			<div class="qna_cont_row">
-				<label>처리상태</label>
-				<span>${qna.state } </span>
-			</div>
+			<label>문의일</label>
+			<span>${qna.regitdate } </span>
 			
+			<label>처리상태</label>
+			<span>${qna.state } </span>
+
 			<c:if test="${sessionBean.nickname != 'admin' }">
 				<c:if test="${qna.state.trim() != '답변 대기' }">
-					<div class="qna_cont_row">
-						<label>답변일</label>
-						<span>${qna.ansdate } </span>
-					</div>
-					
-					<div class="qna_cont_row">
-						<label>답변내용</label>
-						<span>${qna.answer } </span>
-					</div>
+					<label>답변일</label>
+					<span>${qna.ansdate } </span>
+					<label>답변내용</label>
+					<span>${qna.answer } </span>
 				</c:if>
 				<button onclick="location.href='/donong/cs/qna/${qna.num}?state=edit'">수정</button>
+				<f:form method="delete" action="/donong/cs/qna/${qna.num }">
+					<input id="deleteBtn" type="submit" value="삭제" />
+				</f:form>
+				<button onclick="location.href='/donong/cs/qna'">목록으로</button>
 			</c:if>
 			
 			<c:if test="${sessionBean.nickname == 'admin' }">
-				<div class="qna_cont_row">
+				<f:form action="/donong/cs/qna/${qna.num }" method="put">
 					<label>답변일</label>
 					<span>${qna.ansdate } </span>
-				</div>
-				<f:form action="/donong/cs/qna/${qna.num }" method="put">					
-					<div class="qna_cont_row">
-						<label>답변내용</label>
-						<textarea name="answer" id="answer" cols="30" rows="10">${qna.answer } </textarea>
-					</div>
+					
+					<label>답변내용</label>
+					<textarea name="answer" id="answer" cols="30" rows="10">${qna.answer } </textarea>
+					
 					<input id="updateReply" type="submit" value="답변 등록" />
 				</f:form>
+				<f:form method="delete" action="/donong/cs/qna/${qna.num }">
+					<input id="deleteBtn" type="submit" value="삭제" />
+				</f:form>
+				<button onclick="location.href='/donong/cs/qna'">목록으로</button>
 			</c:if>
-			
-			<f:form method="delete" action="/donong/cs/qna/${qna.num }">
-				<input id="deleteBtn" type="submit" value="삭제" />
-			</f:form>
-			<button onclick="location.href='/donong/cs/qna'">목록으로</button>
 		</div>
 		
 	</div>

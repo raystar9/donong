@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
-<title>Insert title here</title>
+<title>나만따라와 도시농부</title>
 <script>
 function check(){
 	if($.trim($('#category').val())==""){
@@ -77,7 +77,7 @@ function check(){
 				<tr>
 					<th class="well well-sm" style="text-align:center;">글내용</th>
 					<td ><textarea name="content" id="content" rows="15"
-							cols="60" class="form-control"></textarea></td>
+							cols="120" class="form-control"></textarea></td>
 				</tr>
 				
 			</table>

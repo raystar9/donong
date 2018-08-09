@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
 <html>
 <head>
+ <title>나만따라와 도시농부</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

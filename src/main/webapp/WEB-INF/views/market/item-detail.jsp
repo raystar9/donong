@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<%@ include file="/resources/common/jsp/import.jsp" %>
 	<script src="/donong/resources/market/js/item-detail.js"></script>
-	<title>Home</title>
+	 <title>나만따라와 도시농부</title>
 	<script>
 		function onSubmitItem(){
 			if($("#quantity").val() <= 0){

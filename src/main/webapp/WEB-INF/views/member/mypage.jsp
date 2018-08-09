@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Page</title>
+ <title>나만따라와 도시농부</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="/resources/common/jsp/import.jsp" %>

@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
 <div class="row panel panel-default">
@@ -10,6 +11,6 @@
 		<a href="/donong/market/item/${item.num}">${item.title}</a>
 	</div>
 	<div class="item-price item-cell">
-		${item.price }원
+		<fmt:formatNumber pattern="#,###">${item.price }</fmt:formatNumber>원
 	</div>
 </div>

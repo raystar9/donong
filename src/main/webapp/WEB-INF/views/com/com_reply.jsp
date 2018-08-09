@@ -8,23 +8,13 @@
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <title>Insert title here</title>
 <script>
-function check(){
-	if($.trim($('#category').val())==""){
-		alert('카테고리를 선택하세요.');
-		$('#category').focus();
-		return false;
-	}
-	if($.trim($('#subject').val())==""){
-		alert('제목을 입력하세요.');
-		$('#subject').focus();
-		return false;
-	}
+$(document).on("submit",function check(){
 	if($.trim($('#content').val())==""){
-		alert('내용을 이력하세요.');
+		alert('내용을 입력하세요.');
 		$('#content').focus();
 		return false;
 	}
-}
+});
 </script>
 <script src="resources/js/bbs.js"></script>
 </head>

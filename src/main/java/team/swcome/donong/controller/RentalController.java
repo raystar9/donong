@@ -93,8 +93,8 @@ public class RentalController {
 
 	/* 농지 대여 상세보기 페이지로 이동 */
 	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
-	public String rentalViewWithoutLogin(Model model, HttpServletRequest request) {
-
+	public String rentalViewWithoutLogin(Model model, HttpServletRequest request, SessionBean sessionBean) {
+		int member_num = sessionBean.getMemberNum();
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		MemberDTO m = RentalService.selectNameByPhone(board_num);
 		RentalDTO r = RentalService.selectRentalView(board_num);
@@ -104,6 +104,7 @@ public class RentalController {
 		model.addAttribute("file", f);
 		model.addAttribute("member", m);
 		model.addAttribute("rental", r);
+		model.addAttribute("member_num", member_num);
 		return "rental/rentalView";
 	}
 

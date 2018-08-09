@@ -22,7 +22,7 @@
 	<div id='viewbtn'>
 		<span id="No">No. ${rental.num}</span>
  		<input type="button" value="목록" onclick="location.href='../rental'" class="btn btn-default" style="margin-left:10px;"/>
- 		<c:if test="${rental.member_num eq member.num }">
+ 		<c:if test="${member_num eq member.num }">
  		  <input type="button" value="삭제" onclick="del_click()" class="btn btn-default" style="margin-left:10px"/>
  		  <input type="button" value="수정" onclick="location.href='../rental/modify?num=${rental.num}'" class="btn btn-default" style="margin-left:10px"/>
  		</c:if>

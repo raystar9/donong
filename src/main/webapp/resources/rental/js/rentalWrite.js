@@ -114,7 +114,7 @@ $(document).ready(function() {
 		
 		if ($('#markerLat').val() == '') {
 			$('#markerLat').focus();
-			alert('농장위치를 지도에 마킹해주세요.');
+			alert('위치확인을 해주세요.');
 			return false;
 		}
 		
@@ -154,13 +154,15 @@ function initMap(){
 		scrollwheel: true
 	});
 	
+	var geocoder = new google.maps.Geocoder();
+	
 	//검색 자동완성 기능 
 	var autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 	
-	clickEvent = map.addListener('click', function(event){
-		removeMarker();
-		addMarker(event.latLng);
-	});//addListener()
+//	clickEvent = map.addListener('click', function(event){
+//		removeMarker();
+//		addMarker(event.latLng);
+//	});//addListener()
 	
 	//자동완성 주소 바꼈을 때 실행
 	autocomplete.addListener('place_changed', function(){
@@ -171,7 +173,25 @@ function initMap(){
 		}
 	});//autocomplete.addListener()
 	
+	document.getElementById('mark2').addEventListener('click', function() {
+	    geocodeAddress(geocoder, map);
+	  });
+	
 }//initMap()
+
+function geocodeAddress(geocoder, resultsMap) {
+    var address = document.getElementById('autocomplete').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        removeMarker();
+        addMarker(results[0].geometry.location);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
 
 /* 마킹하는 함수 */
 function addMarker(location){

@@ -73,7 +73,7 @@ function listReplyRest(num){
 <c:set var="boarddata" value="${boarddata}"/>
 <div>
 <h4>${bbsbean.category }|${bbsbean.subject}</h4>
-	<h5>글쓴이 ${bbsbean.writer} <fmt:formatDate value="${bbsbean.regitdate}" pattern="yyyy-MM-dd HH:mm:SS"></fmt:formatDate> 조회 ${bbsbean.readcount }</h5>
+	<h5>글쓴이 ${bbsbean.writer} <fmt:formatDate value="${bbsbean.regitdate}" pattern="yyyy-MM-dd HH:mm:SS" timeZone="GMT+18"/> 조회 ${bbsbean.readcount }</h5>
 	<hr>
 		<div class="container">
 		<div class="col-sm-9" style="float:left;">
@@ -86,7 +86,7 @@ function listReplyRest(num){
 
 </div>
 <div class="col-sm-3" >
-		<input type="button" value="목록" class="btn" style="vertical-align: top,right;float:right;" onclick="location='list?page=${page}'">
+		
 	</div>
 	</div>
 	<hr>

@@ -9,18 +9,8 @@
 <title>Insert title here</title>
 <script>
 function check(){
-	if($.trim($('#category').val())==""){
-		alert('카테고리를 선택하세요.');
-		$('#category').focus();
-		return false;
-	}
-	if($.trim($('#subject').val())==""){
-		alert('제목을 입력하세요.');
-		$('#subject').focus();
-		return false;
-	}
 	if($.trim($('#content').val())==""){
-		alert('내용을 이력하세요.');
+		alert('내용을 입력하세요.');
 		$('#content').focus();
 		return false;
 	}

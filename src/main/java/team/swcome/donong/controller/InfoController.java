@@ -1,9 +1,5 @@
 package team.swcome.donong.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,7 +19,6 @@ public class InfoController {
 	 */
 	@RequestMapping(value = {"/info_start_1", "/info"}, method = RequestMethod.GET)
 	public String info1(Model model) {
-		
 		return "info/info_start_1";
 	}
 	@RequestMapping(value = "/info_start_2", method = RequestMethod.GET)

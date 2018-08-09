@@ -8,6 +8,7 @@
 <c:forEach var="row" items="${list }">
 <tr>
 <td>
+<br>
 ${row.replyer }(${row.regDate})
 <br>
 ${row.contents}

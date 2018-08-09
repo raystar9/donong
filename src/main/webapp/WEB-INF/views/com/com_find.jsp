@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
-<title>Insert title here</title>
+<title>나만따라와 도시농부</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -41,7 +42,7 @@
             
              </c:if>   
              
-             <a href = "cont?com_num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?num=${b.num}&page=${page}&state=cont">
                       ${b.subject}
              </a>
           </div>
@@ -50,7 +51,7 @@
           <div>${b.writer}</div>
        </td>
        <td>
-          <div>${b.regitdate}</div>
+          <div><fmt:formatDate value="${b.regitdate}" pattern="yyyy-MM-dd HH:mm:SS" timeZone="GMT+18"></fmt:formatDate></div>
        </td>
        <td>
           <div>${b.readcount}</div>

@@ -7,3 +7,4 @@
 
 <link rel="stylesheet" type="text/css" href="/donong/resources/bootstrap-3.3.2-dist/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/donong/resources/common/css/header.css">
+<link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet">

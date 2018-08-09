@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	 <title>나만따라와 도시농부</title>
 	<script src="/donong/resources/service/js/cs_main.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="/donong/resources/service/css/cs_main.css">

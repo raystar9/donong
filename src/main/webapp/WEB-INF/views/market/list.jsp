@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<%@ include file="/resources/common/jsp/import.jsp" %>
-	<title>Home</title>
+	 <title>나만따라와 도시농부</title>
 	<style>
 		.main {
 			display: flex;
@@ -57,7 +57,7 @@
 	</div>
 	<div class="item-container">
 	<div>
-		<h1>타이틀임</h1>
+		<h1>Donong 자재구매</h1>
 	</div>
 	<div class="container-fluid">
 		<c:forEach items="${items}" var="item">

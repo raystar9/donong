@@ -29,6 +29,7 @@ public class AdminService {
 	private static final String PREPARING = "preparing";
 	private static final String SENDING = "sending";
 	private static final String ARRIVED = "arrived";
+	private static final String ALL = "all";
 
 	public List<OrderItemsDTO> getWaitingOrders(int page) {
 		return getOrders(page, "waiting");
@@ -99,7 +100,7 @@ public class AdminService {
 		ordersMapper.updateStatusToArrv(list);
 	}
 
-	private void setOrderItems(List<OrderItemsDTO> orders) {
+	protected void setOrderItems(List<OrderItemsDTO> orders) {
 		for (OrderItemsDTO item : orders) {
 			List<GoodsDTO> goods = goodsMapper.selectItemsByOrderNum(item.getOrderNum());
 			item.setGoods(goods);

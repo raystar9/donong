@@ -13,7 +13,7 @@ public interface RentalMapper {
 	
 	public void insertFile(FileDTO f);
 	
-	public MemberDTO selectNameByPhone(int num);
+	public MemberDTO selectNameByPhone(int board_num);
 	
 	public RentalDTO selectSidoSigunguNum(Map<String,String> map);
 	
@@ -34,5 +34,7 @@ public interface RentalMapper {
 	public void updateRental(RentalDTO r);
 	
 	public void updateFiles(FileDTO f);
+	
+	public MemberDTO selectWriter(int member_num);
 	
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>나만따라와 도시농부</title>
 </head>
 <body>
 	업로드 된 이미지 : <br />
@@ -15,6 +15,13 @@
 		<input type="hidden" name="directory" value="rent" />
 		<input type="submit" value="삭제" />
 	</form>
+	
+	<form action="/donong/cs/download" method="get">
+		<input type="hidden" name="directory" value="rent" />
+		<input type="hidden" name="fileName" value="${imgPath }" />
+		<input type="submit" value="다운로드" />
+	</form>
+	
 	
 </body>
 </html>

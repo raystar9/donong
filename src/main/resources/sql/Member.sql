@@ -21,7 +21,22 @@ insert into goods values(41, '방울토마토', 6000, 1, '제품 구성 - 종이
  commit;
 drop table member;
 
+select * from orders where member_num=1;
 select * from member;
+select * from goods;
+
+select num, subject, regitdate from COMMUNITY where member_num=1 and rownum<=5 order by num desc
+
+update goods set filepath='/donong/resources/image/market/fertilizer/f7.jpg' where num=7;
+
+update goods set content='철재재질 관목용 삽입니다.' where num=53;
+
+select filepath from goods as of timestamp(systimestamp-interval '15'minute);
+
+select * from community
+
+ROLLBACK;
+select * from goods;
 
 create sequence member_num
 start with 1

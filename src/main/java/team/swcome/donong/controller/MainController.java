@@ -1,7 +1,9 @@
 package team.swcome.donong.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import team.swcome.donong.dto.BoardDTO;
 import team.swcome.donong.dto.MemberDTO;
-import team.swcome.donong.dto.RentalDTO;
+import team.swcome.donong.dto.OrderItemsDTO;
 import team.swcome.donong.dto.OrdersDTO;
+import team.swcome.donong.dto.RentalDTO;
 import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.AccountService;
+import team.swcome.donong.service.MarketService;
 import team.swcome.donong.service.RentalService;
 
 /**
@@ -39,6 +44,9 @@ public class MainController {
 	
 	@Autowired
 	RentalService rentalService;
+	
+	@Autowired
+	MarketService marketService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -55,7 +63,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "member_login_ok", method =  {RequestMethod.POST,RequestMethod.GET})
-	public String member_login_ok(Model model, MemberDTO m, SessionBean sessionBean, 
+	public String member_login_okWithoutLogin(Model model, MemberDTO m, SessionBean sessionBean, 
 			@RequestParam String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			MemberDTO memberRes = accountService.getUserNum(m);
 			
@@ -98,12 +106,16 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "member_mypage")
-	public String member_mypage(Model model,@RequestParam(value="page", defaultValue="1") int page, HttpServletRequest request) throws Exception {
+	public String member_mypage(Model model,@RequestParam(value="page", defaultValue="1") int page, HttpServletRequest request, OrdersDTO ordersDTO, SessionBean sessionBean) throws Exception {
+		
+		int member_num = sessionBean.getMemberNum();
+		//최신글 페이지 list 객체 생성
+		List<BoardDTO> boardlist = new ArrayList<BoardDTO>(member_num);
+		boardlist=accountService.selectNewestWrite(member_num);
 		
 		//구매내역 페이지 list 객체 생성
-	
-		List<OrdersDTO> orderlist = new ArrayList<OrdersDTO>();
-		
+		List<OrderItemsDTO> orderlist = new ArrayList<OrderItemsDTO>();
+				
 		//페이징 시작
 		int limit = 5;
 		if(request.getParameter("page") != null) {
@@ -114,7 +126,16 @@ public class MainController {
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
 		
-		int listcount = 50; //쿼리문 select count(*) from order 넣어야 할거
+		//map에 저장
+		Map m = new HashMap();
+		m.put("page", page); //페이지
+		m.put("limit", limit); //페이지 제한
+		m.put("member_num", member_num); //세션저장 id번호
+		
+		orderlist= marketService.getMypageOrdersByMemberNum(page, member_num);
+		
+		//주문글 총 갯수 산출
+		int listcount = accountService.getOrderListCount(member_num);
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		
@@ -127,45 +148,14 @@ public class MainController {
 
 		if (endpage < page)
 			page = endpage;
-		
-		
-		OrdersDTO order = new OrdersDTO();
-		OrdersDTO order1 = new OrdersDTO();
-		OrdersDTO order2 = new OrdersDTO();
-		OrdersDTO order3 = new OrdersDTO();
-		OrdersDTO order4 = new OrdersDTO();
-		OrdersDTO order5 = new OrdersDTO();
-
-		order.setName("모종삽");
-		order.setStatus("npay");
-		orderlist.add(order);
-		
-		order1.setName("사과모종");
-		order1.setStatus("npay");
-		orderlist.add(order1);
-		
-		order2.setName("돼지비료");
-		order2.setStatus("prep");
-		orderlist.add(order2);
-		
-		order3.setName("원킬가위");
-		order3.setStatus("send");
-		orderlist.add(order3);
-		
-		order4.setName("엑스칼리버");
-		order4.setStatus("arrv");
-		orderlist.add(order4);
-		
-		order5.setName("고고모종");
-		order5.setStatus("arrv");
-		orderlist.add(order5);
-		
+				
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("orderlist", orderlist);
+		model.addAttribute("boardlist", boardlist);
 		
 		return "/member/mypage";
 	}
@@ -289,7 +279,7 @@ public class MainController {
 	/* 지도 마커 찍을 때 Ajax */
 	@RequestMapping(value = "/markJson", method = RequestMethod.POST)
 	@ResponseBody
-	public Object markerJson(Model model, SessionBean sessionBean) {
+	public Object markerJson(Model model) {
 		List<RentalDTO> list = rentalService.selectRentalList();
 		String[] imgs = rentalService.selectRepresentImg();
 
@@ -299,7 +289,5 @@ public class MainController {
 
 		return list;
 	}
-	
-	
 	
 }

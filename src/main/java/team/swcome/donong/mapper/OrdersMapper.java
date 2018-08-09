@@ -1,6 +1,7 @@
 package team.swcome.donong.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import team.swcome.donong.dto.GoodsOrdersDTO;
 import team.swcome.donong.dto.OrderItemsDTO;
@@ -10,6 +11,7 @@ public interface OrdersMapper {
 
 	public List<OrdersDTO> selectAllOrdersByMemberNum(int memberNum);
 	public List<OrdersDTO> selectCurrentOrdersByMemberNum(int memberNum);
+	public List<OrderItemsDTO> selectMypageOrdersByMemberNum(int startItem, int endItem, int memberNum);
 	public List<OrderItemsDTO> selectWaitingOrders(int startItem, int endItem);
 	public List<OrderItemsDTO> selectPreparingOrders(int startItem, int endItem);
 	public List<OrderItemsDTO> selectSendingOrders(int startItem, int endItem);
@@ -22,4 +24,5 @@ public interface OrdersMapper {
 	public int updateStatusToArrv(List<OrdersDTO> orders);
 	public int updateStatusAndWaybill(List<OrdersDTO> orders);
 	public int deleteOrderByNum(int num);
+	public int getOrderListCount(int member_num);
 }

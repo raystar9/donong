@@ -4,6 +4,7 @@
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <html>
 <head>
+ <title>나만따라와 도시농부</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalWrite.css">
 <script src="/donong/resources/rental/js/rentalWrite.js"></script>
@@ -82,7 +83,7 @@
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td><input type="text" placeholder="&nbsp;농지 위치를 설정하세요." id="autocomplete" name="address">
+			<td><input type="text" placeholder="&nbsp;농지 위치를 설정하세요." id="autocomplete" name="address">&nbsp;&nbsp;&nbsp;<input type="button" value="위치확인 " id='mark2' class="btn btn-default" style="margin-bottom: 3px;">
 			</td>
 		</tr>
 		<tr>
@@ -93,11 +94,11 @@
 	</div>
 	<input type='hidden' id="markerLat" name="lat" value="">
 	<input type='hidden' id="markerLng" name="lng" value="">
-	</form>
-</div>
-	<div class="button">
+	<div class="button2">
 		<input type="button" value="취소" onclick="can_click()" class="btn btn-default" id="canBtn">
 		<input type="submit" value="등록" class="btn btn-default" id="subBtn">
 	</div>	
+	</form>
+</div>
 </body>
 </html>

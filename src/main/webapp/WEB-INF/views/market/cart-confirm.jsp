@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<%@ include file="/resources/common/jsp/import.jsp" %>
-	<title>Home</title>
+	 <title>나만따라와 도시농부</title>
 	<style>
 		.main{
 			margin-top:130px;

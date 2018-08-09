@@ -23,31 +23,29 @@ import team.swcome.donong.dto.SessionBean;
 import team.swcome.donong.service.ReplyPager;
 import team.swcome.donong.service.ReplyService;
 
-@Controller
 @SessionAttributes("sessionBean")
+@Controller
 public class ReplyController {
 
 	@Inject
 	ReplyService replyService;
 	
-	//?Œ“ê¸??…? ¥
+	//?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½
 	@RequestMapping("reply/insert.do")
 	@ResponseBody
 	public void insert(@ModelAttribute ReplyDTO vo, HttpSession session, SessionBean sessionBean) {
 		
-		sessionBean.setMemberNum(1);
-		sessionBean.setNickname("admin");
 		String userId=(String)session.getAttribute("userId");
 		vo.setReplyer(sessionBean.getNickname());//vo.setReplyer(userId);
 		vo.setMemberNum(sessionBean.getMemberNum());
 		replyService.insert(vo);
 	}
 	
-	//?Œ“ê¸? ëª©ë¡(@Controllerë°©ì‹ :view(?™”ë©?)ë¥? ë¦¬í„´)
+	//?ï¿½ï¿½ï¿½? ëª©ë¡(@Controllerë°©ì‹ :view(?ï¿½ï¿½ï¿½?)ï¿½? ë¦¬í„´)
 	@RequestMapping("reply/list.do")
 	public ModelAndView list(@RequestParam int num, ModelAndView mav,@RequestParam(defaultValue="1")int curPage,HttpSession session) {
 		
-		int count = replyService.count(num);//?Œ“ê¸?ê°œìˆ˜
+		int count = replyService.count(num);//?ï¿½ï¿½ï¿½?ê°œìˆ˜
 		
 		ReplyPager replyPager = new ReplyPager(count,curPage);
 		int start = replyPager.getPageBegin();
@@ -55,16 +53,16 @@ public class ReplyController {
 		
 		
 		List<ReplyDTO> list=replyService.list(num,start,end,session);
-		//ë·? ?´ë¦? ì§?? •
+		//ï¿½? ?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½
 		mav.setViewName("com/replyList");
-		//ë·°ì— ? „?‹¬?•  ?°?´?„° ì§?? •
+		//ë·°ì— ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
 		mav.addObject("list", list);
-		//replyList.jspë¡? ?¬?›Œ?”©
+		//replyList.jspï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
 		return mav;
 	}
 	
 
-	//?Œ“ê¸? ?ƒ?„¸ë³´ê¸°
+	//?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ë³´ê¸°
 	@RequestMapping(value="reply/detail/{num}",method=RequestMethod.GET)
 	public ModelAndView replyDetail(@PathVariable("num") int num,ModelAndView mav,HttpSession session) {
 		ReplyDTO vo=replyService.detail(num);
@@ -75,24 +73,24 @@ public class ReplyController {
 		
 	}
 	
-	//?Œ“ê¸? ?ˆ˜? • ì²˜ë¦¬
+	//?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ì²˜ë¦¬
 	@RequestMapping(value="reply/update/{num}",method= {RequestMethod.PUT,RequestMethod.PATCH})
 	public ResponseEntity<String> replyUpdate(@PathVariable("num")int num,@RequestBody ReplyDTO vo){
 		ResponseEntity<String> entity=null;
 		try {
 			vo.setNum(num);
 			replyService.update(vo);
-			//?Œ“ê¸? ?ˆ˜? •?´ ?„±ê³µí•˜ë©? ?„±ê³? ?ƒ?ƒœë©”ì„¸ì§? ???¥
+			//?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê³µí•˜ï¿½? ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ë©”ì„¸ï¿½? ???ï¿½ï¿½
 			entity=new ResponseEntity<String>("success",HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();
-			//?Œ“ê¸? ?ˆ˜? •?´ ?‹¤?Œ¨?•˜ë©? ?‹¤?Œ¨ ?ƒ?ƒœë©”ì‹œì§? ???¥
+			//?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë©”ì‹œï¿½? ???ï¿½ï¿½
 			entity=new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
-		//?ˆ˜? • ì²˜ë¦¬ HTTP ?ƒ?ƒœ ë©”ì‹œì§? ë¦¬í„´
+		//?ï¿½ï¿½?ï¿½ï¿½ ì²˜ë¦¬ HTTP ?ï¿½ï¿½?ï¿½ï¿½ ë©”ì‹œï¿½? ë¦¬í„´
 		return entity;
 	}
-	//?Œ“ê¸? ?‚­? œì²˜ë¦¬
+	//?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ì²˜ë¦¬
 	@RequestMapping(value="reply/delete/{num}")
 	public ResponseEntity<String> replyDelete(@PathVariable("num") int num){
 		ResponseEntity<String> entity=null;

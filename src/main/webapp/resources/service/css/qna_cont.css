@@ -22,7 +22,6 @@
 	margin-top: 25px;
 	height: 30px;
 	border-bottom: 1px solid green;
-	float: left;
 	margin-right: 5px;
 }
 
@@ -32,7 +31,7 @@
 	height: 30px;
 	margin-top: 25px;
 	border-bottom: 1px solid green;
-	float: left;
+	
 }
 
 #qna_cont textarea {

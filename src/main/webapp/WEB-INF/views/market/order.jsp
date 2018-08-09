@@ -1,11 +1,12 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <%@ page session="false" %>
 <html>
 <head>
 	<meta charset="utf-8">
 	<%@ include file="/resources/common/jsp/import.jsp" %>
-	<title>Home</title>
+	 <title>나만따라와 도시농부</title>
 	<style>
 		.left-navbar {
 			width: 150px;
@@ -39,18 +40,27 @@
 			$form.submit(e=>{
 				if($("#name").val() == ''){
 					alert("이름을 입력해주세요.");
+					$("#name").focus();
 					return false;
 				}
 				if($("#phone").val() == ''){
 					alert("연락처를 입력해주세요.");
+					$("#phone").focus();
 					return false;
 				}
 				if($("#address").val() == ''){
 					alert("주소를 입력해주세요.");
+					$("#address").focus();
 					return false;
 				}
 				if($("#addressdetail").val() == ''){
 					alert("상세 주소를 입력해주세요.");
+					$("#addressdetail").focus();
+					return false;
+				}
+				if($("#comments").val() == ''){
+					alert("코멘트를 입력해주세요.");
+					$("#comments").focus();
 					return false;
 				}
 			});
@@ -61,7 +71,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="container">
 
-	<h1>결제 페이지</h1>
+	<h1>Donong 자재구매</h1>
 	<form class="order-form" action="/donong/market/order/process" method="post">
 	<div class="container-fluid">
 	<div class="col-sm-6 form-group">
@@ -97,14 +107,14 @@
 	<span class="item-title">${repItemTitle }</span>
 	<c:if test="${itemCount == 1 }">
 	
-		<p>단가 : ${item.price }원</p>
-		<p>주문 개수 : ${item.quantity }개</p>
+		<p>단가 : <fmt:formatNumber pattern="#,###">${item.price }</fmt:formatNumber>원</p>
+		<p>주문 개수 : <fmt:formatNumber pattern="#,###">${item.quantity }</fmt:formatNumber>개</p>
 		
 	</c:if>
 	<c:if test="${itemCount > 1 }">
 	 	<span class="item-count">외 ${itemCount -1 }개 제품</span>
 	 </c:if>
-	<p class="item-price text-right">총 가격 : ${totalPrice }원</p>
+	<p class="item-price text-right">총 가격 : <fmt:formatNumber pattern="#,###">${totalPrice }</fmt:formatNumber>원</p>
 	</div>
 	</fieldset>
 	</div>

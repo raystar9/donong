@@ -72,6 +72,10 @@ filepath4 VARCHAR2(200)
 
 drop sequence do_num_seq;
 drop sequence sigungu_num_seq;
+drop sequence rental_num_seq;
+drop sequence file_num_seq;
+drop table rentalfiles;
+drop table rentals;
 
 CREATE SEQUENCE mem_num_seq
 start with 1
@@ -109,18 +113,18 @@ select * from rentalfiles;
 
 alter table member ADD(addressdetail varchar(100));
 ----------------------------------------------------------------
-insert into sido values (sido_num_seq.nextval, '강원도');
-insert into sido values (sido_num_seq.nextval, '경기도');
-insert into sido values (sido_num_seq.nextval, '경상남도');
-insert into sido values (sido_num_seq.nextval, '광주광역시 ');
-insert into sido values (sido_num_seq.nextval, '대구광역시');
-insert into sido values (sido_num_seq.nextval, '대전광역시');
-insert into sido values (sido_num_seq.nextval, '부산광역시');
-insert into sido values (sido_num_seq.nextval, '서울특별시');
-insert into sido values (sido_num_seq.nextval, '울산광역시');
-insert into sido values (sido_num_seq.nextval, '인천광역시');
-insert into sido values (sido_num_seq.nextval, '전라북도');
-insert into sido values (sido_num_seq.nextval, '충청북도');
+insert into sido values (sido_num_seq.nextval, '강원도');		--1
+insert into sido values (sido_num_seq.nextval, '경기도');		--2
+insert into sido values (sido_num_seq.nextval, '경상남도');	--3
+insert into sido values (sido_num_seq.nextval, '광주광역시 ');	--4
+insert into sido values (sido_num_seq.nextval, '대구광역시');	--5
+insert into sido values (sido_num_seq.nextval, '대전광역시');	--6
+insert into sido values (sido_num_seq.nextval, '부산광역시');	--7
+insert into sido values (sido_num_seq.nextval, '서울특별시');	--8
+insert into sido values (sido_num_seq.nextval, '울산광역시');	--9
+insert into sido values (sido_num_seq.nextval, '인천광역시');	--10
+insert into sido values (sido_num_seq.nextval, '전라북도');	--11
+insert into sido values (sido_num_seq.nextval, '충청북도');	--12
 ----------------------------------------------------------------
 insert into sigungu values (sigungu_num_seq.nextval, '춘천시', 1);
 insert into sigungu values (sigungu_num_seq.nextval, '원주시', 1);
@@ -266,5 +270,10 @@ insert into sigungu values (sigungu_num_seq.nextval, '음성군', 12);
 insert into sigungu values (sigungu_num_seq.nextval, '단양군', 12);
 ----------------------------------------------------------------
 
+select * from rentals;
+select * from rentalfiles;
 
+select * from SIGUNGU;
 
+SELECT sido.num AS sido, sigungu.num AS sigungu FROM sido , sigungu WHERE sido.num = sigungu.sido AND
+sido.name like '%대전광역시%' AND sigungu.name like '%중구%'

@@ -23,14 +23,17 @@
   </insert>
   
   <select id="selectNameByPhone" parameterType="int" resultType="MemberDTO">
-  	SELECT name, phone 
-  	FROM member
+  	SELECT realname, phone
+	FROM member m, RENTALS r
+	WHERE r.member_num = m.num
+	AND r.num = #{board_num}
   </select> 
   
   <select id="selectSidoSigunguNum" parameterType="Map" resultType="RentalDTO">
   	SELECT sido.num AS sido, sigungu.num AS sigungu
 	FROM sido , sigungu
-	WHERE sido.name like #{sido}
+	WHERE sido.num = sigungu.sido
+	AND sido.name like #{sido}
 	AND sigungu.name like #{sigungu}
   </select>
   
@@ -40,7 +43,7 @@
   </select>
   
   <select id="selectRepresentImg" resultType="String">
-  	SELECT filepath1 FROM rentalfiles
+  	SELECT filepath1 FROM rentalfiles ORDER BY NUM
   </select>
   
   <select id="selectRentalView" resultType="RentalDTO" parameterType="int">
@@ -53,6 +56,7 @@
   	SELECT filepath1, filepath2, filepath3, filepath4, filename1, filename2, filename3, filename4 
   	FROM rentalfiles
 	WHERE board_num = #{board_num}
+	ORDER BY NUM
   </select>
   
   <delete id="deleteRental" parameterType="int">
@@ -71,12 +75,14 @@
   	<choose>
   		<when test="num != 0">
   			WHERE num = #{num}
+  			ORDER BY NUM
   		</when>
   		<when test="sido != 0 
   					and num == 0 
   				    and sigungu == 0 
   				 	and price == 0">
   			WHERE sido = #{sido}
+  			ORDER BY NUM
   		</when>
   		<when test="sido != 0 
   					and sigungu != 0 
@@ -84,6 +90,7 @@
   					and price == 0">
   			WHERE sido = #{sido}
   			AND sigungu = #{sigungu}
+  			ORDER BY NUM
   		</when>
   		<when test="sido != 0 
   					and price != 0 
@@ -92,6 +99,7 @@
   					and price &gt;= 50000">
   			WHERE sido = #{sido}		
   			AND price &gt;= #{price} 
+  			ORDER BY NUM
   		</when>
   		<when test="sido != 0 
   					and price != 0 
@@ -100,6 +108,7 @@
   					and price &lt; 50000">
   			WHERE sido = #{sido}		
   			AND price between #{price} and #{price}+10000
+  			ORDER BY NUM
   		</when>
   		<when test="sido != 0
   					and sigungu != 0
@@ -108,6 +117,7 @@
   			WHERE sido = #{sido}
   			AND sigungu = #{sigungu}
   			AND price between #{price} and #{price}+10000
+  			ORDER BY NUM
   		</when>
   		<when test="sido != 0
   					and sigungu != 0
@@ -117,6 +127,7 @@
    			WHERE sido = #{sido}
   			AND sigungu = #{sigungu}
   			AND price >= #{price} 
+  			ORDER BY NUM
   			]]>
   		</when>
   		<when test="price != 0
@@ -124,12 +135,14 @@
   					and sigungu == 0
   					and price &lt; 50000">
   			WHERE price between #{price} and #{price}+10000
+  			ORDER BY NUM
   		</when>
   		<when test="price != 0
   					and num == 0
   					and sigungu == 0
   					and price &gt;= 50000">
   			WHERE price &gt;= #{price} 
+  			ORDER BY NUM
   		</when>
   	</choose>
   </select>

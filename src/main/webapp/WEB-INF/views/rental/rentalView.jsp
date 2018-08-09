@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>  
 <html>
 <head>
+ <title>나만따라와 도시농부</title>
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalView.css">
 <script src="/donong/resources/rental/js/rentalView.js"></script>
@@ -22,7 +24,7 @@
 	<div id='viewbtn'>
 		<span id="No">No. ${rental.num}</span>
  		<input type="button" value="목록" onclick="location.href='../rental'" class="btn btn-default" style="margin-left:10px;"/>
- 		<c:if test="${rental.member_num eq member.num }">
+ 		<c:if test="${member_num eq member.num }">
  		  <input type="button" value="삭제" onclick="del_click()" class="btn btn-default" style="margin-left:10px"/>
  		  <input type="button" value="수정" onclick="location.href='../rental/modify?num=${rental.num}'" class="btn btn-default" style="margin-left:10px"/>
  		</c:if>
@@ -39,13 +41,13 @@
 		<tr>
 			<td>면적</td>
 			<td>
-				${rental.area}㎡
+				<fmt:formatNumber pattern="#,###">${rental.area}</fmt:formatNumber>㎡
 			</td>
 		</tr>
 		<tr>
 			<td>임대료</td>
 			<td>
-				${rental.price}원
+				<fmt:formatNumber pattern="#,###">${rental.price}</fmt:formatNumber>원
 			</td>
 		</tr>
 		<tr>

@@ -70,9 +70,6 @@ public class CommunityController {
 			SessionBean sessionBean) {
 		List<BoardDTO> boardlist = new ArrayList<>();
 		HttpSession session = request.getSession();
-		sessionBean.setMemberNum(1);
-		sessionBean.setNickname("admin");
-		sessionBean.getMemberNum();
 		if (limit != null) {
 			session.setAttribute("limit", limit);
 		} else {
@@ -136,7 +133,6 @@ public class CommunityController {
 
 	@RequestMapping(value = "/community/write", method = RequestMethod.GET)
 	public String write(Locale locale, Model model, SessionBean sessionBean) {
-		sessionBean.getMemberNum();
 		return "com/com_write";
 	}
 
@@ -168,27 +164,20 @@ public class CommunityController {
 	public ModelAndView cont(HttpServletRequest request,
 			HttpServletResponse response,Locale locale, Model model,@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("num") int bbs_num,
-			@RequestParam("state") String state,
 			SessionBean sessionBean) throws Exception{
 		sessionBean.getMemberNum();
-		if(state.equals("cont")) {//내용보기일때만
+		
 			boardService.bbsHit(bbs_num);
-		}
+		
 		BoardDTO bbsbean = boardService.getContent(bbs_num);
 		
 		ModelAndView contM = new ModelAndView();
 		contM.addObject("num", bbs_num);
-		if(state.equals("cont")) {//내용보기일때
+		
 			contM.setViewName("com/com_cont");//내용보기 페이지 설정
 			String content=bbsbean.getContent().replace("\n","<br/>");
 			contM.addObject("content",content);
-		}else if(state.equals("edit")) {//수정폼
-			contM.setViewName("com/com_edit");
-		}else if(state.equals("del")) {//삭제폼
-			contM.setViewName("com/com_del");
-		}else if(state.equals("reply")) {//답변달기 폼
-			contM.setViewName("com/com_reply");
-		}
+	
 		contM.addObject("bbsbean",bbsbean);
 		contM.addObject("page",page);
 		return contM;
@@ -216,7 +205,6 @@ public class CommunityController {
 	public String edit(Model model,  @RequestParam(value = "page", defaultValue = "1") int page,
 		 @RequestParam(value = "num") int num,
 		 SessionBean sessionBean) {
-		sessionBean.getMemberNum();
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
@@ -257,7 +245,6 @@ public class CommunityController {
 
 	@RequestMapping(value = "/community/del", method = RequestMethod.GET)
 	public String del(Model model, @RequestParam(value = "num") String num, SessionBean sessionBean) {
-		sessionBean.getMemberNum();
 		model.addAttribute("num", num);
 		return "com/com_del";
 	}
@@ -292,7 +279,6 @@ public class CommunityController {
 		model.addAttribute("bbsbean", boardService.getContent(num));
 		model.addAttribute("page", page);
 		model.addAttribute("num", num);
-		sessionBean.getMemberNum();
 		return "com/com_reply";
 	}
 	/* 게시판 답변 저장 */
@@ -315,7 +301,6 @@ public class CommunityController {
 			@RequestParam(value="page",defaultValue="1") int page,
 			@RequestParam("find_name") String find_name,
 			@RequestParam("find_field") String find_field, SessionBean sessionBean) throws Exception{
-		sessionBean.getMemberNum();
 		int limit=10;
 		
 		Map<String, String> m=new HashMap<>();
@@ -436,5 +421,13 @@ public class CommunityController {
 		
 		return "com/delete_confirm";
 	}
+	
+	@RequestMapping(value = "/community/download", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> download(
+    		@RequestParam String directory, 
+    		@RequestParam String fileName) throws IOException {
+    	
+        return s3Util.download(bucketName, directory + fileName);
+    }
 
 }

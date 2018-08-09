@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/resources/common/jsp/import.jsp" %>
-<title>Insert title here</title>
+<title>나만따라와 도시농부</title>
 <script>
 $(function(){
 	var limit; 
@@ -69,11 +69,45 @@ $(function(){
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   <div class="container">
   <div style="text-align:center; font-size:150px; top-margin:50px;">
-   <a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg"></a>
-   <a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
-   <a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
-   <a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
-   <a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+   <c:if test="${category=='' }">
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-success btn-lg; " ></a>
+  	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+    </c:if>
+  <c:if test="${category=='전체' }">
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-success btn-lg" ></a>
+  	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+    </c:if>
+     <c:if test="${category=='잡담' }">
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-success btn-lg" ></a>
+  	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+    </c:if> <c:if test="${category=='질문' }">
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-success btn-lg" ></a>
+  	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+    </c:if> <c:if test="${category=='정보' }">
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-success btn-lg" ></a>
+  	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-lg" ></a>
+    </c:if> <c:if test="${category=='모임' }">
+ 	<a href ="list?page=1&category=전체"><input type="button" value="전체" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=잡담"><input type="button" value="잡담" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=질문"><input type="button" value="질문" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=정보"><input type="button" value="정보" class="btn btn-lg" ></a>
+  	<a href ="list?page=1&category=모임"><input type="button" value="모임" class="btn btn-success btn-lg" ></a>
+    </c:if>
     </div>
     <table class="table table-hover">
        
@@ -100,16 +134,21 @@ $(function(){
              
              </c:if>   
              
-             <a href = "cont?num=${b.num}&page=${page}&state=cont">
+             <a href = "cont?num=${b.num}&page=${page}">
                       ${b.subject}
              </a>
           </div>
        </td>
        <td>
-          <div>${b.writer}</div>
+          <div>
+          <c:if test="${b.writer=='admin'}">
+          <b>${b.writer}</b></c:if>
+          <c:if test="${b.writer!='admin' }">
+          ${b.writer}</c:if>
+          </div>
        </td>
        <td>
-          <div><fmt:formatDate value="${b.regitdate}" pattern="yyyy-MM-dd HH:mm:SS"></fmt:formatDate></div>
+          <div><fmt:formatDate value="${b.regitdate}" pattern="yyyy-MM-dd HH:mm:SS" timeZone="GMT+18"></fmt:formatDate></div>
        </td>
        <td>
           <div>${b.readcount}</div>

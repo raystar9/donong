@@ -14,6 +14,7 @@ import team.swcome.donong.dto.GoodsDTO;
 import team.swcome.donong.dto.GoodsOrdersDTO;
 import team.swcome.donong.dto.MarketPaginationDTO;
 import team.swcome.donong.dto.MemberDTO;
+import team.swcome.donong.dto.OrderItemsDTO;
 import team.swcome.donong.dto.OrdersDTO;
 import team.swcome.donong.mapper.CartMapper;
 import team.swcome.donong.mapper.GoodsMapper;
@@ -31,12 +32,15 @@ public class MarketService {
 	OrdersMapper ordersMapper;
 	@Autowired
 	CartMapper cartMapper;
+	@Autowired
+	AdminService adminService;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/*
 	 * Goods관련 메서드
 	 */
 	final int itemsPerPage = 10;
+	final int mypageItemsPerPage = 5;
 	
 	public List<GoodsDTO> getGoodsList(int page, String category){
 		int startItem = (page-1) * itemsPerPage;
@@ -122,6 +126,14 @@ public class MarketService {
 	 */
 	public List<OrdersDTO> getOrderListByMemberNum(int memberNum) {
 		return ordersMapper.selectAllOrdersByMemberNum(memberNum);
+	}
+	
+	public List<OrderItemsDTO> getMypageOrdersByMemberNum(int page, int memberNum) {
+		int startItem = (page-1) * mypageItemsPerPage;
+		int endItem = (page) * mypageItemsPerPage;
+		List<OrderItemsDTO> result = ordersMapper.selectMypageOrdersByMemberNum(startItem, endItem, memberNum);
+		adminService.setOrderItems(result);
+		return result;
 	}
 	
 	public void insertOrder(OrdersDTO orders, List<CartGoodsDTO> goods) {

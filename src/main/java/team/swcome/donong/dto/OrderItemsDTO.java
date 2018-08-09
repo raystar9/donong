@@ -11,10 +11,17 @@ public class OrderItemsDTO {
 	private String orderName;
 	private int price;
 	private Date orderDate;
+	private String status;
 	private List<GoodsDTO> goods;
 	private String address;
 	private String comments;
 	private int waybill;
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getOrderNum() {
 		return orderNum;
 	}

@@ -1,6 +1,6 @@
 package team.swcome.donong.controller;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -240,8 +240,6 @@ public class CSController {
 			HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		session.setNickname("admin");
-		session.setMemberNum(1);
 		if (session.getNickname().equals("admin")) {
 			map = qnaService.getQnaListAll(request);
 			
@@ -387,7 +385,7 @@ public class CSController {
 				conn = (HttpURLConnection) url.openConnection();
 				in = conn.getInputStream(); // 이미지를 불러옴
 			} catch (Exception e) {
-				url = new URL(s3Util.getFileURL(bucketName, "default.jpg"));
+				url = new URL(s3Util.getFileURL(bucketName, "default.png"));
 				conn = (HttpURLConnection) url.openConnection();
 				in = conn.getInputStream();
 			}
@@ -403,7 +401,7 @@ public class CSController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "cs/deleteFile", method = RequestMethod.POST)
+	@RequestMapping(value = "/cs/deleteFile", method = RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName, String directory)throws Exception {
 
 		logger.info("delete file: " + fileName);
@@ -428,5 +426,14 @@ public class CSController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 
-	
+	@RequestMapping(value = "/cs/download", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> download(
+    		@RequestParam String directory, 
+    		@RequestParam String fileName) throws IOException {
+    	
+        return s3Util.download(bucketName, directory + fileName);
+    }
+    
+    
+    
 }

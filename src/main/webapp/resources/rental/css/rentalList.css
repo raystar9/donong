@@ -8,6 +8,7 @@
     height: 40px;
     font-size: 17;
     margin-bottom:10px;
+   	font-weight: bold;
 }
 
 #btn {
@@ -28,19 +29,19 @@
 }
 
 #List {
-	border: 1px solid black;
 	width: 1000px;
-	height: 700px;
+	height: 1500px;
 	margin-bottom: 70px;
-	padding: 10px;
-	text-align: center;
     margin-top: 20px;	
+    padding-left: 4px;
 }
 
 #searchTable {
-	width: 600px;
 	margin: 0 auto;
-	margin-top: 30px;
+	height: 112px;
+    margin-top: 5px;
+    width: 702px;
+    
 }
 
 .list_table {
@@ -57,14 +58,15 @@
 
 .viewbox {
 	text-align: center;
-	border: 1px solid black;
+	border: 1px solid #ddd;
 	width: 180px;
 	height: 225px;
 	font-size: 13px;
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 8px;
+	margin-right: 8px;
 	margin-top: 10px;
 	display: inline-block;
+	border-radius: 10px;
 }
 
 .img {
@@ -74,8 +76,9 @@
 	height: 120px;
 }
 
-.row {
+.row2 {
 	margin-bottom: 3px;
+	font-weight:bold;
 }
 
 #map {
@@ -89,9 +92,10 @@
 
 #top {
 	height: 20px;
-	background: #277623;
+	background: #658d55;
 	color: white;
 	width: 100%;
+	border-radius: 10px 10px 0px 0px;
 }
 
 .mark {
@@ -102,7 +106,8 @@
 .searchNo {
 	width: 500px;
 	height: 400px;
-	margin-top: 100px;
+	margin-top: 30px;
+	text-align:center;
 }
 #box{
 	border: 1px solid white;
@@ -115,13 +120,87 @@
     margin-left:2%;
     float: right;
     margin-right: 18px;
+    padding-left: 70px;
 }
 #searchLogo{
     width: 210px;
-    height: 125px;
+    height: 140px;
     margin-top: 12px;
     margin-left: 20px;
 }
 #con{
 	margin-left:20%;
+	height:2500px;
+}
+table tr td:nth-child(1) {
+	text-align:center;
+}
+table tr td:nth-child(2) {
+	padding-left: 5px;
+}
+#num_text{
+	width:150px;
+	display: inline-block;	
+}
+div strong{
+	 font-size: 17px;
+}
+#num_div, #area_div, #price_div{
+	width:400px;
+	height:30px;
+	margin-top: 10px;
+}
+select{
+	height:22px;
+}
+.s_title{
+	width:150px;
+	text-align:center;
+	display:inline-block;
+    border: 1px solid #dff0d88f;
+    border-radius: 10px;
+    background-color: #dff0d88f;	
+}
+#search_div{
+	height:150px;
+   	float:right;
+	width:180px;
+	margin-right: 40px;
+    margin-top: 25px;
+}
+#searchBtn{
+	height: 70px;
+    width: 70px;
+    background-color: #dff0d85c;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+     margin-right: 15px;
+}
+ul{
+	list-style:none;
+    display: inline-block;
+    padding:0;	 
+}
+#num_div{
+	margin-bottom: 7px;
+    margin-top: 13px;
+}
+#searchNo{
+	text-align:center;
+}
+#MOVE_TOP_BTN {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+}
+#resetBtn{
+	height: 70px;
+    width: 70px;
+    background-color: #dff0d85c;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;    
 }

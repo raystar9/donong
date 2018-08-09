@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Page</title>
+ <title>나만따라와 도시농부</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="/resources/common/jsp/import.jsp" %>
@@ -33,7 +33,7 @@
 	
 
 	.mypage-write{
-		margin-top:100px;
+		margin-top:50px;
 		margin-bottom:50px;
 	}
 	
@@ -76,24 +76,24 @@
   	  <c:forEach var="order" items="${orderlist}">
       	<tr>
       		<td>
-     	 		${order.name }  	 
+     	 		${order.goods.get(0).name }  	 
      	 	</td>
      	 	<td>
      	 		 <c:if test="${order.status=='npay'}">
      	 			입금대기
      	 		 </c:if>
      	 		  <c:if test="${order.status=='prep'}">
-     	 			배송준비중
+     	 			배송준비
      	 		 </c:if>
      	 		  <c:if test="${order.status=='send'}">
-     	 			배송중
+     	 			배송진행
      	 		 </c:if>
      	 		  <c:if test="${order.status=='arrv'}">
      	 			배송완료
      	 		 </c:if>
      	 	</td>
      	 	<td>
-     	 	Sysdate
+     	 	${order.orderDate } 
      	 	</td>
    	   </tr>
      </c:forEach> 
@@ -137,15 +137,15 @@
 </div>
 	<div class="col-sm-2"></div>
     <div class="col-sm-8">
+    
+    <c:forEach var="board" items="${boardlist}">
 
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#1">작성글1</a></li>
-        <li><a href="#2">작성글2</a></li>
-        <li><a href="#3">작성글3</a></li>
-        <li><a href="#4">작성글4</a></li>
-        <li><a href="#5">작성글5</a></li>
+        <li><a href="/donong/community/cont?num=${board.num}">${board.subject}</a></li>
+
       </ul><br>
-   
+      
+   </c:forEach>
     </div>
   
     <div class="col-sm-2"></div>
@@ -157,7 +157,7 @@
 		
 		<div class="col-sm-6">
 		<input type="button" value="정보수정"  class="btn btn-default" onclick="location='member_edit'">
-		<input type="button" value="내가 한 질문"  class="btn btn-default" onclick="location='/donong/cs/qna'">
+		<input type="button" value="내가 한 질문"  class="btn btn-default" onclick="location='/donong/cs/qna/'">
 		<input type="button" value="회원탈퇴"  class="btn btn-default" onclick="location='member_del'">
 	
 		</div>

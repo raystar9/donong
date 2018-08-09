@@ -13,6 +13,33 @@
 		WHERE member_num = #{memberNum}
 	</select>
 	
+	<select id="selectPagingOrders" resultMap="OrdersResult">
+	<![CDATA[
+		select * from (select rownum rnum, num, member_num, name, orderdate, address, phone, comments, waybill, status 
+				from (select * from orders order by orderdate DESC)) 
+					where rnum >= ((#{page}-1) * #{limit} + 1) and rnum <= (#{page}*#{limit}) and member_num = #{member_num} 
+	]]>
+	</select>
+	
+	<select id="getOrderListCount" resultType="int">
+		select count(*) from orders where member_num = #{member_num} 
+	</select>
+	<select id="selectMypageOrdersByMemberNum" resultType="OrderItemsDTO">
+	<![CDATA[
+		SELECT ordernum, status, orderdate
+		FROM (
+		    SELECT rownum as rnum, ordernum, status, orderdate
+				FROM(
+					SELECT orders.num as ordernum, status, orderdate
+					FROM member, orders
+					WHERE member_num = member.num AND member_num = #{param3}
+		            ORDER BY ORDERNUM DESC
+				)
+				WHERE rownum <= #{param2}
+		    )
+		WHERE rnum > #{param1}
+	]]>
+	</select>
 	<select id="selectWaitingOrders" resultType="OrderItemsDTO">
 	<![CDATA[
 		SELECT ordernum, orderername, orderdate
@@ -29,6 +56,7 @@
 		WHERE rnum > #{param1}
 	]]>
 	</select>
+	
 	<select id="selectPreparingOrders" resultType="OrderItemsDTO">
 	<![CDATA[
 		SELECT ordernum, receivername, address, comments

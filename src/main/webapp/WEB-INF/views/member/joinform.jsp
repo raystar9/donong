@@ -4,7 +4,7 @@
     
 <html>
 <head>
-<title>회원 가입 페이지</title>
+ <title>나만따라와 도시농부</title>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  <%@ include file="/resources/common/jsp/import.jsp" %>
@@ -79,8 +79,6 @@ function domain_list(){
 }
 
 function check(){
-	
-	
 	
 	//도메인 주소값 유효성검사
 	if($.trim($("#join_maildomain").val())==""){
@@ -228,8 +226,8 @@ function nickname_check(){
 function onlynum(){
 	if(!((event.keyCode>=48&&event.keyCode<=57) // 숫자
 			|| (event.keyCode>=96 && event.keyCode <= 105)  //키패드 숫자
-			|| event.keyCode==8 || event.keyCode==116 || event.keyCode==9)){ //백스페이스 또는 F5키(새로고침)
-		event.returnValue=false;
+			|| event.keyCode==8 || event.keyCode==116 || event.keyCode==9)){ //백스페이스  F5키(새로고침) tab키
+		event.returnValue=false; //event 실행 불가
 		alert("숫자만 입력할 수 있습니다.");
 	}
 }

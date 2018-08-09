@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <html>
 <head>
+ <title>나만따라와 도시농부</title>
 <%@ include file="/resources/common/jsp/import.jsp" %>
 <link rel="stylesheet" type="text/css" href="/donong/resources/rental/css/rentalView.css">
 <script src="/donong/resources/rental/js/rentalView.js"></script>

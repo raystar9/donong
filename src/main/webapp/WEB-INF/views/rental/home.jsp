@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Home</title>
+ <title>나만따라와 도시농부</title>
 </head>
 <body>
 <h1>

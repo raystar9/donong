@@ -62,7 +62,7 @@ function listReplyRest(num){
 	});
 }
 </script>
-<title>Insert title here</title>
+<title>나만따라와 도시농부</title>
 </head>
 
 <body>
@@ -101,13 +101,13 @@ function listReplyRest(num){
 </c:if>
 </div>
 <hr>
-<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
+<textarea rows="5" cols="120" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
 <br>
 <button type="button" id="btnReply" class="btn">댓글 작성</button>
 <div id="listReply"></div>
 <hr>
 <div id="boardcont_menu" style="margin-left:75%">
-		<c:if test="${sessionBean.memberNum== bbsbean.member_num }">
+		<c:if test="${sessionBean.memberNum== bbsbean.member_num || sessionBean.memberNum==1}">
 		<input type="button" value="수정" class="btn" onclick="location='edit?page=${page}&num=${num}'">
 		<input type="button" value="삭제" class="btn" onclick="location='del?num=${num}'">
 		</c:if>

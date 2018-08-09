@@ -97,7 +97,7 @@
   }
 
   to {
-    margin-left: -40%;
+    margin-left: -20%;
     width: 80%;
   }
 }
@@ -115,7 +115,7 @@
 <div class="container text-center">    
   <div class="row content">
     <div class="col-sm-6 text-center"> 
-      <h1>이달의 작물(정보페이지)</h1>
+      <h1>이달의 작물</h1>
       
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- 인디게이터(사진 아래 단추) -->
@@ -175,7 +175,7 @@
  
  
  <div class="container">
- <h1>판매중인 상품(판매페이지)</h1>
+ <h1>판매중인 상품</h1>
  
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">종자</a></li>

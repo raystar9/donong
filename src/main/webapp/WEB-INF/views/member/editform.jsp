@@ -4,7 +4,7 @@
     
 <html>
 <head>
-<title>회원 정보 수정 페이지</title>
+ <title>나만따라와 도시농부</title>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  <%@ include file="/resources/common/jsp/import.jsp" %>
@@ -121,7 +121,7 @@ function nickname_check(){
 	var msg = '';
 
 	$.ajax({
-		type : "POST",
+		type : "POST",		
 		data : {"nickname" : inputNickname},
 		url : "checkOverlapNickName",
 		cache : false,

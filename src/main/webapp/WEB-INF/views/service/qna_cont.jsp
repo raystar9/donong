@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Insert title here</title>
+	<title>나만따라와 도시농부</title>
 	
 	<script src="/donong/resources/service/js/qna_cont.js"></script>
 	

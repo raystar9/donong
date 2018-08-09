@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Insert title here</title>
+	<title>나만따라와 도시농부</title>
 	<script src="/donong/resources/service/js/notice_cont.js"></script>
 	
 	<link rel="stylesheet" href="/donong/resources/service/css/notice_cont.css" type="text/css">

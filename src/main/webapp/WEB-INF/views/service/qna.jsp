@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	 <title>나만따라와 도시농부</title>
 	
 	<script src="/donong/resources/service/js/qna.js"></script>
 	
@@ -100,7 +100,7 @@
 						</td>
 						<td>
 							<div>
-								<a href="./qna/${content.num }?state=cont">
+								<a href="/donong/cs/qna/${content.num }?state=cont">
 									${content.title } 
 								</a>
 							</div>

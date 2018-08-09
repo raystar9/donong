@@ -57,7 +57,7 @@
 	</div>
 	<div class="item-container">
 	<div>
-		<h1>타이틀임</h1>
+		<h1>Donong 자재구매</h1>
 	</div>
 	<div class="container-fluid">
 		<c:forEach items="${items}" var="item">

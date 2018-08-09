@@ -235,7 +235,8 @@ function search(){
 						"<strong>No.&nbsp;"+ json[i].num +
 						"</strong></div>"+
 		 			   	"<div class='row2'>"+
-		 			   	"<a href='./rental/view?num="+ json[i].num +"'><img src='/donong/rental/displayFile?fileName="+json[i].path +"&directory=rent' class='img'></a>"+
+		 			   	"<a href='./rental/view?num="+ json[i].num +"'><img src='/donong/rental/displayFile?fileName="+
+		 			   	json[i].path +"&directory=rent' class='img'></a>"+
 		 			   	"</div>"+
 		 			   	"<div class='row2'>"+
 		 			   	"<img src='./resources/rental/image/flag.png' class='mark'/>&nbsp;"+json[i].title+"<br>"+
@@ -288,7 +289,8 @@ function viewMarkers(){
 				
 				var infoContent = "<div style='font-size:10px; font-weight:bold;'>" +
 								  "<h3>< "+json[i].title+" ></h3><br>"+
-				  				  "<a href='./rental/view?num="+json[i].num+"'><img src='/donong/rental/displayFile?fileName="+json[i].path+"&directory=rent' width='120px' height='80px''></a><br><br>"+
+				  				  "<a href='./rental/view?num="+json[i].num+"'><img src='/donong/rental/displayFile?fileName="+
+				  				  json[i].path+"&directory=rent' width='120px' height='80px''></a><br><br>"+
 				  				  "* 번호 &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;"+json[i].num+"<br>"+
 				  				  "* 소재지 : "+json[i].title+"<br>"+
 				  				  "* 면적&nbsp;&nbsp;&nbsp;&nbsp; : "+json[i].area+"㎡<br>"+

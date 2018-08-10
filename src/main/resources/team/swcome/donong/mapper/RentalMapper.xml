@@ -23,7 +23,7 @@
   </insert>
   
   <select id="selectNameByPhone" parameterType="int" resultType="MemberDTO">
-  	SELECT realname, phone
+  	SELECT realname, phone, m.num
 	FROM member m, RENTALS r
 	WHERE r.member_num = m.num
 	AND r.num = #{board_num}

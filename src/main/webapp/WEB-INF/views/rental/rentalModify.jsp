@@ -87,7 +87,7 @@
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td><input type="text" placeholder="&nbsp;농지 위치를 설정하세요." id="autocomplete" name="address" value="${rental.address }">
+			<td><input type="text" placeholder="&nbsp;농지 위치를 설정하세요." id="autocomplete" name="address" value="${rental.address }">&nbsp;&nbsp;&nbsp;<input type="button" value="위치확인 " id='mark2' class="btn btn-default" style="margin-bottom: 3px;">
 			</td>
 		</tr>
 		<tr>

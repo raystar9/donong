@@ -159,11 +159,6 @@ function initMap(){
 	//검색 자동완성 기능 
 	var autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 	
-//	clickEvent = map.addListener('click', function(event){
-//		removeMarker();
-//		addMarker(event.latLng);
-//	});//addListener()
-	
 	//자동완성 주소 바꼈을 때 실행
 	autocomplete.addListener('place_changed', function(){
 		var place = autocomplete.getPlace();
@@ -179,6 +174,7 @@ function initMap(){
 	
 }//initMap()
 
+/* 주소에 따른 위도 경도 마커 찍기 */
 function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('autocomplete').value;
     geocoder.geocode({'address': address}, function(results, status) {

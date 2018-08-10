@@ -16,6 +16,7 @@
     <h2 id='viewTitle'>농지 대여</h2><hr>      
 </div>
 <div class="container" id="con">
+
  <form action="./modify_ok" method="post" class="modifyForm" enctype="multipart/form-data">
  <input type="hidden" value="${rental.num }" name="num">
  <input type="hidden" name="directory" value="rent" />

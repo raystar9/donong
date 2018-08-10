@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.View;
 
 import com.amazonaws.util.IOUtils;
 
@@ -92,7 +93,6 @@ public class RentalController {
 	/* 농지 대여 상세보기 페이지로 이동 */
 	@RequestMapping(value = "/rental/view", method = RequestMethod.GET)
 	public String rentalViewWithoutLogin(Model model, HttpServletRequest request, SessionBean sessionBean) {
-		sessionBean.setMemberNum(9);
 		int member_num = sessionBean.getMemberNum();
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		MemberDTO m = RentalService.selectNameByPhone(board_num);
@@ -124,7 +124,7 @@ public class RentalController {
 	}
 
 	/* 농지 대여 삭제 */
-	@RequestMapping(value = "/rental/delete", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/rental/delete", method = RequestMethod.GET)
 	public String rentalDelete(Model model, HttpServletRequest request, String directory, SessionBean sessionBean) {
 		int board_num = Integer.parseInt(request.getParameter("num"));
 		
@@ -174,9 +174,9 @@ public class RentalController {
 	@RequestMapping(value = "/rental/modify", method = RequestMethod.GET)
 	public String rentalModify(Model model, HttpServletRequest request, SessionBean sessionBean){
 		int member_num = sessionBean.getMemberNum();
-		MemberDTO m = RentalService.selectNameByPhone(member_num);
-
 		int board_num = Integer.parseInt(request.getParameter("num"));
+		MemberDTO m = RentalService.selectNameByPhone(board_num);
+
 		RentalDTO r = RentalService.selectRentalView(board_num);
 
 		FileDTO f = RentalService.selectFileNamePath(board_num);
@@ -189,8 +189,8 @@ public class RentalController {
 	}
 	
 	/* 농지 대여 수정 처리 */
-	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.PUT)
-	public String rentalModify_ok(Model model, RentalDTO r, FileDTO f, SessionBean sessionBean)
+	@RequestMapping(value = "/rental/modify_ok", method = RequestMethod.POST)
+	public String rentalModify_ok(HttpServletRequest request, Model model, RentalDTO r, FileDTO f, SessionBean sessionBean)
 			throws IllegalStateException, IOException {
 		int board_num = r.getNum();
 		r.setNum(board_num);
@@ -198,8 +198,7 @@ public class RentalController {
 
 		RentalService.updateRental(r);
 		RentalService.updateFiles(f);
-
-		return "redirect:/rental/view?num=" + board_num;
+		return rentalViewWithoutLogin(model, request, sessionBean);
 	}
 
 	/* aws 사진 View */
